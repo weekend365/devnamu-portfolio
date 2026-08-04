@@ -11,6 +11,15 @@ export type Experience = {
   achievements: LocalizedText[];
 };
 
+export type ProjectImage = {
+  src: string;
+  alt: LocalizedText;
+  caption: LocalizedText;
+  variant: "mobile" | "desktop";
+  width?: number;
+  height?: number;
+};
+
 export type Project = {
   slug: string;
   startedAt: string;
@@ -28,7 +37,7 @@ export type Project = {
   contributions: LocalizedText[];
   challenges: LocalizedText[];
   results: LocalizedText[];
-  images: string[];
+  images: ProjectImage[];
   featured?: boolean;
   repository?: string;
   externalLink?: string;
@@ -73,8 +82,8 @@ export const experiences: Experience[] = [
     location: t("서울", "Seoul"),
     projects: [
       t(
-        "디지털 건설기준 관리시스템(KCSC) 프론트엔드 개발·고도화",
-        "KCSC digital construction standards management system",
+        "KCSC 디지털 건설기준 시범적용 사용자 지원 시스템 프론트엔드 개발·고도화",
+        "KCSC digital construction standards pilot support system",
       ),
       t(
         "BIMS(Bus Information Management System) 웹·앱 개발",
@@ -476,12 +485,78 @@ export const projects: Project[] = [
     ],
     // TODO: Add final App Store / Play Store URLs when available.
     images: [
-      "/images/projects/jango/01.png",
-      "/images/projects/jango/02.png",
-      "/images/projects/jango/03.png",
-      "/images/projects/jango/04.png",
-      "/images/projects/jango/05.png",
-      "/images/projects/jango/06.png",
+      {
+        src: "/images/projects/jango/01.png",
+        alt: t(
+          "오늘 만료되는 재료와 유통기한 현황, AI 추천 요리를 보여주는 장고야 부탁해 홈 화면",
+          "Jango home dashboard showing ingredients expiring today, expiry status, and an AI recipe suggestion",
+        ),
+        caption: t(
+          "오늘 확인해야 할 식재료를 한 화면에 모은 홈",
+          "A home view focused on ingredients that need attention today",
+        ),
+        variant: "mobile",
+      },
+      {
+        src: "/images/projects/jango/02.png",
+        alt: t(
+          "보관 중인 재료를 유통기한 순서로 조회하고 관리하는 장고야 부탁해 보관함 화면",
+          "Jango inventory screen for browsing and managing stored ingredients by expiry date",
+        ),
+        caption: t(
+          "유통기한 중심의 식재료 보관함",
+          "An ingredient inventory organized around expiry dates",
+        ),
+        variant: "mobile",
+      },
+      {
+        src: "/images/projects/jango/03.png",
+        alt: t(
+          "남은 재료를 우선 활용해 오늘의 AI 추천 요리를 보여주는 화면",
+          "AI recipe recommendations prioritizing ingredients already in the refrigerator",
+        ),
+        caption: t(
+          "임박 식재료를 우선 활용하는 AI 추천",
+          "AI recommendations that prioritize ingredients expiring soon",
+        ),
+        variant: "mobile",
+      },
+      {
+        src: "/images/projects/jango/04.png",
+        alt: t(
+          "카메라로 상품 바코드와 유통기한을 인식하는 장고야 부탁해 스캔 화면",
+          "Jango camera scanner recognizing a product barcode and its expiry date",
+        ),
+        caption: t(
+          "바코드와 유통기한을 한 흐름에서 인식",
+          "Barcode and expiry-date capture in one flow",
+        ),
+        variant: "mobile",
+      },
+      {
+        src: "/images/projects/jango/05.png",
+        alt: t(
+          "보관 위치와 유통기한을 확인해 식재료 등록을 완료하는 화면",
+          "Guided ingredient registration flow confirming storage location and expiry date",
+        ),
+        caption: t(
+          "필수 정보만 단계적으로 확인하는 등록 과정",
+          "A guided registration flow that asks only for essential details",
+        ),
+        variant: "mobile",
+      },
+      {
+        src: "/images/projects/jango/06.png",
+        alt: t(
+          "초대 코드로 가족이나 동료와 여러 냉장고를 공유하는 화면",
+          "Jango shared refrigerator screen for managing multiple spaces with family or colleagues",
+        ),
+        caption: t(
+          "가족·동료와 함께 관리하는 공유 공간",
+          "Shared spaces for households and teams",
+        ),
+        variant: "mobile",
+      },
     ],
     featured: true,
     repository: "https://github.com/weekend365/ExpiryMate",
@@ -492,48 +567,124 @@ export const projects: Project[] = [
     endedAt: null,
     locale: ["ko", "en"],
     title: t(
-      "디지털 건설기준 관리시스템 KCSC",
-      "KCSC Digital Construction Standards System",
+      "KCSC 디지털 건설기준 시범적용 사용자 지원 시스템",
+      "KCSC Digital Construction Standards Pilot Support System",
     ),
     company: t("씨엔넷", "C&Net"),
-    role: t("프론트엔드 개발·고도화", "Frontend Development & Enhancement"),
+    role: t("프론트엔드 개발·UX 고도화", "Frontend Development & UX Enhancement"),
     period: t("2025.12 – 재직중", "Dec 2025 – Present"),
-    status: t("운영·고도화", "Production & Enhancement"),
+    status: t("시범운영 · 2026.08 기준", "Pilot operation · Aug 2026"),
     summary: t(
-      "공공·건설 기준의 표준문서, 검토항목, 객체분류와 변수를 탐색하고 편집하는 업무 시스템입니다.",
-      "A business system for navigating and editing public construction standards, review items, object classifications, and variables.",
+      "KDS·KCS 디지털 건설기준을 시설물–검토항목–검토요소–변수의 계층으로 탐색하고, 사용자 기준을 편집해 API로 활용하도록 지원하는 시범운영 플랫폼입니다.",
+      "A pilot platform for navigating KDS and KCS digital construction standards through facility, review-item, review-element, and variable hierarchies, then adapting and consuming them through APIs.",
     ),
     description: [
       t(
-        "Next.js App Router 기반 사용자·관리자 화면과 복잡한 문서·변수 관리 도구를 개발했습니다.",
-        "Developed user and administration screens and complex document and variable-management tools with the Next.js App Router.",
+        "디지털 건설기준 활용기술의 사용성을 높이기 위해 별도로 운영되는 사용자 지원 시스템입니다. 2026년 8월 현재 관계전문가 피드백을 위한 시범운영 단계이며, 자동검토 항목과 배포 자료를 지속적으로 확장하고 있습니다.",
+        "This independently operated support system makes digital construction standards easier to use. As of August 2026, it is in pilot operation for expert feedback while its automated review coverage and distributed resources continue to expand.",
+      ),
+      t(
+        "표준 라이브러리와 사용자 라이브러리, 사용자 건설기준 작성, API 탐색·실행, 활용 SW·매뉴얼 다운로드, 공지·자료·Q&A·건의 게시판을 하나의 흐름으로 연결합니다.",
+        "It connects the standard library, user libraries, user-authored standards, API exploration and execution, software and manual downloads, and support boards in one workflow.",
+      ),
+      t(
+        "프런트엔드에서는 복잡한 건설기준 데이터를 잃지 않고 탐색할 수 있도록 다중 패널 편집 도구, 계층 검색과 빠른 이동, 유형별 상세 편집, 권한별 동작과 외부 연동을 구현했습니다.",
+        "On the frontend, I implemented multi-panel editing, hierarchical search and direct navigation, type-aware detail editing, role-based behavior, and external integrations so users can work with dense standards data without losing context.",
+      ),
+      t(
+        "화면 자료는 실제 시범운영 시스템의 표준 라이브러리 화면이며, 공개 가능한 디지털 건설기준 정보만 포함합니다.",
+        "The interface image shows the standard library in the live pilot system and contains only publicly shareable digital construction standards information.",
       ),
     ],
     technologies: [
-      "Next.js",
+      "Next.js 14",
+      "React 18",
       "TypeScript",
       "Mantine",
       "TanStack Query",
+      "Zustand",
+      "next-intl",
+      "TipTap",
       "Jest",
       "React Testing Library",
       "Docker",
       "Jenkins",
     ],
-    contributions: experiences[0].achievements.slice(0, 9),
+    contributions: [
+      t(
+        "객체분류, 검토항목, 검토요소와 상세 편집기를 연결하는 다중 패널 가변형 기준맵 도구와 포인터 기반 리사이저를 구현했습니다.",
+        "Implemented a resizable multi-panel standards-map tool connecting object classifications, review items, review elements, and a detail editor.",
+      ),
+      t(
+        "트리 검색, 선택 상태, 하위 노드 CRUD, ID 빠른 이동과 공간정보 조회를 연결해 깊은 계층에서도 현재 작업 위치를 유지하도록 구성했습니다.",
+        "Connected tree search, selection state, child-node CRUD, direct ID navigation, and spatial information so users retain context in deep hierarchies.",
+      ),
+      t(
+        "건설기준 유형에 따라 본문, Python 룰, 입출력변수와 판정변수 탭을 전환하고 선택값·상위변수·관리변수 편집 흐름을 구현했습니다.",
+        "Built type-aware tabs for content, Python rules, input/output variables, and decision variables, including selectable values and parent or management-variable editing.",
+      ),
+      t(
+        "원본 기준과 사용자 정의 기준을 구분해 사용자 코드, 변경 본문과 초기값을 조회·편집하고 외부 화면에서도 같은 데이터 규칙을 유지했습니다.",
+        "Separated source and user-defined standards, enabling user codes, edited content, and initial values to be viewed and maintained consistently in embedded experiences.",
+      ),
+      t(
+        "API Center에 카테고리 탐색, 절대 요청 URL, 요청 본문 사전 입력, 파일 파라미터, 실행 결과와 복사 기능을 구성하고 관리자 권한별 동작을 분리했습니다.",
+        "Enhanced the API Center with category navigation, absolute request URLs, request-body prefilling, file parameters, executable responses, copy actions, and admin-only controls.",
+      ),
+      t(
+        "TanStack Query와 기능별 query key, 커스텀 fetch 계층을 사용해 Java 백엔드 CRUD 상태와 저장·삭제·검증 이후 화면 동기화를 관리했습니다.",
+        "Used TanStack Query, feature-scoped query keys, and custom fetch utilities to synchronize Java backend CRUD state after save, delete, and validation operations.",
+      ),
+      t(
+        "Jest와 React Testing Library로 사용자 기준 매핑, 관리변수 가시성, 권한, 트리와 편집 도구의 핵심 회귀 경로를 검증했습니다.",
+        "Added Jest and React Testing Library coverage for user-standard mapping, management-variable visibility, permissions, trees, and critical editor regressions.",
+      ),
+    ],
     challenges: [
       t(
-        "트리, 테이블, 모달과 4분할 패널 사이의 탐색·선택·편집 상태를 일관되게 관리해야 했습니다.",
-        "Navigation, selection, and editing state had to remain consistent across trees, tables, dialogs, and a four-pane editor.",
+        "시설물부터 변수까지 이어지는 깊은 계층을 한 화면에 보여주면서도 현재 선택과 편집 맥락을 잃지 않도록 정보 밀도와 패널 크기를 조율해야 했습니다.",
+        "The interface had to expose a deep facility-to-variable hierarchy without losing the current selection or editing context, requiring careful control of information density and panel sizing.",
+      ),
+      t(
+        "정성·정량·판정 유형마다 노출되는 탭과 입력 규칙이 달라, 유형 전환 중에도 기준 코드와 사용자 입력을 안전하게 보존해야 했습니다.",
+        "Qualitative, quantitative, and decision standards expose different tabs and rules, so type changes had to preserve the correct standard code and user input.",
+      ),
+      t(
+        "역할별 권한, 쿠키 기반 인증, 외부 WebView·iframe 소비자와 Java API 응답 규약을 하나의 예측 가능한 화면 흐름으로 통합해야 했습니다.",
+        "Role permissions, cookie-based authentication, embedded WebView and iframe consumers, and Java API contracts had to behave as one predictable interface.",
       ),
     ],
     results: [
       t(
-        "서버 상태와 편집 상태를 분리한 CRUD 흐름과 주요 사용자 동작 테스트를 구성해 변경 시 회귀 위험을 줄였습니다.",
-        "Separated server and editing state and added tests for key interactions to reduce regression risk during changes.",
+        "2026년 8월 기준 실제 사이트에서 표준·사용자 라이브러리, API Center, 활용 SW·매뉴얼과 지원 게시판이 시범운영되고 있습니다.",
+        "As of August 2026, the live pilot provides standard and user libraries, the API Center, software and manuals, and support boards.",
+      ),
+      t(
+        "기능별 서버 상태와 로컬 편집 상태를 분리하고 핵심 변환·권한 로직에 자동화 테스트를 더해 고도화 과정의 회귀 경로를 관리했습니다.",
+        "Separated feature-scoped server state from local editing state and added automated coverage for critical transforms and permissions to manage regressions during iteration.",
+      ),
+      t(
+        "Next.js standalone 빌드, Docker 이미지와 Jenkins 파이프라인에 맞는 운영 구조를 유지해 개발·운영 환경의 배포 흐름을 지원했습니다.",
+        "Maintained an operational structure compatible with Next.js standalone builds, Docker images, and the Jenkins deployment pipeline.",
       ),
     ],
-    // TODO: Add verified KCSC screenshots when public sharing is permitted.
-    images: [],
+    images: [
+      {
+        src: "/images/projects/kcsc/01.png",
+        alt: t(
+          "시설물과 절차를 필터링하고 객체분류, 검토항목, 검토요소와 상세 정보를 다중 패널로 탐색하는 KCSC 표준 라이브러리",
+          "KCSC standard library showing facility filters and multi-panel navigation across object classifications, review items, review elements, and details",
+        ),
+        caption: t(
+          "표준 라이브러리 · 시설물별 계층 탐색",
+          "Standard library · Facility-based hierarchical navigation",
+        ),
+        variant: "desktop",
+        width: 1920,
+        height: 945,
+      },
+    ],
+    externalLink: "https://digital.kcsc.re.kr/home",
   },
   {
     slug: "bims",

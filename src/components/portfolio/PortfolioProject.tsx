@@ -2,8 +2,8 @@ import { Button, Column, Grid, Heading, Row, Tag, Text } from "@once-ui-system/c
 import { baseURL, getProjects, localize, type Locale, type Project, ui } from "@/resources";
 import { localePath } from "@/utils/site-metadata";
 import { ProjectCard } from "./ProjectCard";
+import { ProjectScreenshotCarousel } from "./ProjectScreenshotCarousel";
 import { ProjectVisual } from "./ProjectVisual";
-import { JangoScreenshotCarousel } from "./JangoScreenshotCarousel";
 import { SectionHeading } from "./SectionHeading";
 import { StructuredData } from "./StructuredData";
 
@@ -23,6 +23,7 @@ export function PortfolioProject({ project, locale }: { project: Project; locale
   const labels = ui[locale];
   const related = getProjects(locale).filter((item) => item.slug !== project.slug).slice(0, 2);
   const projectUrl = `${baseURL}${localePath(locale, `/work/${project.slug}`)}`;
+  const projectTitle = localize(project.title, locale);
 
   return (
     <Column className="page-stack" maxWidth="m" fillWidth gap="104">
@@ -30,7 +31,7 @@ export function PortfolioProject({ project, locale }: { project: Project; locale
         data={{
           "@context": "https://schema.org",
           "@type": "CreativeWork",
-          name: localize(project.title, locale),
+          name: projectTitle,
           alternateName: project.technicalName,
           description: localize(project.summary, locale),
           url: projectUrl,
@@ -38,7 +39,7 @@ export function PortfolioProject({ project, locale }: { project: Project; locale
           dateCreated: project.startedAt,
           creator: { "@type": "Person", name: locale === "ko" ? "남우현" : "Nam Woo-hyun" },
           keywords: project.technologies.join(", "),
-          image: project.images[0] ? `${baseURL}${project.images[0]}` : undefined,
+          image: project.images[0] ? `${baseURL}${project.images[0].src}` : undefined,
           sameAs: project.repository ?? project.externalLink,
         }}
       />
@@ -51,7 +52,7 @@ export function PortfolioProject({ project, locale }: { project: Project; locale
           <Tag>{localize(project.status, locale)}</Tag>
         </Row>
         <Heading as="h1" className="hero-name" variant="display-strong-l" wrap="balance">
-          {localize(project.title, locale)}
+          {projectTitle}
         </Heading>
         {project.technicalName && (
           <Text variant="label-default-m" onBackground="neutral-weak">
@@ -69,8 +70,13 @@ export function PortfolioProject({ project, locale }: { project: Project; locale
         </Row>
       </Column>
 
-      {project.slug === "jango" ? (
-        <JangoScreenshotCarousel images={project.images} locale={locale} />
+      {project.images.length > 1 ? (
+        <ProjectScreenshotCarousel
+          id={project.slug}
+          images={project.images}
+          locale={locale}
+          projectTitle={projectTitle}
+        />
       ) : (
         <ProjectVisual project={project} locale={locale} priority />
       )}

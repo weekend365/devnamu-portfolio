@@ -16,6 +16,9 @@ const keywords = [
   "장고야 부탁해",
   "Jango",
   "ExpiryMate",
+  "KCSC",
+  "디지털 건설기준",
+  "Digital Construction Standards",
 ];
 
 export function localePath(locale: Locale, path = "/"): string {
@@ -28,22 +31,31 @@ export function buildMetadata({
   title,
   description,
   path = "/",
+  image,
 }: {
   locale: Locale;
   title: string;
   description: string;
   path?: string;
+  image?: {
+    url: string;
+    width: number;
+    height: number;
+    alt: string;
+  };
 }): Metadata {
   const localized = localePath(locale, path);
   const koPath = localePath("ko", path);
   const enPath = localePath("en", path);
   const fullTitle = `${title} | ${person.name[locale]}`;
-  const socialImage = {
-    url: `/images/og/portfolio-${locale}.png`,
-    width: 1200,
-    height: 630,
-    alt: `${person.name[locale]} · ${title}`,
-  };
+  const socialImage =
+    image ??
+    {
+      url: `/images/og/portfolio-${locale}.png`,
+      width: 1200,
+      height: 630,
+      alt: `${person.name[locale]} · ${title}`,
+    };
 
   return {
     metadataBase: new URL(baseURL),

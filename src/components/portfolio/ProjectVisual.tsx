@@ -3,14 +3,22 @@ import type { Locale, Project } from "@/resources";
 import { localize, ui } from "@/resources";
 
 export function ProjectVisual({ project, locale, priority = false }: { project: Project; locale: Locale; priority?: boolean }) {
-  if (project.slug === "jango" && project.images[0]) {
+  const image = project.images[0];
+  const aspectRatio =
+    image?.width && image.height
+      ? `${image.width} / ${image.height}`
+      : image?.variant === "mobile"
+        ? "1125 / 2436"
+        : "1060 / 600";
+
+  if (project.slug === "jango" && image) {
     return (
       <Column className="jango-card-visual" fillWidth center radius="l">
         <Media
           className="jango-card-screen"
-          src={project.images[0]}
-          alt={locale === "ko" ? "장고야 부탁해 홈 대시보드 앱 화면" : "Jango home dashboard app screen"}
-          aspectRatio="1125 / 2433"
+          src={image.src}
+          alt={localize(image.alt, locale)}
+          aspectRatio={aspectRatio}
           objectFit="cover"
           sizes="(max-width: 768px) 72vw, 260px"
           priority={priority}
@@ -20,13 +28,13 @@ export function ProjectVisual({ project, locale, priority = false }: { project: 
     );
   }
 
-  if (project.images[0]) {
+  if (image) {
     return (
       <Media
-        src={project.images[0]}
-        alt={`${localize(project.title, locale)} ${locale === "ko" ? "프로젝트 비주얼" : "project visual"}`}
-        aspectRatio="16 / 9"
-        objectFit="cover"
+        src={image.src}
+        alt={localize(image.alt, locale)}
+        aspectRatio={aspectRatio}
+        objectFit={image.variant === "mobile" ? "cover" : "contain"}
         sizes="(max-width: 768px) 100vw, 960px"
         priority={priority}
         radius="l"
