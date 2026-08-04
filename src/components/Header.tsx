@@ -76,7 +76,7 @@ export function Header({ locale }: { locale: Locale }) {
           >
             {labels.languageSwitch}
           </Button>
-          <ThemeToggle />
+          <ThemeToggle locale={locale} />
         </Row>
       </Row>
     </Row>

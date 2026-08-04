@@ -1,6 +1,124 @@
-import { Column, Icon, Media, Text } from "@once-ui-system/core";
+import { Column, Media, Row, Tag, Text } from "@once-ui-system/core";
+import { Fragment } from "react";
 import type { Locale, Project } from "@/resources";
 import { localize, ui } from "@/resources";
+
+type WorkflowCopy = {
+  eyebrow: string;
+  badge: string;
+  nodes: string[];
+  signals: string[];
+  caption: string;
+};
+
+const workflowCopy: Record<string, Record<Locale, WorkflowCopy>> = {
+  kcsc: {
+    ko: {
+      eyebrow: "ANONYMIZED WORKFLOW · 업무 구조 시각화",
+      badge: "계층형 편집",
+      nodes: ["기준 탐색", "검토 항목", "변수 편집", "API 활용"],
+      signals: ["Tree", "Editor", "Query", "Role"],
+      caption: "깊은 계층에서도 선택·편집·실행 맥락을 유지하는 기준맵 흐름",
+    },
+    en: {
+      eyebrow: "ANONYMIZED WORKFLOW · OPERATIONAL MAP",
+      badge: "Hierarchical editor",
+      nodes: ["Standards", "Review items", "Variables", "API Center"],
+      signals: ["Tree", "Editor", "Query", "Role"],
+      caption: "A standards-map flow that keeps selection, editing, and execution context together",
+    },
+  },
+  bims: {
+    ko: {
+      eyebrow: "ANONYMIZED WORKFLOW · 운영 데이터",
+      badge: "관리자 화면",
+      nodes: ["버스", "노선", "운영 데이터", "저장·검증"],
+      signals: ["Table", "Filter", "CRUD", "Spring API"],
+      caption: "교통 운영 데이터를 업무 순서에 맞게 조회하고 관리하는 관리자 흐름",
+    },
+    en: {
+      eyebrow: "ANONYMIZED WORKFLOW · OPERATIONS DATA",
+      badge: "Admin interface",
+      nodes: ["Buses", "Routes", "Operations", "Save & validate"],
+      signals: ["Table", "Filter", "CRUD", "Spring API"],
+      caption: "An admin flow for querying and managing transportation data around real work",
+    },
+  },
+  "subscription-platform": {
+    ko: {
+      eyebrow: "ANONYMIZED WORKFLOW · 서비스 데이터",
+      badge: "웹·API 연결",
+      nodes: ["인증", "상품 정보", "구독 상태", "계정 화면"],
+      signals: ["SSR", "NestJS", "PostgreSQL", "Docker"],
+      caption: "사용자 화면과 API·데이터 모델을 하나의 구독 흐름으로 연결",
+    },
+    en: {
+      eyebrow: "ANONYMIZED WORKFLOW · SERVICE DATA",
+      badge: "Web + API",
+      nodes: ["Auth", "Products", "Subscription", "Account"],
+      signals: ["SSR", "NestJS", "PostgreSQL", "Docker"],
+      caption: "Connecting the user experience, APIs, and data model into one subscription flow",
+    },
+  },
+  "gis-facility-system": {
+    ko: {
+      eyebrow: "ANONYMIZED WORKFLOW · 위치 데이터",
+      badge: "공공 납품 시스템",
+      nodes: ["지도 검색", "시설물 마커", "상세 패널", "업무 확인"],
+      signals: ["Map", "Marker", "Panel", "Responsive"],
+      caption: "위치 데이터와 상세 정보를 한 화면의 탐색 흐름으로 묶은 GIS 웹앱",
+    },
+    en: {
+      eyebrow: "ANONYMIZED WORKFLOW · LOCATION DATA",
+      badge: "Delivered system",
+      nodes: ["Map search", "Facility marker", "Detail panel", "Action"],
+      signals: ["Map", "Marker", "Panel", "Responsive"],
+      caption: "A GIS workflow that brings location data and details into one navigable interface",
+    },
+  },
+};
+
+function WorkflowVisual({ project, locale }: { project: Project; locale: Locale }) {
+  const copy = workflowCopy[project.slug]?.[locale];
+  if (!copy) return null;
+
+  return (
+    <Column
+      className={`project-placeholder project-workflow project-workflow-${project.slug}`}
+      fillWidth
+      border="neutral-alpha-medium"
+      radius="l"
+      padding="l"
+      gap="20"
+      aria-label={copy.caption}
+    >
+      <Row fillWidth horizontal="between" vertical="center" gap="12" s={{ direction: "column", horizontal: "start" }}>
+        <Column gap="4">
+          <Text className="workflow-kicker" variant="label-strong-s" onBackground="brand-weak">
+            {copy.eyebrow}
+          </Text>
+          <Text variant="heading-strong-m">{localize(project.title, locale)}</Text>
+        </Column>
+        <Tag size="s" variant="info">{copy.badge}</Tag>
+      </Row>
+      <Row className="workflow-flow" fillWidth gap="8" vertical="center" s={{ direction: "column" }}>
+        {copy.nodes.map((node, index) => (
+          <Fragment key={node}>
+            <Column className="workflow-node" background="surface" border="neutral-alpha-medium" radius="m" padding="m" gap="8">
+              <Text variant="label-strong-s" onBackground="brand-weak">0{index + 1}</Text>
+              <Text variant="heading-strong-s" wrap="balance">{node}</Text>
+            </Column>
+            {index < copy.nodes.length - 1 && <Text className="workflow-arrow" onBackground="neutral-weak">→</Text>}
+          </Fragment>
+        ))}
+      </Row>
+      <Row gap="8" wrap>
+        {copy.signals.map((signal) => <Tag key={signal} size="s">{signal}</Tag>)}
+      </Row>
+      <Text variant="label-default-s" onBackground="neutral-weak" wrap="balance">{copy.caption}</Text>
+    </Column>
+  );
+}
 
 export function ProjectVisual({ project, locale, priority = false }: { project: Project; locale: Locale; priority?: boolean }) {
   const image = project.images[0];
@@ -42,6 +160,10 @@ export function ProjectVisual({ project, locale, priority = false }: { project: 
     );
   }
 
+  if (workflowCopy[project.slug]) {
+    return <WorkflowVisual project={project} locale={locale} />;
+  }
+
   return (
     <Column
       className="project-placeholder"
@@ -53,7 +175,6 @@ export function ProjectVisual({ project, locale, priority = false }: { project: 
       padding="l"
       aria-label={ui[locale].screenshotsTodo}
     >
-      <Icon name="image" size="l" onBackground="brand-weak" />
       <Text variant="heading-strong-m" align="center">
         {localize(project.title, locale)}
       </Text>

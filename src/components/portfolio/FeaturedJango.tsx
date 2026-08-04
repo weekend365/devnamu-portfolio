@@ -1,4 +1,4 @@
-import { Button, Column, Heading, Media, Row, Tag, Text } from "@once-ui-system/core";
+import { Button, Column, Grid, Heading, Media, Row, Tag, Text } from "@once-ui-system/core";
 import type { Locale } from "@/resources";
 import { getProject, localize, ui } from "@/resources";
 import { localePath } from "@/utils/site-metadata";
@@ -36,6 +36,32 @@ export function FeaturedJango({ locale }: { locale: Locale }) {
             <Tag key={technology} size="s">{technology}</Tag>
           ))}
         </Row>
+        <Grid className="featured-facts" columns="3" s={{ columns: 1 }} gap="8" fillWidth>
+          <Column className="featured-fact" gap="4">
+            <Text variant="label-strong-s" onBackground="brand-weak">
+              {locale === "ko" ? "문제" : "Problem"}
+            </Text>
+            <Text variant="body-default-s" onBackground="neutral-weak">
+              {locale === "ko" ? "임박 식재료를 놓치는 일상" : "Ingredients expiring unnoticed"}
+            </Text>
+          </Column>
+          <Column className="featured-fact" gap="4">
+            <Text variant="label-strong-s" onBackground="brand-weak">
+              {locale === "ko" ? "범위" : "Scope"}
+            </Text>
+            <Text variant="body-default-s" onBackground="neutral-weak">
+              {locale === "ko" ? "모바일 · API · 관리자 · 운영" : "Mobile · API · Admin · Ops"}
+            </Text>
+          </Column>
+          <Column className="featured-fact" gap="4">
+            <Text variant="label-strong-s" onBackground="brand-weak">
+              {locale === "ko" ? "현재" : "Now"}
+            </Text>
+            <Text variant="body-default-s" onBackground="neutral-weak">
+              {locale === "ko" ? "TestFlight 빌드 검증" : "TestFlight build validation"}
+            </Text>
+          </Column>
+        </Grid>
         <Row gap="12" wrap>
           <Button href={localePath(locale, "/work/jango")} variant="primary" suffixIcon="arrowRight">
             {locale === "ko" ? "제품 사례 읽기" : "Read the case study"}

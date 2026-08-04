@@ -25,6 +25,7 @@ export function PortfolioHome({ locale }: { locale: Locale }) {
   const content = getContent(locale);
   const labels = content.navigation;
   const secondaryProjects = content.projects.filter((project) => !project.featured).slice(0, 3);
+  const projectCount = content.projects.length;
 
   return (
     <Column className="page-stack" maxWidth="l" fillWidth gap="128">
@@ -73,6 +74,11 @@ export function PortfolioHome({ locale }: { locale: Locale }) {
                 : "I build public, transportation, and subscription services with React and Next.js. For Jango, I connect mobile, API, admin, and deployment into one product."}
             </Text>
           </Column>
+          <Row className="hero-context" gap="8" wrap>
+            <Tag size="s">{locale === "ko" ? "3년+" : "3+ years"}</Tag>
+            <Tag size="s">{localize(person.location, locale)}</Tag>
+            <Tag size="s">{localize(person.languages, locale)}</Tag>
+          </Row>
           <Row gap="12" wrap>
             <Button href={person.github} variant="primary" prefixIcon="github" suffixIcon="arrowUpRightFromSquare">
               {labels.github}
@@ -97,6 +103,33 @@ export function PortfolioHome({ locale }: { locale: Locale }) {
         </Column>
       </Row>
 
+      <Row className="proof-strip" fillWidth gap="8" s={{ direction: "column" }}>
+        <Column className="proof-item" gap="4">
+          <Text variant="display-strong-s" onBackground="brand-weak">3+</Text>
+          <Text variant="label-default-s" onBackground="neutral-weak">
+            {locale === "ko" ? "제품을 만든 경력" : "years building products"}
+          </Text>
+        </Column>
+        <Column className="proof-item" gap="4">
+          <Text variant="display-strong-s">{projectCount}</Text>
+          <Text variant="label-default-s" onBackground="neutral-weak">
+            {locale === "ko" ? "공개 가능한 작업 맥락" : "selected product contexts"}
+          </Text>
+        </Column>
+        <Column className="proof-item" gap="4">
+          <Text variant="display-strong-s">4</Text>
+          <Text variant="label-default-s" onBackground="neutral-weak">
+            {locale === "ko" ? "모바일 · 웹 · API · 관리자 접점" : "mobile · web · API · admin surfaces"}
+          </Text>
+        </Column>
+        <Column className="proof-item" gap="4">
+          <Text variant="display-strong-s">01</Text>
+          <Text variant="label-default-s" onBackground="neutral-weak">
+            {locale === "ko" ? "직접 체험 가능한 라이브 데모" : "live demo you can try"}
+          </Text>
+        </Column>
+      </Row>
+
       <Column as="section" gap="40" aria-labelledby="featured-heading">
         <SectionHeading
           id="featured-heading"
@@ -107,7 +140,7 @@ export function PortfolioHome({ locale }: { locale: Locale }) {
         <FeaturedJango locale={locale} />
       </Column>
 
-      <Column as="section" gap="40">
+      <Column as="section" className="home-experience" gap="40">
         <Row fillWidth horizontal="between" vertical="end" gap="24" s={{ direction: "column", vertical: "start" }}>
           <SectionHeading eyebrow={labels.featuredProjects} title={locale === "ko" ? "업무의 복잡도를 화면으로 정리한 작업" : "Turning operational complexity into usable software"} />
           <Button href={localePath(locale, "/work")} variant="tertiary" suffixIcon="arrowRight">
@@ -144,15 +177,20 @@ export function PortfolioHome({ locale }: { locale: Locale }) {
         </Column>
       </Column>
 
-      <Column as="section" gap="40">
+      <Column as="section" className="home-skills" gap="40">
         <SectionHeading eyebrow={labels.techStack} title={locale === "ko" ? "문제에 맞는 도구를 선택합니다" : "Tools chosen for the problem"} />
-        <Grid columns="3" m={{ columns: 2 }} s={{ columns: 1 }} gap="16">
+        <Grid className="home-skill-grid" columns="4" m={{ columns: 2 }} s={{ columns: 1 }} gap="12">
           {content.skillCategories.map((category) => (
-            <Column key={category.title.en} className="skill-card" background="surface" border="neutral-alpha-medium" radius="l" padding="l" gap="16">
+            <Column key={category.title.en} className="skill-card" background="surface" border="neutral-alpha-medium" radius="l" padding="m" gap="12">
               <Heading as="h3" variant="heading-strong-m">{localize(category.title, locale)}</Heading>
               <Row wrap gap="8">
-                {category.skills.map((skill) => <Tag key={skill} size="s">{skill}</Tag>)}
+                {category.skills.slice(0, 4).map((skill) => <Tag key={skill} size="s">{skill}</Tag>)}
               </Row>
+              {category.skills.length > 4 && (
+                <Text variant="label-default-s" onBackground="neutral-weak">
+                  +{category.skills.length - 4} {locale === "ko" ? "개 더" : "more"}
+                </Text>
+              )}
             </Column>
           ))}
         </Grid>

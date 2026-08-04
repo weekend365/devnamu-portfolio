@@ -33,8 +33,8 @@ export const dataStyle: DataStyleConfig = {
 export const effects: EffectsConfig = {
   mask: { cursor: false, x: 50, y: 0, radius: 100 },
   gradient: {
-    display: true,
-    opacity: 8,
+    display: false,
+    opacity: 0,
     x: 72,
     y: 4,
     width: 62,

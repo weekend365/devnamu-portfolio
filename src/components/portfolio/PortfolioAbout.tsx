@@ -12,7 +12,7 @@ export function PortfolioAbout({ locale }: { locale: Locale }) {
   const labels = content.navigation;
 
   return (
-    <Column className="page-stack" maxWidth="m" fillWidth gap="104">
+    <Column className="page-stack about-page" maxWidth="m" fillWidth gap="104">
       <Row as="header" fillWidth gap="xl" vertical="center" s={{ direction: "column-reverse", vertical: "start" }}>
         <Column flex={8} gap="20">
           <Text className="eyebrow" variant="label-strong-m" onBackground="brand-weak">{person.brand} · {labels.about}</Text>
@@ -24,26 +24,61 @@ export function PortfolioAbout({ locale }: { locale: Locale }) {
             <Button href={`mailto:${person.email}`} variant="primary" prefixIcon="email">{labels.contact}</Button>
           </Row>
         </Column>
-        <Media
-          className="profile-image"
-          src={person.avatar}
-          alt={locale === "ko" ? "DEVNAMU 프로필 사진" : "Portrait of DEVNAMU"}
-          aspectRatio="1 / 1"
-          objectFit="cover"
-          sizes="120px"
-          priority
-          radius="full"
-          style={{ width: "7.5rem", height: "7.5rem" }}
-        />
+        <Column className="about-hero-meta" gap="12" horizontal="center">
+          <Media
+            className="profile-image"
+            src={person.avatar}
+            alt={locale === "ko" ? "DEVNAMU 프로필 사진" : "Portrait of DEVNAMU"}
+            aspectRatio="1 / 1"
+            objectFit="cover"
+            sizes="120px"
+            priority
+            radius="full"
+            style={{ width: "7.5rem", height: "7.5rem" }}
+          />
+          <Text variant="label-default-s" onBackground="neutral-weak" align="center">
+            {localize(person.location, locale)} · {localize(person.languages, locale)}
+          </Text>
+        </Column>
+      </Row>
+
+      <Row className="proof-strip about-proof-strip" fillWidth gap="8" s={{ direction: "column" }}>
+        <Column className="proof-item" gap="4">
+          <Text variant="display-strong-s" onBackground="brand-weak">3+</Text>
+          <Text variant="label-default-s" onBackground="neutral-weak">
+            {locale === "ko" ? "제품 개발 경력" : "years in product development"}
+          </Text>
+        </Column>
+        <Column className="proof-item" gap="4">
+          <Text variant="display-strong-s">4</Text>
+          <Text variant="label-default-s" onBackground="neutral-weak">
+            {locale === "ko" ? "도메인과 제품 맥락" : "domains and product contexts"}
+          </Text>
+        </Column>
+        <Column className="proof-item" gap="4">
+          <Text variant="display-strong-s">2</Text>
+          <Text variant="label-default-s" onBackground="neutral-weak">
+            {locale === "ko" ? "사용 언어" : "working languages"}
+          </Text>
+        </Column>
       </Row>
 
       <Column as="section" gap="32">
-        <SectionHeading title={labels.professionalSummary} />
-        <Column gap="16" maxWidth="s">
-          {content.person.summary.map((paragraph) => (
-            <Text key={paragraph.en} variant="body-default-l" onBackground="neutral-medium">{localize(paragraph, locale)}</Text>
+        <SectionHeading eyebrow={labels.workingPrinciples} title={labels.professionalSummary} />
+        <Grid className="principles-grid" columns="3" s={{ columns: 1 }} gap="16">
+          {[
+            locale === "ko" ? "01 · 문제를 구조화합니다" : "01 · Frame the problem",
+            locale === "ko" ? "02 · 흐름을 연결합니다" : "02 · Connect the system",
+            locale === "ko" ? "03 · 운영을 고려합니다" : "03 · Design for operations",
+          ].map((title, index) => (
+            <Column key={title} className="principle-card" background="surface" border="neutral-alpha-medium" radius="l" padding="l" gap="12">
+              <Text variant="label-strong-s" onBackground="brand-weak">{title}</Text>
+              <Text variant="body-default-l" onBackground="neutral-medium">
+                {localize(content.person.summary[index], locale)}
+              </Text>
+            </Column>
           ))}
-        </Column>
+        </Grid>
       </Column>
 
       <Column as="section" gap="40">
@@ -91,10 +126,59 @@ export function PortfolioAbout({ locale }: { locale: Locale }) {
         </Grid>
       </Column>
 
+      <Column as="section" className="credentials-section" gap="40">
+        <SectionHeading
+          eyebrow={locale === "ko" ? "자격과 배경" : "Credentials"}
+          title={locale === "ko" ? "제품을 오래 운영하기 위한 기반" : "The foundation behind the work"}
+        />
+        <Grid columns="3" m={{ columns: 2 }} s={{ columns: 1 }} gap="16">
+          <Column className="credential-card" background="surface" border="neutral-alpha-medium" radius="l" padding="l" gap="16">
+            <Heading as="h3" variant="heading-strong-m">{labels.education}</Heading>
+            <Column gap="16">
+              {content.education.map((item) => (
+                <Column key={`${item.institution.en}-${item.period}`} gap="4">
+                  <Text variant="body-strong-m">{localize(item.institution, locale)}</Text>
+                  <Text variant="body-default-s" onBackground="neutral-weak">{localize(item.program, locale)}</Text>
+                  <Text variant="label-default-s" onBackground="neutral-weak">{item.period}</Text>
+                </Column>
+              ))}
+            </Column>
+          </Column>
+          <Column className="credential-card" background="surface" border="neutral-alpha-medium" radius="l" padding="l" gap="16">
+            <Heading as="h3" variant="heading-strong-m">{labels.training}</Heading>
+            <Column gap="16">
+              {content.training.map((item) => (
+                <Column key={`${item.institution.en}-${item.period}`} gap="4">
+                  <Text variant="body-strong-m">{localize(item.institution, locale)}</Text>
+                  <Text variant="body-default-s" onBackground="neutral-weak">{localize(item.program, locale)}</Text>
+                  <Text variant="label-default-s" onBackground="neutral-weak">{item.period}</Text>
+                </Column>
+              ))}
+            </Column>
+          </Column>
+          <Column className="credential-card" background="surface" border="neutral-alpha-medium" radius="l" padding="l" gap="16">
+            <Heading as="h3" variant="heading-strong-m">{labels.certifications}</Heading>
+            <Column gap="12">
+              {content.certifications.map((item) => (
+                <Column key={item.name.en} gap="4">
+                  <Text variant="body-strong-m">{localize(item.name, locale)}</Text>
+                  <Text variant="body-default-s" onBackground="neutral-weak">{localize(item.detail, locale)}</Text>
+                </Column>
+              ))}
+            </Column>
+          </Column>
+        </Grid>
+      </Column>
+
       <Column as="section" gap="32">
         <SectionHeading title={labels.interests} />
-        <Column as="ul" gap="16" paddingLeft="24">
-          {content.interests.map((interest) => <Text as="li" key={interest.en} variant="body-default-l">{localize(interest, locale)}</Text>)}
+        <Column className="interest-list" as="ul" gap="0">
+          {content.interests.map((interest, index) => (
+            <Row as="li" className="interest-row" key={interest.en} gap="16" vertical="center">
+              <Text variant="label-strong-s" onBackground="brand-weak">0{index + 1}</Text>
+              <Text variant="body-default-l">{localize(interest, locale)}</Text>
+            </Row>
+          ))}
         </Column>
       </Column>
     </Column>
