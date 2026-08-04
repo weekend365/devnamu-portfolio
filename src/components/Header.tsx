@@ -1,194 +1,84 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
-
-import { Fade, Flex, Line, Row, ToggleButton } from "@once-ui-system/core";
-
-import { routes, display, person, about, blog, work, gallery } from "@/resources";
+import { Button, Line, Row, SmartLink, Text, ToggleButton } from "@once-ui-system/core";
+import type { Locale } from "@/resources";
+import { getContent, person } from "@/resources";
 import { ThemeToggle } from "./ThemeToggle";
-import styles from "./Header.module.scss";
 
-type TimeDisplayProps = {
-  timeZone: string;
-  locale?: string; // Optionally allow locale, defaulting to 'en-GB'
-};
+function localizedPath(locale: Locale, path: string): string {
+  return locale === "en" ? `/en${path === "/" ? "" : path}` : path;
+}
 
-const TimeDisplay: React.FC<TimeDisplayProps> = ({ timeZone, locale = "en-GB" }) => {
-  const [currentTime, setCurrentTime] = useState("");
-
-  useEffect(() => {
-    const updateTime = () => {
-      const now = new Date();
-      const options: Intl.DateTimeFormatOptions = {
-        timeZone,
-        hour: "2-digit",
-        minute: "2-digit",
-        second: "2-digit",
-        hour12: false,
-      };
-      const timeString = new Intl.DateTimeFormat(locale, options).format(now);
-      setCurrentTime(timeString);
-    };
-
-    updateTime();
-    const intervalId = setInterval(updateTime, 1000);
-
-    return () => clearInterval(intervalId);
-  }, [timeZone, locale]);
-
-  return <>{currentTime}</>;
-};
-
-export default TimeDisplay;
-
-export const Header = () => {
-  const pathname = usePathname() ?? "";
+export function Header({ locale }: { locale: Locale }) {
+  const pathname = usePathname() ?? localizedPath(locale, "/");
+  const labels = getContent(locale).navigation;
+  const homePath = localizedPath(locale, "/");
+  const aboutPath = localizedPath(locale, "/about");
+  const workPath = localizedPath(locale, "/work");
+  const languagePath = locale === "en" ? pathname.replace(/^\/en(?=\/|$)/, "") || "/" : `/en${pathname === "/" ? "" : pathname}`;
 
   return (
-    <>
-      <Fade s={{ hide: true }} fillWidth position="fixed" height="80" zIndex={9} />
-      <Fade
-        hide
-        s={{ hide: false }}
-        fillWidth
-        position="fixed"
-        bottom="0"
-        to="top"
-        height="80"
-        zIndex={9}
-      />
+    <Row
+      as="header"
+      className="portfolio-header"
+      fillWidth
+      horizontal="center"
+      padding="8"
+      zIndex={9}
+    >
       <Row
-        fitHeight
-        className={styles.position}
-        position="sticky"
-        as="header"
-        zIndex={9}
+        className="portfolio-header-inner"
+        maxWidth="l"
         fillWidth
-        padding="8"
-        horizontal="center"
-        data-border="rounded"
-        s={{
-          position: "fixed",
-        }}
+        horizontal="between"
+        vertical="center"
       >
-        <Row paddingLeft="12" fillWidth vertical="center" textVariant="body-default-s">
-          {display.location && <Row s={{ hide: true }}>{person.location}</Row>}
-        </Row>
-        <Row fillWidth horizontal="center">
-          <Row
-            background="page"
-            border="neutral-alpha-weak"
-            radius="m-4"
-            shadow="l"
-            padding="4"
-            horizontal="center"
-            zIndex={1}
+        <SmartLink className="portfolio-brand" href={homePath} aria-label={`${person.name[locale]} · ${labels.home}`}>
+          <Text variant="label-strong-m">{person.name[locale]}</Text>
+        </SmartLink>
+        <Row
+          as="nav"
+          className="portfolio-nav"
+          background="surface"
+          border="neutral-alpha-medium"
+          radius="m"
+          padding="4"
+          gap="4"
+          vertical="center"
+          aria-label={locale === "ko" ? "주요 탐색" : "Primary navigation"}
+        >
+          <ToggleButton
+            prefixIcon="home"
+            href={homePath}
+            selected={pathname === homePath}
+            aria-label={labels.home}
+          />
+          <Line background="neutral-alpha-medium" vert maxHeight="24" />
+          <ToggleButton
+            prefixIcon="person"
+            href={aboutPath}
+            label={labels.about}
+            selected={pathname === aboutPath}
+          />
+          <ToggleButton
+            prefixIcon="grid"
+            href={workPath}
+            label={labels.work}
+            selected={pathname.startsWith(workPath)}
+          />
+          <Line background="neutral-alpha-medium" vert maxHeight="24" />
+          <Button
+            href={languagePath}
+            size="s"
+            variant="tertiary"
+            aria-label={labels.languageLabel}
           >
-            <Row gap="4" vertical="center" textVariant="body-default-s" suppressHydrationWarning>
-              {routes["/"] && (
-                <ToggleButton prefixIcon="home" href="/" selected={pathname === "/"} />
-              )}
-              <Line background="neutral-alpha-medium" vert maxHeight="24" />
-              {routes["/about"] && (
-                <>
-                  <Row s={{ hide: true }}>
-                    <ToggleButton
-                      prefixIcon="person"
-                      href="/about"
-                      label={about.label}
-                      selected={pathname === "/about"}
-                    />
-                  </Row>
-                  <Row hide s={{ hide: false }}>
-                    <ToggleButton
-                      prefixIcon="person"
-                      href="/about"
-                      selected={pathname === "/about"}
-                    />
-                  </Row>
-                </>
-              )}
-              {routes["/work"] && (
-                <>
-                  <Row s={{ hide: true }}>
-                    <ToggleButton
-                      prefixIcon="grid"
-                      href="/work"
-                      label={work.label}
-                      selected={pathname.startsWith("/work")}
-                    />
-                  </Row>
-                  <Row hide s={{ hide: false }}>
-                    <ToggleButton
-                      prefixIcon="grid"
-                      href="/work"
-                      selected={pathname.startsWith("/work")}
-                    />
-                  </Row>
-                </>
-              )}
-              {routes["/blog"] && (
-                <>
-                  <Row s={{ hide: true }}>
-                    <ToggleButton
-                      prefixIcon="book"
-                      href="/blog"
-                      label={blog.label}
-                      selected={pathname.startsWith("/blog")}
-                    />
-                  </Row>
-                  <Row hide s={{ hide: false }}>
-                    <ToggleButton
-                      prefixIcon="book"
-                      href="/blog"
-                      selected={pathname.startsWith("/blog")}
-                    />
-                  </Row>
-                </>
-              )}
-              {routes["/gallery"] && (
-                <>
-                  <Row s={{ hide: true }}>
-                    <ToggleButton
-                      prefixIcon="gallery"
-                      href="/gallery"
-                      label={gallery.label}
-                      selected={pathname.startsWith("/gallery")}
-                    />
-                  </Row>
-                  <Row hide s={{ hide: false }}>
-                    <ToggleButton
-                      prefixIcon="gallery"
-                      href="/gallery"
-                      selected={pathname.startsWith("/gallery")}
-                    />
-                  </Row>
-                </>
-              )}
-              {display.themeSwitcher && (
-                <>
-                  <Line background="neutral-alpha-medium" vert maxHeight="24" />
-                  <ThemeToggle />
-                </>
-              )}
-            </Row>
-          </Row>
+            {labels.languageSwitch}
+          </Button>
+          <ThemeToggle />
         </Row>
-        <Flex fillWidth horizontal="end" vertical="center">
-          <Flex
-            paddingRight="12"
-            horizontal="end"
-            vertical="center"
-            textVariant="body-default-s"
-            gap="20"
-          >
-            <Flex s={{ hide: true }}>
-              {display.time && <TimeDisplay timeZone={person.location} />}
-            </Flex>
-          </Flex>
-        </Flex>
       </Row>
-    </>
+    </Row>
   );
-};
+}
