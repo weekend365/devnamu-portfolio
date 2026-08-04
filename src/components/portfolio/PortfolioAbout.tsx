@@ -31,10 +31,10 @@ export function PortfolioAbout({ locale }: { locale: Locale }) {
             alt={locale === "ko" ? "DEVNAMU 프로필 사진" : "Portrait of DEVNAMU"}
             aspectRatio="1 / 1"
             objectFit="cover"
-            sizes="120px"
+            sizes="(max-width: 768px) 112px, 176px"
             priority
             radius="full"
-            style={{ width: "7.5rem", height: "7.5rem" }}
+            style={{ width: "11rem", height: "11rem" }}
           />
           <Text variant="label-default-s" onBackground="neutral-weak" align="center">
             {localize(person.location, locale)} · {localize(person.languages, locale)}
@@ -123,50 +123,6 @@ export function PortfolioAbout({ locale }: { locale: Locale }) {
               <Row wrap gap="8">{category.skills.map((skill) => <Tag key={skill}>{skill}</Tag>)}</Row>
             </Column>
           ))}
-        </Grid>
-      </Column>
-
-      <Column as="section" className="credentials-section" gap="40">
-        <SectionHeading
-          eyebrow={locale === "ko" ? "자격과 배경" : "Credentials"}
-          title={locale === "ko" ? "제품을 오래 운영하기 위한 기반" : "The foundation behind the work"}
-        />
-        <Grid columns="3" m={{ columns: 2 }} s={{ columns: 1 }} gap="16">
-          <Column className="credential-card" background="surface" border="neutral-alpha-medium" radius="l" padding="l" gap="16">
-            <Heading as="h3" variant="heading-strong-m">{labels.education}</Heading>
-            <Column gap="16">
-              {content.education.map((item) => (
-                <Column key={`${item.institution.en}-${item.period}`} gap="4">
-                  <Text variant="body-strong-m">{localize(item.institution, locale)}</Text>
-                  <Text variant="body-default-s" onBackground="neutral-weak">{localize(item.program, locale)}</Text>
-                  <Text variant="label-default-s" onBackground="neutral-weak">{item.period}</Text>
-                </Column>
-              ))}
-            </Column>
-          </Column>
-          <Column className="credential-card" background="surface" border="neutral-alpha-medium" radius="l" padding="l" gap="16">
-            <Heading as="h3" variant="heading-strong-m">{labels.training}</Heading>
-            <Column gap="16">
-              {content.training.map((item) => (
-                <Column key={`${item.institution.en}-${item.period}`} gap="4">
-                  <Text variant="body-strong-m">{localize(item.institution, locale)}</Text>
-                  <Text variant="body-default-s" onBackground="neutral-weak">{localize(item.program, locale)}</Text>
-                  <Text variant="label-default-s" onBackground="neutral-weak">{item.period}</Text>
-                </Column>
-              ))}
-            </Column>
-          </Column>
-          <Column className="credential-card" background="surface" border="neutral-alpha-medium" radius="l" padding="l" gap="16">
-            <Heading as="h3" variant="heading-strong-m">{labels.certifications}</Heading>
-            <Column gap="12">
-              {content.certifications.map((item) => (
-                <Column key={item.name.en} gap="4">
-                  <Text variant="body-strong-m">{localize(item.name, locale)}</Text>
-                  <Text variant="body-default-s" onBackground="neutral-weak">{localize(item.detail, locale)}</Text>
-                </Column>
-              ))}
-            </Column>
-          </Column>
         </Grid>
       </Column>
 

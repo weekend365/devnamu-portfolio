@@ -95,10 +95,10 @@ export function PortfolioHome({ locale }: { locale: Locale }) {
             alt={locale === "ko" ? "DEVNAMU 프로필 사진" : "Portrait of DEVNAMU"}
             aspectRatio="1 / 1"
             objectFit="cover"
-            sizes="120px"
+            sizes="(max-width: 768px) 112px, 160px"
             priority
             radius="full"
-            style={{ width: "7.5rem", height: "7.5rem" }}
+            style={{ width: "10rem", height: "10rem" }}
           />
         </Column>
       </Row>
