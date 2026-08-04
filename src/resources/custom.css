@@ -297,6 +297,15 @@ body {
     radial-gradient(circle at 80% 18%, var(--brand-alpha-medium), transparent 34%);
 }
 
+.project-demo-access {
+  background: radial-gradient(circle at 88% 12%, var(--brand-alpha-medium), transparent 32%),
+    linear-gradient(
+      135deg,
+      var(--surface-background),
+      color-mix(in srgb, var(--surface-background) 84%, transparent)
+    );
+}
+
 .timeline-item::before {
   position: absolute;
   top: 0.6rem;

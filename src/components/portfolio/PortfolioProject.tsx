@@ -2,6 +2,7 @@ import { Button, Column, Grid, Heading, Row, Tag, Text } from "@once-ui-system/c
 import { baseURL, getProjects, localize, type Locale, type Project, ui } from "@/resources";
 import { localePath } from "@/utils/site-metadata";
 import { ProjectCard } from "./ProjectCard";
+import { ProjectDemoAccess } from "./ProjectDemoAccess";
 import { ProjectScreenshotCarousel } from "./ProjectScreenshotCarousel";
 import { ProjectVisual } from "./ProjectVisual";
 import { SectionHeading } from "./SectionHeading";
@@ -66,11 +67,21 @@ export function PortfolioProject({ project, locale }: { project: Project; locale
         </Column>
         <Row gap="12" wrap horizontal="center">
           {project.repository && <Button href={project.repository} prefixIcon="github" suffixIcon="arrowUpRightFromSquare">{labels.viewGithub}</Button>}
-          {project.externalLink && <Button href={project.externalLink} variant="secondary" suffixIcon="arrowUpRightFromSquare">{labels.viewProject}</Button>}
+          {project.externalLink && !project.demoAccess && (
+            <Button
+              href={project.externalLink}
+              variant="secondary"
+              suffixIcon="arrowUpRightFromSquare"
+            >
+              {labels.viewProject}
+            </Button>
+          )}
         </Row>
       </Column>
 
-      {project.images.length > 1 ? (
+      {project.demoAccess ? (
+        <ProjectDemoAccess demoAccess={project.demoAccess} locale={locale} />
+      ) : project.images.length > 1 ? (
         <ProjectScreenshotCarousel
           id={project.slug}
           images={project.images}

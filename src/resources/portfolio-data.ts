@@ -20,6 +20,13 @@ export type ProjectImage = {
   height?: number;
 };
 
+export type DemoAccess = {
+  url: string;
+  username: string;
+  password: string;
+  note: LocalizedText;
+};
+
 export type Project = {
   slug: string;
   startedAt: string;
@@ -41,6 +48,7 @@ export type Project = {
   featured?: boolean;
   repository?: string;
   externalLink?: string;
+  demoAccess?: DemoAccess;
 };
 
 const t = (ko: string, en: string): LocalizedText => ({ ko, en });
@@ -592,8 +600,8 @@ export const projects: Project[] = [
         "On the frontend, I implemented multi-panel editing, hierarchical search and direct navigation, type-aware detail editing, role-based behavior, and external integrations so users can work with dense standards data without losing context.",
       ),
       t(
-        "화면 자료는 실제 시범운영 시스템의 표준 라이브러리 화면이며, 공개 가능한 디지털 건설기준 정보만 포함합니다.",
-        "The interface image shows the standard library in the live pilot system and contains only publicly shareable digital construction standards information.",
+        "공개된 체험 전용 계정으로 실제 시범운영 시스템에 접속해 표준 라이브러리와 주요 탐색 흐름을 직접 확인할 수 있습니다.",
+        "Use the public demo account to explore the standard library and key navigation flows directly in the live pilot system.",
       ),
     ],
     technologies: [
@@ -668,23 +676,17 @@ export const projects: Project[] = [
         "Maintained an operational structure compatible with Next.js standalone builds, Docker images, and the Jenkins deployment pipeline.",
       ),
     ],
-    images: [
-      {
-        src: "/images/projects/kcsc/01.png",
-        alt: t(
-          "시설물과 절차를 필터링하고 객체분류, 검토항목, 검토요소와 상세 정보를 다중 패널로 탐색하는 KCSC 표준 라이브러리",
-          "KCSC standard library showing facility filters and multi-panel navigation across object classifications, review items, review elements, and details",
-        ),
-        caption: t(
-          "표준 라이브러리 · 시설물별 계층 탐색",
-          "Standard library · Facility-based hierarchical navigation",
-        ),
-        variant: "desktop",
-        width: 1920,
-        height: 945,
-      },
-    ],
+    images: [],
     externalLink: "https://digital.kcsc.re.kr/home",
+    demoAccess: {
+      url: "https://digital.kcsc.re.kr/home",
+      username: "testest",
+      password: "testest",
+      note: t(
+        "공개된 체험 전용 계정입니다. 체험 데이터는 예고 없이 초기화될 수 있습니다.",
+        "This is a public demo account. Demo data may be reset without notice.",
+      ),
+    },
   },
   {
     slug: "bims",

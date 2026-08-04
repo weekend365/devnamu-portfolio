@@ -5,6 +5,7 @@ export * from "./PortfolioNotFound";
 export * from "./PortfolioProject";
 export * from "./PortfolioWork";
 export * from "./ProjectCard";
+export * from "./ProjectDemoAccess";
 export * from "./ProjectScreenshotCarousel";
 export * from "./ProjectVisual";
 export * from "./SectionHeading";
