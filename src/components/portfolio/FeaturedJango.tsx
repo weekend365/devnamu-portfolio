@@ -20,8 +20,12 @@ export function FeaturedJango({ locale }: { locale: Locale }) {
     >
       <Column flex={6} padding="xl" gap="24" vertical="center" s={{ padding: "l" }}>
         <Row gap="8" wrap vertical="center">
-          <Tag variant="success" size="m">{locale === "ko" ? "개인 제품" : "Independent product"}</Tag>
-          <Text variant="label-default-s" onBackground="neutral-weak">{localize(project.status, locale)}</Text>
+          <Tag variant="success" size="m">
+            {locale === "ko" ? "개인 제품" : "Independent product"}
+          </Tag>
+          <Text variant="label-default-s" onBackground="neutral-weak">
+            {localize(project.status, locale)}
+          </Text>
         </Row>
         <Column gap="12">
           <Heading as="h3" variant="display-strong-m" wrap="balance">
@@ -33,14 +37,43 @@ export function FeaturedJango({ locale }: { locale: Locale }) {
         </Column>
         <Row wrap gap="8">
           {project.technologies.slice(0, 6).map((technology) => (
-            <Tag key={technology} size="s">{technology}</Tag>
+            <Tag key={technology} size="s">
+              {technology}
+            </Tag>
           ))}
         </Row>
+        <Row className="featured-proof" fillWidth gap="8" wrap>
+          <Column className="featured-proof-item" flex={1} padding="12" gap="4" radius="m">
+            <Text variant="heading-strong-m" onBackground="brand-strong">
+              약 97%
+            </Text>
+            <Text variant="label-default-xs" onBackground="neutral-weak">
+              {locale === "ko" ? "모바일 핵심 UX · 2026.07" : "Core mobile UX · Jul 2026"}
+            </Text>
+          </Column>
+          <Column className="featured-proof-item" flex={1} padding="12" gap="4" radius="m">
+            <Text variant="heading-strong-m" onBackground="brand-strong">
+              269
+            </Text>
+            <Text variant="label-default-xs" onBackground="neutral-weak">
+              {locale === "ko" ? "통과한 자동 검사" : "Automated checks passed"}
+            </Text>
+          </Column>
+        </Row>
         <Row gap="12" wrap>
-          <Button href={localePath(locale, "/work/jango")} variant="primary" suffixIcon="arrowRight">
+          <Button
+            href={localePath(locale, "/work/jango")}
+            variant="primary"
+            suffixIcon="arrowRight"
+          >
             {locale === "ko" ? "제품 사례 읽기" : "Read the case study"}
           </Button>
-          <Button href={project.repository} variant="secondary" prefixIcon="github" suffixIcon="arrowUpRightFromSquare">
+          <Button
+            href={project.repository}
+            variant="secondary"
+            prefixIcon="github"
+            suffixIcon="arrowUpRightFromSquare"
+          >
             {labels.viewGithub}
           </Button>
         </Row>
@@ -51,12 +84,18 @@ export function FeaturedJango({ locale }: { locale: Locale }) {
         background="neutral-weak"
         radius="xl"
         center
-        aria-label={locale === "ko" ? "장고야 부탁해 실제 모바일 앱 화면" : "Jango mobile app screenshot"}
+        aria-label={
+          locale === "ko" ? "장고야 부탁해 실제 모바일 앱 화면" : "Jango mobile app screenshot"
+        }
       >
         <Media
           className="featured-app-screen"
           src="/images/projects/jango/01.png"
-          alt={locale === "ko" ? "장고야 부탁해 홈 대시보드 앱스토어 스크린샷" : "Jango home dashboard App Store screenshot"}
+          alt={
+            locale === "ko"
+              ? "장고야 부탁해 홈 대시보드 앱스토어 스크린샷"
+              : "Jango home dashboard App Store screenshot"
+          }
           aspectRatio="1125 / 2433"
           objectFit="cover"
           sizes="(max-width: 768px) 72vw, 288px"

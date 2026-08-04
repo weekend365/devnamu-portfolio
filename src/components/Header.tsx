@@ -16,7 +16,10 @@ export function Header({ locale }: { locale: Locale }) {
   const homePath = localizedPath(locale, "/");
   const aboutPath = localizedPath(locale, "/about");
   const workPath = localizedPath(locale, "/work");
-  const languagePath = locale === "en" ? pathname.replace(/^\/en(?=\/|$)/, "") || "/" : `/en${pathname === "/" ? "" : pathname}`;
+  const languagePath =
+    locale === "en"
+      ? pathname.replace(/^\/en(?=\/|$)/, "") || "/"
+      : `/en${pathname === "/" ? "" : pathname}`;
 
   return (
     <Row
@@ -34,8 +37,19 @@ export function Header({ locale }: { locale: Locale }) {
         horizontal="between"
         vertical="center"
       >
-        <SmartLink className="portfolio-brand" href={homePath} aria-label={`${person.name[locale]} · ${labels.home}`}>
-          <Text variant="label-strong-m">{person.name[locale]}</Text>
+        <SmartLink
+          className="portfolio-brand"
+          href={homePath}
+          aria-label={`DEVNAMU · ${person.name[locale]} · ${labels.home}`}
+        >
+          <Row gap="8" vertical="center">
+            <Text className="portfolio-wordmark" variant="label-strong-m">
+              DEVNAMU
+            </Text>
+            <Text className="portfolio-owner" variant="label-default-s" onBackground="neutral-weak">
+              / {person.name[locale]}
+            </Text>
+          </Row>
         </SmartLink>
         <Row
           as="nav"
@@ -68,12 +82,7 @@ export function Header({ locale }: { locale: Locale }) {
             selected={pathname.startsWith(workPath)}
           />
           <Line background="neutral-alpha-medium" vert maxHeight="24" />
-          <Button
-            href={languagePath}
-            size="s"
-            variant="tertiary"
-            aria-label={labels.languageLabel}
-          >
+          <Button href={languagePath} size="s" variant="tertiary" aria-label={labels.languageLabel}>
             {labels.languageSwitch}
           </Button>
           <ThemeToggle />

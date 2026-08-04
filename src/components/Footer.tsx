@@ -14,7 +14,7 @@ export function Footer({ locale }: { locale: Locale }) {
         s={{ direction: "column", horizontal: "center" }}
       >
         <Text variant="body-default-s" onBackground="neutral-weak">
-          © {new Date().getFullYear()} {person.name[locale]}
+          © {new Date().getFullYear()} DEVNAMU · {person.name[locale]}
         </Text>
         <Row gap="8" vertical="center">
           <IconButton
@@ -30,11 +30,7 @@ export function Footer({ locale }: { locale: Locale }) {
             variant="tertiary"
             tooltip="Email"
             aria-label="Email"
-          />
-          <Text variant="body-default-xs" onBackground="neutral-weak">
-            {locale === "ko" ? "Next.js와 " : "Built with Next.js and "}
-            <SmartLink href="https://once-ui.com/products/magic-portfolio-systems">Once UI</SmartLink>
-          </Text>
+          />{" "}
         </Row>
       </Row>
     </Row>

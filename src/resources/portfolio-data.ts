@@ -822,40 +822,6 @@ export const projects: Project[] = [
     // TODO: Add verified GIS project screenshots when public sharing is permitted.
     images: [],
   },
-  {
-    slug: "nextjs-portfolio",
-    startedAt: "2023-02-20",
-    endedAt: "2023-02-22",
-    locale: ["ko", "en"],
-    title: t("Next.js 개인 포트폴리오", "Next.js Personal Portfolio"),
-    company: t("개인 프로젝트", "Personal Project"),
-    role: t("1인 개발", "Solo Development"),
-    period: t("2023.02.20 – 2023.02.22", "Feb 20 – Feb 22, 2023"),
-    status: t("배포", "Deployed"),
-    summary: t(
-      "Next.js로 제작하고 Vercel에 배포한 개인 포트폴리오입니다.",
-      "A personal portfolio built with Next.js and deployed on Vercel.",
-    ),
-    description: [
-      t(
-        "이력서에 기록된 첫 개인 포트폴리오 프로젝트입니다.",
-        "The first personal portfolio project documented in the résumé.",
-      ),
-    ],
-    technologies: ["Next.js"],
-    contributions: [
-      t(
-        "기획과 구현을 포함한 전체 작업을 1인으로 수행했습니다.",
-        "Completed the planning and implementation independently.",
-      ),
-    ],
-    // TODO: Add verified challenges and outcomes if additional project documentation becomes available.
-    challenges: [],
-    results: [],
-    // TODO: Add archived screenshots of the 2023 portfolio when available.
-    images: [],
-    externalLink: person.portfolio,
-  },
 ];
 
 export const ui = {

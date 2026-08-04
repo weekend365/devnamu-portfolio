@@ -30,7 +30,7 @@ function socialImage(locale) {
         justifyContent: "space-between",
         overflow: "hidden",
         padding: "76px 86px",
-        background: "linear-gradient(135deg, #071013 0%, #0b1718 54%, #10231e 100%)",
+        background: "linear-gradient(135deg, #07110b 0%, #0d1b12 54%, #12351f 100%)",
         color: "#f7fbfa",
         fontFamily: "Pretendard",
       },
@@ -40,8 +40,8 @@ function socialImage(locale) {
       { style: { display: "flex", flexDirection: "column", width: 700, gap: 22 } },
       h(
         "span",
-        { style: { color: "#72dfbd", fontSize: 24, fontWeight: 600, letterSpacing: 2 } },
-        "NAM WOO-HYUN · PORTFOLIO",
+        { style: { color: "#4ade80", fontSize: 24, fontWeight: 600, letterSpacing: 2 } },
+        "DEVNAMU · NAM WOO-HYUN",
       ),
       h(
         "section",
@@ -60,7 +60,7 @@ function socialImage(locale) {
       ),
       h(
         "span",
-        { style: { color: "#a9b8b5", fontSize: 28, lineHeight: 1.4 } },
+        { style: { color: "#9db0a2", fontSize: 28, lineHeight: 1.4 } },
         "React · Next.js · React Native · NestJS",
       ),
     ),

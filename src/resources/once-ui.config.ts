@@ -8,9 +8,9 @@ export const baseURL =
 export const style: StyleConfig = {
   theme: "system",
   neutral: "gray",
-  brand: "cyan",
-  accent: "green",
-  solid: "contrast",
+  brand: "green",
+  accent: "yellow",
+  solid: "color",
   solidStyle: "flat",
   border: "playful",
   surface: "translucent",

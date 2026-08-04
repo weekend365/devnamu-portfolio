@@ -1,9 +1,14 @@
-import { Column, Icon, Media, Text } from "@once-ui-system/core";
+import { Column, Media, Row, Text } from "@once-ui-system/core";
 import type { Locale, Project } from "@/resources";
-import { localize, ui } from "@/resources";
+import { localize } from "@/resources";
 
-export function ProjectVisual({ project, locale, priority = false }: { project: Project; locale: Locale; priority?: boolean }) {
+export function ProjectVisual({
+  project,
+  locale,
+  priority = false,
+}: { project: Project; locale: Locale; priority?: boolean }) {
   const image = project.images[0];
+  const evidence = project.results[0] ?? project.contributions[0];
   const aspectRatio =
     image?.width && image.height
       ? `${image.width} / ${image.height}`
@@ -44,22 +49,74 @@ export function ProjectVisual({ project, locale, priority = false }: { project: 
 
   return (
     <Column
-      className="project-placeholder"
+      className="project-evidence-visual"
       fillWidth
-      center
       border="neutral-alpha-medium"
       radius="l"
-      gap="12"
-      padding="l"
-      aria-label={ui[locale].screenshotsTodo}
+      gap="20"
+      padding="m"
+      aria-label={
+        locale === "ko"
+          ? `${localize(project.title, locale)} 프로젝트 증거 요약`
+          : `${localize(project.title, locale)} project evidence summary`
+      }
     >
-      <Icon name="image" size="l" onBackground="brand-weak" />
-      <Text variant="heading-strong-m" align="center">
-        {localize(project.title, locale)}
-      </Text>
-      <Text variant="label-default-s" onBackground="neutral-weak" align="center">
-        {ui[locale].screenshotsTodo}
-      </Text>
+      <Row fillWidth horizontal="between" vertical="center" gap="12">
+        <Text className="eyebrow" variant="label-strong-xs" onBackground="brand-weak">
+          {locale === "ko" ? "검증된 프로젝트" : "Verified work"}
+        </Text>
+        <Text variant="label-default-xs" onBackground="neutral-weak">
+          {localize(project.status, locale)}
+        </Text>
+      </Row>
+      <Column
+        className="project-evidence-window"
+        background="surface"
+        border="neutral-alpha-medium"
+        radius="m"
+        overflow="hidden"
+      >
+        <Row
+          className="project-evidence-toolbar"
+          gap="4"
+          paddingX="12"
+          paddingY="8"
+          borderBottom="neutral-alpha-medium"
+          aria-hidden="true"
+        >
+          <span className="project-evidence-dot" />
+          <span className="project-evidence-dot" />
+          <span className="project-evidence-dot" />
+        </Row>
+        <Column padding="m" gap="16">
+          <Column gap="4">
+            <Text variant="label-default-xs" onBackground="neutral-weak">
+              {locale === "ko" ? "담당 범위" : "Ownership"}
+            </Text>
+            <Text variant="heading-strong-m">{localize(project.role, locale)}</Text>
+          </Column>
+          {evidence && (
+            <Column className="project-evidence-result" gap="4" paddingLeft="12">
+              <Text variant="label-strong-xs" onBackground="brand-weak">
+                {project.results.length > 0
+                  ? locale === "ko"
+                    ? "결과"
+                    : "Outcome"
+                  : locale === "ko"
+                    ? "구현"
+                    : "Delivered"}
+              </Text>
+              <Text
+                className="project-evidence-copy"
+                variant="body-default-s"
+                onBackground="neutral-medium"
+              >
+                {localize(evidence, locale)}
+              </Text>
+            </Column>
+          )}
+        </Column>
+      </Column>
     </Column>
   );
 }

@@ -77,6 +77,15 @@ body {
   opacity: 0.64;
 }
 
+.portfolio-wordmark {
+  color: var(--brand-on-background-strong);
+  letter-spacing: 0.08em;
+}
+
+.portfolio-owner {
+  white-space: nowrap;
+}
+
 .portfolio-nav {
   max-width: calc(100vw - 1rem);
 }
@@ -96,6 +105,15 @@ body {
   padding-block: 3rem 1rem;
 }
 
+.home-proof {
+  box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.06);
+}
+
+.home-proof-item {
+  min-height: 7.5rem;
+  justify-content: center;
+}
+
 .profile-image img {
   filter: saturate(0.92) contrast(1.02);
 }
@@ -112,10 +130,8 @@ body {
 .featured-project {
   overflow: hidden;
   isolation: isolate;
-  transition:
-    transform 320ms cubic-bezier(0.22, 1, 0.36, 1),
-    border-color 200ms ease,
-    box-shadow 320ms ease;
+  transition: transform 320ms cubic-bezier(0.22, 1, 0.36, 1), border-color 200ms ease, box-shadow
+    320ms ease;
 }
 
 .featured-project::before {
@@ -132,6 +148,11 @@ body {
   box-shadow: 0 1.25rem 3.5rem rgba(0, 0, 0, 0.12);
 }
 
+.featured-proof-item,
+.project-card-outcome {
+  background: var(--brand-alpha-weak);
+}
+
 .featured-visual {
   min-height: 30rem;
   overflow: hidden;
@@ -139,8 +160,7 @@ body {
 
 .featured-screenshot-panel,
 .jango-card-visual {
-  background:
-    radial-gradient(circle at 70% 18%, var(--accent-alpha-medium), transparent 38%),
+  background: radial-gradient(circle at 70% 18%, var(--accent-alpha-medium), transparent 38%),
     linear-gradient(145deg, var(--brand-alpha-weak), var(--neutral-alpha-weak));
 }
 
@@ -237,9 +257,7 @@ body {
   border: 1px solid var(--neutral-alpha-medium);
   background: var(--neutral-background-strong);
   box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.22);
-  transition:
-    transform 280ms cubic-bezier(0.22, 1, 0.36, 1),
-    border-color 180ms ease;
+  transition: transform 280ms cubic-bezier(0.22, 1, 0.36, 1), border-color 180ms ease;
 }
 
 .screenshot-slide:hover .screenshot-media,
@@ -274,9 +292,7 @@ body {
 }
 
 .project-card {
-  transition:
-    transform 280ms cubic-bezier(0.22, 1, 0.36, 1),
-    border-color 180ms ease,
+  transition: transform 280ms cubic-bezier(0.22, 1, 0.36, 1), border-color 180ms ease,
     background-color 180ms ease;
 }
 
@@ -286,15 +302,51 @@ body {
   border-color: var(--brand-border-medium);
 }
 
+.project-card-outcome {
+  border: 1px solid var(--brand-alpha-medium);
+}
+
+.project-card-outcome-copy {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
 .project-card-editorial {
   min-height: 22rem;
 }
 
-.project-placeholder {
-  min-height: 15rem;
-  background:
-    linear-gradient(135deg, var(--neutral-alpha-weak), transparent 58%),
-    radial-gradient(circle at 80% 18%, var(--brand-alpha-medium), transparent 34%);
+.project-evidence-visual {
+  min-height: 17rem;
+  background: radial-gradient(circle at 84% 12%, var(--brand-alpha-medium), transparent 34%),
+    linear-gradient(145deg, var(--brand-alpha-weak), var(--neutral-alpha-weak));
+}
+
+.project-evidence-window {
+  box-shadow: 0 1rem 2.5rem rgba(0, 0, 0, 0.1);
+}
+
+.project-evidence-toolbar {
+  background: var(--neutral-alpha-weak);
+}
+
+.project-evidence-dot {
+  width: 0.42rem;
+  height: 0.42rem;
+  border-radius: 999px;
+  background: var(--neutral-alpha-strong);
+}
+
+.project-evidence-result {
+  border-left: 2px solid var(--brand-border-strong);
+}
+
+.project-evidence-copy {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
 }
 
 .project-demo-access {
@@ -406,7 +458,11 @@ body {
   }
 
   .page-stack {
-    gap: 6rem !important;
+    gap: 5rem !important;
+  }
+
+  .home-proof-item {
+    min-height: 0;
   }
 
   .timeline-meta {
