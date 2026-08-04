@@ -1,5 +1,5 @@
 import { Button, Column, Grid, Heading, Row, Tag, Text } from "@once-ui-system/core";
-import { baseURL, getProjects, localize, type Locale, type Project, ui } from "@/resources";
+import { baseURL, getProjects, localize, person, type Locale, type Project, ui } from "@/resources";
 import { localePath } from "@/utils/site-metadata";
 import { ProjectCard } from "./ProjectCard";
 import { ProjectDemoAccess } from "./ProjectDemoAccess";
@@ -38,7 +38,7 @@ export function PortfolioProject({ project, locale }: { project: Project; locale
           url: projectUrl,
           inLanguage: locale === "ko" ? "ko-KR" : "en",
           dateCreated: project.startedAt,
-          creator: { "@type": "Person", name: locale === "ko" ? "남우현" : "Nam Woo-hyun" },
+          creator: { "@type": "Person", name: person.name[locale], alternateName: person.brand },
           keywords: project.technologies.join(", "),
           image: project.images[0] ? `${baseURL}${project.images[0].src}` : undefined,
           sameAs: project.repository ?? project.externalLink,

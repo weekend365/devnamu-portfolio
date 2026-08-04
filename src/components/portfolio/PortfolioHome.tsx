@@ -25,7 +25,6 @@ export function PortfolioHome({ locale }: { locale: Locale }) {
   const content = getContent(locale);
   const labels = content.navigation;
   const secondaryProjects = content.projects.filter((project) => !project.featured).slice(0, 3);
-  const resumeHref = locale === "ko" ? "/resume/nam-woo-hyun-ko.pdf" : "/resume/nam-woo-hyun-en.pdf";
 
   return (
     <Column className="page-stack" maxWidth="l" fillWidth gap="128">
@@ -38,6 +37,7 @@ export function PortfolioHome({ locale }: { locale: Locale }) {
           mainEntity: {
             "@type": "Person",
             name: person.name[locale],
+            alternateName: person.brand,
             jobTitle: person.role[locale],
             email: `mailto:${person.email}`,
             image: `${baseURL}${person.avatar}`,
@@ -59,7 +59,7 @@ export function PortfolioHome({ locale }: { locale: Locale }) {
       >
         <Column className="hero-copy" flex={8} gap="24">
           <Text className="eyebrow" variant="label-strong-m" onBackground="brand-weak">
-            {person.name[locale]} · {person.role[locale]}
+            {person.brand} · {person.role[locale]}
           </Text>
           <Heading id="home-heading" className="hero-title" as="h1" variant="display-strong-xl" wrap="balance">
             {locale === "ko"
@@ -74,13 +74,10 @@ export function PortfolioHome({ locale }: { locale: Locale }) {
             </Text>
           </Column>
           <Row gap="12" wrap>
-            <Button href={resumeHref} download variant="primary" prefixIcon="document">
-              {labels.resume}
-            </Button>
-            <Button href={person.github} variant="secondary" prefixIcon="github" suffixIcon="arrowUpRightFromSquare">
+            <Button href={person.github} variant="primary" prefixIcon="github" suffixIcon="arrowUpRightFromSquare">
               {labels.github}
             </Button>
-            <Button href={`mailto:${person.email}`} variant="tertiary" prefixIcon="email">
+            <Button href={`mailto:${person.email}`} variant="secondary" prefixIcon="email">
               {labels.contact}
             </Button>
           </Row>
@@ -89,7 +86,7 @@ export function PortfolioHome({ locale }: { locale: Locale }) {
           <Media
             className="profile-image"
             src={person.avatar}
-            alt={locale === "ko" ? "남우현 프로필 사진" : "Portrait of Nam Woo-hyun"}
+            alt={locale === "ko" ? "DEVNAMU 프로필 사진" : "Portrait of DEVNAMU"}
             aspectRatio="1 / 1"
             objectFit="cover"
             sizes="120px"

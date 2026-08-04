@@ -10,26 +10,24 @@ import { SectionHeading } from "./SectionHeading";
 export function PortfolioAbout({ locale }: { locale: Locale }) {
   const content = getContent(locale);
   const labels = content.navigation;
-  const resumeHref = locale === "ko" ? "/resume/nam-woo-hyun-ko.pdf" : "/resume/nam-woo-hyun-en.pdf";
 
   return (
     <Column className="page-stack" maxWidth="m" fillWidth gap="104">
       <Row as="header" fillWidth gap="xl" vertical="center" s={{ direction: "column-reverse", vertical: "start" }}>
         <Column flex={8} gap="20">
-          <Text className="eyebrow" variant="label-strong-m" onBackground="brand-weak">{person.name[locale]} · {labels.about}</Text>
+          <Text className="eyebrow" variant="label-strong-m" onBackground="brand-weak">{person.brand} · {labels.about}</Text>
           <Heading as="h1" className="hero-title" variant="display-strong-l" wrap="balance">
             {locale === "ko" ? "문제를 이해하고, 운영 가능한 제품으로 바꿉니다." : "I turn understood problems into operable products."}
           </Heading>
           <Text variant="heading-default-l" onBackground="neutral-weak">{person.role[locale]}</Text>
           <Row gap="12" wrap>
-            <Button href={resumeHref} download prefixIcon="document">{labels.resume}</Button>
-            <Button href={`mailto:${person.email}`} variant="secondary" prefixIcon="email">{labels.contact}</Button>
+            <Button href={`mailto:${person.email}`} variant="primary" prefixIcon="email">{labels.contact}</Button>
           </Row>
         </Column>
         <Media
           className="profile-image"
           src={person.avatar}
-          alt={locale === "ko" ? "남우현 프로필 사진" : "Portrait of Nam Woo-hyun"}
+          alt={locale === "ko" ? "DEVNAMU 프로필 사진" : "Portrait of DEVNAMU"}
           aspectRatio="1 / 1"
           objectFit="cover"
           sizes="120px"
@@ -88,43 +86,6 @@ export function PortfolioAbout({ locale }: { locale: Locale }) {
             <Column key={category.title.en} className="skill-card" background="surface" border="neutral-alpha-medium" radius="l" padding="l" gap="16">
               <Heading as="h3" variant="heading-strong-m">{localize(category.title, locale)}</Heading>
               <Row wrap gap="8">{category.skills.map((skill) => <Tag key={skill}>{skill}</Tag>)}</Row>
-            </Column>
-          ))}
-        </Grid>
-      </Column>
-
-      <Grid columns="2" s={{ columns: 1 }} gap="xl">
-        <Column as="section" gap="32">
-          <SectionHeading title={labels.education} />
-          <Column gap="24">
-            {content.education.map((item) => (
-              <Column key={item.institution.en} gap="4">
-                <Heading as="h3" variant="heading-strong-m">{localize(item.institution, locale)}</Heading>
-                <Text onBackground="neutral-weak">{localize(item.program, locale)}</Text>
-                <Text variant="label-default-s" onBackground="brand-weak">{item.period}</Text>
-              </Column>
-            ))}
-          </Column>
-        </Column>
-        <Column as="section" gap="32">
-          <SectionHeading title={labels.training} />
-          {content.training.map((item) => (
-            <Column key={item.institution.en} gap="4">
-              <Heading as="h3" variant="heading-strong-m">{localize(item.institution, locale)}</Heading>
-              <Text onBackground="neutral-weak">{localize(item.program, locale)}</Text>
-              <Text variant="label-default-s" onBackground="brand-weak">{item.period}</Text>
-            </Column>
-          ))}
-        </Column>
-      </Grid>
-
-      <Column as="section" gap="40">
-        <SectionHeading title={labels.certifications} />
-        <Grid columns="2" s={{ columns: 1 }} gap="16">
-          {content.certifications.map((certification) => (
-            <Column key={certification.name.en} background="surface" border="neutral-alpha-medium" radius="m" padding="m" gap="4">
-              <Heading as="h3" variant="heading-strong-m">{localize(certification.name, locale)}</Heading>
-              <Text variant="body-default-s" onBackground="neutral-weak">{localize(certification.detail, locale)}</Text>
             </Column>
           ))}
         </Grid>

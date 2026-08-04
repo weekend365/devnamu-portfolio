@@ -10,8 +10,7 @@
     "start": "next start",
     "lint": "biome lint src",
     "typecheck": "tsc --noEmit",
-    "og:generate": "node scripts/generate-social-images.mjs",
-    "resume:generate": "node scripts/generate-resume-pdfs.mjs"
+    "og:generate": "node scripts/generate-social-images.mjs"
   },
   "dependencies": {
     "@once-ui-system/core": "latest",

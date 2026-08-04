@@ -34,8 +34,8 @@ export function Header({ locale }: { locale: Locale }) {
         horizontal="between"
         vertical="center"
       >
-        <SmartLink className="portfolio-brand" href={homePath} aria-label={`${person.name[locale]} · ${labels.home}`}>
-          <Text variant="label-strong-m">{person.name[locale]}</Text>
+        <SmartLink className="portfolio-brand" href={homePath} aria-label={`${person.brand} · ${labels.home}`}>
+          <Text variant="label-strong-m">{person.brand}</Text>
         </SmartLink>
         <Row
           as="nav"

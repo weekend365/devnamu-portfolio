@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { baseURL, person, type Locale } from "@/resources";
 
 const keywords = [
+  "DEVNAMU",
   "남우현",
   "Nam Woo-hyun",
   "프론트엔드 개발자",
@@ -47,14 +48,14 @@ export function buildMetadata({
   const localized = localePath(locale, path);
   const koPath = localePath("ko", path);
   const enPath = localePath("en", path);
-  const fullTitle = `${title} | ${person.name[locale]}`;
+  const fullTitle = `${title} | ${person.brand}`;
   const socialImage =
     image ??
     {
       url: `/images/og/portfolio-${locale}.png`,
       width: 1200,
       height: 630,
-      alt: `${person.name[locale]} · ${title}`,
+      alt: `${person.brand} · ${title}`,
     };
 
   return {
@@ -62,8 +63,8 @@ export function buildMetadata({
     title: fullTitle,
     description,
     keywords,
-    authors: [{ name: person.name[locale], url: baseURL }],
-    creator: person.name[locale],
+    authors: [{ name: person.brand, url: baseURL }],
+    creator: person.brand,
     alternates: {
       canonical: localized,
       languages: {
@@ -79,7 +80,7 @@ export function buildMetadata({
       url: localized,
       title: fullTitle,
       description,
-      siteName: `${person.name[locale]} Portfolio`,
+      siteName: `${person.brand} Portfolio`,
       images: [socialImage],
     },
     twitter: {
