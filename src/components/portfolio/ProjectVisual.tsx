@@ -178,12 +178,17 @@ export function ProjectVisual({ project, locale, priority = false }: { project: 
         ? "1125 / 2436"
         : "1060 / 600";
 
-  if (project.slug === "jango" && image) {
+  if (image?.variant === "mobile") {
     return (
-      <ImageBrowserFrame project={project} locale={locale} className="jango-card-visual">
+      <Column
+        className={project.slug === "jango" ? "jango-card-visual" : "mobile-card-visual"}
+        fillWidth
+        center
+        radius="l"
+      >
         <Column fillWidth center>
           <Media
-            className="jango-card-screen"
+            className={project.slug === "jango" ? "jango-card-screen" : "mobile-card-screen"}
             src={image.src}
             alt={localize(image.alt, locale)}
             aspectRatio={aspectRatio}
@@ -193,18 +198,18 @@ export function ProjectVisual({ project, locale, priority = false }: { project: 
             radius="l"
           />
         </Column>
-      </ImageBrowserFrame>
+      </Column>
     );
   }
 
-  if (image) {
+  if (image?.variant === "desktop") {
     return (
       <ImageBrowserFrame project={project} locale={locale}>
         <Media
           src={image.src}
           alt={localize(image.alt, locale)}
           aspectRatio={aspectRatio}
-          objectFit={image.variant === "mobile" ? "cover" : "contain"}
+          objectFit="contain"
           sizes="(max-width: 768px) 100vw, 960px"
           priority={priority}
           radius="l"
