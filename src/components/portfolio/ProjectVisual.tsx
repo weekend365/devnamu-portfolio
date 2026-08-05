@@ -212,7 +212,7 @@ export function ProjectVisual({ project, locale, priority = false }: { project: 
           objectFit="contain"
           sizes="(max-width: 768px) 100vw, 960px"
           priority={priority}
-          radius="l"
+          radius="none"
         />
       </ImageBrowserFrame>
     );

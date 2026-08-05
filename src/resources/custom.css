@@ -770,6 +770,7 @@ body {
   .project-card,
   .featured-app-screen,
   .jango-card-screen,
+  .mobile-card-screen,
   .screenshot-media,
   .screenshot-dot {
     transition: none;
