@@ -30,10 +30,8 @@ export function PortfolioHome({ locale }: { locale: Locale }) {
   const homeSkillCategories = content.skillCategories.filter((_, index) =>
     [0, 2, 3].includes(index),
   );
-  const projectCount = content.projects.length;
-
   return (
-    <Column className="page-stack" maxWidth="l" fillWidth gap="104">
+    <Column className="page-stack home-page" maxWidth="l" fillWidth gap="80">
       <StructuredData
         data={{
           "@context": "https://schema.org",
@@ -102,7 +100,7 @@ export function PortfolioHome({ locale }: { locale: Locale }) {
             <Tag size="s">{localize(person.location, locale)}</Tag>
             <Tag size="s">{localize(person.languages, locale)}</Tag>
           </Row>
-          <Row gap="12" wrap>
+          <Row className="hero-actions" gap="12" wrap>
             <Button
               href={localePath(locale, "/work")}
               variant="primary"
@@ -148,10 +146,10 @@ export function PortfolioHome({ locale }: { locale: Locale }) {
       </Row>
 
       <Row
-        className="proof-strip"
+        className="proof-strip home-proof-strip"
         fillWidth
         gap="8"
-        s={{ direction: "column" }}
+        s={{ direction: "row" }}
       >
         <Column className="proof-item" gap="4">
           <Text variant="display-strong-s" onBackground="brand-weak">
@@ -162,19 +160,19 @@ export function PortfolioHome({ locale }: { locale: Locale }) {
           </Text>
         </Column>
         <Column className="proof-item" gap="4">
-          <Text variant="display-strong-s">{projectCount}</Text>
+          <Text variant="display-strong-s">269</Text>
           <Text variant="label-default-s" onBackground="neutral-weak">
             {locale === "ko"
-              ? "공개 가능한 작업 맥락"
-              : "selected product contexts"}
+              ? "장고 자동 검사 269개"
+              : "269 Jango checks"}
           </Text>
         </Column>
         <Column className="proof-item" gap="4">
           <Text variant="display-strong-s">01</Text>
           <Text variant="label-default-s" onBackground="neutral-weak">
             {locale === "ko"
-              ? "직접 체험 가능한 라이브 데모"
-              : "live demo you can try"}
+              ? "라이브 데모"
+              : "live demo"}
           </Text>
         </Column>
       </Row>

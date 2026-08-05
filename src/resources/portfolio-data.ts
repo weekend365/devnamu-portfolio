@@ -698,10 +698,52 @@ export const projects: Project[] = [
         "Complex transportation data had to be presented and managed accurately around the administrator’s workflow.",
       ),
     ],
-    // TODO: Add a verified outcome when one is available in the project record.
+    // Outcome metrics are intentionally omitted until the current operational scope is verified.
     results: [],
-    // TODO: Add verified BIMS screenshots when public sharing is permitted.
-    images: [],
+    images: [
+      {
+        src: "/images/projects/bims/01.png",
+        alt: t(
+          "실시간 버스 위치와 운행 이벤트를 지도에서 확인하는 BIMS 모니터링 화면",
+          "BIMS monitoring map showing live bus locations and operation events",
+        ),
+        caption: t(
+          "지도·노선·운행 이벤트를 한 화면에서 확인하는 실시간 관제",
+          "Real-time operations view combining the map, routes, and vehicle events",
+        ),
+        variant: "desktop",
+        width: 1920,
+        height: 945,
+      },
+      {
+        src: "/images/projects/bims/02.png",
+        alt: t(
+          "운행 현황과 돌발·위반 데이터를 보여주는 BIMS 운영 대시보드",
+          "BIMS operations dashboard showing service status and incidents",
+        ),
+        caption: t(
+          "운행·돌발·위반 지표를 요약한 운영 대시보드",
+          "An operations dashboard summarizing service, incident, and violation signals",
+        ),
+        variant: "desktop",
+        width: 1920,
+        height: 945,
+      },
+      {
+        src: "/images/projects/bims/03.png",
+        alt: t(
+          "최근 접속 추이와 로그인 이력을 보여주는 BIMS 관리자 화면",
+          "BIMS administrator screen showing login trends and access history",
+        ),
+        caption: t(
+          "관리자 권한과 접속 이력을 확인하는 운영 화면",
+          "An administrative view for access trends, permissions, and login history",
+        ),
+        variant: "desktop",
+        width: 1920,
+        height: 945,
+      },
+    ],
   },
   {
     slug: "subscription-platform",

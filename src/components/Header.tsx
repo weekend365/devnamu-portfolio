@@ -82,8 +82,18 @@ export function Header({ locale }: { locale: Locale }) {
             selected={pathname.startsWith(workPath)}
           />
           <Line background="neutral-alpha-medium" vert maxHeight="24" />
-          <Button href={languagePath} size="s" variant="tertiary" aria-label={labels.languageLabel}>
-            {labels.languageSwitch}
+          <Button
+            className="language-toggle"
+            href={languagePath}
+            size="s"
+            variant="tertiary"
+            aria-label={labels.languageLabel}
+            data-locale={locale}
+          >
+            <span className="language-toggle-full">{labels.languageSwitch}</span>
+            <span className="language-toggle-short">
+              {locale === "ko" ? "EN" : "KO"}
+            </span>
           </Button>
           <ThemeToggle locale={locale} />
         </Row>
