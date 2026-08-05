@@ -1,14 +1,7 @@
 "use client";
 
 import { IconButton, Media, Row, Text } from "@once-ui-system/core";
-import {
-  type KeyboardEvent,
-  type UIEvent,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { type KeyboardEvent, type UIEvent, useCallback, useEffect, useRef, useState } from "react";
 import { localize, type Locale, type ProjectImage } from "@/resources";
 
 type ProjectScreenshotCarouselProps = {
@@ -171,16 +164,10 @@ export function ProjectScreenshotCarousel({
           >
             <figure className="screenshot-figure">
               <Media
-                className="screenshot-media"
+                className={`screenshot-media screenshot-media-${image.variant}`}
                 src={image.src}
                 alt={localize(image.alt, locale)}
-                aspectRatio={
-                  image.width && image.height
-                    ? `${image.width} / ${image.height}`
-                    : image.variant === "mobile"
-                      ? "1125 / 2436"
-                      : "1060 / 600"
-                }
+                aspectRatio={image.variant === "desktop" ? "16 / 9" : "1125 / 2436"}
                 objectFit={image.variant === "mobile" ? "cover" : "contain"}
                 sizes={
                   image.variant === "mobile"

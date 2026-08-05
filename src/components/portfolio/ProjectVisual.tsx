@@ -117,7 +117,11 @@ function ImageBrowserFrame({
           <span className="project-evidence-dot" />
           <span className="project-evidence-dot" />
         </Row>
-        <Text className="project-evidence-url" variant="label-default-xs" onBackground="neutral-weak">
+        <Text
+          className="project-evidence-url"
+          variant="label-default-xs"
+          onBackground="neutral-weak"
+        >
           devnamu.dev / work / {project.slug}
         </Text>
       </Row>
@@ -140,43 +144,82 @@ function WorkflowVisual({ project, locale }: { project: Project; locale: Locale 
       gap="20"
       aria-label={copy.caption}
     >
-      <Row fillWidth horizontal="between" vertical="center" gap="12" s={{ direction: "column", horizontal: "start" }}>
+      <Row
+        fillWidth
+        horizontal="between"
+        vertical="center"
+        gap="12"
+        s={{ direction: "column", horizontal: "start" }}
+      >
         <Column gap="4">
           <Text className="workflow-kicker" variant="label-strong-s" onBackground="brand-weak">
             {copy.eyebrow}
           </Text>
           <Text variant="heading-strong-m">{localize(project.title, locale)}</Text>
         </Column>
-        <Tag size="s" variant="info">{copy.badge}</Tag>
+        <Tag size="s" variant="info">
+          {copy.badge}
+        </Tag>
       </Row>
-      <Row className="workflow-flow" fillWidth gap="8" vertical="center" s={{ direction: "column" }}>
+      <Row
+        className="workflow-flow"
+        fillWidth
+        gap="8"
+        vertical="center"
+        s={{ direction: "column" }}
+      >
         {copy.nodes.map((node, index) => (
           <Fragment key={node}>
-            <Column className="workflow-node" background="surface" border="neutral-alpha-medium" radius="m" padding="m" gap="8">
-              <Text variant="label-strong-s" onBackground="brand-weak">0{index + 1}</Text>
-              <Text variant="heading-strong-s" wrap="balance">{node}</Text>
+            <Column
+              className="workflow-node"
+              background="surface"
+              border="neutral-alpha-medium"
+              radius="m"
+              padding="m"
+              gap="8"
+            >
+              <Text variant="label-strong-s" onBackground="brand-weak">
+                0{index + 1}
+              </Text>
+              <Text variant="heading-strong-s" wrap="balance">
+                {node}
+              </Text>
             </Column>
-            {index < copy.nodes.length - 1 && <Text className="workflow-arrow" onBackground="neutral-weak">→</Text>}
+            {index < copy.nodes.length - 1 && (
+              <Text className="workflow-arrow" onBackground="neutral-weak">
+                →
+              </Text>
+            )}
           </Fragment>
         ))}
       </Row>
       <Row gap="8" wrap>
-        {copy.signals.map((signal) => <Tag key={signal} size="s">{signal}</Tag>)}
+        {copy.signals.map((signal) => (
+          <Tag key={signal} size="s">
+            {signal}
+          </Tag>
+        ))}
       </Row>
-      <Text variant="label-default-s" onBackground="neutral-weak" wrap="balance">{copy.caption}</Text>
+      <Text variant="label-default-s" onBackground="neutral-weak" wrap="balance">
+        {copy.caption}
+      </Text>
     </Column>
   );
 }
 
-export function ProjectVisual({ project, locale, priority = false }: { project: Project; locale: Locale; priority?: boolean }) {
+export function ProjectVisual({
+  project,
+  locale,
+  priority = false,
+}: { project: Project; locale: Locale; priority?: boolean }) {
   const image = project.images[0];
-  const evidence = project.results[0] ?? project.contributions[0];
+  const evidence = project.results[0] ?? project.outcome;
   const aspectRatio =
-    image?.width && image.height
-      ? `${image.width} / ${image.height}`
-      : image?.variant === "mobile"
-        ? "1125 / 2436"
-        : "1060 / 600";
+    image?.variant === "desktop"
+      ? "16 / 9"
+      : image?.width && image.height
+        ? `${image.width} / ${image.height}`
+        : "1125 / 2436";
 
   if (image?.variant === "mobile") {
     return (
@@ -206,6 +249,7 @@ export function ProjectVisual({ project, locale, priority = false }: { project: 
     return (
       <ImageBrowserFrame project={project} locale={locale}>
         <Media
+          className="project-desktop-media"
           src={image.src}
           alt={localize(image.alt, locale)}
           aspectRatio={aspectRatio}
@@ -244,7 +288,13 @@ export function ProjectVisual({ project, locale, priority = false }: { project: 
           {localize(project.status, locale)}
         </Text>
       </Row>
-      <Column className="project-evidence-window" background="surface" border="neutral-alpha-medium" radius="m" overflow="hidden">
+      <Column
+        className="project-evidence-window"
+        background="surface"
+        border="neutral-alpha-medium"
+        radius="m"
+        overflow="hidden"
+      >
         <Column padding="m" gap="16">
           <Column gap="4">
             <Text variant="label-default-xs" onBackground="neutral-weak">
@@ -263,7 +313,11 @@ export function ProjectVisual({ project, locale, priority = false }: { project: 
                     ? "구현"
                     : "Delivered"}
               </Text>
-              <Text className="project-evidence-copy" variant="body-default-s" onBackground="neutral-medium">
+              <Text
+                className="project-evidence-copy"
+                variant="body-default-s"
+                onBackground="neutral-medium"
+              >
                 {localize(evidence, locale)}
               </Text>
             </Column>

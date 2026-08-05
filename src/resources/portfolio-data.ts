@@ -39,6 +39,13 @@ export type Project = {
   period: LocalizedText;
   status: LocalizedText;
   summary: LocalizedText;
+  problem: LocalizedText;
+  outcome: LocalizedText;
+  metrics?: {
+    value: string;
+    label: LocalizedText;
+    note?: LocalizedText;
+  }[];
   description: LocalizedText[];
   technologies: string[];
   contributions: LocalizedText[];
@@ -56,7 +63,10 @@ const t = (ko: string, en: string): LocalizedText => ({ ko, en });
 export const person = {
   brand: "DEVNAMU",
   name: t("남우현", "Nam Woo-hyun"),
-  role: t("프론트엔드 · 풀스택 개발자", "Frontend · Full-stack Developer"),
+  role: t(
+    "제품 전체 흐름을 이해하는 프론트엔드 개발자",
+    "Frontend developer with end-to-end product ownership",
+  ),
   email: "skadngus14@naver.com",
   github: "https://github.com/weekend365",
   portfolio: "https://portfolio-kohl-one-78.vercel.app",
@@ -66,8 +76,8 @@ export const person = {
   languages: t("한국어 · 영어", "Korean · English"),
   summary: [
     t(
-      "React와 Next.js를 중심으로 웹 서비스와 관리 시스템을 개발해 온 3년 경력의 프론트엔드·풀스택 개발자입니다.",
-      "I am a frontend and full-stack developer with three years of experience building web services and management systems, primarily with React and Next.js.",
+      "React와 Next.js를 중심으로 화면부터 운영까지 연결해 온 3년 경력의 프론트엔드 개발자입니다.",
+      "I am a frontend developer with three years of experience connecting product interfaces to APIs, operations, and delivery with React and Next.js.",
     ),
     t(
       "GIS 기반 시설물 조회 시스템, 구독 서비스 플랫폼, BIMS(Bus Information Management System) 등 실제 운영·납품 목적의 웹 애플리케이션 개발 경험을 보유하고 있습니다.",
@@ -83,10 +93,7 @@ export const person = {
 export const experiences: Experience[] = [
   {
     company: t("씨엔넷", "C&Net"),
-    role: t(
-      "개발부 · 주임 · 풀스택 개발자",
-      "Associate · Full-stack Developer",
-    ),
+    role: t("개발부 · 주임 · 풀스택 개발자", "Associate · Full-stack Developer"),
     period: t("2025.12 – 재직중", "Dec 2025 – Present"),
     location: t("서울", "Seoul"),
     projects: [
@@ -116,18 +123,10 @@ export const experiences: Experience[] = [
   },
   {
     company: t("겟앤쇼", "Get&Show"),
-    role: t(
-      "개발부 · 주임 · 풀스택 개발자",
-      "Associate · Full-stack Developer",
-    ),
+    role: t("개발부 · 주임 · 풀스택 개발자", "Associate · Full-stack Developer"),
     period: t("2025.05 – 2025.12 · 8개월", "May 2025 – Dec 2025 · 8 months"),
     location: t("서울", "Seoul"),
-    projects: [
-      t(
-        "자사 구독 서비스 웹·앱 플랫폼",
-        "In-house subscription web and app platform",
-      ),
-    ],
+    projects: [t("자사 구독 서비스 웹·앱 플랫폼", "In-house subscription web and app platform")],
     achievements: [
       t(
         "React·Next.js로 구독 서비스 웹 프론트엔드를 개발하고 App Router 기반 SSR·SEO를 구성했습니다.",
@@ -145,21 +144,10 @@ export const experiences: Experience[] = [
   },
   {
     company: t("케이엠아이에스㈜", "KMIS Co., Ltd."),
-    role: t(
-      "개발부 · 주임 · 프론트엔드 개발자",
-      "Associate · Frontend Developer",
-    ),
-    period: t(
-      "2023.05 – 2025.01 · 1년 9개월",
-      "May 2023 – Jan 2025 · 1 year 9 months",
-    ),
+    role: t("개발부 · 주임 · 프론트엔드 개발자", "Associate · Frontend Developer"),
+    period: t("2023.05 – 2025.01 · 1년 9개월", "May 2023 – Jan 2025 · 1 year 9 months"),
     location: t("인천", "Incheon"),
-    projects: [
-      t(
-        "GIS 기반 시설물 조회 시스템 웹앱",
-        "GIS-based facility lookup web application",
-      ),
-    ],
+    projects: [t("GIS 기반 시설물 조회 시스템 웹앱", "GIS-based facility lookup web application")],
     achievements: [
       t(
         "React·Next.js·TypeScript로 GIS 기반 시설물 조회 웹앱을 개발했습니다.",
@@ -180,10 +168,7 @@ export const experiences: Experience[] = [
 export const education = [
   {
     institution: t("한국방송통신대학교", "Korea National Open University"),
-    program: t(
-      "컴퓨터과학과 · 편입/졸업",
-      "Computer Science · Transfer/Graduated",
-    ),
+    program: t("컴퓨터과학과 · 편입/졸업", "Computer Science · Transfer/Graduated"),
     period: "2023.01 – 2025.08",
   },
   {
@@ -196,10 +181,7 @@ export const education = [
   },
   {
     institution: t("서일대학교", "Seoil University"),
-    program: t(
-      "정보통신과 · 자퇴",
-      "Information and Communications · Withdrew",
-    ),
+    program: t("정보통신과 · 자퇴", "Information and Communications · Withdrew"),
     period: "2015.01 – 2019.03",
   },
   {
@@ -223,39 +205,24 @@ export const training = [
 export const certifications = [
   {
     name: t("정보처리기사", "Engineer Information Processing"),
-    detail: t(
-      "2025.09 · 최종합격 · 한국산업인력공단",
-      "Sep 2025 · Passed · HRD Korea",
-    ),
+    detail: t("2025.09 · 최종합격 · 한국산업인력공단", "Sep 2025 · Passed · HRD Korea"),
   },
   {
     name: t("SQL개발자(SQLD)", "SQL Developer (SQLD)"),
-    detail: t(
-      "2024.09 · 최종합격 · 한국데이터산업진흥원",
-      "Sep 2024 · Passed · Korea Data Agency",
-    ),
+    detail: t("2024.09 · 최종합격 · 한국데이터산업진흥원", "Sep 2024 · Passed · Korea Data Agency"),
   },
   {
     name: t("네트워크관리사 2급", "Network Administrator Level 2"),
-    detail: t(
-      "2021.12 · 최종합격 · 한국정보통신자격협회",
-      "Dec 2021 · Passed · ICQA",
-    ),
+    detail: t("2021.12 · 최종합격 · 한국정보통신자격협회", "Dec 2021 · Passed · ICQA"),
   },
   { name: t("TOEIC", "TOEIC"), detail: t("2025.10 · 835점", "Oct 2025 · 835") },
   {
     name: t("TOEIC Speaking Test", "TOEIC Speaking Test"),
-    detail: t(
-      "2025.09 · 120점 · Intermediate Mid 2",
-      "Sep 2025 · 120 · Intermediate Mid 2",
-    ),
+    detail: t("2025.09 · 120점 · Intermediate Mid 2", "Sep 2025 · 120 · Intermediate Mid 2"),
   },
   {
     name: t("1종 보통 운전면허", "Class 1 Driver’s License"),
-    detail: t(
-      "2018.04 · 최종합격 · 경찰청",
-      "Apr 2018 · Passed · Korean National Police Agency",
-    ),
+    detail: t("2018.04 · 최종합격 · 경찰청", "Apr 2018 · Passed · Korean National Police Agency"),
   },
 ];
 
@@ -327,18 +294,25 @@ export const projects: Project[] = [
       "제품 설계 · 모바일 · 백엔드 · 관리자 · 인프라",
       "Product · Mobile · Backend · Admin · Infrastructure",
     ),
-    period: t(
-      "2026 · 스토어 제출 준비",
-      "2026 · Preparing for store submission",
-    ),
-    status: t(
-      "Phase 2 · 스토어 제출 준비",
-      "Phase 2 · Store submission preparation",
-    ),
+    period: t("2026 · 스토어 제출 준비", "2026 · Preparing for store submission"),
+    status: t("Phase 2 · 스토어 제출 준비", "Phase 2 · Store submission preparation"),
     summary: t(
       "냉장고 식재료와 생활용품의 유통기한을 관리하고, 임박 식재료를 우선 활용하는 AI 레시피를 추천하는 서비스입니다.",
       "An ingredient and household inventory service that tracks expiry dates and recommends AI-generated recipes prioritizing items that expire soon.",
     ),
+    problem: t(
+      "유통기한이 임박한 식재료를 놓치고, 기록·추천·공유가 서로 끊겨 있었습니다.",
+      "People missed expiring ingredients because tracking, recommendations, and shared spaces lived in separate flows.",
+    ),
+    outcome: t(
+      "모바일 핵심 UX 약 97%, API/Admin Railway 운영, iOS TestFlight 빌드 업로드 상태까지 연결했습니다.",
+      "Connected the product through roughly 97% of the core mobile UX, live API/Admin services on Railway, and an uploaded iOS TestFlight build.",
+    ),
+    metrics: [
+      { value: "97%", label: t("모바일 핵심 UX", "Core mobile UX") },
+      { value: "269", label: t("자동 검사 통과", "Automated checks passed") },
+      { value: "01", label: t("독립 제품 운영", "Independent product") },
+    ],
     description: [
       t(
         "장고야 부탁해는 Expo 기반 모바일 앱, NestJS REST API, Next.js 운영 관리자, 공유 계약 패키지를 하나의 pnpm 모노레포로 구성한 한국어 우선 MVP입니다.",
@@ -492,10 +466,7 @@ export const projects: Project[] = [
           "초대 코드로 가족이나 동료와 여러 냉장고를 공유하는 화면",
           "Jango shared refrigerator screen for managing multiple spaces with family or colleagues",
         ),
-        caption: t(
-          "가족·동료와 함께 관리하는 공유 공간",
-          "Shared spaces for households and teams",
-        ),
+        caption: t("가족·동료와 함께 관리하는 공유 공간", "Shared spaces for households and teams"),
         variant: "mobile",
       },
     ],
@@ -518,6 +489,14 @@ export const projects: Project[] = [
     summary: t(
       "KDS·KCS 디지털 건설기준을 시설물–검토항목–검토요소–변수의 계층으로 탐색하고, 사용자 기준을 편집해 API로 활용하도록 지원하는 시범운영 플랫폼입니다.",
       "A pilot platform for navigating KDS and KCS digital construction standards through facility, review-item, review-element, and variable hierarchies, then adapting and consuming them through APIs.",
+    ),
+    problem: t(
+      "시설물부터 변수까지 이어지는 깊은 기준 데이터를 다루면서 현재 선택과 편집 맥락을 잃기 쉬웠습니다.",
+      "Deep standards data from facilities to variables made it easy to lose the current selection and editing context.",
+    ),
+    outcome: t(
+      "표준·사용자 라이브러리, API Center, 지원 게시판이 실제 시범운영 사이트에서 함께 동작하도록 고도화했습니다.",
+      "Advanced the live pilot so standard and user libraries, the API Center, and support boards work as one operational system.",
     ),
     description: [
       t(
@@ -663,10 +642,7 @@ export const projects: Project[] = [
     startedAt: "2025-12",
     endedAt: null,
     locale: ["ko", "en"],
-    title: t(
-      "BIMS 버스 정보 관리 시스템",
-      "BIMS Bus Information Management System",
-    ),
+    title: t("BIMS 버스 정보 관리 시스템", "BIMS Bus Information Management System"),
     company: t("씨엔넷", "C&Net"),
     role: t("풀스택 개발", "Full-stack Development"),
     period: t("2025.12 – 재직중", "Dec 2025 – Present"),
@@ -674,6 +650,14 @@ export const projects: Project[] = [
     summary: t(
       "관리자가 버스, 노선과 운영 데이터를 정확하게 조회·수정·관리할 수 있는 웹 애플리케이션입니다.",
       "A web application for administrators to reliably view, update, and manage bus, route, and operational data.",
+    ),
+    problem: t(
+      "버스·노선·운영 이벤트가 흩어져 있어 관리자가 업무 순서대로 데이터를 확인하기 어려웠습니다.",
+      "Bus, route, and operational events were spread across views, making it difficult for administrators to work in sequence.",
+    ),
+    outcome: t(
+      "Next.js 관리자 화면과 Spring Boot API를 연결해 버스·노선·운영 데이터의 조회·수정 흐름을 구현했습니다.",
+      "Connected the Next.js admin interface to Spring Boot APIs for reliable bus, route, and operations data workflows.",
     ),
     description: [
       t(
@@ -759,6 +743,14 @@ export const projects: Project[] = [
       "사용자 인증, 구독, 상품·서비스 정보를 다루는 자사 구독 서비스 플랫폼입니다.",
       "An in-house subscription platform covering authentication, subscriptions, products, and service information.",
     ),
+    problem: t(
+      "인증·상품·구독 상태가 연결된 하나의 사용자 여정을 만들어야 했습니다.",
+      "Authentication, products, and subscription state needed to behave as one coherent user journey.",
+    ),
+    outcome: t(
+      "React·Next.js 화면과 NestJS API, PostgreSQL 모델을 연결해 구독 서비스의 핵심 흐름을 구현했습니다.",
+      "Connected React and Next.js screens with NestJS APIs and PostgreSQL models to implement the core subscription flow.",
+    ),
     description: [
       t(
         "프론트엔드 화면부터 NestJS API와 PostgreSQL 데이터 설계까지 서비스 전반을 개발했습니다.",
@@ -801,6 +793,14 @@ export const projects: Project[] = [
     summary: t(
       "지도에서 시설물과 위치 데이터를 조회하고 상세 정보를 확인하는 공공기관 납품 웹앱입니다.",
       "A delivered public-sector web application for exploring facilities and location data on a map.",
+    ),
+    problem: t(
+      "시설물 위치와 상세 정보를 지도·목록·패널 사이를 오가며 확인해야 했습니다.",
+      "Users had to move between the map, list, and detail panel to understand facility locations and information.",
+    ),
+    outcome: t(
+      "지도 마커·팝업·상세 패널을 연결한 시스템이 한국수자원공사에 납품되어 실제 업무 환경에서 사용되었습니다.",
+      "The map, marker, popup, and detail-panel workflow was delivered to Korea Water Resources Corporation for real operational use.",
     ),
     description: [
       t(

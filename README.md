@@ -35,6 +35,8 @@ Next.js 16, React 19, TypeScript, Once UI, Pretendard
 
 모바일 기준은 375 × 812 CSS px 화면의 3배(3x), 웹 기준은 1060 × 600 CSS px 작업 영역의 2배(2x)입니다. 새 이미지는 PNG 또는 고품질 WebP로 준비하고, 화면 비율을 맞추기 위해 임의로 자르거나 늘리지 않습니다. 현재 Jango 에셋은 1125 × 2433~2436 px, KCSC 에셋은 2120~2121 × 1200 px로 이 기준을 충족합니다.
 
+웹 프로젝트 스크린샷은 원본 해상도를 유지하되 카드와 상세 캐러셀에서 **16:9 프레임**으로 표시합니다. 16:9가 아닌 원본도 잘라내지 않고 contain 방식으로 전체 화면을 보존합니다.
+
 ## Attribution
 
 This portfolio retains the required [Once UI / Magic Portfolio](https://once-ui.com/products/magic-portfolio-systems) attribution. Pretendard is included under the SIL Open Font License; its license is stored with the local font files.

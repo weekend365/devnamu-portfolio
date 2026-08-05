@@ -1,20 +1,5 @@
-import {
-  Button,
-  Column,
-  Grid,
-  Heading,
-  Media,
-  Row,
-  Tag,
-  Text,
-} from "@once-ui-system/core";
-import {
-  baseURL,
-  getContent,
-  localize,
-  person,
-  type Locale,
-} from "@/resources";
+import { Button, Column, Grid, Heading, Media, Row, Tag, Text } from "@once-ui-system/core";
+import { baseURL, getContent, localize, person, type Locale } from "@/resources";
 import { localePath } from "@/utils/site-metadata";
 import { FeaturedJango } from "./FeaturedJango";
 import { ProjectCard } from "./ProjectCard";
@@ -24,12 +9,7 @@ import { StructuredData } from "./StructuredData";
 export function PortfolioHome({ locale }: { locale: Locale }) {
   const content = getContent(locale);
   const labels = content.navigation;
-  const secondaryProjects = content.projects
-    .filter((project) => !project.featured)
-    .slice(0, 3);
-  const homeSkillCategories = content.skillCategories.filter((_, index) =>
-    [0, 2, 3].includes(index),
-  );
+  const secondaryProjects = content.projects.filter((project) => !project.featured).slice(0, 3);
   return (
     <Column className="page-stack home-page" maxWidth="l" fillWidth gap="80">
       <StructuredData
@@ -49,9 +29,7 @@ export function PortfolioHome({ locale }: { locale: Locale }) {
               "@type": "PostalAddress",
               addressLocality: person.location[locale],
             },
-            knowsAbout: content.skillCategories.flatMap(
-              (category) => category.skills,
-            ),
+            knowsAbout: content.skillCategories.flatMap((category) => category.skills),
             sameAs: [person.github, person.portfolio],
           },
         }}
@@ -67,11 +45,7 @@ export function PortfolioHome({ locale }: { locale: Locale }) {
         s={{ direction: "column-reverse" }}
       >
         <Column className="hero-copy" flex={8} gap="24">
-          <Text
-            className="eyebrow"
-            variant="label-strong-m"
-            onBackground="brand-weak"
-          >
+          <Text className="eyebrow" variant="label-strong-m" onBackground="brand-weak">
             {person.brand} · {person.name[locale]} / {person.role[locale]}
           </Text>
           <Heading
@@ -86,14 +60,10 @@ export function PortfolioHome({ locale }: { locale: Locale }) {
               : "I build the product, not just the interface."}
           </Heading>
           <Column maxWidth={44} fillWidth>
-            <Text
-              variant="heading-default-l"
-              onBackground="neutral-weak"
-              wrap="balance"
-            >
+            <Text variant="heading-default-l" onBackground="neutral-weak" wrap="balance">
               {locale === "ko"
-                ? "React와 Next.js로 공공·교통·구독 서비스를 개발해 왔습니다. 장고야 부탁해에서는 모바일, API, 관리자와 배포까지 하나의 제품으로 연결하고 있습니다."
-                : "I build public, transportation, and subscription services with React and Next.js. For Jango, I connect mobile, API, admin, and deployment into one product."}
+                ? "React와 Next.js로 공공·교통·구독 서비스를 개발해 왔습니다. 화면의 사용성뿐 아니라 API, 관리자와 배포까지 이어지는 운영 가능한 흐름을 설계합니다."
+                : "I build public, transportation, and subscription services with React and Next.js, connecting the interface to APIs, admin tools, and delivery so products can operate in the real world."}
             </Text>
           </Column>
           <Row className="hero-context" gap="8" wrap>
@@ -117,11 +87,7 @@ export function PortfolioHome({ locale }: { locale: Locale }) {
             >
               {labels.github}
             </Button>
-            <Button
-              href={`mailto:${person.email}`}
-              variant="tertiary"
-              prefixIcon="email"
-            >
+            <Button href={`mailto:${person.email}`} variant="tertiary" prefixIcon="email">
               {labels.contact}
             </Button>
           </Row>
@@ -145,12 +111,7 @@ export function PortfolioHome({ locale }: { locale: Locale }) {
         </Column>
       </Row>
 
-      <Row
-        className="proof-strip home-proof-strip"
-        fillWidth
-        gap="8"
-        s={{ direction: "row" }}
-      >
+      <Row className="proof-strip home-proof-strip" fillWidth gap="8" s={{ direction: "row" }}>
         <Column className="proof-item" gap="4">
           <Text variant="display-strong-s" onBackground="brand-weak">
             3+
@@ -160,19 +121,15 @@ export function PortfolioHome({ locale }: { locale: Locale }) {
           </Text>
         </Column>
         <Column className="proof-item" gap="4">
-          <Text variant="display-strong-s">269</Text>
+          <Text variant="display-strong-s">{content.projects.length}</Text>
           <Text variant="label-default-s" onBackground="neutral-weak">
-            {locale === "ko"
-              ? "장고 자동 검사 269개"
-              : "269 Jango checks"}
+            {locale === "ko" ? "공개 가능한 프로젝트 맥락" : "public project contexts"}
           </Text>
         </Column>
         <Column className="proof-item" gap="4">
           <Text variant="display-strong-s">01</Text>
           <Text variant="label-default-s" onBackground="neutral-weak">
-            {locale === "ko"
-              ? "라이브 데모"
-              : "live demo"}
+            {locale === "ko" ? "독립 제품 운영" : "independent product"}
           </Text>
         </Column>
       </Row>
@@ -188,8 +145,8 @@ export function PortfolioHome({ locale }: { locale: Locale }) {
           }
           description={
             locale === "ko"
-              ? "냉장고 재고 관리에서 시작해 AI 추천, 공유 공간과 운영 도구까지 확장하고 있습니다."
-              : "It began with refrigerator inventory and now spans AI recommendations, shared spaces, and operations tooling."
+              ? "유통기한 관리 문제를 모바일, API, 관리자와 운영 도구가 연결된 제품으로 확장하고 있습니다."
+              : "A response to expiry tracking that now connects mobile, APIs, admin tooling, and operations in one product."
           }
         />
         <FeaturedJango locale={locale} />
@@ -211,21 +168,11 @@ export function PortfolioHome({ locale }: { locale: Locale }) {
                 : "Turning operational complexity into usable software"
             }
           />
-          <Button
-            href={localePath(locale, "/work")}
-            variant="tertiary"
-            suffixIcon="arrowRight"
-          >
+          <Button href={localePath(locale, "/work")} variant="tertiary" suffixIcon="arrowRight">
             {labels.allProjects}
           </Button>
         </Row>
-        <Grid
-          columns="2"
-          m={{ columns: 2 }}
-          s={{ columns: 1 }}
-          gap="24"
-          fillWidth
-        >
+        <Grid columns="2" m={{ columns: 2 }} s={{ columns: 1 }} gap="24" fillWidth>
           {secondaryProjects.map((project, index) => (
             <ProjectCard
               key={project.slug}
@@ -249,20 +196,10 @@ export function PortfolioHome({ locale }: { locale: Locale }) {
         />
         <Column gap="32">
           {content.experiences.map((experience) => (
-            <Row
-              key={experience.company.en}
-              className="timeline-item"
-              gap="24"
-              fillWidth
-            >
+            <Row key={experience.company.en} className="timeline-item" gap="24" fillWidth>
               <span className="timeline-dot" aria-hidden="true" />
               <Column fillWidth gap="12" paddingBottom="24">
-                <Row
-                  fillWidth
-                  horizontal="between"
-                  gap="16"
-                  s={{ direction: "column" }}
-                >
+                <Row fillWidth horizontal="between" gap="16" s={{ direction: "column" }}>
                   <Column gap="4">
                     <Heading as="h3" variant="heading-strong-l">
                       {localize(experience.company, locale)}
@@ -288,61 +225,6 @@ export function PortfolioHome({ locale }: { locale: Locale }) {
         </Column>
       </Column>
 
-      <Column as="section" gap="40">
-        <Row
-          fillWidth
-          horizontal="between"
-          vertical="end"
-          gap="24"
-          s={{ direction: "column", vertical: "start" }}
-        >
-          <SectionHeading
-            eyebrow={labels.techStack}
-            title={
-              locale === "ko"
-                ? "제품을 연결하는 핵심 기술"
-                : "Core tools that connect the product"
-            }
-            description={
-              locale === "ko"
-                ? "홈에서는 프론트엔드·백엔드·모바일의 핵심만 요약했습니다."
-                : "A concise view of the frontend, backend, and mobile stack."
-            }
-          />
-          <Button
-            href={localePath(locale, "/about")}
-            variant="tertiary"
-            suffixIcon="arrowRight"
-          >
-            {locale === "ko" ? "전체 기술과 경력" : "Full profile"}
-          </Button>
-        </Row>
-        <Grid columns="3" m={{ columns: 2 }} s={{ columns: 1 }} gap="16">
-          {homeSkillCategories.map((category) => (
-            <Column
-              key={category.title.en}
-              className="skill-card"
-              background="surface"
-              border="neutral-alpha-medium"
-              radius="l"
-              padding="l"
-              gap="16"
-            >
-              <Heading as="h3" variant="heading-strong-m">
-                {localize(category.title, locale)}
-              </Heading>
-              <Row wrap gap="8">
-                {category.skills.map((skill) => (
-                  <Tag key={skill} size="s">
-                    {skill}
-                  </Tag>
-                ))}
-              </Row>
-            </Column>
-          ))}
-        </Grid>
-      </Column>
-
       <Column
         as="section"
         id="contact"
@@ -352,11 +234,7 @@ export function PortfolioHome({ locale }: { locale: Locale }) {
         horizontal="center"
         align="center"
       >
-        <Text
-          className="eyebrow"
-          variant="label-strong-s"
-          onBackground="brand-weak"
-        >
+        <Text className="eyebrow" variant="label-strong-s" onBackground="brand-weak">
           {labels.contact}
         </Text>
         <Heading as="h2" variant="display-strong-s" wrap="balance">
@@ -364,21 +242,13 @@ export function PortfolioHome({ locale }: { locale: Locale }) {
             ? "제품과 팀에 대한 이야기를 나누고 싶습니다"
             : "Let’s talk about the product and the team"}
         </Heading>
-        <Text
-          variant="body-default-l"
-          onBackground="neutral-weak"
-          wrap="balance"
-        >
+        <Text variant="body-default-l" onBackground="neutral-weak" wrap="balance">
           {locale === "ko"
             ? "프로젝트나 채용에 관해 공유할 내용이 있다면 이메일로 연락해 주세요."
             : "If you have a project or role worth discussing, send me an email."}
         </Text>
         <Row gap="12" wrap horizontal="center">
-          <Button
-            href={`mailto:${person.email}`}
-            variant="primary"
-            prefixIcon="email"
-          >
+          <Button href={`mailto:${person.email}`} variant="primary" prefixIcon="email">
             {person.email}
           </Button>
           <Button href={person.github} variant="secondary" prefixIcon="github">

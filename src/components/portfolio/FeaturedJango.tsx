@@ -32,7 +32,7 @@ export function FeaturedJango({ locale }: { locale: Locale }) {
             {localize(project.title, locale)}
           </Heading>
           <Text variant="heading-default-l" onBackground="neutral-weak" wrap="balance">
-            {localize(project.summary, locale)}
+            {localize(project.problem, locale)}
           </Text>
         </Column>
         <Row wrap gap="8">
@@ -43,30 +43,16 @@ export function FeaturedJango({ locale }: { locale: Locale }) {
           ))}
         </Row>
         <Grid className="featured-facts" columns="3" s={{ columns: 1 }} gap="8" fillWidth>
-          <Column className="featured-fact" gap="4">
-            <Text variant="label-strong-s" onBackground="brand-weak">
-              {locale === "ko" ? "범위" : "Scope"}
-            </Text>
-            <Text variant="body-default-s" onBackground="neutral-weak">
-              {locale === "ko" ? "모바일 · API · 관리자 · 운영" : "Mobile · API · Admin · Ops"}
-            </Text>
-          </Column>
-          <Column className="featured-fact" gap="4">
-            <Text variant="label-strong-s" onBackground="brand-weak">
-              {locale === "ko" ? "검증 상태" : "Validation"}
-            </Text>
-            <Text variant="body-default-s" onBackground="neutral-weak">
-              {locale === "ko" ? "모바일 핵심 UX 약 97%" : "Core mobile UX about 97%"}
-            </Text>
-          </Column>
-          <Column className="featured-fact" gap="4">
-            <Text variant="label-strong-s" onBackground="brand-weak">
-              {locale === "ko" ? "자동 검사" : "Automation"}
-            </Text>
-            <Text variant="body-default-s" onBackground="neutral-weak">
-              {locale === "ko" ? "269개 통과 · TestFlight 검증 중" : "269 passed · TestFlight validation"}
-            </Text>
-          </Column>
+          {(project.metrics ?? []).map((metric) => (
+            <Column key={metric.value + metric.label.en} className="featured-fact" gap="4">
+              <Text variant="display-strong-xs" onBackground="brand-weak">
+                {metric.value}
+              </Text>
+              <Text variant="body-default-s" onBackground="neutral-weak">
+                {localize(metric.label, locale)}
+              </Text>
+            </Column>
+          ))}
         </Grid>
         <Row gap="12" wrap>
           <Button

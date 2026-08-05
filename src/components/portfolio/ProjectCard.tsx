@@ -23,7 +23,7 @@ export function ProjectCard({
 }) {
   const labels = ui[locale];
   const hasVisual = Boolean(project.images[0]);
-  const evidence = project.results[0] ?? project.contributions[0];
+  const evidence = project.results[0] ?? project.outcome;
 
   return (
     <Column
@@ -51,11 +51,19 @@ export function ProjectCard({
             {localize(project.status, locale)}
           </Tag>
         </Row>
-        <Text className="project-card-role" variant="label-default-s" onBackground="neutral-weak" wrap="balance">
+        <Text
+          className="project-card-role"
+          variant="label-default-s"
+          onBackground="neutral-weak"
+          wrap="balance"
+        >
           {labels.role} · {localize(project.role, locale)}
         </Text>
+        <Text variant="label-strong-xs" onBackground="brand-weak">
+          {locale === "ko" ? "문제" : "Problem"}
+        </Text>
         <Text variant="body-default-m" onBackground="neutral-weak" wrap="balance">
-          {localize(project.summary, locale)}
+          {localize(project.problem, locale)}
         </Text>
         {evidence && (
           <Column className="project-card-outcome" gap="4" padding="12" radius="m">
@@ -65,7 +73,7 @@ export function ProjectCard({
                   ? "검증된 결과"
                   : "Verified outcome"
                 : locale === "ko"
-                  ? "핵심 구현"
+                  ? "핵심 납품"
                   : "Key delivery"}
             </Text>
             <Text

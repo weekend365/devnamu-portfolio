@@ -1,7 +1,17 @@
 "use client";
 
+import { useState } from "react";
 import { usePathname } from "next/navigation";
-import { Button, Line, Row, SmartLink, Text, ToggleButton } from "@once-ui-system/core";
+import {
+  Button,
+  Column,
+  DropdownWrapper,
+  Line,
+  Row,
+  SmartLink,
+  Text,
+  ToggleButton,
+} from "@once-ui-system/core";
 import type { Locale } from "@/resources";
 import { getContent, person } from "@/resources";
 import { ThemeToggle } from "./ThemeToggle";
@@ -11,6 +21,7 @@ function localizedPath(locale: Locale, path: string): string {
 }
 
 export function Header({ locale }: { locale: Locale }) {
+  const [moreOpen, setMoreOpen] = useState(false);
   const pathname = usePathname() ?? localizedPath(locale, "/");
   const labels = getContent(locale).navigation;
   const homePath = localizedPath(locale, "/");
@@ -68,7 +79,7 @@ export function Header({ locale }: { locale: Locale }) {
             selected={pathname === homePath}
             aria-label={labels.home}
           />
-          <Line background="neutral-alpha-medium" vert maxHeight="24" />
+          <Line className="nav-divider" background="neutral-alpha-medium" vert maxHeight="24" />
           <ToggleButton
             prefixIcon="person"
             href={aboutPath}
@@ -81,7 +92,7 @@ export function Header({ locale }: { locale: Locale }) {
             label={labels.work}
             selected={pathname.startsWith(workPath)}
           />
-          <Line background="neutral-alpha-medium" vert maxHeight="24" />
+          <Line className="nav-divider" background="neutral-alpha-medium" vert maxHeight="24" />
           <Button
             className="language-toggle"
             href={languagePath}
@@ -91,11 +102,45 @@ export function Header({ locale }: { locale: Locale }) {
             data-locale={locale}
           >
             <span className="language-toggle-full">{labels.languageSwitch}</span>
-            <span className="language-toggle-short">
-              {locale === "ko" ? "EN" : "KO"}
-            </span>
+            <span className="language-toggle-short">{locale === "ko" ? "EN" : "KO"}</span>
           </Button>
-          <ThemeToggle locale={locale} />
+          <span className="desktop-theme-toggle">
+            <ThemeToggle locale={locale} />
+          </span>
+          <DropdownWrapper
+            className="mobile-more"
+            placement="top-end"
+            isOpen={moreOpen}
+            onOpenChange={setMoreOpen}
+            trigger={
+              <ToggleButton
+                prefixIcon="more"
+                selected={moreOpen}
+                aria-label={locale === "ko" ? "추가 설정" : "More options"}
+              />
+            }
+            dropdown={
+              <Column
+                className="mobile-more-menu"
+                background="surface"
+                border="neutral-alpha-medium"
+                radius="m"
+                padding="4"
+                gap="4"
+                minWidth={10}
+              >
+                <Button
+                  href={languagePath}
+                  variant="tertiary"
+                  prefixIcon="globe"
+                  onClick={() => setMoreOpen(false)}
+                >
+                  {labels.languageSwitch}
+                </Button>
+                <ThemeToggle locale={locale} />
+              </Column>
+            }
+          />
         </Row>
       </Row>
     </Row>

@@ -30,9 +30,22 @@ function StorySignal({
   children?: React.ReactNode;
 }) {
   return (
-    <Column className="project-story-card" background="surface" border="neutral-alpha-medium" radius="l" padding="l" gap="8">
-      <Text variant="label-strong-s" onBackground="brand-weak">{label}</Text>
-      {value && <Text variant="heading-strong-m" wrap="balance">{value}</Text>}
+    <Column
+      className="project-story-card"
+      background="surface"
+      border="neutral-alpha-medium"
+      radius="l"
+      padding="l"
+      gap="8"
+    >
+      <Text variant="label-strong-s" onBackground="brand-weak">
+        {label}
+      </Text>
+      {value && (
+        <Text variant="heading-strong-m" wrap="balance">
+          {value}
+        </Text>
+      )}
       {children}
     </Column>
   );
@@ -40,16 +53,11 @@ function StorySignal({
 
 export function PortfolioProject({ project, locale }: { project: Project; locale: Locale }) {
   const labels = ui[locale];
-  const related = getProjects(locale).filter((item) => item.slug !== project.slug).slice(0, 2);
+  const related = getProjects(locale)
+    .filter((item) => item.slug !== project.slug)
+    .slice(0, 2);
   const projectUrl = `${baseURL}${localePath(locale, `/work/${project.slug}`)}`;
   const projectTitle = localize(project.title, locale);
-  const currentEvidence =
-    project.results[0] &&
-    localize(project.results[0], locale);
-  const evidenceFallback =
-    locale === "ko"
-      ? "출시·납품 상태와 다음 검증 단계를 투명하게 공개합니다."
-      : "The current delivery state and next validation step are shown transparently.";
 
   return (
     <Column className="page-stack project-page" maxWidth="m" fillWidth gap="104">
@@ -70,7 +78,12 @@ export function PortfolioProject({ project, locale }: { project: Project; locale
         }}
       />
       <Column as="header" className="project-hero" gap="24">
-        <Button href={localePath(locale, "/work")} variant="tertiary" prefixIcon="chevronLeft" size="s">
+        <Button
+          href={localePath(locale, "/work")}
+          variant="tertiary"
+          prefixIcon="chevronLeft"
+          size="s"
+        >
           {labels.backToWork}
         </Button>
         <Row gap="8" wrap>
@@ -96,7 +109,15 @@ export function PortfolioProject({ project, locale }: { project: Project; locale
           </Text>
         </Column>
         <Row gap="12" wrap>
-          {project.repository && <Button href={project.repository} prefixIcon="github" suffixIcon="arrowUpRightFromSquare">{labels.viewGithub}</Button>}
+          {project.repository && (
+            <Button
+              href={project.repository}
+              prefixIcon="github"
+              suffixIcon="arrowUpRightFromSquare"
+            >
+              {labels.viewGithub}
+            </Button>
+          )}
           {project.externalLink && !project.demoAccess && (
             <Button
               href={project.externalLink}
@@ -110,7 +131,7 @@ export function PortfolioProject({ project, locale }: { project: Project; locale
       </Column>
 
       <Grid className="project-story-grid" columns="3" s={{ columns: 1 }} gap="12">
-        <StorySignal label={labels.problem} value={localize(project.summary, locale)} />
+        <StorySignal label={labels.problem} value={localize(project.problem, locale)} />
         <StorySignal label={labels.constraints}>
           <Text variant="body-default-m" onBackground="neutral-medium">
             {project.challenges[0]
@@ -122,7 +143,7 @@ export function PortfolioProject({ project, locale }: { project: Project; locale
         </StorySignal>
         <StorySignal label={labels.evidence}>
           <Text variant="body-default-m" onBackground="neutral-medium">
-            {currentEvidence ?? evidenceFallback}
+            {localize(project.outcome, locale)}
           </Text>
         </StorySignal>
       </Grid>
@@ -141,18 +162,56 @@ export function PortfolioProject({ project, locale }: { project: Project; locale
 
       <Grid className="project-meta-grid" columns="3" s={{ columns: 1 }} gap="12">
         <Column background="surface" border="neutral-alpha-medium" radius="l" padding="l" gap="8">
-          <Text variant="label-strong-s" onBackground="neutral-weak">{labels.role}</Text>
+          <Text variant="label-strong-s" onBackground="neutral-weak">
+            {labels.role}
+          </Text>
           <Text variant="heading-strong-m">{localize(project.role, locale)}</Text>
         </Column>
         <Column background="surface" border="neutral-alpha-medium" radius="l" padding="l" gap="8">
-          <Text variant="label-strong-s" onBackground="neutral-weak">{locale === "ko" ? "기간" : "Period"}</Text>
+          <Text variant="label-strong-s" onBackground="neutral-weak">
+            {locale === "ko" ? "기간" : "Period"}
+          </Text>
           <Text variant="heading-strong-m">{localize(project.period, locale)}</Text>
         </Column>
         <Column background="surface" border="neutral-alpha-medium" radius="l" padding="l" gap="8">
-          <Text variant="label-strong-s" onBackground="neutral-weak">{labels.status}</Text>
+          <Text variant="label-strong-s" onBackground="neutral-weak">
+            {labels.status}
+          </Text>
           <Text variant="heading-strong-m">{localize(project.status, locale)}</Text>
         </Column>
       </Grid>
+
+      {project.metrics && project.metrics.length > 0 && (
+        <Grid
+          className="project-metrics"
+          columns="3"
+          s={{ columns: 1 }}
+          gap="12"
+          aria-label={locale === "ko" ? "프로젝트 핵심 지표" : "Project metrics"}
+        >
+          {project.metrics.map((metric) => (
+            <Column
+              key={metric.value + metric.label.en}
+              className="project-metric"
+              background="brand-alpha-weak"
+              border="brand-alpha-medium"
+              radius="l"
+              padding="l"
+              gap="4"
+            >
+              <Text variant="display-strong-s" onBackground="brand-weak">
+                {metric.value}
+              </Text>
+              <Text variant="label-strong-s">{localize(metric.label, locale)}</Text>
+              {metric.note && (
+                <Text variant="body-default-s" onBackground="neutral-weak">
+                  {localize(metric.note, locale)}
+                </Text>
+              )}
+            </Column>
+          ))}
+        </Grid>
+      )}
 
       <Row
         as="nav"
@@ -161,19 +220,30 @@ export function PortfolioProject({ project, locale }: { project: Project; locale
         wrap
         aria-label={locale === "ko" ? "사례 목차" : "Case study sections"}
       >
-        <Button href="#project-overview" size="s" variant="tertiary">{labels.overview}</Button>
-        <Button href="#project-contributions" size="s" variant="tertiary">{labels.contributions}</Button>
+        <Button href="#project-overview" size="s" variant="tertiary">
+          {labels.overview}
+        </Button>
+        <Button href="#project-contributions" size="s" variant="tertiary">
+          {labels.contributions}
+        </Button>
         {project.challenges.length > 0 && (
-          <Button href="#project-challenges" size="s" variant="tertiary">{labels.challenges}</Button>
+          <Button href="#project-challenges" size="s" variant="tertiary">
+            {labels.challenges}
+          </Button>
         )}
         {project.results.length > 0 && (
-          <Button href="#project-results" size="s" variant="tertiary">{labels.results}</Button>
+          <Button href="#project-results" size="s" variant="tertiary">
+            {labels.results}
+          </Button>
         )}
       </Row>
 
       <Column as="article" className="article-copy case-study-content" gap="64">
         <Column as="section" id="project-overview" className="case-study-section" gap="24">
-          <SectionHeading eyebrow={labels.overview} title={locale === "ko" ? "무엇을 만들었는가" : "What I built"} />
+          <SectionHeading
+            eyebrow={labels.overview}
+            title={locale === "ko" ? "무엇을 만들었는가" : "What I built"}
+          />
           <Column gap="16" maxWidth="s">
             {project.description.map((paragraph) => (
               <Text key={paragraph.en} variant="body-default-l" onBackground="neutral-medium">
@@ -182,8 +252,14 @@ export function PortfolioProject({ project, locale }: { project: Project; locale
             ))}
           </Column>
           <Column gap="16">
-            <Text variant="label-strong-s" onBackground="neutral-weak">{labels.technologies}</Text>
-            <Row wrap gap="8">{project.technologies.map((technology) => <Tag key={technology}>{technology}</Tag>)}</Row>
+            <Text variant="label-strong-s" onBackground="neutral-weak">
+              {labels.technologies}
+            </Text>
+            <Row wrap gap="8">
+              {project.technologies.map((technology) => (
+                <Tag key={technology}>{technology}</Tag>
+              ))}
+            </Row>
           </Column>
         </Column>
         <Column as="section" id="project-contributions" className="case-study-section" gap="24">
@@ -201,9 +277,21 @@ export function PortfolioProject({ project, locale }: { project: Project; locale
             <SectionHeading eyebrow={labels.evidence} title={labels.results} />
             <Grid className="result-list" columns="2" s={{ columns: 1 }} gap="12">
               {project.results.map((result, index) => (
-                <Column key={result.en} className="result-item" background="surface" border="neutral-alpha-medium" radius="l" padding="l" gap="8">
-                  <Text variant="label-strong-s" onBackground="brand-weak">0{index + 1}</Text>
-                  <Text variant="body-default-l" onBackground="neutral-medium">{localize(result, locale)}</Text>
+                <Column
+                  key={result.en}
+                  className="result-item"
+                  background="surface"
+                  border="neutral-alpha-medium"
+                  radius="l"
+                  padding="l"
+                  gap="8"
+                >
+                  <Text variant="label-strong-s" onBackground="brand-weak">
+                    0{index + 1}
+                  </Text>
+                  <Text variant="body-default-l" onBackground="neutral-medium">
+                    {localize(result, locale)}
+                  </Text>
                 </Column>
               ))}
             </Grid>
