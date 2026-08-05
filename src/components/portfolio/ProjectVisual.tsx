@@ -1,5 +1,5 @@
 import { Column, Media, Row, Tag, Text } from "@once-ui-system/core";
-import { Fragment } from "react";
+import { Fragment, type ReactNode } from "react";
 import type { Locale, Project } from "@/resources";
 import { localize } from "@/resources";
 
@@ -78,45 +78,110 @@ const workflowCopy: Record<string, Record<Locale, WorkflowCopy>> = {
   },
 };
 
+function BrowserVisual({
+  project,
+  locale,
+  children,
+}: {
+  project: Project;
+  locale: Locale;
+  children: ReactNode;
+}) {
+  return (
+    <Column
+      className="project-evidence-visual"
+      fillWidth
+      border="neutral-alpha-medium"
+      radius="l"
+      gap="20"
+      padding="m"
+      aria-label={
+        locale === "ko"
+          ? `${localize(project.title, locale)} 프로젝트 증거 요약`
+          : `${localize(project.title, locale)} project evidence summary`
+      }
+    >
+      <Row fillWidth horizontal="between" vertical="center" gap="12">
+        <Text className="eyebrow" variant="label-strong-xs" onBackground="brand-weak">
+          {locale === "ko" ? "검증된 프로젝트" : "Verified work"}
+        </Text>
+        <Text variant="label-default-xs" onBackground="neutral-weak">
+          {localize(project.status, locale)}
+        </Text>
+      </Row>
+      <Column
+        className="project-evidence-window"
+        background="surface"
+        border="neutral-alpha-medium"
+        radius="m"
+        overflow="hidden"
+      >
+        <Row
+          className="project-evidence-toolbar"
+          fillWidth
+          gap="8"
+          paddingX="12"
+          paddingY="8"
+          borderBottom="neutral-alpha-medium"
+          vertical="center"
+          aria-hidden="true"
+        >
+          <Row gap="4">
+            <span className="project-evidence-dot" />
+            <span className="project-evidence-dot" />
+            <span className="project-evidence-dot" />
+          </Row>
+          <Text className="project-evidence-url" variant="label-default-xs" onBackground="neutral-weak">
+            devnamu.dev / work / {project.slug}
+          </Text>
+        </Row>
+        <Column className="project-evidence-content">{children}</Column>
+      </Column>
+    </Column>
+  );
+}
+
 function WorkflowVisual({ project, locale }: { project: Project; locale: Locale }) {
   const copy = workflowCopy[project.slug]?.[locale];
   if (!copy) return null;
 
   return (
-    <Column
-      className={`project-placeholder project-workflow project-workflow-${project.slug}`}
-      fillWidth
-      border="neutral-alpha-medium"
-      radius="l"
-      padding="l"
-      gap="20"
-      aria-label={copy.caption}
-    >
-      <Row fillWidth horizontal="between" vertical="center" gap="12" s={{ direction: "column", horizontal: "start" }}>
-        <Column gap="4">
-          <Text className="workflow-kicker" variant="label-strong-s" onBackground="brand-weak">
-            {copy.eyebrow}
-          </Text>
-          <Text variant="heading-strong-m">{localize(project.title, locale)}</Text>
-        </Column>
-        <Tag size="s" variant="info">{copy.badge}</Tag>
-      </Row>
-      <Row className="workflow-flow" fillWidth gap="8" vertical="center" s={{ direction: "column" }}>
-        {copy.nodes.map((node, index) => (
-          <Fragment key={node}>
-            <Column className="workflow-node" background="surface" border="neutral-alpha-medium" radius="m" padding="m" gap="8">
-              <Text variant="label-strong-s" onBackground="brand-weak">0{index + 1}</Text>
-              <Text variant="heading-strong-s" wrap="balance">{node}</Text>
-            </Column>
-            {index < copy.nodes.length - 1 && <Text className="workflow-arrow" onBackground="neutral-weak">→</Text>}
-          </Fragment>
-        ))}
-      </Row>
-      <Row gap="8" wrap>
-        {copy.signals.map((signal) => <Tag key={signal} size="s">{signal}</Tag>)}
-      </Row>
-      <Text variant="label-default-s" onBackground="neutral-weak" wrap="balance">{copy.caption}</Text>
-    </Column>
+    <BrowserVisual project={project} locale={locale}>
+      <Column
+        className={`project-placeholder project-workflow project-workflow-${project.slug}`}
+        fillWidth
+        border="neutral-alpha-medium"
+        radius="m"
+        padding="l"
+        gap="20"
+        aria-label={copy.caption}
+      >
+        <Row fillWidth horizontal="between" vertical="center" gap="12" s={{ direction: "column", horizontal: "start" }}>
+          <Column gap="4">
+            <Text className="workflow-kicker" variant="label-strong-s" onBackground="brand-weak">
+              {copy.eyebrow}
+            </Text>
+            <Text variant="heading-strong-m">{localize(project.title, locale)}</Text>
+          </Column>
+          <Tag size="s" variant="info">{copy.badge}</Tag>
+        </Row>
+        <Row className="workflow-flow" fillWidth gap="8" vertical="center" s={{ direction: "column" }}>
+          {copy.nodes.map((node, index) => (
+            <Fragment key={node}>
+              <Column className="workflow-node" background="surface" border="neutral-alpha-medium" radius="m" padding="m" gap="8">
+                <Text variant="label-strong-s" onBackground="brand-weak">0{index + 1}</Text>
+                <Text variant="heading-strong-s" wrap="balance">{node}</Text>
+              </Column>
+              {index < copy.nodes.length - 1 && <Text className="workflow-arrow" onBackground="neutral-weak">→</Text>}
+            </Fragment>
+          ))}
+        </Row>
+        <Row gap="8" wrap>
+          {copy.signals.map((signal) => <Tag key={signal} size="s">{signal}</Tag>)}
+        </Row>
+        <Text variant="label-default-s" onBackground="neutral-weak" wrap="balance">{copy.caption}</Text>
+      </Column>
+    </BrowserVisual>
   );
 }
 
@@ -166,47 +231,8 @@ export function ProjectVisual({ project, locale, priority = false }: { project: 
   }
 
   return (
-    <Column
-      className="project-evidence-visual"
-      fillWidth
-      border="neutral-alpha-medium"
-      radius="l"
-      gap="20"
-      padding="m"
-      aria-label={
-        locale === "ko"
-          ? `${localize(project.title, locale)} 프로젝트 증거 요약`
-          : `${localize(project.title, locale)} project evidence summary`
-      }
-    >
-      <Row fillWidth horizontal="between" vertical="center" gap="12">
-        <Text className="eyebrow" variant="label-strong-xs" onBackground="brand-weak">
-          {locale === "ko" ? "검증된 프로젝트" : "Verified work"}
-        </Text>
-        <Text variant="label-default-xs" onBackground="neutral-weak">
-          {localize(project.status, locale)}
-        </Text>
-      </Row>
-      <Column
-        className="project-evidence-window"
-        background="surface"
-        border="neutral-alpha-medium"
-        radius="m"
-        overflow="hidden"
-      >
-        <Row
-          className="project-evidence-toolbar"
-          gap="4"
-          paddingX="12"
-          paddingY="8"
-          borderBottom="neutral-alpha-medium"
-          aria-hidden="true"
-        >
-          <span className="project-evidence-dot" />
-          <span className="project-evidence-dot" />
-          <span className="project-evidence-dot" />
-        </Row>
-        <Column padding="m" gap="16">
+    <BrowserVisual project={project} locale={locale}>
+      <Column padding="m" gap="16">
           <Column gap="4">
             <Text variant="label-default-xs" onBackground="neutral-weak">
               {locale === "ko" ? "담당 범위" : "Ownership"}
@@ -233,8 +259,7 @@ export function ProjectVisual({ project, locale, priority = false }: { project: 
               </Text>
             </Column>
           )}
-        </Column>
       </Column>
-    </Column>
+    </BrowserVisual>
   );
 }

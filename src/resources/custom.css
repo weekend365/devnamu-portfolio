@@ -380,6 +380,21 @@ body {
   background: var(--neutral-alpha-weak);
 }
 
+.project-evidence-url {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  padding: 0.25rem 0.6rem;
+  border: 1px solid var(--neutral-alpha-medium);
+  border-radius: 999px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.project-evidence-content {
+  min-width: 0;
+}
+
 .project-evidence-dot {
   width: 0.42rem;
   height: 0.42rem;
