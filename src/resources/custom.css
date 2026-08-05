@@ -366,6 +366,16 @@ body {
   min-height: 22rem;
 }
 
+.project-browser-frame {
+  min-height: 17rem;
+  background: var(--neutral-background-strong);
+  box-shadow: 0 1rem 2.5rem rgba(0, 0, 0, 0.12);
+}
+
+.project-browser-frame .project-evidence-content {
+  background: var(--surface-background);
+}
+
 .project-evidence-visual {
   min-height: 17rem;
   background: radial-gradient(circle at 84% 12%, var(--brand-alpha-medium), transparent 34%),

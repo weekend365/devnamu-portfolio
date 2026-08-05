@@ -78,15 +78,145 @@ const workflowCopy: Record<string, Record<Locale, WorkflowCopy>> = {
   },
 };
 
-function BrowserVisual({
+function ImageBrowserFrame({
   project,
   locale,
   children,
+  className = "",
 }: {
   project: Project;
   locale: Locale;
   children: ReactNode;
+  className?: string;
 }) {
+  return (
+    <Column
+      className={`project-browser-frame ${className}`.trim()}
+      fillWidth
+      border="neutral-alpha-medium"
+      radius="l"
+      overflow="hidden"
+      aria-label={
+        locale === "ko"
+          ? `${localize(project.title, locale)} 프로젝트 화면 미리보기`
+          : `${localize(project.title, locale)} project screen preview`
+      }
+    >
+      <Row
+        className="project-evidence-toolbar"
+        fillWidth
+        gap="8"
+        paddingX="12"
+        paddingY="8"
+        borderBottom="neutral-alpha-medium"
+        vertical="center"
+        aria-hidden="true"
+      >
+        <Row gap="4">
+          <span className="project-evidence-dot" />
+          <span className="project-evidence-dot" />
+          <span className="project-evidence-dot" />
+        </Row>
+        <Text className="project-evidence-url" variant="label-default-xs" onBackground="neutral-weak">
+          devnamu.dev / work / {project.slug}
+        </Text>
+      </Row>
+      <Column className="project-evidence-content">{children}</Column>
+    </Column>
+  );
+}
+
+function WorkflowVisual({ project, locale }: { project: Project; locale: Locale }) {
+  const copy = workflowCopy[project.slug]?.[locale];
+  if (!copy) return null;
+
+  return (
+    <Column
+      className={`project-placeholder project-workflow project-workflow-${project.slug}`}
+      fillWidth
+      border="neutral-alpha-medium"
+      radius="l"
+      padding="l"
+      gap="20"
+      aria-label={copy.caption}
+    >
+      <Row fillWidth horizontal="between" vertical="center" gap="12" s={{ direction: "column", horizontal: "start" }}>
+        <Column gap="4">
+          <Text className="workflow-kicker" variant="label-strong-s" onBackground="brand-weak">
+            {copy.eyebrow}
+          </Text>
+          <Text variant="heading-strong-m">{localize(project.title, locale)}</Text>
+        </Column>
+        <Tag size="s" variant="info">{copy.badge}</Tag>
+      </Row>
+      <Row className="workflow-flow" fillWidth gap="8" vertical="center" s={{ direction: "column" }}>
+        {copy.nodes.map((node, index) => (
+          <Fragment key={node}>
+            <Column className="workflow-node" background="surface" border="neutral-alpha-medium" radius="m" padding="m" gap="8">
+              <Text variant="label-strong-s" onBackground="brand-weak">0{index + 1}</Text>
+              <Text variant="heading-strong-s" wrap="balance">{node}</Text>
+            </Column>
+            {index < copy.nodes.length - 1 && <Text className="workflow-arrow" onBackground="neutral-weak">→</Text>}
+          </Fragment>
+        ))}
+      </Row>
+      <Row gap="8" wrap>
+        {copy.signals.map((signal) => <Tag key={signal} size="s">{signal}</Tag>)}
+      </Row>
+      <Text variant="label-default-s" onBackground="neutral-weak" wrap="balance">{copy.caption}</Text>
+    </Column>
+  );
+}
+
+export function ProjectVisual({ project, locale, priority = false }: { project: Project; locale: Locale; priority?: boolean }) {
+  const image = project.images[0];
+  const evidence = project.results[0] ?? project.contributions[0];
+  const aspectRatio =
+    image?.width && image.height
+      ? `${image.width} / ${image.height}`
+      : image?.variant === "mobile"
+        ? "1125 / 2436"
+        : "1060 / 600";
+
+  if (project.slug === "jango" && image) {
+    return (
+      <ImageBrowserFrame project={project} locale={locale} className="jango-card-visual">
+        <Column fillWidth center>
+          <Media
+            className="jango-card-screen"
+            src={image.src}
+            alt={localize(image.alt, locale)}
+            aspectRatio={aspectRatio}
+            objectFit="cover"
+            sizes="(max-width: 768px) 72vw, 260px"
+            priority={priority}
+            radius="l"
+          />
+        </Column>
+      </ImageBrowserFrame>
+    );
+  }
+
+  if (image) {
+    return (
+      <ImageBrowserFrame project={project} locale={locale}>
+        <Media
+          src={image.src}
+          alt={localize(image.alt, locale)}
+          aspectRatio={aspectRatio}
+          objectFit={image.variant === "mobile" ? "cover" : "contain"}
+          sizes="(max-width: 768px) 100vw, 960px"
+          priority={priority}
+          radius="l"
+        />
+      </ImageBrowserFrame>
+    );
+  }
+
+  if (workflowCopy[project.slug]) {
+    return <WorkflowVisual project={project} locale={locale} />;
+  }
+
   return (
     <Column
       className="project-evidence-visual"
@@ -109,130 +239,8 @@ function BrowserVisual({
           {localize(project.status, locale)}
         </Text>
       </Row>
-      <Column
-        className="project-evidence-window"
-        background="surface"
-        border="neutral-alpha-medium"
-        radius="m"
-        overflow="hidden"
-      >
-        <Row
-          className="project-evidence-toolbar"
-          fillWidth
-          gap="8"
-          paddingX="12"
-          paddingY="8"
-          borderBottom="neutral-alpha-medium"
-          vertical="center"
-          aria-hidden="true"
-        >
-          <Row gap="4">
-            <span className="project-evidence-dot" />
-            <span className="project-evidence-dot" />
-            <span className="project-evidence-dot" />
-          </Row>
-          <Text className="project-evidence-url" variant="label-default-xs" onBackground="neutral-weak">
-            devnamu.dev / work / {project.slug}
-          </Text>
-        </Row>
-        <Column className="project-evidence-content">{children}</Column>
-      </Column>
-    </Column>
-  );
-}
-
-function WorkflowVisual({ project, locale }: { project: Project; locale: Locale }) {
-  const copy = workflowCopy[project.slug]?.[locale];
-  if (!copy) return null;
-
-  return (
-    <BrowserVisual project={project} locale={locale}>
-      <Column
-        className={`project-placeholder project-workflow project-workflow-${project.slug}`}
-        fillWidth
-        border="neutral-alpha-medium"
-        radius="m"
-        padding="l"
-        gap="20"
-        aria-label={copy.caption}
-      >
-        <Row fillWidth horizontal="between" vertical="center" gap="12" s={{ direction: "column", horizontal: "start" }}>
-          <Column gap="4">
-            <Text className="workflow-kicker" variant="label-strong-s" onBackground="brand-weak">
-              {copy.eyebrow}
-            </Text>
-            <Text variant="heading-strong-m">{localize(project.title, locale)}</Text>
-          </Column>
-          <Tag size="s" variant="info">{copy.badge}</Tag>
-        </Row>
-        <Row className="workflow-flow" fillWidth gap="8" vertical="center" s={{ direction: "column" }}>
-          {copy.nodes.map((node, index) => (
-            <Fragment key={node}>
-              <Column className="workflow-node" background="surface" border="neutral-alpha-medium" radius="m" padding="m" gap="8">
-                <Text variant="label-strong-s" onBackground="brand-weak">0{index + 1}</Text>
-                <Text variant="heading-strong-s" wrap="balance">{node}</Text>
-              </Column>
-              {index < copy.nodes.length - 1 && <Text className="workflow-arrow" onBackground="neutral-weak">→</Text>}
-            </Fragment>
-          ))}
-        </Row>
-        <Row gap="8" wrap>
-          {copy.signals.map((signal) => <Tag key={signal} size="s">{signal}</Tag>)}
-        </Row>
-        <Text variant="label-default-s" onBackground="neutral-weak" wrap="balance">{copy.caption}</Text>
-      </Column>
-    </BrowserVisual>
-  );
-}
-
-export function ProjectVisual({ project, locale, priority = false }: { project: Project; locale: Locale; priority?: boolean }) {
-  const image = project.images[0];
-  const evidence = project.results[0] ?? project.contributions[0];
-  const aspectRatio =
-    image?.width && image.height
-      ? `${image.width} / ${image.height}`
-      : image?.variant === "mobile"
-        ? "1125 / 2436"
-        : "1060 / 600";
-
-  if (project.slug === "jango" && image) {
-    return (
-      <Column className="jango-card-visual" fillWidth center radius="l">
-        <Media
-          className="jango-card-screen"
-          src={image.src}
-          alt={localize(image.alt, locale)}
-          aspectRatio={aspectRatio}
-          objectFit="cover"
-          sizes="(max-width: 768px) 72vw, 260px"
-          priority={priority}
-          radius="l"
-        />
-      </Column>
-    );
-  }
-
-  if (image) {
-    return (
-      <Media
-        src={image.src}
-        alt={localize(image.alt, locale)}
-        aspectRatio={aspectRatio}
-        objectFit={image.variant === "mobile" ? "cover" : "contain"}
-        sizes="(max-width: 768px) 100vw, 960px"
-        priority={priority}
-        radius="l"
-      />
-    );
-  }
-
-  if (workflowCopy[project.slug]) {
-    return <WorkflowVisual project={project} locale={locale} />;
-  }
-
-  return (
-    <BrowserVisual project={project} locale={locale}>
-      <Column padding="m" gap="16">
+      <Column className="project-evidence-window" background="surface" border="neutral-alpha-medium" radius="m" overflow="hidden">
+        <Column padding="m" gap="16">
           <Column gap="4">
             <Text variant="label-default-xs" onBackground="neutral-weak">
               {locale === "ko" ? "담당 범위" : "Ownership"}
@@ -250,16 +258,13 @@ export function ProjectVisual({ project, locale, priority = false }: { project: 
                     ? "구현"
                     : "Delivered"}
               </Text>
-              <Text
-                className="project-evidence-copy"
-                variant="body-default-s"
-                onBackground="neutral-medium"
-              >
+              <Text className="project-evidence-copy" variant="body-default-s" onBackground="neutral-medium">
                 {localize(evidence, locale)}
               </Text>
             </Column>
           )}
+        </Column>
       </Column>
-    </BrowserVisual>
+    </Column>
   );
 }
