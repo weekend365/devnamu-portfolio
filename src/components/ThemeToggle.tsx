@@ -4,7 +4,13 @@ import { useEffect, useState } from "react";
 import { ToggleButton, useTheme } from "@once-ui-system/core";
 import type { Locale } from "@/resources";
 
-export const ThemeToggle = ({ locale }: { locale: Locale }) => {
+export const ThemeToggle = ({
+  locale,
+  showLabel = false,
+}: {
+  locale: Locale;
+  showLabel?: boolean;
+}) => {
   const { setTheme } = useTheme();
   const [currentTheme, setCurrentTheme] = useState("light");
 
@@ -22,6 +28,7 @@ export const ThemeToggle = ({ locale }: { locale: Locale }) => {
   return (
     <ToggleButton
       prefixIcon={icon}
+      label={showLabel ? label : undefined}
       onClick={() => {
         setTheme(nextTheme);
         setCurrentTheme(nextTheme);

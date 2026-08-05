@@ -15,6 +15,7 @@ import {
   HiChevronLeft,
   HiChevronRight,
   HiEllipsisHorizontal,
+  HiBars3,
 } from "react-icons/hi2";
 
 import {
@@ -69,6 +70,7 @@ export const iconLibrary: Record<string, IconType> = {
   chevronLeft: HiChevronLeft,
   chevronRight: HiChevronRight,
   more: HiEllipsisHorizontal,
+  menu: HiBars3,
   javascript: SiJavascript,
   nextjs: SiNextdotjs,
   supabase: SiSupabase,

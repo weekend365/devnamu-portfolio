@@ -35,13 +35,14 @@ export function FeaturedJango({ locale }: { locale: Locale }) {
             {localize(project.problem, locale)}
           </Text>
         </Column>
-        <Row wrap gap="8">
-          {project.technologies.slice(0, 6).map((technology) => (
-            <Tag key={technology} size="s">
-              {technology}
-            </Tag>
-          ))}
-        </Row>
+        <Column className="featured-ownership" gap="4" paddingLeft="16">
+          <Text variant="label-strong-xs" onBackground="brand-weak">
+            {labels.role}
+          </Text>
+          <Text variant="body-default-m" onBackground="neutral-medium" wrap="balance">
+            {localize(project.role, locale)}
+          </Text>
+        </Column>
         <Grid className="featured-facts" columns="3" s={{ columns: 1 }} gap="8" fillWidth>
           {(project.metrics ?? []).map((metric) => (
             <Column key={metric.value + metric.label.en} className="featured-fact" gap="4">
@@ -59,6 +60,13 @@ export function FeaturedJango({ locale }: { locale: Locale }) {
             </Column>
           ))}
         </Grid>
+        <Row wrap gap="8">
+          {project.technologies.slice(0, 6).map((technology) => (
+            <Tag key={technology} size="s">
+              {technology}
+            </Tag>
+          ))}
+        </Row>
         <Row gap="12" wrap>
           <Button
             href={localePath(locale, "/work/jango")}

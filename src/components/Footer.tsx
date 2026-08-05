@@ -3,9 +3,17 @@ import { person, type Locale } from "@/resources";
 
 export function Footer({ locale }: { locale: Locale }) {
   return (
-    <Row as="footer" fillWidth horizontal="center" paddingX="l" paddingY="24">
+    <Row
+      as="footer"
+      className="portfolio-footer"
+      fillWidth
+      horizontal="center"
+      paddingX="l"
+      paddingY="24"
+    >
       <Row
-        maxWidth="m"
+        className="portfolio-footer-inner"
+        maxWidth="l"
         fillWidth
         horizontal="between"
         vertical="center"

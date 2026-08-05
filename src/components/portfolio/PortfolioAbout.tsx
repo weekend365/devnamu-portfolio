@@ -8,12 +8,34 @@ import {
   Tag,
   Text,
 } from "@once-ui-system/core";
-import { getContent, localize, person, type Locale } from "@/resources";
+import { getContent, localize, pageCopy, person, type Locale } from "@/resources";
 import { SectionHeading } from "./SectionHeading";
 
 export function PortfolioAbout({ locale }: { locale: Locale }) {
   const content = getContent(locale);
   const labels = content.navigation;
+  const copy = pageCopy.about;
+  const skillsFor = (...titles: string[]) =>
+    Array.from(
+      new Set(
+        content.skillCategories
+          .filter((category) => titles.includes(category.title.en))
+          .flatMap((category) => category.skills),
+      ),
+    );
+  const capabilityGroups = [
+    { title: "Frontend", skills: skillsFor("Frontend") },
+    {
+      title: locale === "ko" ? "상태·데이터" : "State & Data",
+      skills: skillsFor("State & Data", "Database"),
+    },
+    { title: "Backend", skills: skillsFor("Backend") },
+    { title: "Mobile", skills: skillsFor("Mobile") },
+    {
+      title: locale === "ko" ? "검증·배포" : "Quality & Delivery",
+      skills: skillsFor("Testing", "DevOps & Tools"),
+    },
+  ];
 
   return (
     <Column className="page-stack about-page" maxWidth="m" fillWidth gap="80">
@@ -38,11 +60,12 @@ export function PortfolioAbout({ locale }: { locale: Locale }) {
             variant="display-strong-l"
             wrap="balance"
           >
-            {locale === "ko"
-              ? "문제를 이해하고, 운영 가능한 제품으로 바꿉니다."
-              : "I turn understood problems into operable products."}
+            {localize(copy.title, locale)}
           </Heading>
-          <Text variant="heading-default-l" onBackground="neutral-weak">
+          <Text variant="heading-default-l" onBackground="neutral-weak" wrap="balance">
+            {localize(copy.summary, locale)}
+          </Text>
+          <Text variant="label-strong-m" onBackground="brand-weak">
             {person.role[locale]}
           </Text>
           <Row gap="12" wrap>
@@ -69,7 +92,6 @@ export function PortfolioAbout({ locale }: { locale: Locale }) {
             sizes="(max-width: 768px) 112px, 176px"
             priority
             radius="full"
-            style={{ width: "11rem", height: "11rem" }}
           />
         </Column>
       </Row>
@@ -85,23 +107,19 @@ export function PortfolioAbout({ locale }: { locale: Locale }) {
             3+
           </Text>
           <Text variant="label-default-s" onBackground="neutral-weak">
-            {locale === "ko"
-              ? "제품 개발 경력"
-              : "years in product development"}
+            {localize(copy.proofYears, locale)}
           </Text>
         </Column>
         <Column className="proof-item" gap="4">
           <Text variant="display-strong-s">4</Text>
           <Text variant="label-default-s" onBackground="neutral-weak">
-            {locale === "ko"
-              ? "도메인과 제품 맥락"
-              : "domains and product contexts"}
+            {localize(copy.proofDomains, locale)}
           </Text>
         </Column>
         <Column className="proof-item" gap="4">
           <Text variant="display-strong-s">2</Text>
           <Text variant="label-default-s" onBackground="neutral-weak">
-            {locale === "ko" ? "사용 언어" : "working languages"}
+            {localize(copy.proofLanguages, locale)}
           </Text>
         </Column>
       </Row>
@@ -207,11 +225,14 @@ export function PortfolioAbout({ locale }: { locale: Locale }) {
       </Column>
 
       <Column as="section" gap="40">
-        <SectionHeading title={labels.technicalSkills} />
-        <Grid columns="2" s={{ columns: 1 }} gap="16">
-          {content.skillCategories.map((category, index) => (
+        <SectionHeading
+          eyebrow={labels.technicalSkills}
+          title={localize(copy.capabilitiesTitle, locale)}
+        />
+        <Grid className="capability-grid" columns="2" s={{ columns: 1 }} gap="16">
+          {capabilityGroups.map((category, index) => (
             <Column
-              key={category.title.en}
+              key={category.title}
               className={`skill-card${index < 2 ? " skill-card-core" : ""}`}
               background="surface"
               border="neutral-alpha-medium"
@@ -221,7 +242,7 @@ export function PortfolioAbout({ locale }: { locale: Locale }) {
             >
               <Row fillWidth horizontal="between" vertical="center" gap="12">
                 <Heading as="h3" variant="heading-strong-m">
-                  {localize(category.title, locale)}
+                  {category.title}
                 </Heading>
                 <Text variant="label-default-xs" onBackground="neutral-weak">
                   {index < 2
@@ -244,6 +265,87 @@ export function PortfolioAbout({ locale }: { locale: Locale }) {
       </Column>
 
       <Column as="section" gap="32">
+        <SectionHeading
+          eyebrow={labels.education}
+          title={localize(copy.credentialsTitle, locale)}
+        />
+        <Grid className="credentials-grid" columns="3" s={{ columns: 1 }} gap="16">
+          <Column
+            className="credential-card"
+            background="surface"
+            border="neutral-alpha-medium"
+            radius="l"
+            padding="l"
+            gap="16"
+          >
+            <Heading as="h3" variant="heading-strong-m">
+              {labels.education}
+            </Heading>
+            <Column as="ul" className="credential-list" gap="0" paddingLeft="0">
+              {content.education.map((item) => (
+                <Column as="li" className="credential-item" key={item.institution.en} gap="4">
+                  <Text variant="label-strong-s">{localize(item.institution, locale)}</Text>
+                  <Text variant="body-default-s" onBackground="neutral-medium">
+                    {localize(item.program, locale)}
+                  </Text>
+                  <Text variant="label-default-xs" onBackground="neutral-weak">
+                    {item.period}
+                  </Text>
+                </Column>
+              ))}
+            </Column>
+          </Column>
+          <Column
+            className="credential-card"
+            background="surface"
+            border="neutral-alpha-medium"
+            radius="l"
+            padding="l"
+            gap="16"
+          >
+            <Heading as="h3" variant="heading-strong-m">
+              {labels.training}
+            </Heading>
+            <Column as="ul" className="credential-list" gap="0" paddingLeft="0">
+              {content.training.map((item) => (
+                <Column as="li" className="credential-item" key={item.institution.en} gap="4">
+                  <Text variant="label-strong-s">{localize(item.institution, locale)}</Text>
+                  <Text variant="body-default-s" onBackground="neutral-medium">
+                    {localize(item.program, locale)}
+                  </Text>
+                  <Text variant="label-default-xs" onBackground="neutral-weak">
+                    {item.period}
+                  </Text>
+                </Column>
+              ))}
+            </Column>
+          </Column>
+          <Column
+            className="credential-card"
+            background="surface"
+            border="neutral-alpha-medium"
+            radius="l"
+            padding="l"
+            gap="16"
+          >
+            <Heading as="h3" variant="heading-strong-m">
+              {labels.certifications}
+            </Heading>
+            <Column as="ul" className="credential-list" gap="0" paddingLeft="0">
+              {content.certifications.map((item) => (
+                <Column as="li" className="credential-item" key={item.name.en} gap="4">
+                  <Text variant="label-strong-s">{localize(item.name, locale)}</Text>
+                  <Text variant="label-default-xs" onBackground="neutral-weak">
+                    {localize(item.detail, locale)}
+                  </Text>
+                </Column>
+              ))}
+            </Column>
+          </Column>
+        </Grid>
+      </Column>
+
+      <Column as="section" gap="32">
         <SectionHeading title={labels.interests} />
         <Column className="interest-list" as="ul" gap="0">
           {content.interests.map((interest, index) => (
@@ -261,6 +363,31 @@ export function PortfolioAbout({ locale }: { locale: Locale }) {
             </Row>
           ))}
         </Column>
+      </Column>
+
+      <Column
+        as="section"
+        className="contact-section"
+        background="surface"
+        border="neutral-alpha-medium"
+        radius="xl"
+        padding="xl"
+        gap="20"
+        horizontal="center"
+        align="center"
+      >
+        <Text className="eyebrow" variant="label-strong-s" onBackground="brand-weak">
+          {labels.contact}
+        </Text>
+        <Heading as="h2" variant="display-strong-s" wrap="balance">
+          {localize(copy.contactTitle, locale)}
+        </Heading>
+        <Text variant="body-default-l" onBackground="neutral-weak" wrap="balance">
+          {localize(copy.contactBody, locale)}
+        </Text>
+        <Button href={`mailto:${person.email}`} variant="primary" prefixIcon="email">
+          {person.email}
+        </Button>
       </Column>
     </Column>
   );

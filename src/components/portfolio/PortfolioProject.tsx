@@ -1,5 +1,14 @@
 import { Button, Column, Grid, Heading, Row, Tag, Text } from "@once-ui-system/core";
-import { baseURL, getProjects, localize, person, type Locale, type Project, ui } from "@/resources";
+import {
+  baseURL,
+  getProjects,
+  localize,
+  pageCopy,
+  person,
+  type Locale,
+  type Project,
+  ui,
+} from "@/resources";
 import { localePath } from "@/utils/site-metadata";
 import { getProjectStatusVariant, ProjectCard } from "./ProjectCard";
 import { ProjectDemoAccess } from "./ProjectDemoAccess";
@@ -67,6 +76,7 @@ function StorySignal({
 
 export function PortfolioProject({ project, locale }: { project: Project; locale: Locale }) {
   const labels = ui[locale];
+  const copy = pageCopy.project;
   const related = getProjects(locale)
     .filter((item) => item.slug !== project.slug)
     .slice(0, 2);
@@ -111,7 +121,7 @@ export function PortfolioProject({ project, locale }: { project: Project; locale
         </Heading>
         {project.technicalName && (
           <Text variant="label-default-m" onBackground="neutral-weak">
-            {locale === "ko" ? "저장소 이름" : "Repository namespace"} · {project.technicalName}
+            {localize(copy.namespace, locale)} · {project.technicalName}
           </Text>
         )}
         <Column className="project-summary" maxWidth="s" gap="12">
@@ -156,9 +166,7 @@ export function PortfolioProject({ project, locale }: { project: Project; locale
           <Text variant="body-default-m" onBackground="neutral-medium">
             {project.challenges[0]
               ? localize(project.challenges[0], locale)
-              : locale === "ko"
-                ? "핵심 흐름을 유지하면서 제품 범위를 단계적으로 확장했습니다."
-                : "Expanded the product in stages while protecting the core workflow."}
+              : localize(copy.fallbackConstraint, locale)}
           </Text>
         </StorySignal>
         <StorySignal label={labels.evidence}>
@@ -181,19 +189,19 @@ export function PortfolioProject({ project, locale }: { project: Project; locale
       )}
 
       <Grid className="project-meta-grid" columns="3" s={{ columns: 1 }} gap="12">
-        <Column background="surface" border="neutral-alpha-medium" radius="l" padding="l" gap="8">
+        <Column className="project-meta-card" background="surface" border="neutral-alpha-medium" radius="l" padding="l" gap="8">
           <Text variant="label-strong-s" onBackground="neutral-weak">
             {labels.role}
           </Text>
           <Text variant="heading-strong-m">{localize(project.role, locale)}</Text>
         </Column>
-        <Column background="surface" border="neutral-alpha-medium" radius="l" padding="l" gap="8">
+        <Column className="project-meta-card" background="surface" border="neutral-alpha-medium" radius="l" padding="l" gap="8">
           <Text variant="label-strong-s" onBackground="neutral-weak">
-            {locale === "ko" ? "기간" : "Period"}
+            {localize(copy.period, locale)}
           </Text>
           <Text variant="heading-strong-m">{localize(project.period, locale)}</Text>
         </Column>
-        <Column background="surface" border="neutral-alpha-medium" radius="l" padding="l" gap="8">
+        <Column className="project-meta-card" background="surface" border="neutral-alpha-medium" radius="l" padding="l" gap="8">
           <Text variant="label-strong-s" onBackground="neutral-weak">
             {labels.status}
           </Text>
@@ -262,7 +270,7 @@ export function PortfolioProject({ project, locale }: { project: Project; locale
         <Column as="section" id="project-overview" className="case-study-section" gap="24">
           <SectionHeading
             eyebrow={labels.overview}
-            title={locale === "ko" ? "무엇을 만들었는가" : "What I built"}
+            title={localize(copy.overviewTitle, locale)}
           />
           <Column gap="16" maxWidth="s">
             {project.description.map((paragraph) => (

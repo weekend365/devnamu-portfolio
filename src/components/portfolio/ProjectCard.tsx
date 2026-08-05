@@ -21,11 +21,18 @@ export function ProjectCard({
   locale: Locale;
   priority?: boolean;
   headingLevel?: "h2" | "h3";
-  variant?: "default" | "compact";
+  variant?: "featured" | "default" | "compact";
 }) {
   const labels = ui[locale];
   const hasVisual = Boolean(project.images[0]);
   const evidence = project.results[0] ?? project.outcome;
+  const evidenceLabel = project.results.length > 0
+    ? locale === "ko"
+      ? "검증된 결과"
+      : "Verified outcome"
+    : locale === "ko"
+      ? "핵심 납품"
+      : "Key delivery";
 
   if (variant === "compact") {
     return (
@@ -57,6 +64,20 @@ export function ProjectCard({
           <Text className="project-card-role" variant="label-default-s" onBackground="neutral-weak" wrap="balance">
             {labels.role} · {localize(project.role, locale)}
           </Text>
+          {evidence && (
+            <Column className="project-card-compact-outcome" gap="4" paddingTop="8">
+              <Text variant="label-strong-xs" onBackground="brand-weak">
+                {evidenceLabel}
+              </Text>
+              <Text
+                className="project-card-outcome-copy"
+                variant="body-default-s"
+                onBackground="neutral-medium"
+              >
+                {localize(evidence, locale)}
+              </Text>
+            </Column>
+          )}
           <Button
             href={localePath(locale, `/work/${project.slug}`)}
             size="s"
@@ -73,7 +94,7 @@ export function ProjectCard({
   return (
     <Column
       as="article"
-      className={`project-card project-card-with-visual${hasVisual ? "" : " project-card-evidence"}`}
+      className={`project-card project-card-${variant} project-card-with-visual${hasVisual ? "" : " project-card-evidence"}`}
       fillWidth
       background="surface"
       border="neutral-alpha-medium"
@@ -113,13 +134,7 @@ export function ProjectCard({
         {evidence && (
           <Column className="project-card-outcome" gap="4" padding="12" radius="m">
             <Text variant="label-strong-xs" onBackground="brand-weak">
-              {project.results.length > 0
-                ? locale === "ko"
-                  ? "검증된 결과"
-                  : "Verified outcome"
-                : locale === "ko"
-                  ? "핵심 납품"
-                  : "Key delivery"}
+              {evidenceLabel}
             </Text>
             <Text
               className="project-card-outcome-copy"

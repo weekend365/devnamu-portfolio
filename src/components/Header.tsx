@@ -13,7 +13,7 @@ import {
   ToggleButton,
 } from "@once-ui-system/core";
 import type { Locale } from "@/resources";
-import { getContent, person } from "@/resources";
+import { getContent, localize, pageCopy, person } from "@/resources";
 import { ThemeToggle } from "./ThemeToggle";
 
 function localizedPath(locale: Locale, path: string): string {
@@ -24,6 +24,7 @@ export function Header({ locale }: { locale: Locale }) {
   const [moreOpen, setMoreOpen] = useState(false);
   const pathname = usePathname() ?? localizedPath(locale, "/");
   const labels = getContent(locale).navigation;
+  const copy = pageCopy.header;
   const homePath = localizedPath(locale, "/");
   const aboutPath = localizedPath(locale, "/about");
   const workPath = localizedPath(locale, "/work");
@@ -64,14 +65,14 @@ export function Header({ locale }: { locale: Locale }) {
         </SmartLink>
         <Row
           as="nav"
-          className="portfolio-nav"
+          className="portfolio-nav desktop-navigation"
           background="surface"
           border="neutral-alpha-medium"
           radius="m"
           padding="4"
           gap="4"
           vertical="center"
-          aria-label={locale === "ko" ? "주요 탐색" : "Primary navigation"}
+          aria-label={localize(copy.primaryNavigation, locale)}
         >
           <ToggleButton
             prefixIcon="home"
@@ -108,42 +109,73 @@ export function Header({ locale }: { locale: Locale }) {
           <span className="desktop-theme-toggle">
             <ThemeToggle locale={locale} />
           </span>
-          <DropdownWrapper
-            className="mobile-more"
-            placement="top-end"
-            isOpen={moreOpen}
-            onOpenChange={setMoreOpen}
-            trigger={
-              <ToggleButton
-                prefixIcon="more"
-                label={locale === "ko" ? "더보기" : "More"}
-                selected={moreOpen}
-                aria-label={locale === "ko" ? "추가 설정" : "More options"}
-              />
-            }
-            dropdown={
-              <Column
-                className="mobile-more-menu"
-                background="surface"
-                border="neutral-alpha-medium"
-                radius="m"
-                padding="4"
-                gap="4"
-                minWidth={10}
-              >
-                <Button
-                  href={languagePath}
-                  variant="tertiary"
-                  prefixIcon="globe"
-                  onClick={() => setMoreOpen(false)}
-                >
-                  {labels.languageSwitch}
-                </Button>
-                <ThemeToggle locale={locale} />
-              </Column>
-            }
-          />
         </Row>
+        <DropdownWrapper
+          className="mobile-navigation"
+          placement="bottom-end"
+          isOpen={moreOpen}
+          onOpenChange={setMoreOpen}
+          trigger={
+            <ToggleButton
+              prefixIcon="menu"
+              label={localize(copy.menu, locale)}
+              selected={moreOpen}
+              aria-label={localize(copy.openMenu, locale)}
+            />
+          }
+          dropdown={
+            <Column
+              as="nav"
+              className="mobile-navigation-menu"
+              background="surface"
+              border="neutral-alpha-medium"
+              radius="l"
+              padding="8"
+              gap="4"
+              minWidth={15}
+              aria-label={localize(copy.primaryNavigation, locale)}
+            >
+              <Text
+                className="mobile-navigation-label"
+                variant="label-strong-xs"
+                onBackground="neutral-weak"
+              >
+                {person.brand} · {person.name[locale]}
+              </Text>
+              <ToggleButton
+                prefixIcon="home"
+                href={homePath}
+                label={labels.home}
+                selected={pathname === homePath}
+                onClick={() => setMoreOpen(false)}
+              />
+              <ToggleButton
+                prefixIcon="person"
+                href={aboutPath}
+                label={labels.about}
+                selected={pathname === aboutPath}
+                onClick={() => setMoreOpen(false)}
+              />
+              <ToggleButton
+                prefixIcon="grid"
+                href={workPath}
+                label={labels.work}
+                selected={pathname.startsWith(workPath)}
+                onClick={() => setMoreOpen(false)}
+              />
+              <Line background="neutral-alpha-medium" />
+              <Button
+                href={languagePath}
+                variant="tertiary"
+                prefixIcon="globe"
+                onClick={() => setMoreOpen(false)}
+              >
+                {labels.languageSwitch}
+              </Button>
+              <ThemeToggle locale={locale} showLabel />
+            </Column>
+          }
+        />
       </Row>
     </Row>
   );

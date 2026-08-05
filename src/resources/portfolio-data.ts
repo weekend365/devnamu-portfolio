@@ -844,6 +844,99 @@ export const projects: Project[] = [
   },
 ];
 
+export const pageCopy = {
+  home: {
+    title: t(
+      "복잡한 업무를, 실제로 쓰이는 제품으로 바꿉니다.",
+      "I turn complex operations into products people can use.",
+    ),
+    summary: t(
+      "3년간 React와 Next.js로 공공·교통·구독 제품을 만들었습니다. 화면 설계부터 API·관리자·배포까지 제품의 흐름을 연결합니다.",
+      "For three years, I’ve built public, transportation, and subscription products with React and Next.js—connecting interface decisions to APIs, admin tools, and delivery.",
+    ),
+    proofYears: t("제품 개발 경력", "years in product"),
+    proofProjects: t("프로젝트 사례", "case studies"),
+    proofDelivery: t("운영·납품 사례", "live or delivered"),
+    featuredTitle: t(
+      "장고야 부탁해 — 모바일부터 운영까지 연결한 제품",
+      "Jango — one product from mobile experience to operations",
+    ),
+    featuredDescription: t(
+      "유통기한 관리 문제를 실제 앱, API, 관리자와 운영 환경이 연결된 제품으로 확장하고 있습니다.",
+      "An expiry-management problem developed into a working product spanning the app, APIs, admin tools, and operations.",
+    ),
+    selectedTitle: t(
+      "복잡한 업무를 명확한 흐름으로 바꾼 작업",
+      "Work that turns operational complexity into clear flows",
+    ),
+    experienceTitle: t(
+      "제품의 앞단과 운영의 뒷단을 함께 경험했습니다",
+      "Experience across the product surface and its operations",
+    ),
+    experienceAction: t("경력 자세히 보기", "View full experience"),
+    contactTitle: t(
+      "제품과 팀에 기여할 다음 기회를 찾고 있습니다",
+      "I’m looking for the next product and team I can contribute to",
+    ),
+    contactBody: t(
+      "프론트엔드 채용이나 제품 개발에 관해 이야기하고 싶다면 이메일로 연락해 주세요.",
+      "If you would like to discuss a frontend role or product work, send me an email.",
+    ),
+  },
+  work: {
+    title: t(
+      "제품을 만들고, 업무를 움직인 기록",
+      "Products built. Operations improved.",
+    ),
+    summary: t(
+      "개인 제품부터 공공·교통·구독 서비스까지, 맡은 역할과 구현 결과를 검증 가능한 사실로 정리했습니다.",
+      "A factual record of what I owned and delivered across an independent product, public systems, transportation, and subscriptions.",
+    ),
+    featuredTitle: t(
+      "현재 가장 깊이 관여하고 있는 제품",
+      "The product I currently own most deeply",
+    ),
+    selectedTitle: t(
+      "복잡한 업무를 사용 가능한 소프트웨어로 바꾼 작업",
+      "Turning complex operations into usable software",
+    ),
+  },
+  about: {
+    title: t(
+      "문제를 이해하고, 운영 가능한 제품으로 바꿉니다.",
+      "I turn understood problems into operable products.",
+    ),
+    summary: t(
+      "사용자가 보는 화면과 그 뒤의 데이터·API·운영 환경을 함께 이해하는 제품형 프론트엔드 개발자입니다.",
+      "I’m a product-minded frontend developer who connects the interface people use with the data, APIs, and operations behind it.",
+    ),
+    proofYears: t("제품 개발 경력", "years in product"),
+    proofDomains: t("도메인 경험", "product domains"),
+    proofLanguages: t("업무 언어", "working languages"),
+    capabilitiesTitle: t("제품을 끝까지 연결하는 역량", "Capabilities across the product lifecycle"),
+    credentialsTitle: t("학력·교육·자격", "Education, training, and credentials"),
+    contactTitle: t("함께 만들 제품에 대해 이야기해 주세요", "Tell me about the product you’re building"),
+    contactBody: t(
+      "채용이나 협업에 관해 공유할 내용이 있다면 이메일로 연락해 주세요.",
+      "If you have a role or collaboration in mind, I’d be glad to hear from you.",
+    ),
+  },
+  project: {
+    namespace: t("저장소 이름", "Repository namespace"),
+    period: t("기간", "Period"),
+    overviewTitle: t("무엇을 만들었는가", "What I built"),
+    fallbackConstraint: t(
+      "핵심 흐름을 유지하면서 제품 범위를 단계적으로 확장했습니다.",
+      "Expanded the product in stages while protecting the core workflow.",
+    ),
+  },
+  header: {
+    primaryNavigation: t("주요 탐색", "Primary navigation"),
+    menu: t("메뉴", "Menu"),
+    openMenu: t("탐색 메뉴 열기", "Open navigation menu"),
+  },
+} as const;
+
 export const ui = {
   ko: {
     home: "홈",
