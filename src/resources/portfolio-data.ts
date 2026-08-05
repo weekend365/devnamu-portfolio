@@ -54,6 +54,7 @@ export type Project = {
 const t = (ko: string, en: string): LocalizedText => ({ ko, en });
 
 export const person = {
+  brand: "DEVNAMU",
   name: t("남우현", "Nam Woo-hyun"),
   role: t("프론트엔드 · 풀스택 개발자", "Frontend · Full-stack Developer"),
   email: "skadngus14@naver.com",
@@ -90,7 +91,7 @@ export const experiences: Experience[] = [
     location: t("서울", "Seoul"),
     projects: [
       t(
-        "KCSC 디지털 건설기준 시범적용 사용자 지원 시스템 프론트엔드 개발·고도화",
+        "KCSC 디지털 건설기준 사용자 지원 시스템 프론트엔드 개발·고도화",
         "KCSC digital construction standards pilot support system",
       ),
       t(
@@ -100,48 +101,16 @@ export const experiences: Experience[] = [
     ],
     achievements: [
       t(
-        "KDS/KCS 표준문서, 검토항목, 객체분류, 변수 정보를 관리하는 프론트엔드 화면을 개발했습니다.",
-        "Built frontend screens for KDS/KCS standard documents, review items, object classifications, and variables.",
+        "KCSC 디지털 건설기준 시스템의 표준문서·검토·변수 관리 프론트엔드를 개발·고도화했습니다.",
+        "Built and advanced the KCSC digital construction standards frontend for documents, reviews, and variables.",
       ),
       t(
-        "Mantine UI와 TypeScript로 테이블, 트리, 모달, 탭, 리사이즈 패널 기반의 복잡한 업무 UI를 구현했습니다.",
-        "Implemented complex business interfaces with TypeScript, Mantine UI, tables, trees, modals, tabs, and resizable panels.",
+        "Mantine UI와 TanStack Query로 트리·테이블·매핑 도구 등 복잡한 업무 UI와 서버 상태를 구현했습니다.",
+        "Implemented complex business UIs and server state with Mantine UI and TanStack Query, including trees, tables, and mapping tools.",
       ),
       t(
-        "TanStack Query로 CRUD 서버 상태를 관리하고 저장·삭제·검증 이후 화면 데이터를 동기화했습니다.",
-        "Managed CRUD server state with TanStack Query and synchronized screen data after save, delete, and validation operations.",
-      ),
-      t(
-        "입력·출력·관리 변수와 상위 변수 연결, 선택값 관리 기능을 갖춘 변수 관리 테이블과 모달을 구현했습니다.",
-        "Built variable tables and dialogs for input, output, and managed variables, parent links, and selectable values.",
-      ),
-      t(
-        "객체분류, 검토항목, 검토요소, 상세 편집기를 연결한 4분할 변수 매핑 도구를 구현했습니다.",
-        "Implemented a four-pane variable mapping tool connecting classifications, review items, review elements, and a detail editor.",
-      ),
-      t(
-        "기본정보, 본문, 관리변수, 룰, 입출력변수를 탭 단위로 편집하는 검토요소 상세 기능을 개발했습니다.",
-        "Developed tab-based detail editing for base information, content, managed variables, rules, and I/O variables.",
-      ),
-      t(
-        "트리 기반 탐색, 검색, 선택 상태, 하위 노드 생성·수정·삭제 흐름을 설계하고 구현했습니다.",
-        "Designed and implemented tree navigation, search, selection state, and child-node create, update, and delete flows.",
-      ),
-      t(
-        "Jest와 React Testing Library로 변수 테이블, 모달, 매핑 도구, 리사이즈 패널의 주요 동작 테스트를 작성했습니다.",
-        "Wrote Jest and React Testing Library tests for variable tables, dialogs, mapping tools, and resizable panels.",
-      ),
-      t(
-        "Docker standalone 빌드와 Jenkins 배포 환경을 고려해 Next.js 프론트엔드 구조를 유지보수했습니다.",
-        "Maintained the Next.js frontend for Docker standalone builds and Jenkins deployment.",
-      ),
-      t(
-        "BIMS 관리자 웹에서 버스·노선·운영 데이터를 조회하고 관리하는 화면을 개발했습니다.",
-        "Built BIMS administration screens for bus, route, and operational data.",
-      ),
-      t(
-        "Spring Boot API 명세를 분석해 요청·응답 데이터 구조를 화면 처리 흐름에 연결했습니다.",
-        "Mapped Spring Boot API request and response contracts into frontend data flows.",
+        "BIMS 관리자 웹에서 버스·노선·운영 데이터 화면을 개발하고 Spring Boot API와 연동했습니다.",
+        "Built BIMS admin screens for bus, route, and operations data, integrated with Spring Boot APIs.",
       ),
     ],
   },
@@ -161,36 +130,16 @@ export const experiences: Experience[] = [
     ],
     achievements: [
       t(
-        "React와 Next.js 기반 구독 서비스 웹 프론트엔드를 개발했습니다.",
-        "Developed the React and Next.js frontend for a subscription service.",
+        "React·Next.js로 구독 서비스 웹 프론트엔드를 개발하고 App Router 기반 SSR·SEO를 구성했습니다.",
+        "Built the subscription service frontend with React and Next.js, including App Router SSR and SEO.",
       ),
       t(
-        "Next.js App Router로 페이지를 구성하고 SSR과 SEO를 개선했습니다.",
-        "Structured pages with the Next.js App Router and improved SSR and SEO.",
+        "NestJS API와 PostgreSQL 모델링에 참여하며 인증·구독·상품 등 핵심 기능을 구현했습니다.",
+        "Implemented core auth, subscription, and product flows with NestJS APIs and PostgreSQL modeling.",
       ),
       t(
-        "사용자 인증, 구독 정보, 상품·서비스 정보 등 주요 화면을 개발했습니다.",
-        "Built core screens for authentication, subscription information, products, and services.",
-      ),
-      t(
-        "NestJS 기반 백엔드 API와 비즈니스 로직을 구현했습니다.",
-        "Implemented NestJS backend APIs and business logic.",
-      ),
-      t(
-        "PostgreSQL 데이터 모델링과 서비스 테이블 설계에 참여했습니다.",
-        "Contributed to PostgreSQL data modeling and service table design.",
-      ),
-      t(
-        "API 연동 구조와 프론트엔드 데이터 처리 흐름을 개선했습니다.",
-        "Improved API integration and frontend data-processing flows.",
-      ),
-      t(
-        "Tailwind CSS로 UI를 구현하고 사용자 경험을 개선했습니다.",
-        "Implemented the UI with Tailwind CSS and improved the user experience.",
-      ),
-      t(
-        "Docker와 Git을 활용한 개발 환경과 협업 프로세스를 경험했습니다.",
-        "Worked with Docker and Git-based development and collaboration workflows.",
+        "프론트엔드 데이터 흐름과 UI/UX를 개선하고 Docker 기반 배포 환경에서 협업했습니다.",
+        "Improved frontend data flows and UX while collaborating in a Docker-based deployment environment.",
       ),
     ],
   },
@@ -213,28 +162,12 @@ export const experiences: Experience[] = [
     ],
     achievements: [
       t(
-        "React, Next.js, TypeScript 기반 GIS 웹 애플리케이션을 개발했습니다.",
-        "Developed a GIS web application with React, Next.js, and TypeScript.",
+        "React·Next.js·TypeScript로 GIS 기반 시설물 조회 웹앱을 개발했습니다.",
+        "Developed a GIS facility lookup web app with React, Next.js, and TypeScript.",
       ),
       t(
-        "지도 기반 시설물 조회 화면과 상세 정보 UI를 개발했습니다.",
-        "Built map-based facility lookup and detail interfaces.",
-      ),
-      t(
-        "위치 데이터 조회, 마커, 팝업, 상세 패널 등 지도 인터랙션을 구현했습니다.",
-        "Implemented location queries, map markers, popups, and detail-panel interactions.",
-      ),
-      t(
-        "Tailwind CSS 기반 반응형 UI와 관리 화면을 구성했습니다.",
-        "Created responsive and administrative interfaces with Tailwind CSS.",
-      ),
-      t(
-        "API 응답 데이터를 화면 구조에 맞게 가공하고 렌더링했습니다.",
-        "Transformed and rendered API response data for the interface structure.",
-      ),
-      t(
-        "Git 기반 협업과 기능 단위 개발을 수행했습니다.",
-        "Worked through Git-based collaboration and feature-oriented development.",
+        "지도 마커·팝업·상세 패널 등 위치 데이터 인터랙션과 반응형 UI를 구현했습니다.",
+        "Implemented map markers, popups, detail panels, and responsive UI for location data.",
       ),
       t(
         "한국수자원공사에 납품된 실제 운영 시스템 개발에 참여했습니다.",
@@ -575,7 +508,7 @@ export const projects: Project[] = [
     endedAt: null,
     locale: ["ko", "en"],
     title: t(
-      "KCSC 디지털 건설기준 시범적용 사용자 지원 시스템",
+      "KCSC 디지털 건설기준 사용자 지원 시스템",
       "KCSC Digital Construction Standards Pilot Support System",
     ),
     company: t("씨엔넷", "C&Net"),
@@ -676,7 +609,44 @@ export const projects: Project[] = [
         "Maintained an operational structure compatible with Next.js standalone builds, Docker images, and the Jenkins deployment pipeline.",
       ),
     ],
-    images: [],
+    images: [
+      {
+        src: "/images/projects/kcsc/01.png",
+        alt: t(
+          "디지털 건설기준 시범운영 홈과 지원 게시판 화면",
+          "KCSC pilot home and support-board dashboard",
+        ),
+        caption: t(
+          "시범운영 홈과 공지·자료·Q&A 지원 게시판",
+          "Pilot home with notices, resources, Q&A, and support boards",
+        ),
+        variant: "desktop",
+      },
+      {
+        src: "/images/projects/kcsc/02.png",
+        alt: t(
+          "시설물·검토항목·검토요소·룰을 연결한 4분할 기준맵 화면",
+          "Four-pane standards map connecting facilities, review items, elements, and rules",
+        ),
+        caption: t(
+          "깊은 계층의 기준을 탐색하고 편집하는 다중 패널 화면",
+          "A multi-panel view for exploring and editing deep standards hierarchies",
+        ),
+        variant: "desktop",
+      },
+      {
+        src: "/images/projects/kcsc/03.png",
+        alt: t(
+          "KDS 설계기준 문서와 목차를 탐색하는 표준 라이브러리 화면",
+          "Standards library for browsing KDS documents and table of contents",
+        ),
+        caption: t(
+          "유형·특성·입출력변수와 함께 보는 표준 문서 목록",
+          "Standards documents shown with types, properties, and variables",
+        ),
+        variant: "desktop",
+      },
+    ],
     externalLink: "https://digital.kcsc.re.kr/home",
     demoAccess: {
       url: "https://digital.kcsc.re.kr/home",
@@ -728,7 +698,7 @@ export const projects: Project[] = [
         "Complex transportation data had to be presented and managed accurately around the administrator’s workflow.",
       ),
     ],
-    // TODO: Add a verified outcome when one is available in the source resume.
+    // TODO: Add a verified outcome when one is available in the project record.
     results: [],
     // TODO: Add verified BIMS screenshots when public sharing is permitted.
     images: [],
@@ -771,7 +741,7 @@ export const projects: Project[] = [
         "Expanded from frontend work into APIs and databases while connecting the service’s end-to-end data flow.",
       ),
     ],
-    // TODO: Add a verified outcome when one is available in the source resume.
+    // TODO: Add a verified outcome when one is available in the project record.
     results: [],
     // TODO: Add verified subscription-platform screenshots when available.
     images: [],
@@ -829,15 +799,16 @@ export const ui = {
     home: "홈",
     about: "소개",
     work: "프로젝트",
-    resume: "이력서 PDF",
     github: "GitHub",
     contact: "이메일",
     featured: "대표 프로젝트",
     featuredProjects: "주요 프로젝트",
     allProjects: "전체 프로젝트",
+    selectedWork: "선별한 작업",
     experience: "경력",
     techStack: "기술 스택",
     professionalSummary: "소개",
+    workingPrinciples: "일하는 방식",
     careerTimeline: "경력",
     technicalSkills: "기술",
     education: "학력",
@@ -849,6 +820,11 @@ export const ui = {
     viewProject: "프로젝트 열기",
     technologies: "기술",
     role: "담당 역할",
+    overview: "제품 개요",
+    problem: "문제",
+    constraints: "제약과 판단",
+    evidence: "검증 가능한 결과",
+    scope: "작업 범위",
     contributions: "주요 기여",
     challenges: "과제",
     results: "결과",
@@ -863,15 +839,16 @@ export const ui = {
     home: "Home",
     about: "About",
     work: "Work",
-    resume: "Résumé PDF",
     github: "GitHub",
     contact: "Email",
     featured: "Featured Project",
     featuredProjects: "Selected Projects",
     allProjects: "All Projects",
+    selectedWork: "Selected Work",
     experience: "Experience",
     techStack: "Tech Stack",
     professionalSummary: "Professional Summary",
+    workingPrinciples: "How I Work",
     careerTimeline: "Career Timeline",
     technicalSkills: "Technical Skills",
     education: "Education",
@@ -883,6 +860,11 @@ export const ui = {
     viewProject: "Open Project",
     technologies: "Technologies",
     role: "My Role",
+    overview: "Project Overview",
+    problem: "Problem",
+    constraints: "Constraints & Decisions",
+    evidence: "Verified Evidence",
+    scope: "Scope",
     contributions: "Key Contributions",
     challenges: "Challenges",
     results: "Results",

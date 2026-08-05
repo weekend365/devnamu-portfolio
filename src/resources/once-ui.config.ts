@@ -75,7 +75,7 @@ export const display = {
 export const schema = {
   logo: "/icon.svg",
   type: "Person",
-  name: person.name.en,
+  name: person.brand,
   description: person.summary[0].en,
   email: person.email,
 };

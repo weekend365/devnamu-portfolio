@@ -4,6 +4,12 @@ import { localize, ui } from "@/resources";
 import { localePath } from "@/utils/site-metadata";
 import { ProjectVisual } from "./ProjectVisual";
 
+export function getProjectStatusVariant(status: string): "neutral" | "info" | "success" {
+  if (/(개발|시범|phase|preparing|pilot|development)/i.test(status)) return "info";
+  if (/(완료|납품|completed|delivered|live|운영)/i.test(status)) return "success";
+  return "neutral";
+}
+
 export function ProjectCard({
   project,
   locale,
@@ -31,7 +37,7 @@ export function ProjectCard({
       gap="4"
     >
       <ProjectVisual project={project} locale={locale} priority={priority} />
-      <Column padding="m" gap="16">
+      <Column className="project-card-body" padding="m" gap="16">
         <Row fillWidth horizontal="between" vertical="start" gap="16" s={{ direction: "column" }}>
           <Column gap="4">
             <Text variant="label-strong-s" onBackground="brand-weak">
@@ -41,10 +47,13 @@ export function ProjectCard({
               {localize(project.title, locale)}
             </Heading>
           </Column>
-          <Tag size="s" variant="success">
+          <Tag size="s" variant={getProjectStatusVariant(localize(project.status, locale))}>
             {localize(project.status, locale)}
           </Tag>
         </Row>
+        <Text className="project-card-role" variant="label-default-s" onBackground="neutral-weak" wrap="balance">
+          {labels.role} · {localize(project.role, locale)}
+        </Text>
         <Text variant="body-default-m" onBackground="neutral-weak" wrap="balance">
           {localize(project.summary, locale)}
         </Text>

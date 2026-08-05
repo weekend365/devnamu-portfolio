@@ -13,20 +13,7 @@ export function PortfolioHome({ locale }: { locale: Locale }) {
   const homeSkillCategories = content.skillCategories.filter((_, index) =>
     [0, 2, 3].includes(index),
   );
-  const resumeHref =
-    locale === "ko" ? "/resume/nam-woo-hyun-ko.pdf" : "/resume/nam-woo-hyun-en.pdf";
-  const proofPoints =
-    locale === "ko"
-      ? [
-          { value: "3년+", label: "실무 제품 개발" },
-          { value: "공공 · 교통 · 구독", label: "운영·납품 도메인" },
-          { value: "Mobile · API · Admin", label: "엔드투엔드 제품 범위" },
-        ]
-      : [
-          { value: "3+ years", label: "Production development" },
-          { value: "Public · Transit · Subscription", label: "Operational domains" },
-          { value: "Mobile · API · Admin", label: "End-to-end product scope" },
-        ];
+  const projectCount = content.projects.length;
 
   return (
     <Column className="page-stack" maxWidth="l" fillWidth gap="104">
@@ -39,6 +26,7 @@ export function PortfolioHome({ locale }: { locale: Locale }) {
           mainEntity: {
             "@type": "Person",
             name: person.name[locale],
+            alternateName: person.brand,
             jobTitle: person.role[locale],
             email: `mailto:${person.email}`,
             image: `${baseURL}${person.avatar}`,
@@ -60,7 +48,7 @@ export function PortfolioHome({ locale }: { locale: Locale }) {
       >
         <Column className="hero-copy" flex={8} gap="24">
           <Text className="eyebrow" variant="label-strong-m" onBackground="brand-weak">
-            DEVNAMU · {person.name[locale]} / {person.role[locale]}
+            {person.brand} · {person.name[locale]} / {person.role[locale]}
           </Text>
           <Heading
             id="home-heading"
@@ -80,6 +68,10 @@ export function PortfolioHome({ locale }: { locale: Locale }) {
                 : "I build public, transportation, and subscription services with React and Next.js. For Jango, I connect mobile, API, admin, and deployment into one product."}
             </Text>
           </Column>
+          <Row className="hero-context" gap="8" wrap>
+            <Tag size="s">{localize(person.location, locale)}</Tag>
+            <Tag size="s">{localize(person.languages, locale)}</Tag>
+          </Row>
           <Row gap="12" wrap>
             <Button
               href={localePath(locale, "/work")}
@@ -89,8 +81,8 @@ export function PortfolioHome({ locale }: { locale: Locale }) {
             >
               {locale === "ko" ? "대표 프로젝트 보기" : "View selected work"}
             </Button>
-            <Button href={resumeHref} download variant="secondary" prefixIcon="document">
-              {labels.resume}
+            <Button href={person.github} variant="secondary" prefixIcon="github" suffixIcon="arrowUpRightFromSquare">
+              {labels.github}
             </Button>
             <Button href={`mailto:${person.email}`} variant="tertiary" prefixIcon="email">
               {labels.contact}
@@ -101,45 +93,37 @@ export function PortfolioHome({ locale }: { locale: Locale }) {
           <Media
             className="profile-image"
             src={person.avatar}
-            alt={locale === "ko" ? "남우현 프로필 사진" : "Portrait of Nam Woo-hyun"}
+            alt={locale === "ko" ? `${person.brand} ${person.name[locale]} 프로필 사진` : `Portrait of ${person.name[locale]}`}
             aspectRatio="1 / 1"
             objectFit="cover"
-            sizes="120px"
+            sizes="(max-width: 768px) 112px, 160px"
             priority
             radius="full"
-            style={{ width: "7.5rem", height: "7.5rem" }}
+            style={{ width: "10rem", height: "10rem" }}
           />
         </Column>
       </Row>
 
-      <Grid
-        as="section"
-        className="home-proof"
-        columns="3"
-        s={{ columns: 1 }}
-        gap="-1"
-        radius="l"
-        overflow="hidden"
-        aria-label={locale === "ko" ? "핵심 경력 요약" : "Career proof points"}
-      >
-        {proofPoints.map((point) => (
-          <Column
-            key={point.label}
-            className="home-proof-item"
-            background="surface"
-            border="neutral-alpha-medium"
-            padding="l"
-            gap="4"
-          >
-            <Text variant="heading-strong-m" onBackground="brand-strong">
-              {point.value}
-            </Text>
-            <Text variant="label-default-s" onBackground="neutral-weak">
-              {point.label}
-            </Text>
-          </Column>
-        ))}
-      </Grid>
+      <Row className="proof-strip" fillWidth gap="8" s={{ direction: "column" }}>
+        <Column className="proof-item" gap="4">
+          <Text variant="display-strong-s" onBackground="brand-weak">3+</Text>
+          <Text variant="label-default-s" onBackground="neutral-weak">
+            {locale === "ko" ? "제품을 만든 경력" : "years building products"}
+          </Text>
+        </Column>
+        <Column className="proof-item" gap="4">
+          <Text variant="display-strong-s">{projectCount}</Text>
+          <Text variant="label-default-s" onBackground="neutral-weak">
+            {locale === "ko" ? "공개 가능한 작업 맥락" : "selected product contexts"}
+          </Text>
+        </Column>
+        <Column className="proof-item" gap="4">
+          <Text variant="display-strong-s">01</Text>
+          <Text variant="label-default-s" onBackground="neutral-weak">
+            {locale === "ko" ? "직접 체험 가능한 라이브 데모" : "live demo you can try"}
+          </Text>
+        </Column>
+      </Row>
 
       <Column as="section" gap="40" aria-labelledby="featured-heading">
         <SectionHeading
@@ -159,22 +143,9 @@ export function PortfolioHome({ locale }: { locale: Locale }) {
         <FeaturedJango locale={locale} />
       </Column>
 
-      <Column as="section" gap="40">
-        <Row
-          fillWidth
-          horizontal="between"
-          vertical="end"
-          gap="24"
-          s={{ direction: "column", vertical: "start" }}
-        >
-          <SectionHeading
-            eyebrow={labels.featuredProjects}
-            title={
-              locale === "ko"
-                ? "업무의 복잡도를 화면으로 정리한 작업"
-                : "Turning operational complexity into usable software"
-            }
-          />
+      <Column as="section" className="home-experience" gap="40">
+        <Row fillWidth horizontal="between" vertical="end" gap="24" s={{ direction: "column", vertical: "start" }}>
+          <SectionHeading eyebrow={labels.featuredProjects} title={locale === "ko" ? "업무의 복잡도를 화면으로 정리한 작업" : "Turning operational complexity into usable software"} />
           <Button href={localePath(locale, "/work")} variant="tertiary" suffixIcon="arrowRight">
             {labels.allProjects}
           </Button>

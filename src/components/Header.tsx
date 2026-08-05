@@ -40,11 +40,11 @@ export function Header({ locale }: { locale: Locale }) {
         <SmartLink
           className="portfolio-brand"
           href={homePath}
-          aria-label={`DEVNAMU · ${person.name[locale]} · ${labels.home}`}
+          aria-label={`${person.brand} · ${person.name[locale]} · ${labels.home}`}
         >
           <Row gap="8" vertical="center">
             <Text className="portfolio-wordmark" variant="label-strong-m">
-              DEVNAMU
+              {person.brand}
             </Text>
             <Text className="portfolio-owner" variant="label-default-s" onBackground="neutral-weak">
               / {person.name[locale]}
@@ -85,7 +85,7 @@ export function Header({ locale }: { locale: Locale }) {
           <Button href={languagePath} size="s" variant="tertiary" aria-label={labels.languageLabel}>
             {labels.languageSwitch}
           </Button>
-          <ThemeToggle />
+          <ThemeToggle locale={locale} />
         </Row>
       </Row>
     </Row>

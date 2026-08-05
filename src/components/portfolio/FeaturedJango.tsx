@@ -1,4 +1,4 @@
-import { Button, Column, Heading, Media, Row, Tag, Text } from "@once-ui-system/core";
+import { Button, Column, Grid, Heading, Media, Row, Tag, Text } from "@once-ui-system/core";
 import type { Locale } from "@/resources";
 import { getProject, localize, ui } from "@/resources";
 import { localePath } from "@/utils/site-metadata";
@@ -42,24 +42,32 @@ export function FeaturedJango({ locale }: { locale: Locale }) {
             </Tag>
           ))}
         </Row>
-        <Row className="featured-proof" fillWidth gap="8" wrap>
-          <Column className="featured-proof-item" flex={1} padding="12" gap="4" radius="m">
-            <Text variant="heading-strong-m" onBackground="brand-strong">
-              약 97%
+        <Grid className="featured-facts" columns="3" s={{ columns: 1 }} gap="8" fillWidth>
+          <Column className="featured-fact" gap="4">
+            <Text variant="label-strong-s" onBackground="brand-weak">
+              {locale === "ko" ? "범위" : "Scope"}
             </Text>
-            <Text variant="label-default-xs" onBackground="neutral-weak">
-              {locale === "ko" ? "모바일 핵심 UX · 2026.07" : "Core mobile UX · Jul 2026"}
-            </Text>
-          </Column>
-          <Column className="featured-proof-item" flex={1} padding="12" gap="4" radius="m">
-            <Text variant="heading-strong-m" onBackground="brand-strong">
-              269
-            </Text>
-            <Text variant="label-default-xs" onBackground="neutral-weak">
-              {locale === "ko" ? "통과한 자동 검사" : "Automated checks passed"}
+            <Text variant="body-default-s" onBackground="neutral-weak">
+              {locale === "ko" ? "모바일 · API · 관리자 · 운영" : "Mobile · API · Admin · Ops"}
             </Text>
           </Column>
-        </Row>
+          <Column className="featured-fact" gap="4">
+            <Text variant="label-strong-s" onBackground="brand-weak">
+              {locale === "ko" ? "검증 상태" : "Validation"}
+            </Text>
+            <Text variant="body-default-s" onBackground="neutral-weak">
+              {locale === "ko" ? "모바일 핵심 UX 약 97%" : "Core mobile UX about 97%"}
+            </Text>
+          </Column>
+          <Column className="featured-fact" gap="4">
+            <Text variant="label-strong-s" onBackground="brand-weak">
+              {locale === "ko" ? "자동 검사" : "Automation"}
+            </Text>
+            <Text variant="body-default-s" onBackground="neutral-weak">
+              {locale === "ko" ? "269개 통과 · TestFlight 검증 중" : "269 passed · TestFlight validation"}
+            </Text>
+          </Column>
+        </Grid>
         <Row gap="12" wrap>
           <Button
             href={localePath(locale, "/work/jango")}

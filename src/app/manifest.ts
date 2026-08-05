@@ -1,10 +1,11 @@
 import type { MetadataRoute } from "next";
+import { person } from "@/resources";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "DEVNAMU · 남우현 포트폴리오",
-    short_name: "DEVNAMU",
-    description: "React와 Next.js로 제품의 화면부터 운영까지 만드는 DEVNAMU 남우현의 포트폴리오",
+    name: `${person.brand} · ${person.name.ko} 포트폴리오`,
+    short_name: person.brand,
+    description: `React와 Next.js로 제품의 화면부터 운영까지 만드는 ${person.brand} ${person.name.ko}의 포트폴리오`,
     lang: "ko-KR",
     start_url: "/",
     display: "standalone",

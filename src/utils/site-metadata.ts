@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { baseURL, person, type Locale } from "@/resources";
 
 const keywords = [
-  "DEVNAMU",
+  person.brand,
   "데브나무",
   "남우현",
   "Nam Woo-hyun",
@@ -15,7 +15,7 @@ const keywords = [
   "NestJS",
   "Spring Boot",
   "PostgreSQL",
-  "장고야 부탁해",
+  "제품 엔지니어링",
   "Jango",
   "ExpiryMate",
   "KCSC",
@@ -49,13 +49,14 @@ export function buildMetadata({
   const localized = localePath(locale, path);
   const koPath = localePath("ko", path);
   const enPath = localePath("en", path);
-  const fullTitle = `${title} | DEVNAMU · ${person.name[locale]}`;
-  const socialImage = image ?? {
-    url: `/images/og/portfolio-${locale}.png`,
-    width: 1200,
-    height: 630,
-    alt: `${person.name[locale]} · ${title}`,
-  };
+  const fullTitle = `${title} | ${person.brand} · ${person.name[locale]}`;
+  const socialImage =
+    image ?? {
+      url: `/images/og/portfolio-${locale}.png`,
+      width: 1200,
+      height: 630,
+      alt: `${person.brand} · ${person.name[locale]} · ${title}`,
+    };
 
   return {
     metadataBase: new URL(baseURL),
@@ -79,7 +80,7 @@ export function buildMetadata({
       url: localized,
       title: fullTitle,
       description,
-      siteName: `DEVNAMU · ${person.name[locale]} Portfolio`,
+      siteName: `${person.brand} · ${person.name[locale]} Portfolio`,
       images: [socialImage],
     },
     twitter: {

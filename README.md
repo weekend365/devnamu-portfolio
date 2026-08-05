@@ -1,6 +1,6 @@
-# Nam Woo-hyun — Portfolio
+# DEVNAMU — Portfolio
 
-남우현의 한·영 개발자 포트폴리오입니다. 한국어가 기본 경로이며 영어 콘텐츠는 `/en`에서 정적 생성됩니다. 대표 프로젝트는 **장고야 부탁해(Jango)**이고, GitHub 저장소의 기술 namespace인 `ExpiryMate`는 사례 페이지에서만 병기합니다.
+DEVNAMU(남우현)의 한·영 개발자 포트폴리오입니다. 한국어가 기본 경로이며 영어 콘텐츠는 `/en`에서 정적 생성됩니다. 대표 프로젝트는 **장고야 부탁해(Jango)**이고, GitHub 저장소의 기술 namespace인 `ExpiryMate`는 사례 페이지에서만 병기합니다.
 
 ## Local development
 
@@ -18,8 +18,6 @@ npm run lint
 npm run typecheck
 npm run build
 ```
-
-공개용 비식별 이력서는 `npm run resume:generate`로 한국어·영어 PDF를 다시 생성할 수 있습니다. 원본 이력서는 배포 자산에 포함하지 않습니다.
 
 ## Stack
 
