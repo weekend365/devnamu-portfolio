@@ -45,12 +45,17 @@ export function FeaturedJango({ locale }: { locale: Locale }) {
         <Grid className="featured-facts" columns="3" s={{ columns: 1 }} gap="8" fillWidth>
           {(project.metrics ?? []).map((metric) => (
             <Column key={metric.value + metric.label.en} className="featured-fact" gap="4">
-              <Text variant="display-strong-xs" onBackground="brand-weak">
+              <Text className="featured-fact-value" variant="display-strong-xs" onBackground="brand-weak">
                 {metric.value}
               </Text>
               <Text variant="body-default-s" onBackground="neutral-weak">
                 {localize(metric.label, locale)}
               </Text>
+              {metric.note && (
+                <Text variant="label-default-xs" onBackground="neutral-weak" wrap="balance">
+                  {localize(metric.note, locale)}
+                </Text>
+              )}
             </Column>
           ))}
         </Grid>
@@ -84,7 +89,7 @@ export function FeaturedJango({ locale }: { locale: Locale }) {
       >
         <Media
           className="featured-app-screen"
-          src="/images/projects/jango/01.png"
+          src="/images/projects/jango/01.webp"
           alt={
             locale === "ko"
               ? "장고야 부탁해 홈 대시보드 앱스토어 스크린샷"

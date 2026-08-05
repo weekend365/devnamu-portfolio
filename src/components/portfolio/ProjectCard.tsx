@@ -15,15 +15,60 @@ export function ProjectCard({
   locale,
   priority = false,
   headingLevel = "h2",
+  variant = "default",
 }: {
   project: Project;
   locale: Locale;
   priority?: boolean;
   headingLevel?: "h2" | "h3";
+  variant?: "default" | "compact";
 }) {
   const labels = ui[locale];
   const hasVisual = Boolean(project.images[0]);
   const evidence = project.results[0] ?? project.outcome;
+
+  if (variant === "compact") {
+    return (
+      <Column
+        as="article"
+        className={`project-card project-card-compact${hasVisual ? "" : " project-card-evidence"}`}
+        fillWidth
+        background="surface"
+        border="neutral-alpha-medium"
+        radius="l"
+        padding="8"
+        gap="4"
+      >
+        <ProjectVisual project={project} locale={locale} priority={priority} />
+        <Column className="project-card-body" padding="m" gap="12">
+          <Row fillWidth horizontal="between" vertical="start" gap="12">
+            <Column gap="4">
+              <Text variant="label-strong-s" onBackground="brand-weak">
+                {localize(project.company, locale)}
+              </Text>
+              <Heading as={headingLevel} variant="heading-strong-l" wrap="balance">
+                {localize(project.title, locale)}
+              </Heading>
+            </Column>
+            <Tag size="s" variant={getProjectStatusVariant(localize(project.status, locale))}>
+              {localize(project.status, locale)}
+            </Tag>
+          </Row>
+          <Text className="project-card-role" variant="label-default-s" onBackground="neutral-weak" wrap="balance">
+            {labels.role} · {localize(project.role, locale)}
+          </Text>
+          <Button
+            href={localePath(locale, `/work/${project.slug}`)}
+            size="s"
+            variant="tertiary"
+            suffixIcon="arrowRight"
+          >
+            {labels.caseStudy}
+          </Button>
+        </Column>
+      </Column>
+    );
+  }
 
   return (
     <Column

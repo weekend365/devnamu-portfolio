@@ -4,7 +4,7 @@ import { buildMetadata } from "@/utils/site-metadata";
 
 export const metadata = buildMetadata({
   locale: "en",
-  title: "Frontend · Full-stack Developer",
+  title: "Product-minded Frontend Developer",
   description: `${person.brand} builds public, transportation, and subscription services with React and Next.js—and takes Jango from mobile UI through operations.`,
 });
 

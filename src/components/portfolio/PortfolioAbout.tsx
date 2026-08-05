@@ -16,7 +16,7 @@ export function PortfolioAbout({ locale }: { locale: Locale }) {
   const labels = content.navigation;
 
   return (
-    <Column className="page-stack about-page" maxWidth="m" fillWidth gap="104">
+    <Column className="page-stack about-page" maxWidth="m" fillWidth gap="80">
       <Row
         as="header"
         fillWidth

@@ -10,11 +10,25 @@ import { StructuredData } from "./StructuredData";
 
 function DetailList({ items, locale }: { items: Project["contributions"]; locale: Locale }) {
   return (
-    <Column as="ul" gap="16" paddingLeft="24">
-      {items.map((item) => (
-        <Text as="li" key={item.en} variant="body-default-m" onBackground="neutral-medium">
-          {localize(item, locale)}
-        </Text>
+    <Column as="ol" className="detail-list" gap="12" paddingLeft="0">
+      {items.map((item, index) => (
+        <Column
+          as="li"
+          className="detail-list-item"
+          key={item.en}
+          background="surface"
+          border="neutral-alpha-medium"
+          radius="l"
+          padding="m"
+          gap="8"
+        >
+          <Text variant="label-strong-s" onBackground="brand-weak">
+            0{index + 1}
+          </Text>
+          <Text variant="body-default-m" onBackground="neutral-medium">
+            {localize(item, locale)}
+          </Text>
+        </Column>
       ))}
     </Column>
   );
@@ -60,7 +74,7 @@ export function PortfolioProject({ project, locale }: { project: Project; locale
   const projectTitle = localize(project.title, locale);
 
   return (
-    <Column className="page-stack project-page" maxWidth="m" fillWidth gap="104">
+    <Column className="page-stack project-page" maxWidth="m" fillWidth gap="64">
       <StructuredData
         data={{
           "@context": "https://schema.org",
@@ -100,7 +114,7 @@ export function PortfolioProject({ project, locale }: { project: Project; locale
             {locale === "ko" ? "저장소 이름" : "Repository namespace"} · {project.technicalName}
           </Text>
         )}
-        <Column maxWidth="s" gap="12">
+        <Column className="project-summary" maxWidth="s" gap="12">
           <Text variant="heading-default-l" onBackground="neutral-weak" wrap="balance">
             {localize(project.summary, locale)}
           </Text>
@@ -130,7 +144,13 @@ export function PortfolioProject({ project, locale }: { project: Project; locale
         </Row>
       </Column>
 
-      <Grid className="project-story-grid" columns="3" s={{ columns: 1 }} gap="12">
+      <Grid
+        className="project-story-grid"
+        columns="3"
+        s={{ columns: 1 }}
+        gap="12"
+        aria-label={locale === "ko" ? "프로젝트 요약" : "Project summary"}
+      >
         <StorySignal label={labels.problem} value={localize(project.problem, locale)} />
         <StorySignal label={labels.constraints}>
           <Text variant="body-default-m" onBackground="neutral-medium">
@@ -238,7 +258,7 @@ export function PortfolioProject({ project, locale }: { project: Project; locale
         )}
       </Row>
 
-      <Column as="article" className="article-copy case-study-content" gap="64">
+      <Column as="article" className="article-copy case-study-content" gap="48">
         <Column as="section" id="project-overview" className="case-study-section" gap="24">
           <SectionHeading
             eyebrow={labels.overview}
@@ -303,7 +323,13 @@ export function PortfolioProject({ project, locale }: { project: Project; locale
         <SectionHeading title={labels.related} />
         <Grid columns="2" s={{ columns: 1 }} gap="24">
           {related.map((item) => (
-            <ProjectCard key={item.slug} project={item} locale={locale} headingLevel="h3" />
+            <ProjectCard
+              key={item.slug}
+              project={item}
+              locale={locale}
+              headingLevel="h3"
+              variant="compact"
+            />
           ))}
         </Grid>
       </Column>

@@ -7,7 +7,7 @@ const keywords = [
   "남우현",
   "Nam Woo-hyun",
   "프론트엔드 개발자",
-  "풀스택 개발자",
+  "제품형 프론트엔드 개발자",
   "React",
   "Next.js",
   "TypeScript",

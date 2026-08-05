@@ -8,7 +8,7 @@ export function PortfolioWork({ locale }: { locale: Locale }) {
   const otherProjects = content.projects.filter((project) => !project.featured);
 
   return (
-    <Column className="page-stack work-page" maxWidth="l" fillWidth gap="80">
+    <Column className="page-stack work-page" maxWidth="l" fillWidth gap="64">
       <Column as="header" maxWidth="s" gap="16">
         <Text className="eyebrow" variant="label-strong-m" onBackground="brand-weak">{content.navigation.work}</Text>
         <Heading as="h1" className="hero-name" variant="display-strong-l" wrap="balance">
@@ -20,7 +20,14 @@ export function PortfolioWork({ locale }: { locale: Locale }) {
       </Column>
       {featuredProject && (
         <Column as="section" className="work-featured" gap="24">
-          <Row fillWidth horizontal="between" vertical="end" gap="16" s={{ direction: "column", vertical: "start" }}>
+          <Row
+            className="work-section-heading"
+            fillWidth
+            horizontal="between"
+            vertical="end"
+            gap="16"
+            s={{ direction: "column", vertical: "start" }}
+          >
             <Column gap="8">
               <Text className="eyebrow" variant="label-strong-s" onBackground="brand-weak">
                 {content.navigation.featured}
@@ -37,7 +44,14 @@ export function PortfolioWork({ locale }: { locale: Locale }) {
         </Column>
       )}
       <Column as="section" className="work-selected" gap="24">
-        <Row fillWidth horizontal="between" vertical="end" gap="16" s={{ direction: "column", vertical: "start" }}>
+        <Row
+          className="work-section-heading"
+          fillWidth
+          horizontal="between"
+          vertical="end"
+          gap="16"
+          s={{ direction: "column", vertical: "start" }}
+        >
           <Column gap="8">
             <Text className="eyebrow" variant="label-strong-s" onBackground="brand-weak">
               {content.navigation.selectedWork}

@@ -64,20 +64,20 @@ export const person = {
   brand: "DEVNAMU",
   name: t("남우현", "Nam Woo-hyun"),
   role: t(
-    "제품 전체 흐름을 이해하는 프론트엔드 개발자",
-    "Frontend developer with end-to-end product ownership",
+    "제품형 프론트엔드 개발자",
+    "Product-minded frontend developer",
   ),
   email: "skadngus14@naver.com",
   github: "https://github.com/weekend365",
   portfolio: "https://portfolio-kohl-one-78.vercel.app",
   location: t("인천, 대한민국", "Incheon, South Korea"),
   timeZone: "Asia/Seoul",
-  avatar: "/images/profile.png",
+  avatar: "/images/profile.webp",
   languages: t("한국어 · 영어", "Korean · English"),
   summary: [
     t(
-      "React와 Next.js를 중심으로 화면부터 운영까지 연결해 온 3년 경력의 프론트엔드 개발자입니다.",
-      "I am a frontend developer with three years of experience connecting product interfaces to APIs, operations, and delivery with React and Next.js.",
+      "React와 Next.js로 복잡한 도메인을 사용 가능한 화면으로 구조화하고 API·관리자·배포까지 연결해 온 3년 경력의 프론트엔드 개발자입니다.",
+      "I am a frontend developer with three years of experience turning complex domains into usable interfaces and connecting them to APIs, admin tools, and delivery with React and Next.js.",
     ),
     t(
       "GIS 기반 시설물 조회 시스템, 구독 서비스 플랫폼, BIMS(Bus Information Management System) 등 실제 운영·납품 목적의 웹 애플리케이션 개발 경험을 보유하고 있습니다.",
@@ -305,13 +305,17 @@ export const projects: Project[] = [
       "People missed expiring ingredients because tracking, recommendations, and shared spaces lived in separate flows.",
     ),
     outcome: t(
-      "모바일 핵심 UX 약 97%, API/Admin Railway 운영, iOS TestFlight 빌드 업로드 상태까지 연결했습니다.",
-      "Connected the product through roughly 97% of the core mobile UX, live API/Admin services on Railway, and an uploaded iOS TestFlight build.",
+      "iOS TestFlight 빌드와 Railway 기반 API/Admin 운영 환경을 연결하고, 269개 자동 검사를 통과한 핵심 모바일 흐름을 구축했습니다.",
+      "Connected an iOS TestFlight build with live Railway API/Admin services and a core mobile flow backed by 269 automated checks.",
     ),
     metrics: [
-      { value: "97%", label: t("모바일 핵심 UX", "Core mobile UX") },
-      { value: "269", label: t("자동 검사 통과", "Automated checks passed") },
-      { value: "01", label: t("독립 제품 운영", "Independent product") },
+      { value: "TestFlight", label: t("iOS 빌드 업로드", "iOS build uploaded") },
+      {
+        value: "269",
+        label: t("자동 검사 통과", "Automated checks passed"),
+        note: t("전체 typecheck·환경 정합성 검사 포함", "Including full typecheck and environment parity checks"),
+      },
+      { value: "Live", label: t("API/Admin Railway 운영", "API/Admin live on Railway") },
     ],
     description: [
       t(
@@ -386,8 +390,8 @@ export const projects: Project[] = [
     ],
     results: [
       t(
-        "2026-07-24 기준 모바일 핵심 UX 약 97%, API/Admin Railway 운영, iOS TestFlight 빌드 업로드 상태입니다.",
-        "As of Jul 24, 2026, core mobile UX was approximately 97% complete, API/Admin were live on Railway, and an iOS TestFlight build had been uploaded.",
+        "2026-07-24 기준 iOS TestFlight 빌드를 업로드했고 API/Admin은 Railway에서 운영 중이며, 핵심 모바일 흐름을 검증했습니다.",
+        "As of Jul 24, 2026, an iOS TestFlight build was uploaded, API/Admin were live on Railway, and the core mobile flow was validated.",
       ),
       t(
         "ESLint, 전체 typecheck, 환경 정합성 검사와 269개 자동 검사를 통과했습니다.",
@@ -401,7 +405,7 @@ export const projects: Project[] = [
     // TODO: Add final App Store / Play Store URLs when available.
     images: [
       {
-        src: "/images/projects/jango/01.png",
+        src: "/images/projects/jango/01.webp",
         alt: t(
           "오늘 만료되는 재료와 유통기한 현황, AI 추천 요리를 보여주는 장고야 부탁해 홈 화면",
           "Jango home dashboard showing ingredients expiring today, expiry status, and an AI recipe suggestion",
@@ -413,7 +417,7 @@ export const projects: Project[] = [
         variant: "mobile",
       },
       {
-        src: "/images/projects/jango/02.png",
+        src: "/images/projects/jango/02.webp",
         alt: t(
           "보관 중인 재료를 유통기한 순서로 조회하고 관리하는 장고야 부탁해 보관함 화면",
           "Jango inventory screen for browsing and managing stored ingredients by expiry date",
@@ -425,7 +429,7 @@ export const projects: Project[] = [
         variant: "mobile",
       },
       {
-        src: "/images/projects/jango/03.png",
+        src: "/images/projects/jango/03.webp",
         alt: t(
           "남은 재료를 우선 활용해 오늘의 AI 추천 요리를 보여주는 화면",
           "AI recipe recommendations prioritizing ingredients already in the refrigerator",
@@ -437,7 +441,7 @@ export const projects: Project[] = [
         variant: "mobile",
       },
       {
-        src: "/images/projects/jango/04.png",
+        src: "/images/projects/jango/04.webp",
         alt: t(
           "카메라로 상품 바코드와 유통기한을 인식하는 장고야 부탁해 스캔 화면",
           "Jango camera scanner recognizing a product barcode and its expiry date",
@@ -449,7 +453,7 @@ export const projects: Project[] = [
         variant: "mobile",
       },
       {
-        src: "/images/projects/jango/05.png",
+        src: "/images/projects/jango/05.webp",
         alt: t(
           "보관 위치와 유통기한을 확인해 식재료 등록을 완료하는 화면",
           "Guided ingredient registration flow confirming storage location and expiry date",
@@ -461,7 +465,7 @@ export const projects: Project[] = [
         variant: "mobile",
       },
       {
-        src: "/images/projects/jango/06.png",
+        src: "/images/projects/jango/06.webp",
         alt: t(
           "초대 코드로 가족이나 동료와 여러 냉장고를 공유하는 화면",
           "Jango shared refrigerator screen for managing multiple spaces with family or colleagues",
@@ -590,7 +594,7 @@ export const projects: Project[] = [
     ],
     images: [
       {
-        src: "/images/projects/kcsc/01.png",
+        src: "/images/projects/kcsc/01.webp",
         alt: t(
           "디지털 건설기준 시범운영 홈과 지원 게시판 화면",
           "KCSC pilot home and support-board dashboard",
@@ -602,7 +606,7 @@ export const projects: Project[] = [
         variant: "desktop",
       },
       {
-        src: "/images/projects/kcsc/02.png",
+        src: "/images/projects/kcsc/02.webp",
         alt: t(
           "시설물·검토항목·검토요소·룰을 연결한 4분할 기준맵 화면",
           "Four-pane standards map connecting facilities, review items, elements, and rules",
@@ -614,7 +618,7 @@ export const projects: Project[] = [
         variant: "desktop",
       },
       {
-        src: "/images/projects/kcsc/03.png",
+        src: "/images/projects/kcsc/03.webp",
         alt: t(
           "KDS 설계기준 문서와 목차를 탐색하는 표준 라이브러리 화면",
           "Standards library for browsing KDS documents and table of contents",
@@ -664,6 +668,10 @@ export const projects: Project[] = [
         "Next.js 관리자 웹과 Spring Boot API를 연결하고 교통 관리 업무 흐름을 화면에 반영했습니다.",
         "Connected a Next.js administration frontend to Spring Boot APIs and translated transportation workflows into the interface.",
       ),
+      t(
+        "공개 화면은 민감한 운영 정보를 노출하지 않도록 익명화된 개발·검증 데이터로 구성했습니다.",
+        "Public screenshots use anonymized development and validation data so sensitive operational information is not exposed.",
+      ),
     ],
     technologies: [
       "React",
@@ -686,42 +694,42 @@ export const projects: Project[] = [
     results: [],
     images: [
       {
-        src: "/images/projects/bims/01.png",
+        src: "/images/projects/bims/01.webp",
         alt: t(
           "실시간 버스 위치와 운행 이벤트를 지도에서 확인하는 BIMS 모니터링 화면",
           "BIMS monitoring map showing live bus locations and operation events",
         ),
         caption: t(
-          "지도·노선·운행 이벤트를 한 화면에서 확인하는 실시간 관제",
-          "Real-time operations view combining the map, routes, and vehicle events",
+          "익명화된 개발·검증 데이터로 지도·노선·운행 이벤트를 한 화면에서 확인하는 관제",
+          "An operations view combining anonymized map, route, and vehicle-event data",
         ),
         variant: "desktop",
         width: 1920,
         height: 945,
       },
       {
-        src: "/images/projects/bims/02.png",
+        src: "/images/projects/bims/02.webp",
         alt: t(
           "운행 현황과 돌발·위반 데이터를 보여주는 BIMS 운영 대시보드",
           "BIMS operations dashboard showing service status and incidents",
         ),
         caption: t(
-          "운행·돌발·위반 지표를 요약한 운영 대시보드",
-          "An operations dashboard summarizing service, incident, and violation signals",
+          "익명화된 운행·돌발·위반 지표를 요약한 운영 대시보드",
+          "An operations dashboard summarizing anonymized service, incident, and violation signals",
         ),
         variant: "desktop",
         width: 1920,
         height: 945,
       },
       {
-        src: "/images/projects/bims/03.png",
+        src: "/images/projects/bims/03.webp",
         alt: t(
           "최근 접속 추이와 로그인 이력을 보여주는 BIMS 관리자 화면",
           "BIMS administrator screen showing login trends and access history",
         ),
         caption: t(
-          "관리자 권한과 접속 이력을 확인하는 운영 화면",
-          "An administrative view for access trends, permissions, and login history",
+          "익명화된 접속 추이와 관리자 권한을 확인하는 운영 화면",
+          "An administrative view for anonymized access trends and permissions",
         ),
         variant: "desktop",
         width: 1920,

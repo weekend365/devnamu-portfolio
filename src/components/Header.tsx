@@ -76,6 +76,7 @@ export function Header({ locale }: { locale: Locale }) {
           <ToggleButton
             prefixIcon="home"
             href={homePath}
+            label={labels.home}
             selected={pathname === homePath}
             aria-label={labels.home}
           />
@@ -115,6 +116,7 @@ export function Header({ locale }: { locale: Locale }) {
             trigger={
               <ToggleButton
                 prefixIcon="more"
+                label={locale === "ko" ? "더보기" : "More"}
                 selected={moreOpen}
                 aria-label={locale === "ko" ? "추가 설정" : "More options"}
               />

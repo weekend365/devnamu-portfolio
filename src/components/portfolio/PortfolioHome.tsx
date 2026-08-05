@@ -11,7 +11,7 @@ export function PortfolioHome({ locale }: { locale: Locale }) {
   const labels = content.navigation;
   const secondaryProjects = content.projects.filter((project) => !project.featured).slice(0, 3);
   return (
-    <Column className="page-stack home-page" maxWidth="l" fillWidth gap="80">
+    <Column className="page-stack home-page" maxWidth="l" fillWidth gap="32">
       <StructuredData
         data={{
           "@context": "https://schema.org",
@@ -62,8 +62,8 @@ export function PortfolioHome({ locale }: { locale: Locale }) {
           <Column maxWidth={44} fillWidth>
             <Text variant="heading-default-l" onBackground="neutral-weak" wrap="balance">
               {locale === "ko"
-                ? "React와 Next.js로 공공·교통·구독 서비스를 개발해 왔습니다. 화면의 사용성뿐 아니라 API, 관리자와 배포까지 이어지는 운영 가능한 흐름을 설계합니다."
-                : "I build public, transportation, and subscription services with React and Next.js, connecting the interface to APIs, admin tools, and delivery so products can operate in the real world."}
+                ? "React와 Next.js로 공공·교통·구독 서비스를 개발해 왔습니다. 복잡한 도메인을 사용 가능한 화면으로 구조화하고 API·관리자·배포까지 연결합니다."
+                : "I build public, transportation, and subscription services with React and Next.js, turning complex domains into usable interfaces and connecting them to APIs, admin tools, and delivery."}
             </Text>
           </Column>
           <Row className="hero-context" gap="8" wrap>
@@ -79,17 +79,25 @@ export function PortfolioHome({ locale }: { locale: Locale }) {
             >
               {locale === "ko" ? "대표 프로젝트 보기" : "View selected work"}
             </Button>
-            <Button
-              href={person.github}
-              variant="secondary"
-              prefixIcon="github"
-              suffixIcon="arrowUpRightFromSquare"
-            >
-              {labels.github}
-            </Button>
-            <Button href={`mailto:${person.email}`} variant="tertiary" prefixIcon="email">
-              {labels.contact}
-            </Button>
+            <Row className="hero-secondary-actions" gap="12" wrap>
+              <Button
+                href={person.github}
+                variant="secondary"
+                prefixIcon="github"
+                suffixIcon="arrowUpRightFromSquare"
+              >
+                {labels.github}
+              </Button>
+              <Button
+                className="hero-email-button"
+                href={`mailto:${person.email}`}
+                variant="tertiary"
+                prefixIcon="email"
+                aria-label={labels.contact}
+              >
+                {labels.contact}
+              </Button>
+            </Row>
           </Row>
         </Column>
         <Column className="hero-portrait" flex={3} horizontal="center">
@@ -123,13 +131,13 @@ export function PortfolioHome({ locale }: { locale: Locale }) {
         <Column className="proof-item" gap="4">
           <Text variant="display-strong-s">{content.projects.length}</Text>
           <Text variant="label-default-s" onBackground="neutral-weak">
-            {locale === "ko" ? "공개 가능한 프로젝트 맥락" : "public project contexts"}
+            {locale === "ko" ? "프로젝트 사례" : "project case studies"}
           </Text>
         </Column>
         <Column className="proof-item" gap="4">
-          <Text variant="display-strong-s">01</Text>
+          <Text variant="display-strong-s">2</Text>
           <Text variant="label-default-s" onBackground="neutral-weak">
-            {locale === "ko" ? "독립 제품 운영" : "independent product"}
+            {locale === "ko" ? "운영·납품 사례" : "live or delivered cases"}
           </Text>
         </Column>
       </Row>
@@ -140,8 +148,8 @@ export function PortfolioHome({ locale }: { locale: Locale }) {
           eyebrow={labels.featured}
           title={
             locale === "ko"
-              ? "장고야 부탁해 — 혼자 설계하고 운영하는 모바일 제품"
-              : "Jango — a mobile product designed and operated end to end"
+              ? "장고야 부탁해 — 운영까지 연결한 모바일 제품"
+              : "Jango — a mobile product connected to operations"
           }
           description={
             locale === "ko"
@@ -180,6 +188,7 @@ export function PortfolioHome({ locale }: { locale: Locale }) {
               locale={locale}
               priority={index === 0}
               headingLevel="h3"
+              variant="compact"
             />
           ))}
         </Grid>
