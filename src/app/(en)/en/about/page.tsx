@@ -6,7 +6,7 @@ export const metadata = buildMetadata({
   locale: "en",
   path: "/about",
   title: "About & Experience",
-  description: `${person.brand}'s experience building public, transportation, and subscription services, with skills centered on React and Next.js.`,
+  description: `${person.brand}'s frontend-focused experience with React and Next.js, plus NestJS, PostgreSQL, and Spring Boot API integrations.`,
 });
 
 export default function EnglishAboutPage() {

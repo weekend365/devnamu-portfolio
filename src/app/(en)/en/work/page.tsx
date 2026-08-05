@@ -5,7 +5,7 @@ export const metadata = buildMetadata({
   locale: "en",
   path: "/work",
   title: "Projects",
-  description: "Case studies covering Jango, construction standards, bus information, subscription services, and GIS—from role to implementation details.",
+  description: "Case studies covering KCSC digital construction standards, BIMS bus information, subscription services, and GIS—from problem to implementation and outcome.",
 });
 
 export default function EnglishWorkPage() {

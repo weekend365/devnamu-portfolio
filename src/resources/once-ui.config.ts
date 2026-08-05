@@ -3,7 +3,7 @@ import { person } from "./portfolio-data";
 
 export const baseURL =
   process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ??
-  "https://portfolio-kohl-one-78.vercel.app";
+  "https://devnamu.com";
 
 export const style: StyleConfig = {
   theme: "system",

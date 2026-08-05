@@ -64,28 +64,28 @@ export const person = {
   brand: "DEVNAMU",
   name: t("남우현", "Nam Woo-hyun"),
   role: t(
-    "제품형 프론트엔드 개발자",
-    "Product-minded frontend developer",
+    "프론트엔드 중심 풀스택 개발자",
+    "Frontend-focused full-stack developer",
   ),
   email: "skadngus14@naver.com",
   github: "https://github.com/weekend365",
-  portfolio: "https://portfolio-kohl-one-78.vercel.app",
+  portfolio: "https://devnamu.com/",
   location: t("인천, 대한민국", "Incheon, South Korea"),
   timeZone: "Asia/Seoul",
   avatar: "/images/profile.webp",
   languages: t("한국어 · 영어", "Korean · English"),
   summary: [
     t(
-      "React와 Next.js로 복잡한 도메인을 사용 가능한 화면으로 구조화하고 API·관리자·배포까지 연결해 온 3년 경력의 프론트엔드 개발자입니다.",
-      "I am a frontend developer with three years of experience turning complex domains into usable interfaces and connecting them to APIs, admin tools, and delivery with React and Next.js.",
+      "React와 Next.js로 복잡한 도메인을 트리·테이블·다중 패널·지도 기반 업무 UI로 구조화하고 API·관리자·배포까지 연결해 온 3년 이상의 프론트엔드 중심 풀스택 개발자입니다.",
+      "I am a frontend-focused full-stack developer with over three years of experience turning complex domains into tree, table, multi-panel, and map-based business UIs while connecting them to APIs, admin tools, and delivery with React and Next.js.",
     ),
     t(
-      "GIS 기반 시설물 조회 시스템, 구독 서비스 플랫폼, BIMS(Bus Information Management System) 등 실제 운영·납품 목적의 웹 애플리케이션 개발 경험을 보유하고 있습니다.",
-      "My experience includes production and delivery-focused applications such as a GIS facility lookup system, a subscription service platform, and a Bus Information Management System (BIMS).",
+      "TanStack Query와 Zustand로 서버 상태와 화면 상태를 분리하고, NestJS·PostgreSQL 개발 및 Spring Boot·Java API 연동을 통해 화면 뒤의 데이터 흐름까지 함께 설계했습니다.",
+      "I separate server and UI state with TanStack Query and Zustand, and have designed data flows across the interface, NestJS and PostgreSQL development, and Spring Boot and Java API integrations.",
     ),
     t(
-      "서비스 구조와 데이터 흐름을 이해한 상태에서 프론트엔드와 백엔드의 연결 구조, 유지보수성, 사용자 경험을 함께 고려하는 개발자를 지향합니다.",
-      "I aim to understand service architecture and data flow while considering frontend–backend integration, maintainability, and user experience together.",
+      "공공기관 납품 GIS 시스템과 디지털 건설기준 시범운영 시스템을 개발하며 권한·인증 예외·파일 처리·테스트·배포 환경까지 운영 조건을 함께 고려해 왔습니다.",
+      "Through a public-sector GIS delivery and a digital construction standards pilot, I have considered operational requirements including permissions, authentication edge cases, file handling, testing, and delivery environments.",
     ),
   ],
 } as const;
@@ -93,7 +93,10 @@ export const person = {
 export const experiences: Experience[] = [
   {
     company: t("씨엔넷", "C&Net"),
-    role: t("개발부 · 주임 · 풀스택 개발자", "Associate · Full-stack Developer"),
+    role: t(
+      "개발부 · 주임 · 풀스택 개발자(프론트엔드 주력)",
+      "Associate · Full-stack Developer (Frontend-focused)",
+    ),
     period: t("2025.12 – 재직중", "Dec 2025 – Present"),
     location: t("서울", "Seoul"),
     projects: [
@@ -108,58 +111,101 @@ export const experiences: Experience[] = [
     ],
     achievements: [
       t(
-        "KCSC 디지털 건설기준 시스템의 표준문서·검토·변수 관리 프론트엔드를 개발·고도화했습니다.",
+        "KCSC 디지털 건설기준 사용자 지원 시스템에서 표준문서·검토·변수 관리 프론트엔드를 개발·고도화했습니다.",
         "Built and advanced the KCSC digital construction standards frontend for documents, reviews, and variables.",
       ),
       t(
-        "Mantine UI와 TanStack Query로 트리·테이블·매핑 도구 등 복잡한 업무 UI와 서버 상태를 구현했습니다.",
-        "Implemented complex business UIs and server state with Mantine UI and TanStack Query, including trees, tables, and mapping tools.",
+        "시설물–검토항목–검토요소–변수의 계층을 트리·테이블·다중 패널과 유형별 편집 흐름으로 구조화했습니다.",
+        "Structured the facility–review item–review element–variable hierarchy with trees, tables, multi-panel layouts, and type-aware editing flows.",
+      ),
+      t(
+        "TanStack Query와 Zustand를 활용해 Java API 서버 상태와 로컬 편집·화면 상태를 분리하고 저장·삭제·검증 이후 화면을 동기화했습니다.",
+        "Separated Java API server state from local editing and UI state with TanStack Query and Zustand, synchronizing screens after save, delete, and validation operations.",
       ),
       t(
         "BIMS 관리자 웹에서 버스·노선·운영 데이터 화면을 개발하고 Spring Boot API와 연동했습니다.",
         "Built BIMS admin screens for bus, route, and operations data, integrated with Spring Boot APIs.",
       ),
+      t(
+        "Jest와 React Testing Library, Docker·Jenkins 기반 배포 구조를 적용해 주요 업무 화면의 회귀 검증과 운영 배포 흐름을 지원했습니다.",
+        "Supported regression checks for key business screens and the delivery flow with Jest, React Testing Library, and Docker and Jenkins-based deployment.",
+      ),
     ],
   },
   {
     company: t("겟앤쇼", "Get&Show"),
-    role: t("개발부 · 주임 · 풀스택 개발자", "Associate · Full-stack Developer"),
+    role: t(
+      "개발부 · 주임 · 풀스택 개발자",
+      "Associate · Full-stack Developer",
+    ),
     period: t("2025.05 – 2025.12 · 8개월", "May 2025 – Dec 2025 · 8 months"),
     location: t("서울", "Seoul"),
-    projects: [t("자사 구독 서비스 웹·앱 플랫폼", "In-house subscription web and app platform")],
+    projects: [
+      t(
+        "자사 구독 서비스 웹·앱 플랫폼",
+        "In-house subscription web and app platform",
+      ),
+    ],
     achievements: [
       t(
-        "React·Next.js로 구독 서비스 웹 프론트엔드를 개발하고 App Router 기반 SSR·SEO를 구성했습니다.",
-        "Built the subscription service frontend with React and Next.js, including App Router SSR and SEO.",
+        "Next.js App Router와 TypeScript로 사용자 인증, 상품·서비스 정보와 구독 상태를 연결하는 사용자 화면을 개발했습니다.",
+        "Built user screens connecting authentication, product and service information, and subscription state with Next.js App Router and TypeScript.",
       ),
       t(
-        "NestJS API와 PostgreSQL 모델링에 참여하며 인증·구독·상품 등 핵심 기능을 구현했습니다.",
-        "Implemented core auth, subscription, and product flows with NestJS APIs and PostgreSQL modeling.",
+        "서버 렌더링과 메타데이터 구성을 적용해 SSR·SEO 기반 페이지 구조를 구현했습니다.",
+        "Implemented an SSR and SEO-oriented page structure with server rendering and metadata configuration.",
       ),
       t(
-        "프론트엔드 데이터 흐름과 UI/UX를 개선하고 Docker 기반 배포 환경에서 협업했습니다.",
-        "Improved frontend data flows and UX while collaborating in a Docker-based deployment environment.",
+        "NestJS로 인증·상품·구독 API와 비즈니스 로직을 개발하고 PostgreSQL 데이터 모델링과 테이블 설계에 참여했습니다.",
+        "Developed authentication, product, and subscription APIs and business logic with NestJS, and participated in PostgreSQL modeling and table design.",
+      ),
+      t(
+        "프론트엔드 화면, API와 데이터베이스 사이의 처리 흐름을 정리하고 공통 연동 구조를 개선했습니다.",
+        "Clarified the processing flow between frontend screens, APIs, and the database and improved the shared integration structure.",
+      ),
+      t(
+        "Tailwind CSS 기반 반응형 UI와 Docker 개발 환경을 구성했습니다.",
+        "Built responsive UI with Tailwind CSS and a Docker-based development environment.",
       ),
     ],
   },
   {
     company: t("케이엠아이에스㈜", "KMIS Co., Ltd."),
-    role: t("개발부 · 주임 · 프론트엔드 개발자", "Associate · Frontend Developer"),
-    period: t("2023.05 – 2025.01 · 1년 9개월", "May 2023 – Jan 2025 · 1 year 9 months"),
+    role: t(
+      "개발부 · 주임 · 프론트엔드 개발자",
+      "Associate · Frontend Developer",
+    ),
+    period: t(
+      "2023.05 – 2025.01 · 1년 9개월",
+      "May 2023 – Jan 2025 · 1 year 9 months",
+    ),
     location: t("인천", "Incheon"),
-    projects: [t("GIS 기반 시설물 조회 시스템 웹앱", "GIS-based facility lookup web application")],
+    projects: [
+      t(
+        "GIS 기반 시설물 조회 시스템 웹앱",
+        "GIS-based facility lookup web application",
+      ),
+    ],
     achievements: [
       t(
-        "React·Next.js·TypeScript로 GIS 기반 시설물 조회 웹앱을 개발했습니다.",
-        "Developed a GIS facility lookup web app with React, Next.js, and TypeScript.",
+        "React·Next.js·TypeScript 기반 GIS 웹 애플리케이션의 시설물 조회와 상세 정보 화면을 담당했습니다.",
+        "Owned facility lookup and detail screens for a GIS web application built with React, Next.js, and TypeScript.",
       ),
       t(
-        "지도 마커·팝업·상세 패널 등 위치 데이터 인터랙션과 반응형 UI를 구현했습니다.",
-        "Implemented map markers, popups, detail panels, and responsive UI for location data.",
+        "위치 데이터와 지도 마커·팝업·목록·상세 패널을 연결해 지도에서 시설물을 탐색하는 흐름을 구현했습니다.",
+        "Connected location data with map markers, popups, lists, and detail panels to implement a facility exploration flow.",
       ),
       t(
-        "한국수자원공사에 납품된 실제 운영 시스템 개발에 참여했습니다.",
-        "Contributed to a production system delivered to Korea Water Resources Corporation.",
+        "API 응답 데이터를 지도와 화면 구조에 맞게 변환하고 시설물 선택 상태가 각 화면에 일관되게 반영되도록 구성했습니다.",
+        "Transformed API responses for the map and screen models and kept facility selection state consistent across views.",
+      ),
+      t(
+        "Tailwind CSS 기반 반응형 UI와 관리 화면을 개발하고 기능 단위 이슈 대응에 참여했습니다.",
+        "Built responsive UI and management screens with Tailwind CSS and participated in feature-level issue resolution.",
+      ),
+      t(
+        "한국수자원공사에 납품되어 실제 업무 환경에서 사용되는 시스템의 개발과 운영 환경 적용에 참여했습니다.",
+        "Contributed to the development and operational rollout of a system delivered to Korea Water Resources Corporation.",
       ),
     ],
   },
@@ -168,7 +214,10 @@ export const experiences: Experience[] = [
 export const education = [
   {
     institution: t("한국방송통신대학교", "Korea National Open University"),
-    program: t("컴퓨터과학과 · 편입/졸업", "Computer Science · Transfer/Graduated"),
+    program: t(
+      "컴퓨터과학과 · 편입/졸업",
+      "Computer Science · Transfer/Graduated",
+    ),
     period: "2023.01 – 2025.08",
   },
   {
@@ -178,11 +227,6 @@ export const education = [
       "Computer Networks · Completed · Associate-degree-equivalent credit",
     ),
     period: "2021.04 – 2023.01",
-  },
-  {
-    institution: t("서일대학교", "Seoil University"),
-    program: t("정보통신과 · 자퇴", "Information and Communications · Withdrew"),
-    period: "2015.01 – 2019.03",
   },
   {
     institution: t("인천효성고등학교", "Incheon Hyosung High School"),
@@ -205,24 +249,39 @@ export const training = [
 export const certifications = [
   {
     name: t("정보처리기사", "Engineer Information Processing"),
-    detail: t("2025.09 · 최종합격 · 한국산업인력공단", "Sep 2025 · Passed · HRD Korea"),
+    detail: t(
+      "2025.09 · 최종합격 · 한국산업인력공단",
+      "Sep 2025 · Passed · HRD Korea",
+    ),
   },
   {
     name: t("SQL개발자(SQLD)", "SQL Developer (SQLD)"),
-    detail: t("2024.09 · 최종합격 · 한국데이터산업진흥원", "Sep 2024 · Passed · Korea Data Agency"),
+    detail: t(
+      "2024.09 · 최종합격 · 한국데이터산업진흥원",
+      "Sep 2024 · Passed · Korea Data Agency",
+    ),
   },
   {
     name: t("네트워크관리사 2급", "Network Administrator Level 2"),
-    detail: t("2021.12 · 최종합격 · 한국정보통신자격협회", "Dec 2021 · Passed · ICQA"),
+    detail: t(
+      "2021.12 · 최종합격 · 한국정보통신자격협회",
+      "Dec 2021 · Passed · ICQA",
+    ),
   },
   { name: t("TOEIC", "TOEIC"), detail: t("2025.10 · 835점", "Oct 2025 · 835") },
   {
     name: t("TOEIC Speaking Test", "TOEIC Speaking Test"),
-    detail: t("2025.09 · 120점 · Intermediate Mid 2", "Sep 2025 · 120 · Intermediate Mid 2"),
+    detail: t(
+      "2025.09 · 120점 · Intermediate Mid 2",
+      "Sep 2025 · 120 · Intermediate Mid 2",
+    ),
   },
   {
     name: t("1종 보통 운전면허", "Class 1 Driver’s License"),
-    detail: t("2018.04 · 최종합격 · 경찰청", "Apr 2018 · Passed · Korean National Police Agency"),
+    detail: t(
+      "2018.04 · 최종합격 · 경찰청",
+      "Apr 2018 · Passed · Korean National Police Agency",
+    ),
   },
 ];
 
@@ -294,8 +353,14 @@ export const projects: Project[] = [
       "제품 설계 · 모바일 · 백엔드 · 관리자 · 인프라",
       "Product · Mobile · Backend · Admin · Infrastructure",
     ),
-    period: t("2026 · 스토어 제출 준비", "2026 · Preparing for store submission"),
-    status: t("Phase 2 · 스토어 제출 준비", "Phase 2 · Store submission preparation"),
+    period: t(
+      "2026 · 스토어 제출 준비",
+      "2026 · Preparing for store submission",
+    ),
+    status: t(
+      "Phase 2 · 스토어 제출 준비",
+      "Phase 2 · Store submission preparation",
+    ),
     summary: t(
       "냉장고 식재료와 생활용품의 유통기한을 관리하고, 임박 식재료를 우선 활용하는 AI 레시피를 추천하는 서비스입니다.",
       "An ingredient and household inventory service that tracks expiry dates and recommends AI-generated recipes prioritizing items that expire soon.",
@@ -309,13 +374,22 @@ export const projects: Project[] = [
       "Connected an iOS TestFlight build with live Railway API/Admin services and a core mobile flow backed by 269 automated checks.",
     ),
     metrics: [
-      { value: "TestFlight", label: t("iOS 빌드 업로드", "iOS build uploaded") },
+      {
+        value: "TestFlight",
+        label: t("iOS 빌드 업로드", "iOS build uploaded"),
+      },
       {
         value: "269",
         label: t("자동 검사 통과", "Automated checks passed"),
-        note: t("전체 typecheck·환경 정합성 검사 포함", "Including full typecheck and environment parity checks"),
+        note: t(
+          "전체 typecheck·환경 정합성 검사 포함",
+          "Including full typecheck and environment parity checks",
+        ),
       },
-      { value: "Live", label: t("API/Admin Railway 운영", "API/Admin live on Railway") },
+      {
+        value: "Live",
+        label: t("API/Admin Railway 운영", "API/Admin live on Railway"),
+      },
     ],
     description: [
       t(
@@ -470,7 +544,10 @@ export const projects: Project[] = [
           "초대 코드로 가족이나 동료와 여러 냉장고를 공유하는 화면",
           "Jango shared refrigerator screen for managing multiple spaces with family or colleagues",
         ),
-        caption: t("가족·동료와 함께 관리하는 공유 공간", "Shared spaces for households and teams"),
+        caption: t(
+          "가족·동료와 함께 관리하는 공유 공간",
+          "Shared spaces for households and teams",
+        ),
         variant: "mobile",
       },
     ],
@@ -487,7 +564,10 @@ export const projects: Project[] = [
       "KCSC Digital Construction Standards Pilot Support System",
     ),
     company: t("씨엔넷", "C&Net"),
-    role: t("프론트엔드 개발·UX 고도화", "Frontend Development & UX Enhancement"),
+    role: t(
+      "프론트엔드 개발·UX 고도화",
+      "Frontend Development & UX Enhancement",
+    ),
     period: t("2025.12 – 재직중", "Dec 2025 – Present"),
     status: t("시범운영 · 2026.08 기준", "Pilot operation · Aug 2026"),
     summary: t(
@@ -646,7 +726,10 @@ export const projects: Project[] = [
     startedAt: "2025-12",
     endedAt: null,
     locale: ["ko", "en"],
-    title: t("BIMS 버스 정보 관리 시스템", "BIMS Bus Information Management System"),
+    title: t(
+      "BIMS 버스 정보 관리 시스템",
+      "BIMS Bus Information Management System",
+    ),
     company: t("씨엔넷", "C&Net"),
     role: t("풀스택 개발", "Full-stack Development"),
     period: t("2025.12 – 재직중", "Dec 2025 – Present"),
@@ -660,8 +743,8 @@ export const projects: Project[] = [
       "Bus, route, and operational events were spread across views, making it difficult for administrators to work in sequence.",
     ),
     outcome: t(
-      "Next.js 관리자 화면과 Spring Boot API를 연결해 버스·노선·운영 데이터의 조회·수정 흐름을 구현했습니다.",
-      "Connected the Next.js admin interface to Spring Boot APIs for reliable bus, route, and operations data workflows.",
+      "Next.js 관리자 화면과 Spring Boot API를 연결해 버스·노선·운영 데이터의 조회·수정 흐름을 구현하고, 지도 관제·운영 대시보드·접속 이력 화면으로 업무 범위를 확장했습니다.",
+      "Connected the Next.js admin interface to Spring Boot APIs for bus, route, and operations workflows, extending the scope to map monitoring, operations dashboards, and access history.",
     ),
     description: [
       t(
@@ -683,15 +766,48 @@ export const projects: Project[] = [
       "Mantine",
       "Git",
     ],
-    contributions: experiences[0].achievements.slice(9),
-    challenges: [
+    contributions: [
       t(
-        "교통·관리 도메인의 다양한 데이터를 사용자의 업무 흐름에 맞게 정확히 조회하고 관리해야 했습니다.",
-        "Complex transportation data had to be presented and managed accurately around the administrator’s workflow.",
+        "버스·노선·운영 데이터를 조회하고 관리하는 Next.js 기반 관리자 화면을 개발하고 Spring Boot API와 연동했습니다.",
+        "Built Next.js admin screens for viewing and managing bus, route, and operations data and integrated them with Spring Boot APIs.",
+      ),
+      t(
+        "버스 위치와 운행 이벤트를 지도에서 확인하는 모니터링 화면과 운행·돌발·위반 현황 대시보드를 구현했습니다.",
+        "Implemented a monitoring screen for bus locations and operation events on a map, along with dashboards for operations, incidents, and violations.",
+      ),
+      t(
+        "API 요청·응답 데이터를 화면 모델로 변환하고 교통 관리 업무 흐름을 테이블·지도·상세 화면에 반영했습니다.",
+        "Transformed API request and response data into screen models and reflected transportation workflows in table, map, and detail views.",
+      ),
+      t(
+        "접속 추이, 로그인 이력과 관리자 권한을 확인하는 운영 화면을 구현했습니다.",
+        "Implemented operations screens for access trends, login history, and administrator permissions.",
+      ),
+      t(
+        "Mantine과 Tailwind CSS 기반 공통 UI를 적용하고 Git 기반 코드 리뷰와 이슈 대응에 참여했습니다.",
+        "Applied shared UI built with Mantine and Tailwind CSS and participated in Git-based code reviews and issue resolution.",
       ),
     ],
-    // Outcome metrics are intentionally omitted until the current operational scope is verified.
-    results: [],
+    challenges: [
+      t(
+        "버스·노선·운영 이벤트가 서로 다른 화면과 API에 흩어져 있어 관리자가 업무 순서대로 확인할 수 있는 화면 흐름으로 묶어야 했습니다.",
+        "Bus, route, and operational events were spread across different views and APIs, so they had to be connected into a workflow administrators could follow.",
+      ),
+      t(
+        "지도·테이블·상세 화면마다 API 데이터 구조가 달라 화면 모델로 변환하면서 조회·수정 상태를 일관되게 유지해야 했습니다.",
+        "Map, table, and detail views required different API data shapes, so screen models had to preserve consistent view and edit state.",
+      ),
+    ],
+    results: [
+      t(
+        "버스·노선·운영 데이터의 조회·수정 흐름과 지도 관제, 운영 대시보드, 접속 이력 화면을 개발 중인 관리자 시스템에 반영했습니다.",
+        "Added bus, route, and operations workflows, map monitoring, operations dashboards, and access history screens to the admin system under development.",
+      ),
+      t(
+        "익명화된 개발·검증 데이터로 민감한 운영 정보를 노출하지 않는 프로젝트 사례를 구성했습니다.",
+        "Prepared the project case study with anonymized development and validation data without exposing sensitive operational information.",
+      ),
+    ],
     images: [
       {
         src: "/images/projects/bims/01.webp",
@@ -761,8 +877,12 @@ export const projects: Project[] = [
     ),
     description: [
       t(
-        "프론트엔드 화면부터 NestJS API와 PostgreSQL 데이터 설계까지 서비스 전반을 개발했습니다.",
-        "Worked across the service from frontend screens to NestJS APIs and PostgreSQL data design.",
+        "자사 구독 서비스의 사용자 화면과 관리 기능을 개발하며 프론트엔드 화면부터 NestJS API와 PostgreSQL 데이터 설계까지 서비스 전반에 참여했습니다.",
+        "Worked across the in-house subscription service, from user screens and administration to NestJS APIs and PostgreSQL data design.",
+      ),
+      t(
+        "인증·상품·구독 상태가 하나의 사용자 여정으로 이어지도록 화면과 API의 데이터 흐름을 정리했습니다.",
+        "Clarified the data flow between screens and APIs so authentication, product information, and subscription state form one user journey.",
       ),
     ],
     technologies: [
@@ -776,15 +896,48 @@ export const projects: Project[] = [
       "Docker",
       "Git",
     ],
-    contributions: experiences[1].achievements,
-    challenges: [
+    contributions: [
       t(
-        "프론트엔드 중심 업무에서 API와 데이터베이스까지 범위를 확장하며 서비스 전체 데이터 흐름을 연결했습니다.",
-        "Expanded from frontend work into APIs and databases while connecting the service’s end-to-end data flow.",
+        "Next.js App Router와 TypeScript로 사용자 인증, 상품·서비스 정보와 구독 상태를 연결하는 사용자 화면을 개발했습니다.",
+        "Built user screens connecting authentication, product and service information, and subscription state with Next.js App Router and TypeScript.",
+      ),
+      t(
+        "서버 렌더링과 메타데이터 구성을 적용해 SSR·SEO 기반 페이지 구조를 구현했습니다.",
+        "Implemented an SSR and SEO-oriented page structure with server rendering and metadata configuration.",
+      ),
+      t(
+        "NestJS로 인증·상품·구독 API와 비즈니스 로직을 개발하고 PostgreSQL 데이터 모델링과 테이블 설계에 참여했습니다.",
+        "Developed authentication, product, and subscription APIs and business logic with NestJS, and participated in PostgreSQL modeling and table design.",
+      ),
+      t(
+        "프론트엔드 화면, API와 데이터베이스 사이의 처리 흐름을 정리하고 공통 연동 구조를 개선했습니다.",
+        "Clarified the processing flow between frontend screens, APIs, and the database and improved the shared integration structure.",
+      ),
+      t(
+        "Tailwind CSS 기반 반응형 UI와 Docker 개발 환경을 구성했습니다.",
+        "Built responsive UI with Tailwind CSS and a Docker-based development environment.",
       ),
     ],
-    // TODO: Add a verified outcome when one is available in the project record.
-    results: [],
+    challenges: [
+      t(
+        "인증·상품·구독 상태가 서로 다른 화면과 API에 흩어지지 않도록 하나의 사용자 여정과 데이터 흐름으로 연결해야 했습니다.",
+        "Authentication, product information, and subscription state had to behave as one user journey and data flow across screens and APIs.",
+      ),
+      t(
+        "프론트엔드 중심 업무에서 API와 데이터베이스까지 범위를 확장하면서 각 계층의 책임과 연동 지점을 정리해야 했습니다.",
+        "Expanding from frontend work into APIs and databases required clear responsibilities and integration points across each layer.",
+      ),
+    ],
+    results: [
+      t(
+        "인증·상품·구독의 핵심 흐름을 React·Next.js 화면, NestJS API와 PostgreSQL 모델이 연결된 구조로 구현했습니다.",
+        "Implemented the core authentication, product, and subscription flows through connected React and Next.js screens, NestJS APIs, and PostgreSQL models.",
+      ),
+      t(
+        "프론트엔드 중심 업무에서 API와 데이터베이스까지 범위를 확장하며 서비스 전체 데이터 흐름을 경험했습니다.",
+        "Expanded from frontend-focused work into APIs and databases while working across the service’s end-to-end data flow.",
+      ),
+    ],
     // TODO: Add verified subscription-platform screenshots when available.
     images: [],
   },
@@ -812,8 +965,12 @@ export const projects: Project[] = [
     ),
     description: [
       t(
-        "React, Next.js, TypeScript로 지도 기반 조회와 상세 정보 UI를 담당했습니다.",
-        "Built map-based lookup and detail interfaces with React, Next.js, and TypeScript.",
+        "한국수자원공사에 납품된 GIS 기반 시설물 조회 시스템으로, 지도 기반 시설물 탐색과 상세 정보 확인을 위한 프론트엔드 화면을 담당했습니다.",
+        "A GIS facility lookup system delivered to Korea Water Resources Corporation, where I owned frontend screens for map-based exploration and detail viewing.",
+      ),
+      t(
+        "위치 데이터, 마커, 목록과 상세 패널이 연결되는 탐색 흐름을 구성해 지도와 시설물 정보를 한 화면에서 확인할 수 있도록 했습니다.",
+        "Connected location data, markers, lists, and detail panels so users could understand facilities and their locations in one exploration flow.",
       ),
     ],
     technologies: [
@@ -826,17 +983,46 @@ export const projects: Project[] = [
       "CSS3",
       "Git",
     ],
-    contributions: experiences[2].achievements,
+    contributions: [
+      t(
+        "React·Next.js·TypeScript 기반 GIS 웹 애플리케이션의 시설물 조회와 상세 정보 화면을 담당했습니다.",
+        "Owned facility lookup and detail screens for a GIS web application built with React, Next.js, and TypeScript.",
+      ),
+      t(
+        "위치 데이터와 지도 마커·팝업·목록·상세 패널을 연결해 지도에서 시설물을 탐색하는 흐름을 구현했습니다.",
+        "Connected location data with map markers, popups, lists, and detail panels to implement a facility exploration flow.",
+      ),
+      t(
+        "API 응답 데이터를 지도와 화면 구조에 맞게 변환하고 시설물 선택 상태가 각 화면에 일관되게 반영되도록 구성했습니다.",
+        "Transformed API responses for the map and screen models and kept facility selection state consistent across views.",
+      ),
+      t(
+        "Tailwind CSS 기반 반응형 UI와 관리 화면을 개발하고 기능 단위 이슈 대응에 참여했습니다.",
+        "Built responsive UI and management screens with Tailwind CSS and participated in feature-level issue resolution.",
+      ),
+      t(
+        "한국수자원공사에 납품되어 실제 업무 환경에서 사용되는 시스템의 개발과 운영 환경 적용에 참여했습니다.",
+        "Contributed to the development and operational rollout of a system delivered to Korea Water Resources Corporation.",
+      ),
+    ],
     challenges: [
       t(
-        "위치 데이터, 마커, 팝업과 상세 패널이 연결되는 일반 웹보다 복잡한 지도 인터랙션을 구현했습니다.",
-        "Implemented map interactions connecting location data, markers, popups, and detail panels.",
+        "시설물 위치와 상세 정보를 지도·목록·상세 패널 사이에서 확인할 때 선택 상태와 현재 맥락이 끊기지 않도록 해야 했습니다.",
+        "Selection state and context had to remain intact as users moved between the map, list, and detail panel to inspect facility locations and information.",
+      ),
+      t(
+        "위치 데이터와 시설물 상세 API 응답을 지도와 화면 구조에 맞게 변환하면서 다양한 화면의 표시 상태를 일관되게 유지해야 했습니다.",
+        "Location data and facility detail responses had to be transformed for the map and screen structures while keeping display state consistent across views.",
       ),
     ],
     results: [
       t(
-        "한국수자원공사에 납품되어 실제 업무 환경에서 사용되는 시스템 개발에 참여했습니다.",
-        "Contributed to a system delivered to Korea Water Resources Corporation for real operational use.",
+        "지도 마커·팝업·목록·상세 패널을 연결한 GIS 업무 UI를 구현했습니다.",
+        "Implemented a GIS business UI connecting map markers, popups, lists, and detail panels.",
+      ),
+      t(
+        "한국수자원공사에 납품되어 실제 업무 환경에서 사용되는 시스템의 개발과 운영 환경 적용에 참여했습니다.",
+        "Contributed to the development and operational rollout of a system delivered to Korea Water Resources Corporation for real operational use.",
       ),
     ],
     // TODO: Add verified GIS project screenshots when public sharing is permitted.
@@ -851,8 +1037,8 @@ export const pageCopy = {
       "I turn complex operations into products people can use.",
     ),
     summary: t(
-      "3년간 React와 Next.js로 공공·교통·구독 제품을 만들었습니다. 화면 설계부터 API·관리자·배포까지 제품의 흐름을 연결합니다.",
-      "For three years, I’ve built public, transportation, and subscription products with React and Next.js—connecting interface decisions to APIs, admin tools, and delivery.",
+      "3년 이상 React와 Next.js로 공공·교통·구독 제품을 만들었습니다. 복잡한 업무 UI를 설계하고 API·데이터·관리자·배포까지 제품의 흐름을 연결합니다.",
+      "For over three years, I’ve built public, transportation, and subscription products with React and Next.js—connecting complex business UIs to APIs, data, admin tools, and delivery.",
     ),
     proofYears: t("제품 개발 경력", "years in product"),
     proofProjects: t("프로젝트 사례", "case studies"),
@@ -889,8 +1075,8 @@ export const pageCopy = {
       "Products built. Operations improved.",
     ),
     summary: t(
-      "개인 제품부터 공공·교통·구독 서비스까지, 맡은 역할과 구현 결과를 검증 가능한 사실로 정리했습니다.",
-      "A factual record of what I owned and delivered across an independent product, public systems, transportation, and subscriptions.",
+      "개인 제품부터 공공·교통·구독 서비스까지, 복잡한 업무 흐름을 화면·API·데이터 구조로 구현한 과정과 결과를 정리했습니다.",
+      "A record of how I turned complex workflows into interfaces, APIs, and data structures across an independent product, public systems, transportation, and subscriptions.",
     ),
     featuredTitle: t(
       "현재 가장 깊이 관여하고 있는 제품",
@@ -907,15 +1093,24 @@ export const pageCopy = {
       "I turn understood problems into operable products.",
     ),
     summary: t(
-      "사용자가 보는 화면과 그 뒤의 데이터·API·운영 환경을 함께 이해하는 제품형 프론트엔드 개발자입니다.",
-      "I’m a product-minded frontend developer who connects the interface people use with the data, APIs, and operations behind it.",
+      "사용자가 보는 화면과 그 뒤의 데이터·API·운영 환경을 함께 이해하고 연결하는 프론트엔드 중심 풀스택 개발자입니다.",
+      "I’m a frontend-focused full-stack developer who connects the interface people use with the data, APIs, and operations behind it.",
     ),
     proofYears: t("제품 개발 경력", "years in product"),
     proofDomains: t("도메인 경험", "product domains"),
     proofLanguages: t("업무 언어", "working languages"),
-    capabilitiesTitle: t("제품을 끝까지 연결하는 역량", "Capabilities across the product lifecycle"),
-    credentialsTitle: t("학력·교육·자격", "Education, training, and credentials"),
-    contactTitle: t("함께 만들 제품에 대해 이야기해 주세요", "Tell me about the product you’re building"),
+    capabilitiesTitle: t(
+      "제품을 끝까지 연결하는 역량",
+      "Capabilities across the product lifecycle",
+    ),
+    credentialsTitle: t(
+      "학력·교육·자격",
+      "Education, training, and credentials",
+    ),
+    contactTitle: t(
+      "함께 만들 제품에 대해 이야기해 주세요",
+      "Tell me about the product you’re building",
+    ),
     contactBody: t(
       "채용이나 협업에 관해 공유할 내용이 있다면 이메일로 연락해 주세요.",
       "If you have a role or collaboration in mind, I’d be glad to hear from you.",
