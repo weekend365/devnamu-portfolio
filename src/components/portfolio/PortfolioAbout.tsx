@@ -124,6 +124,24 @@ export function PortfolioAbout({ locale }: { locale: Locale }) {
         </Column>
       </Row>
 
+      <Column as="section" gap="32">
+        <SectionHeading
+          eyebrow={localize(copy.aiIntroductionEyebrow, locale)}
+          title={localize(copy.aiIntroductionTitle, locale)}
+        />
+        <Column maxWidth="s" fillWidth gap="16">
+          {copy.aiIntroduction.map((paragraph) => (
+            <Text
+              key={paragraph.en}
+              variant="body-default-l"
+              onBackground="neutral-medium"
+            >
+              {localize(paragraph, locale)}
+            </Text>
+          ))}
+        </Column>
+      </Column>
+
       <Column as="section" gap="40">
         <SectionHeading title={labels.careerTimeline} />
         <Column gap="48">

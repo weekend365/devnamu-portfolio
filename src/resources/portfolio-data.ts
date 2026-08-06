@@ -1099,6 +1099,25 @@ export const pageCopy = {
     proofYears: t("제품 개발 경력", "years in product"),
     proofDomains: t("도메인 경험", "product domains"),
     proofLanguages: t("업무 언어", "working languages"),
+    aiIntroductionEyebrow: t("AI 활용", "Working with AI"),
+    aiIntroductionTitle: t(
+      "AI를 활용해 더 빠르게 이해하고, 끝까지 검증합니다",
+      "I use AI to understand faster and verify the result end to end",
+    ),
+    aiIntroduction: [
+      t(
+        "저는 AI를 단순한 코드 생성기가 아니라 문제를 빠르게 이해하고 구현의 불확실성을 줄이는 개발 도구로 활용합니다. 코드베이스 분석, 변경 영향 범위 파악, 리팩터링 대안 검토와 테스트 시나리오 정리에 AI를 사용하되, 생성된 결과는 타입·테스트·실행 환경을 통해 직접 확인하고 최종 판단은 개발자가 책임져야 한다고 생각합니다.",
+        "I use AI not simply as a code generator, but as an engineering tool for understanding problems faster and reducing implementation uncertainty. I apply it to codebase analysis, change-impact discovery, refactoring alternatives, and test-scenario planning, then verify the result through types, tests, and the actual runtime environment while retaining responsibility for the final decision.",
+      ),
+      t(
+        "씨엔넷의 KCSC 디지털 건설기준 시스템에서는 시설물·검토항목·검토요소·변수로 이어지는 복잡한 계층과 Java API 연동 구조를 다뤘습니다. AI 개발 도구로 관련 코드와 변경 지점을 탐색하고 리팩터링 방향과 예외 시나리오를 검토했으며, 실제 구현에서는 TanStack Query와 Zustand로 서버 상태와 편집 상태를 분리했습니다. 권한·계층 편집·데이터 변환 흐름은 Jest와 React Testing Library로 검증하고 Docker·Jenkins 배포 환경까지 연결했습니다.",
+        "On C&Net's KCSC digital construction standards system, I worked with a complex hierarchy spanning facilities, review items, review elements, and variables, together with Java API integrations. I used AI development tools to explore related code and change points and to review refactoring directions and edge cases. In the implementation, I separated server and editing state with TanStack Query and Zustand, verified permissions, hierarchical editing, and data transformation with Jest and React Testing Library, and supported delivery through Docker and Jenkins.",
+      ),
+      t(
+        "개인 프로젝트 ‘장고야 부탁해’에서는 AI를 사용자 가치와 운영 조건까지 포함한 제품 기능으로 구현했습니다. 재고 snapshot과 유통기한을 OpenAI Responses API에 연결해 임박 재료를 우선 활용하는 레시피를 추천하고, AI 이용 동의·철회와 추천 기록 삭제 흐름을 함께 설계했습니다. ML Kit 기반 OCR, NestJS API, Next.js 관리자와 Sentry 모니터링을 하나의 모노레포로 연결했으며, 269개 자동 검사를 통과한 뒤 iOS TestFlight 빌드와 Railway 운영 환경에서 핵심 흐름을 검증하고 있습니다.",
+        "In my personal project Jango, I turned AI into a product capability that accounts for both user value and operational requirements. Inventory snapshots and expiry dates are sent through the OpenAI Responses API to recommend recipes that prioritize ingredients expiring soon, with consent, withdrawal, and recommendation-history deletion designed into the same flow. I connected ML Kit OCR, NestJS APIs, a Next.js admin, and Sentry monitoring in one monorepo, passed 269 automated checks, and am validating the core flow through an iOS TestFlight build and live Railway environments.",
+      ),
+    ],
     capabilitiesTitle: t(
       "제품을 끝까지 연결하는 역량",
       "Capabilities across the product lifecycle",
