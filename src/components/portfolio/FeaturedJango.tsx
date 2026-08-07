@@ -83,6 +83,15 @@ export function FeaturedJango({ locale }: { locale: Locale }) {
           >
             {labels.viewGithub}
           </Button>
+          {project.externalLink && (
+            <Button
+              href={project.externalLink}
+              variant="secondary"
+              suffixIcon="arrowUpRightFromSquare"
+            >
+              App Store
+            </Button>
+          )}
         </Row>
       </Column>
       <Column

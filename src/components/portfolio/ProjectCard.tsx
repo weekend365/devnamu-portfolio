@@ -6,7 +6,7 @@ import { ProjectVisual } from "./ProjectVisual";
 
 export function getProjectStatusVariant(status: string): "neutral" | "info" | "success" {
   if (/(개발|시범|phase|preparing|pilot|development)/i.test(status)) return "info";
-  if (/(완료|납품|completed|delivered|live|운영)/i.test(status)) return "success";
+  if (/(출시|완료|납품|launched|completed|delivered|live|운영)/i.test(status)) return "success";
   return "neutral";
 }
 
@@ -78,14 +78,26 @@ export function ProjectCard({
               </Text>
             </Column>
           )}
-          <Button
-            href={localePath(locale, `/work/${project.slug}`)}
-            size="s"
-            variant="tertiary"
-            suffixIcon="arrowRight"
-          >
-            {labels.caseStudy}
-          </Button>
+          <Row gap="8" wrap>
+            <Button
+              href={localePath(locale, `/work/${project.slug}`)}
+              size="s"
+              variant="tertiary"
+              suffixIcon="arrowRight"
+            >
+              {labels.caseStudy}
+            </Button>
+            {project.externalLink && (
+              <Button
+                href={project.externalLink}
+                size="s"
+                variant="tertiary"
+                suffixIcon="arrowUpRightFromSquare"
+              >
+                App Store
+              </Button>
+            )}
+          </Row>
         </Column>
       </Column>
     );
@@ -170,6 +182,16 @@ export function ProjectCard({
               suffixIcon="arrowUpRightFromSquare"
             >
               GitHub
+            </Button>
+          )}
+          {project.externalLink && (
+            <Button
+              href={project.externalLink}
+              size="s"
+              variant="tertiary"
+              suffixIcon="arrowUpRightFromSquare"
+            >
+              App Store
             </Button>
           )}
         </Row>

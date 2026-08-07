@@ -148,7 +148,11 @@ export function PortfolioProject({ project, locale }: { project: Project; locale
               variant="secondary"
               suffixIcon="arrowUpRightFromSquare"
             >
-              {labels.viewProject}
+              {project.slug === "jango"
+                ? locale === "ko"
+                  ? "App Store에서 보기"
+                  : "View on the App Store"
+                : labels.viewProject}
             </Button>
           )}
         </Row>

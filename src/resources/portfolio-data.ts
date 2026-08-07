@@ -354,12 +354,12 @@ export const projects: Project[] = [
       "Product · Mobile · Backend · Admin · Infrastructure",
     ),
     period: t(
-      "2026 · 스토어 제출 준비",
-      "2026 · Preparing for store submission",
+      "2026 · iOS 출시 · Android 비공개 테스트",
+      "2026 · iOS launched · Android closed testing",
     ),
     status: t(
-      "Phase 2 · 스토어 제출 준비",
-      "Phase 2 · Store submission preparation",
+      "iOS 정식 출시 · Android 비공개 테스트",
+      "iOS live · Android closed testing",
     ),
     summary: t(
       "냉장고 식재료와 생활용품의 유통기한을 관리하고, 임박 식재료를 우선 활용하는 AI 레시피를 추천하는 서비스입니다.",
@@ -370,13 +370,13 @@ export const projects: Project[] = [
       "People missed expiring ingredients because tracking, recommendations, and shared spaces lived in separate flows.",
     ),
     outcome: t(
-      "iOS TestFlight 빌드와 Railway 기반 API/Admin 운영 환경을 연결하고, 269개 자동 검사를 통과한 핵심 모바일 흐름을 구축했습니다.",
-      "Connected an iOS TestFlight build with live Railway API/Admin services and a core mobile flow backed by 269 automated checks.",
+      "iOS 앱을 App Store에 정식 출시했고, Android는 Google Play 비공개 테스트를 진행 중입니다. Railway 기반 API/Admin 운영 환경과 269개 자동 검사를 통과한 핵심 모바일 흐름을 연결했습니다.",
+      "Launched the iOS app on the App Store while Android is in Google Play closed testing, backed by live Railway API/Admin services and a core mobile flow that passed 269 automated checks.",
     ),
     metrics: [
       {
-        value: "TestFlight",
-        label: t("iOS 빌드 업로드", "iOS build uploaded"),
+        value: "App Store",
+        label: t("iOS 정식 출시", "iOS app launched"),
       },
       {
         value: "269",
@@ -464,19 +464,18 @@ export const projects: Project[] = [
     ],
     results: [
       t(
-        "2026-07-24 기준 iOS TestFlight 빌드를 업로드했고 API/Admin은 Railway에서 운영 중이며, 핵심 모바일 흐름을 검증했습니다.",
-        "As of Jul 24, 2026, an iOS TestFlight build was uploaded, API/Admin were live on Railway, and the core mobile flow was validated.",
+        "iOS 앱을 App Store에 정식 출시했고, Android 앱은 Google Play 비공개 테스트를 진행하고 있습니다.",
+        "The iOS app is live on the App Store, while the Android app is in Google Play closed testing.",
       ),
       t(
         "ESLint, 전체 typecheck, 환경 정합성 검사와 269개 자동 검사를 통과했습니다.",
         "The project passed ESLint, full type checking, environment parity validation, and 269 automated checks.",
       ),
       t(
-        "공유 기능 운영 migration, 2계정 실기기 E2E, 최종 스토어 제출은 진행 중이며 출시 완료로 표시하지 않습니다.",
-        "Production migration for shared spaces, two-account device E2E, and final store submission remain in progress; the product is not presented as launched.",
+        "API/Admin은 Railway에서 운영 중이며 Google Play 정식 출시를 위한 테스트와 검증을 이어가고 있습니다.",
+        "API/Admin services are live on Railway, with testing and validation continuing toward the Google Play production release.",
       ),
     ],
-    // TODO: Add final App Store / Play Store URLs when available.
     images: [
       {
         src: "/images/projects/jango/01.webp",
@@ -553,6 +552,8 @@ export const projects: Project[] = [
     ],
     featured: true,
     repository: "https://github.com/weekend365/ExpiryMate",
+    externalLink:
+      "https://apps.apple.com/kr/app/%EC%9E%A5%EA%B3%A0%EC%95%BC-%EB%B6%80%ED%83%81%ED%95%B4/id6793375883",
   },
   {
     slug: "kcsc",
@@ -1114,8 +1115,8 @@ export const pageCopy = {
         "On C&Net's KCSC digital construction standards system, I worked with a complex hierarchy spanning facilities, review items, review elements, and variables, together with Java API integrations. I used AI development tools to explore related code and change points and to review refactoring directions and edge cases. In the implementation, I separated server and editing state with TanStack Query and Zustand, verified permissions, hierarchical editing, and data transformation with Jest and React Testing Library, and supported delivery through Docker and Jenkins.",
       ),
       t(
-        "개인 프로젝트 ‘장고야 부탁해’에서는 AI를 사용자 가치와 운영 조건까지 포함한 제품 기능으로 구현했습니다. 재고 snapshot과 유통기한을 OpenAI Responses API에 연결해 임박 재료를 우선 활용하는 레시피를 추천하고, AI 이용 동의·철회와 추천 기록 삭제 흐름을 함께 설계했습니다. ML Kit 기반 OCR, NestJS API, Next.js 관리자와 Sentry 모니터링을 하나의 모노레포로 연결했으며, 269개 자동 검사를 통과한 뒤 iOS TestFlight 빌드와 Railway 운영 환경에서 핵심 흐름을 검증하고 있습니다.",
-        "In my personal project Jango, I turned AI into a product capability that accounts for both user value and operational requirements. Inventory snapshots and expiry dates are sent through the OpenAI Responses API to recommend recipes that prioritize ingredients expiring soon, with consent, withdrawal, and recommendation-history deletion designed into the same flow. I connected ML Kit OCR, NestJS APIs, a Next.js admin, and Sentry monitoring in one monorepo, passed 269 automated checks, and am validating the core flow through an iOS TestFlight build and live Railway environments.",
+        "개인 프로젝트 ‘장고야 부탁해’에서는 AI를 사용자 가치와 운영 조건까지 포함한 제품 기능으로 구현했습니다. 재고 snapshot과 유통기한을 OpenAI Responses API에 연결해 임박 재료를 우선 활용하는 레시피를 추천하고, AI 이용 동의·철회와 추천 기록 삭제 흐름을 함께 설계했습니다. ML Kit 기반 OCR, NestJS API, Next.js 관리자와 Sentry 모니터링을 하나의 모노레포로 연결했으며, 269개 자동 검사를 통과한 뒤 iOS 앱을 App Store에 정식 출시하고 Android 비공개 테스트를 진행하고 있습니다.",
+        "In my personal project Jango, I turned AI into a product capability that accounts for both user value and operational requirements. Inventory snapshots and expiry dates are sent through the OpenAI Responses API to recommend recipes that prioritize ingredients expiring soon, with consent, withdrawal, and recommendation-history deletion designed into the same flow. I connected ML Kit OCR, NestJS APIs, a Next.js admin, and Sentry monitoring in one monorepo, passed 269 automated checks, launched the iOS app on the App Store, and am running Android closed testing.",
       ),
     ],
     capabilitiesTitle: t(
