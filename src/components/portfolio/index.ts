@@ -1,3 +1,4 @@
+export * from "./BimsArchitectureDiagram";
 export * from "./FeaturedJango";
 export * from "./PortfolioAbout";
 export * from "./PortfolioHome";

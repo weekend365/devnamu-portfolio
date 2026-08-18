@@ -10,6 +10,7 @@ import {
   ui,
 } from "@/resources";
 import { localePath } from "@/utils/site-metadata";
+import { BimsArchitectureDiagram, bimsArchitectureCopy } from "./BimsArchitectureDiagram";
 import { getProjectStatusVariant, ProjectCard } from "./ProjectCard";
 import { ProjectDemoAccess } from "./ProjectDemoAccess";
 import { ProjectScreenshotCarousel } from "./ProjectScreenshotCarousel";
@@ -82,6 +83,8 @@ export function PortfolioProject({ project, locale }: { project: Project; locale
     .slice(0, 2);
   const projectUrl = `${baseURL}${localePath(locale, `/work/${project.slug}`)}`;
   const projectTitle = localize(project.title, locale);
+  const hasArchitecture = project.slug === "bims";
+  const architectureCopy = bimsArchitectureCopy[locale];
 
   return (
     <Column className="page-stack project-page" maxWidth="m" fillWidth gap="64">
@@ -98,7 +101,7 @@ export function PortfolioProject({ project, locale }: { project: Project; locale
           creator: { "@type": "Person", name: person.name[locale], alternateName: person.brand },
           keywords: project.technologies.join(", "),
           image: project.images[0] ? `${baseURL}${project.images[0].src}` : undefined,
-          sameAs: project.repository ?? project.externalLink,
+          sameAs: project.repository ?? project.externalLink?.href,
         }}
       />
       <Column as="header" className="project-hero" gap="24">
@@ -144,15 +147,11 @@ export function PortfolioProject({ project, locale }: { project: Project; locale
           )}
           {project.externalLink && !project.demoAccess && (
             <Button
-              href={project.externalLink}
+              href={project.externalLink.href}
               variant="secondary"
               suffixIcon="arrowUpRightFromSquare"
             >
-              {project.slug === "jango"
-                ? locale === "ko"
-                  ? "App Store에서 보기"
-                  : "View on the App Store"
-                : labels.viewProject}
+              {localize(project.externalLink.label, locale)}
             </Button>
           )}
         </Row>
@@ -255,6 +254,11 @@ export function PortfolioProject({ project, locale }: { project: Project; locale
         <Button href="#project-overview" size="s" variant="tertiary">
           {labels.overview}
         </Button>
+        {hasArchitecture && (
+          <Button href="#project-architecture" size="s" variant="tertiary">
+            {architectureCopy.navLabel}
+          </Button>
+        )}
         <Button href="#project-contributions" size="s" variant="tertiary">
           {labels.contributions}
         </Button>
@@ -270,8 +274,14 @@ export function PortfolioProject({ project, locale }: { project: Project; locale
         )}
       </Row>
 
-      <Column as="article" className="article-copy case-study-content" gap="48">
-        <Column as="section" id="project-overview" className="case-study-section" gap="24">
+      <Column as="article" className="article-copy" fillWidth gap="48">
+        <Column
+          as="section"
+          id="project-overview"
+          className="case-study-content case-study-section"
+          fillWidth
+          gap="24"
+        >
           <SectionHeading
             eyebrow={labels.overview}
             title={localize(copy.overviewTitle, locale)}
@@ -294,18 +304,54 @@ export function PortfolioProject({ project, locale }: { project: Project; locale
             </Row>
           </Column>
         </Column>
-        <Column as="section" id="project-contributions" className="case-study-section" gap="24">
+        {hasArchitecture && (
+          <Column
+            as="section"
+            id="project-architecture"
+            className="case-study-section bims-architecture-section"
+            fillWidth
+            gap="24"
+            aria-labelledby="project-architecture-title"
+          >
+            <SectionHeading
+              id="project-architecture-title"
+              eyebrow={architectureCopy.eyebrow}
+              title={architectureCopy.title}
+              description={architectureCopy.description}
+            />
+            <BimsArchitectureDiagram locale={locale} />
+          </Column>
+        )}
+        <Column
+          as="section"
+          id="project-contributions"
+          className="case-study-content case-study-section"
+          fillWidth
+          gap="24"
+        >
           <SectionHeading eyebrow={labels.scope} title={labels.contributions} />
           <DetailList items={project.contributions} locale={locale} />
         </Column>
         {project.challenges.length > 0 && (
-          <Column as="section" id="project-challenges" className="case-study-section" gap="24">
+          <Column
+            as="section"
+            id="project-challenges"
+            className="case-study-content case-study-section"
+            fillWidth
+            gap="24"
+          >
             <SectionHeading eyebrow={labels.constraints} title={labels.challenges} />
             <DetailList items={project.challenges} locale={locale} />
           </Column>
         )}
         {project.results.length > 0 && (
-          <Column as="section" id="project-results" className="case-study-section" gap="24">
+          <Column
+            as="section"
+            id="project-results"
+            className="case-study-content case-study-section"
+            fillWidth
+            gap="24"
+          >
             <SectionHeading eyebrow={labels.evidence} title={labels.results} />
             <Grid className="result-list" columns="2" s={{ columns: 1 }} gap="12">
               {project.results.map((result, index) => (

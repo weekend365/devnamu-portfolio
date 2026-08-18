@@ -27,6 +27,12 @@ export type DemoAccess = {
   note: LocalizedText;
 };
 
+export type ProjectExternalLink = {
+  href: string;
+  label: LocalizedText;
+  kind: "app-store" | "website";
+};
+
 export type Project = {
   slug: string;
   startedAt: string;
@@ -54,7 +60,7 @@ export type Project = {
   images: ProjectImage[];
   featured?: boolean;
   repository?: string;
-  externalLink?: string;
+  externalLink?: ProjectExternalLink;
   demoAccess?: DemoAccess;
 };
 
@@ -552,8 +558,11 @@ export const projects: Project[] = [
     ],
     featured: true,
     repository: "https://github.com/weekend365/ExpiryMate",
-    externalLink:
-      "https://apps.apple.com/kr/app/%EC%9E%A5%EA%B3%A0%EC%95%BC-%EB%B6%80%ED%83%81%ED%95%B4/id6793375883",
+    externalLink: {
+      href: "https://apps.apple.com/kr/app/%EC%9E%A5%EA%B3%A0%EC%95%BC-%EB%B6%80%ED%83%81%ED%95%B4/id6793375883",
+      label: t("App Store에서 보기", "View on the App Store"),
+      kind: "app-store",
+    },
   },
   {
     slug: "kcsc",
@@ -711,7 +720,11 @@ export const projects: Project[] = [
         variant: "desktop",
       },
     ],
-    externalLink: "https://digital.kcsc.re.kr/home",
+    externalLink: {
+      href: "https://digital.kcsc.re.kr/home",
+      label: t("사이트 보기", "Visit site"),
+      kind: "website",
+    },
     demoAccess: {
       url: "https://digital.kcsc.re.kr/home",
       username: "testest",

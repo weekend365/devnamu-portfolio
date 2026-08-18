@@ -89,12 +89,12 @@ export function ProjectCard({
             </Button>
             {project.externalLink && (
               <Button
-                href={project.externalLink}
+                href={project.externalLink.href}
                 size="s"
                 variant="tertiary"
                 suffixIcon="arrowUpRightFromSquare"
               >
-                App Store
+                {localize(project.externalLink.label, locale)}
               </Button>
             )}
           </Row>
@@ -186,12 +186,12 @@ export function ProjectCard({
           )}
           {project.externalLink && (
             <Button
-              href={project.externalLink}
+              href={project.externalLink.href}
               size="s"
               variant="tertiary"
               suffixIcon="arrowUpRightFromSquare"
             >
-              App Store
+              {localize(project.externalLink.label, locale)}
             </Button>
           )}
         </Row>

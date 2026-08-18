@@ -637,6 +637,384 @@ body {
   scroll-margin-top: 8rem;
 }
 
+.bims-architecture-section {
+  max-width: 100%;
+}
+
+.bims-architecture {
+  display: grid;
+  gap: clamp(1rem, 2.5vw, 1.5rem);
+  width: 100%;
+  margin: 0;
+  padding: clamp(0.75rem, 2.5vw, 1.5rem);
+  overflow: hidden;
+  border: 1px solid var(--neutral-alpha-medium);
+  border-radius: 1.25rem;
+  background:
+    radial-gradient(circle at 90% 4%, var(--brand-alpha-medium), transparent 26rem),
+    var(--neutral-alpha-weak);
+}
+
+.bims-diagram-lane {
+  display: grid;
+  gap: 1.25rem;
+  min-width: 0;
+  padding: clamp(1rem, 2.4vw, 1.5rem);
+  border: 1px solid var(--neutral-alpha-medium);
+  border-radius: 1rem;
+  background: color-mix(in srgb, var(--surface-background) 92%, transparent);
+  box-shadow: 0 0.75rem 2.5rem color-mix(in srgb, var(--neutral-on-background-strong) 5%, transparent);
+}
+
+.bims-lane-heading {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.bims-lane-heading > span {
+  display: grid;
+  flex: 0 0 auto;
+  width: 2rem;
+  height: 2rem;
+  place-items: center;
+  border: 1px solid var(--brand-border-medium);
+  border-radius: 999px;
+  background: var(--brand-alpha-weak);
+  color: var(--brand-on-background-strong);
+  font-family: var(--font-code);
+  font-size: 0.68rem;
+  font-weight: 700;
+}
+
+.bims-lane-heading h3,
+.bims-lane-heading p,
+.bims-diagram-node strong,
+.bims-diagram-node span,
+.bims-result-lane p,
+.bims-retry-note p {
+  margin: 0;
+}
+
+.bims-lane-heading h3 {
+  color: var(--neutral-on-background-strong);
+  font-size: 1rem;
+  line-height: 1.35;
+}
+
+.bims-lane-heading p {
+  margin-top: 0.2rem;
+  color: var(--neutral-on-background-weak);
+  font-size: 0.78rem;
+  line-height: 1.55;
+}
+
+.bims-diagram-flow,
+.bims-flow-step {
+  display: flex;
+  align-items: stretch;
+  min-width: 0;
+}
+
+.bims-flow-step {
+  flex: 1 1 0;
+}
+
+.bims-diagram-node {
+  position: relative;
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  justify-content: space-between;
+  min-width: 0;
+  min-height: 7rem;
+  gap: 1rem;
+  padding: 0.9rem;
+  overflow: hidden;
+  border: 1px solid var(--neutral-alpha-strong);
+  border-radius: 0.8rem;
+  background: var(--surface-background);
+}
+
+.bims-diagram-node::before {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 2px;
+  background: transparent;
+  content: "";
+}
+
+.bims-diagram-node-direct {
+  border-color: var(--brand-border-medium);
+  background: linear-gradient(145deg, var(--brand-alpha-weak), var(--surface-background) 72%);
+}
+
+.bims-diagram-node-direct::before {
+  background: var(--brand-solid-strong);
+}
+
+.bims-diagram-node > svg {
+  flex: 0 0 auto;
+  width: 1.45rem;
+  height: 1.45rem;
+  color: var(--neutral-on-background-weak);
+}
+
+.bims-diagram-node-direct > svg {
+  color: var(--brand-on-background-strong);
+}
+
+.bims-diagram-node > div {
+  display: grid;
+  gap: 0.2rem;
+  min-width: 0;
+}
+
+.bims-diagram-node strong {
+  overflow-wrap: anywhere;
+  color: var(--neutral-on-background-strong);
+  font-family: var(--font-code);
+  font-size: clamp(0.7rem, 1vw, 0.78rem);
+  line-height: 1.35;
+}
+
+.bims-diagram-node span {
+  color: var(--neutral-on-background-weak);
+  font-size: 0.68rem;
+  line-height: 1.4;
+}
+
+.bims-flow-connector {
+  position: relative;
+  display: block;
+  flex: 0 0 clamp(1rem, 2.4vw, 2.25rem);
+  align-self: center;
+  height: 0;
+  border-top: 1px solid var(--neutral-on-background-strong);
+  color: var(--neutral-on-background-strong);
+}
+
+.bims-flow-connector::after {
+  position: absolute;
+  top: -0.25rem;
+  right: -1px;
+  width: 0;
+  height: 0;
+  border-top: 0.22rem solid transparent;
+  border-bottom: 0.22rem solid transparent;
+  border-left: 0.38rem solid currentColor;
+  content: "";
+}
+
+.bims-flow-connector > span {
+  position: absolute;
+  bottom: 0.35rem;
+  left: 50%;
+  color: var(--neutral-on-background-weak);
+  font-size: 0.62rem;
+  white-space: nowrap;
+  transform: translateX(-50%);
+}
+
+.bims-deployment-handoff {
+  display: flex;
+  align-items: center;
+  justify-self: end;
+  gap: 0.5rem;
+  padding: 0.55rem 0.75rem;
+  border: 1px solid var(--brand-alpha-medium);
+  border-radius: 999px;
+  background: var(--brand-alpha-weak);
+  color: var(--brand-on-background-strong);
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+
+.bims-deployment-handoff svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+.bims-command-label {
+  justify-self: center;
+  padding: 0.3rem 0.65rem;
+  border-radius: 999px;
+  background: var(--neutral-alpha-medium);
+  color: var(--neutral-on-background-medium);
+  font-family: var(--font-code);
+  font-size: 0.64rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.bims-command-flow {
+  display: grid;
+  grid-template-columns: minmax(6.5rem, 0.8fr) clamp(1rem, 2vw, 1.75rem) minmax(0, 5fr) clamp(1rem, 2vw, 1.75rem) minmax(6.5rem, 0.8fr);
+  align-items: stretch;
+  min-width: 0;
+}
+
+.bims-command-endpoint {
+  display: flex;
+  min-width: 0;
+}
+
+.bims-internal-network {
+  display: grid;
+  gap: 0.8rem;
+  min-width: 0;
+  padding: 0.8rem;
+  border: 1px solid var(--brand-alpha-medium);
+  border-radius: 0.9rem;
+  background: color-mix(in srgb, var(--brand-alpha-weak) 55%, transparent);
+}
+
+.bims-network-label {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: var(--neutral-on-background-medium);
+  font-size: 0.68rem;
+  font-weight: 600;
+}
+
+.bims-network-label svg {
+  width: 1rem;
+  height: 1rem;
+  color: var(--brand-on-background-strong);
+}
+
+.bims-internal-network .bims-diagram-node {
+  min-height: 6.5rem;
+  padding: 0.7rem;
+}
+
+.bims-result-lane {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding-inline: min(10%, 6rem);
+}
+
+.bims-result-lane > span {
+  position: relative;
+  flex: 1 1 auto;
+  height: 0;
+  border-top: 1px dashed var(--neutral-on-background-weak);
+  color: var(--neutral-on-background-weak);
+}
+
+.bims-result-lane > span::before {
+  position: absolute;
+  top: -0.25rem;
+  left: -1px;
+  width: 0;
+  height: 0;
+  border-top: 0.22rem solid transparent;
+  border-right: 0.38rem solid currentColor;
+  border-bottom: 0.22rem solid transparent;
+  content: "";
+}
+
+.bims-result-lane p {
+  flex: 0 0 auto;
+  color: var(--neutral-on-background-weak);
+  font-size: 0.68rem;
+  font-weight: 600;
+}
+
+.bims-support-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.bims-support-grid .bims-diagram-node {
+  min-height: 6.5rem;
+}
+
+.bims-retry-note {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--accent-alpha-medium);
+  border-radius: 0.8rem;
+  background: var(--accent-alpha-weak);
+}
+
+.bims-retry-line {
+  display: block;
+  flex: 0 0 2.5rem;
+  height: 0;
+  border-top: 3px solid var(--accent-solid-strong);
+}
+
+.bims-retry-note > div {
+  display: grid;
+  gap: 0.15rem;
+}
+
+.bims-retry-note strong {
+  color: var(--neutral-on-background-strong);
+  font-size: 0.75rem;
+}
+
+.bims-retry-note p {
+  color: var(--neutral-on-background-weak);
+  font-size: 0.7rem;
+  line-height: 1.5;
+}
+
+.bims-diagram-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem 1.15rem;
+  padding: 0.15rem 0.25rem;
+  color: var(--neutral-on-background-weak);
+  font-size: 0.68rem;
+}
+
+.bims-legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.bims-legend-mark {
+  display: block;
+  flex: 0 0 auto;
+}
+
+.bims-legend-node {
+  width: 0.9rem;
+  height: 0.65rem;
+  border: 1px solid var(--neutral-alpha-strong);
+  border-radius: 0.2rem;
+  background: var(--surface-background);
+}
+
+.bims-legend-direct {
+  border-color: var(--brand-border-medium);
+  box-shadow: inset 2px 0 var(--brand-solid-strong);
+}
+
+.bims-legend-line {
+  width: 1.25rem;
+  height: 0;
+  border-top: 1px solid var(--neutral-on-background-strong);
+}
+
+.bims-legend-result {
+  border-top-style: dashed;
+  border-top-color: var(--neutral-on-background-weak);
+}
+
+.bims-legend-retry {
+  border-top: 3px solid var(--accent-solid-strong);
+}
+
 .article-copy p,
 .article-copy li {
   line-height: 1.8;
@@ -1152,6 +1530,112 @@ body {
 
   .case-study-index > * {
     flex: 0 0 auto;
+  }
+
+  .bims-architecture {
+    gap: 0.75rem;
+    padding: 0.5rem;
+    border-radius: 1rem;
+  }
+
+  .bims-diagram-lane {
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  .bims-lane-heading {
+    gap: 0.65rem;
+  }
+
+  .bims-diagram-flow,
+  .bims-flow-step {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .bims-diagram-node,
+  .bims-internal-network .bims-diagram-node,
+  .bims-support-grid .bims-diagram-node {
+    width: 100%;
+    min-height: 5.75rem;
+  }
+
+  .bims-diagram-node {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0.8rem;
+  }
+
+  .bims-flow-connector,
+  .bims-command-flow > .bims-flow-connector {
+    flex: 0 0 1.5rem;
+    align-self: center;
+    width: 0;
+    height: 1.5rem;
+    border-top: 0;
+    border-left: 1px solid var(--neutral-on-background-strong);
+  }
+
+  .bims-flow-connector::after {
+    top: auto;
+    right: auto;
+    bottom: -1px;
+    left: -0.24rem;
+    border-top: 0.38rem solid currentColor;
+    border-right: 0.22rem solid transparent;
+    border-bottom: 0;
+    border-left: 0.22rem solid transparent;
+  }
+
+  .bims-deployment-handoff {
+    justify-self: stretch;
+    justify-content: center;
+    border-radius: 0.75rem;
+  }
+
+  .bims-command-label {
+    justify-self: start;
+  }
+
+  .bims-command-flow {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .bims-internal-network {
+    width: 100%;
+    padding: 0.75rem;
+  }
+
+  .bims-result-lane {
+    align-items: flex-start;
+    padding: 0.75rem;
+    border: 1px dashed var(--neutral-alpha-strong);
+    border-radius: 0.75rem;
+    background: var(--neutral-alpha-weak);
+  }
+
+  .bims-result-lane > span {
+    flex: 0 0 1.5rem;
+    margin-top: 0.45rem;
+  }
+
+  .bims-result-lane p {
+    flex: 1 1 auto;
+    line-height: 1.45;
+  }
+
+  .bims-support-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .bims-retry-note {
+    align-items: flex-start;
+  }
+
+  .bims-retry-line {
+    flex-basis: 1.5rem;
+    margin-top: 0.45rem;
   }
 
   .screenshot-carousel {

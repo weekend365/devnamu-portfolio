@@ -2,8 +2,8 @@ import {
   Background,
   Column,
   Flex,
+  type Opacity,
   type SpacingToken,
-  type opacity,
 } from "@once-ui-system/core";
 import type { Locale } from "@/resources";
 import { dataStyle, effects, style } from "@/resources";
@@ -18,16 +18,16 @@ export function PortfolioShell({ children, locale }: { children: React.ReactNode
         <Flex fill position="fixed" aria-hidden="true" pointerEvents="none">
           <Background
             mask={effects.mask}
-            gradient={{ ...effects.gradient, opacity: effects.gradient.opacity as opacity }}
+            gradient={{ ...effects.gradient, opacity: effects.gradient.opacity as Opacity }}
             dots={{
               ...effects.dots,
-              opacity: effects.dots.opacity as opacity,
+              opacity: effects.dots.opacity as Opacity,
               size: effects.dots.size as SpacingToken,
             }}
-            grid={{ ...effects.grid, opacity: effects.grid.opacity as opacity }}
+            grid={{ ...effects.grid, opacity: effects.grid.opacity as Opacity }}
             lines={{
               ...effects.lines,
-              opacity: effects.lines.opacity as opacity,
+              opacity: effects.lines.opacity as Opacity,
               size: effects.lines.size as SpacingToken,
             }}
           />

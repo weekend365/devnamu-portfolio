@@ -85,11 +85,11 @@ export function FeaturedJango({ locale }: { locale: Locale }) {
           </Button>
           {project.externalLink && (
             <Button
-              href={project.externalLink}
+              href={project.externalLink.href}
               variant="secondary"
               suffixIcon="arrowUpRightFromSquare"
             >
-              App Store
+              {localize(project.externalLink.label, locale)}
             </Button>
           )}
         </Row>
