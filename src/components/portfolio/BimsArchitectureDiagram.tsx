@@ -10,7 +10,7 @@ import {
   SiNextdotjs,
   SiPostgresql,
   SiRedis,
-  SiSonarqubeserver,
+  SiSonarqube,
   SiSpringboot,
 } from "react-icons/si";
 import type { Locale } from "@/resources";
@@ -142,7 +142,7 @@ const deploymentNodes: DiagramNode[] = [
   {
     name: "SonarQube",
     detail: { ko: "정적 분석", en: "Static analysis" },
-    icon: SiSonarqubeserver,
+    icon: SiSonarqube,
     ownership: "direct",
   },
   {
