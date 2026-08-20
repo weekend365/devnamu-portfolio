@@ -394,7 +394,7 @@ body {
   isolation: isolate;
   min-height: 34rem;
   box-shadow: 0 1.75rem 5rem color-mix(in srgb, var(--neutral-on-background-strong) 7%, transparent);
-  transition: transform 220ms ease, border-color 180ms ease, box-shadow 220ms ease;
+  transition: border-color 180ms ease, box-shadow 220ms ease;
 }
 
 .featured-project::before {
@@ -406,7 +406,6 @@ body {
 }
 
 .featured-project:hover {
-  transform: translateY(-3px);
   border-color: var(--brand-border-strong);
   box-shadow: 0 2.25rem 6rem color-mix(in srgb, var(--brand-on-background-strong) 10%, transparent);
 }
@@ -428,17 +427,18 @@ body {
   padding: clamp(1.5rem, 3vw, 2.5rem);
 }
 
-.featured-app-screen {
+.featured-app-enter {
+  display: flex;
+  justify-content: center;
   width: min(18rem, 72%);
+  transform-origin: center center;
+}
+
+.featured-app-screen {
+  width: 100%;
   border: 1px solid var(--neutral-alpha-medium);
   background: var(--neutral-background-strong);
   box-shadow: 0 1.5rem 4rem color-mix(in srgb, var(--neutral-on-background-strong) 22%, transparent);
-  transition: transform 200ms ease, border-color 180ms ease;
-}
-
-.featured-project:hover .featured-app-screen {
-  transform: translateY(-3px);
-  border-color: var(--brand-border-strong);
 }
 
 .featured-facts {
@@ -1635,7 +1635,7 @@ body {
     padding: 1.5rem 1.25rem;
   }
 
-  .featured-app-screen {
+  .featured-app-enter {
     width: min(14rem, 58%);
   }
 

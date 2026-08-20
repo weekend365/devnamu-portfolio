@@ -1,19 +1,21 @@
 "use client";
 
 import { Button, Column, Grid, Heading, Media, Row, Tag, Text } from "@once-ui-system/core";
-import { Reveal } from "@/components/motion/Reveal";
+import { motion, useReducedMotion } from "motion/react";
+import { Magnetic } from "@/components/motion/Magnetic";
+import { titleTransition } from "@/components/motion/tokens";
 import type { Locale } from "@/resources";
 import { getProject, localize, ui } from "@/resources";
 import { localePath } from "@/utils/site-metadata";
 
 export function FeaturedJango({ locale }: { locale: Locale }) {
+  const reduced = useReducedMotion();
   const project = getProject("jango", locale);
   if (!project) return null;
   const labels = ui[locale];
 
   return (
-    <Reveal inView y={12} className="featured-project-reveal">
-      <Row
+    <Row
       as="article"
       className="featured-project"
       fillWidth
@@ -72,13 +74,15 @@ export function FeaturedJango({ locale }: { locale: Locale }) {
           ))}
         </Row>
         <Row gap="12" wrap>
-          <Button
-            href={localePath(locale, "/work/jango")}
-            variant="primary"
-            suffixIcon="arrowRight"
-          >
-            {locale === "ko" ? "제품 사례 읽기" : "Read the case study"}
-          </Button>
+          <Magnetic arrow>
+            <Button
+              href={localePath(locale, "/work/jango")}
+              variant="primary"
+              suffixIcon="arrowRight"
+            >
+              {locale === "ko" ? "제품 사례 읽기" : "Read the case study"}
+            </Button>
+          </Magnetic>
           <Button
             href={project.repository}
             variant="secondary"
@@ -108,22 +112,29 @@ export function FeaturedJango({ locale }: { locale: Locale }) {
           locale === "ko" ? "장고야 부탁해 실제 모바일 앱 화면" : "Jango mobile app screenshot"
         }
       >
-        <Media
-          className="featured-app-screen"
-          src="/images/projects/jango/01.webp"
-          alt={
-            locale === "ko"
-              ? "장고야 부탁해 홈 대시보드 앱스토어 스크린샷"
-              : "Jango home dashboard App Store screenshot"
-          }
-          aspectRatio="1125 / 2436"
-          objectFit="cover"
-          sizes="(max-width: 768px) 72vw, 288px"
-          priority
-          radius="xl"
-        />
+        <motion.div
+          className="featured-app-enter"
+          initial={reduced ? false : { scale: 0.97, y: 12 }}
+          whileInView={{ scale: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.35, margin: "0px 0px -8% 0px" }}
+          transition={{ ...titleTransition, delay: reduced ? 0 : 0.08 }}
+        >
+          <Media
+            className="featured-app-screen"
+            src="/images/projects/jango/01.webp"
+            alt={
+              locale === "ko"
+                ? "장고야 부탁해 홈 대시보드 앱스토어 스크린샷"
+                : "Jango home dashboard App Store screenshot"
+            }
+            aspectRatio="1125 / 2436"
+            objectFit="cover"
+            sizes="(max-width: 768px) 72vw, 288px"
+            priority
+            radius="xl"
+          />
+        </motion.div>
       </Column>
     </Row>
-    </Reveal>
   );
 }
