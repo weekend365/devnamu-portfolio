@@ -18,6 +18,7 @@ export function PortfolioHome({ locale }: { locale: Locale }) {
   const labels = content.navigation;
   const copy = pageCopy.home;
   const secondaryProjects = content.projects.filter((project) => !project.featured).slice(0, 3);
+
   return (
     <Column className="page-stack home-page" maxWidth="l" fillWidth gap="32">
       <StructuredData
