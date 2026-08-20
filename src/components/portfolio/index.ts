@@ -1,4 +1,5 @@
 export * from "./BimsArchitectureDiagram";
+export * from "./KcscArchitectureDiagram";
 export * from "./FeaturedJango";
 export * from "./PortfolioAbout";
 export * from "./PortfolioHome";

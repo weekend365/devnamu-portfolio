@@ -2,7 +2,7 @@ import { Button, Column, Heading, Row, Tag, Text } from "@once-ui-system/core";
 import type { Locale, Project } from "@/resources";
 import { localize, ui } from "@/resources";
 import { localePath } from "@/utils/site-metadata";
-import { ProjectVisual } from "./ProjectVisual";
+import { hasWorkflowVisual, ProjectVisual } from "./ProjectVisual";
 
 export function getProjectStatusVariant(status: string): "neutral" | "info" | "success" {
   if (/(개발|시범|phase|preparing|pilot|development)/i.test(status)) return "info";
@@ -24,7 +24,7 @@ export function ProjectCard({
   variant?: "featured" | "default" | "compact";
 }) {
   const labels = ui[locale];
-  const hasVisual = Boolean(project.images[0]);
+  const hasVisual = Boolean(project.images[0]) || hasWorkflowVisual(project.slug);
   const evidence = project.results[0] ?? project.outcome;
   const evidenceLabel = project.results.length > 0
     ? locale === "ko"

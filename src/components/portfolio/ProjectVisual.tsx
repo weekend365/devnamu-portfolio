@@ -130,6 +130,10 @@ function ImageBrowserFrame({
   );
 }
 
+export function hasWorkflowVisual(slug: string) {
+  return slug in workflowCopy;
+}
+
 function WorkflowVisual({ project, locale }: { project: Project; locale: Locale }) {
   const copy = workflowCopy[project.slug]?.[locale];
   if (!copy) return null;

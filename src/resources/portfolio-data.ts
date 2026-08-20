@@ -605,10 +605,6 @@ export const projects: Project[] = [
         "프런트엔드에서는 복잡한 건설기준 데이터를 잃지 않고 탐색할 수 있도록 다중 패널 편집 도구, 계층 검색과 빠른 이동, 유형별 상세 편집, 권한별 동작과 외부 연동을 구현했습니다.",
         "On the frontend, I implemented multi-panel editing, hierarchical search and direct navigation, type-aware detail editing, role-based behavior, and external integrations so users can work with dense standards data without losing context.",
       ),
-      t(
-        "공개된 체험 전용 계정으로 실제 시범운영 시스템에 접속해 표준 라이브러리와 주요 탐색 흐름을 직접 확인할 수 있습니다.",
-        "Use the public demo account to explore the standard library and key navigation flows directly in the live pilot system.",
-      ),
     ],
     technologies: [
       "Next.js 14",
@@ -682,58 +678,7 @@ export const projects: Project[] = [
         "Maintained an operational structure compatible with Next.js standalone builds, Docker images, and the Jenkins deployment pipeline.",
       ),
     ],
-    images: [
-      {
-        src: "/images/projects/kcsc/01.webp",
-        alt: t(
-          "디지털 건설기준 시범운영 홈과 지원 게시판 화면",
-          "KCSC pilot home and support-board dashboard",
-        ),
-        caption: t(
-          "시범운영 홈과 공지·자료·Q&A 지원 게시판",
-          "Pilot home with notices, resources, Q&A, and support boards",
-        ),
-        variant: "desktop",
-      },
-      {
-        src: "/images/projects/kcsc/02.webp",
-        alt: t(
-          "시설물·검토항목·검토요소·룰을 연결한 4분할 기준맵 화면",
-          "Four-pane standards map connecting facilities, review items, elements, and rules",
-        ),
-        caption: t(
-          "깊은 계층의 기준을 탐색하고 편집하는 다중 패널 화면",
-          "A multi-panel view for exploring and editing deep standards hierarchies",
-        ),
-        variant: "desktop",
-      },
-      {
-        src: "/images/projects/kcsc/03.webp",
-        alt: t(
-          "KDS 설계기준 문서와 목차를 탐색하는 표준 라이브러리 화면",
-          "Standards library for browsing KDS documents and table of contents",
-        ),
-        caption: t(
-          "유형·특성·입출력변수와 함께 보는 표준 문서 목록",
-          "Standards documents shown with types, properties, and variables",
-        ),
-        variant: "desktop",
-      },
-    ],
-    externalLink: {
-      href: "https://digital.kcsc.re.kr/home",
-      label: t("사이트 보기", "Visit site"),
-      kind: "website",
-    },
-    demoAccess: {
-      url: "https://digital.kcsc.re.kr/home",
-      username: "testest",
-      password: "testest",
-      note: t(
-        "공개된 체험 전용 계정입니다. 체험 데이터는 예고 없이 초기화될 수 있습니다.",
-        "This is a public demo account. Demo data may be reset without notice.",
-      ),
-    },
+    images: [],
   },
   {
     slug: "bims",
@@ -766,8 +711,8 @@ export const projects: Project[] = [
         "Connected a Next.js administration frontend to Spring Boot APIs and translated transportation workflows into the interface.",
       ),
       t(
-        "공개 화면은 민감한 운영 정보를 노출하지 않도록 익명화된 개발·검증 데이터로 구성했습니다.",
-        "Public screenshots use anonymized development and validation data so sensitive operational information is not exposed.",
+        "운영 화면과 실데이터는 공개하지 않고, 배포 파이프라인과 비동기 차량 제어 구조를 다이어그램과 사례로 정리했습니다.",
+        "Instead of public operations screens, the case study documents the deployment pipeline and asynchronous vehicle-control architecture.",
       ),
     ],
     technologies: [
@@ -818,54 +763,11 @@ export const projects: Project[] = [
         "Added bus, route, and operations workflows, map monitoring, operations dashboards, and access history screens to the admin system under development.",
       ),
       t(
-        "익명화된 개발·검증 데이터로 민감한 운영 정보를 노출하지 않는 프로젝트 사례를 구성했습니다.",
-        "Prepared the project case study with anonymized development and validation data without exposing sensitive operational information.",
+        "민감한 운영 화면은 공개하지 않고, 배포 파이프라인과 비동기 차량 제어 흐름을 다이어그램으로 정리했습니다.",
+        "Kept sensitive operations screens private and documented the deployment pipeline and asynchronous vehicle-control flow as a diagram.",
       ),
     ],
-    images: [
-      {
-        src: "/images/projects/bims/01.webp",
-        alt: t(
-          "실시간 버스 위치와 운행 이벤트를 지도에서 확인하는 BIMS 모니터링 화면",
-          "BIMS monitoring map showing live bus locations and operation events",
-        ),
-        caption: t(
-          "익명화된 개발·검증 데이터로 지도·노선·운행 이벤트를 한 화면에서 확인하는 관제",
-          "An operations view combining anonymized map, route, and vehicle-event data",
-        ),
-        variant: "desktop",
-        width: 1920,
-        height: 945,
-      },
-      {
-        src: "/images/projects/bims/02.webp",
-        alt: t(
-          "운행 현황과 돌발·위반 데이터를 보여주는 BIMS 운영 대시보드",
-          "BIMS operations dashboard showing service status and incidents",
-        ),
-        caption: t(
-          "익명화된 운행·돌발·위반 지표를 요약한 운영 대시보드",
-          "An operations dashboard summarizing anonymized service, incident, and violation signals",
-        ),
-        variant: "desktop",
-        width: 1920,
-        height: 945,
-      },
-      {
-        src: "/images/projects/bims/03.webp",
-        alt: t(
-          "최근 접속 추이와 로그인 이력을 보여주는 BIMS 관리자 화면",
-          "BIMS administrator screen showing login trends and access history",
-        ),
-        caption: t(
-          "익명화된 접속 추이와 관리자 권한을 확인하는 운영 화면",
-          "An administrative view for anonymized access trends and permissions",
-        ),
-        variant: "desktop",
-        width: 1920,
-        height: 945,
-      },
-    ],
+    images: [],
   },
   {
     slug: "subscription-platform",

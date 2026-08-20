@@ -11,8 +11,8 @@ import {
 } from "@/resources";
 import { localePath } from "@/utils/site-metadata";
 import { BimsArchitectureDiagram, bimsArchitectureCopy } from "./BimsArchitectureDiagram";
+import { KcscArchitectureDiagram, kcscArchitectureCopy } from "./KcscArchitectureDiagram";
 import { getProjectStatusVariant, ProjectCard } from "./ProjectCard";
-import { ProjectDemoAccess } from "./ProjectDemoAccess";
 import { ProjectScreenshotCarousel } from "./ProjectScreenshotCarousel";
 import { ProjectVisual } from "./ProjectVisual";
 import { SectionHeading } from "./SectionHeading";
@@ -83,8 +83,12 @@ export function PortfolioProject({ project, locale }: { project: Project; locale
     .slice(0, 2);
   const projectUrl = `${baseURL}${localePath(locale, `/work/${project.slug}`)}`;
   const projectTitle = localize(project.title, locale);
-  const hasArchitecture = project.slug === "bims";
-  const architectureCopy = bimsArchitectureCopy[locale];
+  const architecture =
+    project.slug === "bims"
+      ? { copy: bimsArchitectureCopy[locale], Diagram: BimsArchitectureDiagram }
+      : project.slug === "kcsc"
+        ? { copy: kcscArchitectureCopy[locale], Diagram: KcscArchitectureDiagram }
+        : null;
 
   return (
     <Column className="page-stack project-page" maxWidth="m" fillWidth gap="64">
@@ -179,7 +183,6 @@ export function PortfolioProject({ project, locale }: { project: Project; locale
         </StorySignal>
       </Grid>
 
-      {project.demoAccess && <ProjectDemoAccess demoAccess={project.demoAccess} locale={locale} />}
       {project.images.length > 1 ? (
         <ProjectScreenshotCarousel
           id={project.slug}
@@ -187,9 +190,9 @@ export function PortfolioProject({ project, locale }: { project: Project; locale
           locale={locale}
           projectTitle={projectTitle}
         />
-      ) : (
+      ) : project.images[0] ? (
         <ProjectVisual project={project} locale={locale} priority />
-      )}
+      ) : null}
 
       <Grid className="project-meta-grid" columns="3" s={{ columns: 1 }} gap="12">
         <Column className="project-meta-card" background="surface" border="neutral-alpha-medium" radius="l" padding="l" gap="8">
@@ -254,9 +257,9 @@ export function PortfolioProject({ project, locale }: { project: Project; locale
         <Button href="#project-overview" size="s" variant="tertiary">
           {labels.overview}
         </Button>
-        {hasArchitecture && (
+        {architecture && (
           <Button href="#project-architecture" size="s" variant="tertiary">
-            {architectureCopy.navLabel}
+            {architecture.copy.navLabel}
           </Button>
         )}
         <Button href="#project-contributions" size="s" variant="tertiary">
@@ -304,22 +307,22 @@ export function PortfolioProject({ project, locale }: { project: Project; locale
             </Row>
           </Column>
         </Column>
-        {hasArchitecture && (
+        {architecture && (
           <Column
             as="section"
             id="project-architecture"
-            className="case-study-section bims-architecture-section"
+            className="case-study-section project-architecture-section"
             fillWidth
             gap="24"
             aria-labelledby="project-architecture-title"
           >
             <SectionHeading
               id="project-architecture-title"
-              eyebrow={architectureCopy.eyebrow}
-              title={architectureCopy.title}
-              description={architectureCopy.description}
+              eyebrow={architecture.copy.eyebrow}
+              title={architecture.copy.title}
+              description={architecture.copy.description}
             />
-            <BimsArchitectureDiagram locale={locale} />
+            <architecture.Diagram locale={locale} />
           </Column>
         )}
         <Column

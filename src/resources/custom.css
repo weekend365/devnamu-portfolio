@@ -637,6 +637,7 @@ body {
   scroll-margin-top: 8rem;
 }
 
+.project-architecture-section,
 .bims-architecture-section {
   max-width: 100%;
 }
