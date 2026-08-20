@@ -3,6 +3,7 @@
 import { Button, Column, Grid, Heading, Media, Row, Tag, Text } from "@once-ui-system/core";
 import { motion, useReducedMotion } from "motion/react";
 import { Magnetic } from "@/components/motion/Magnetic";
+import { DeviceScreenCanvas } from "@/components/motion/DeviceScreenCanvas";
 import { titleTransition } from "@/components/motion/tokens";
 import type { Locale } from "@/resources";
 import { getProject, localize, ui } from "@/resources";
@@ -119,20 +120,29 @@ export function FeaturedJango({ locale }: { locale: Locale }) {
           viewport={{ once: true, amount: 0.35, margin: "0px 0px -8% 0px" }}
           transition={{ ...titleTransition, delay: reduced ? 0 : 0.08 }}
         >
-          <Media
-            className="featured-app-screen"
+          <DeviceScreenCanvas
             src="/images/projects/jango/01.webp"
             alt={
               locale === "ko"
                 ? "장고야 부탁해 홈 대시보드 앱스토어 스크린샷"
                 : "Jango home dashboard App Store screenshot"
             }
-            aspectRatio="1125 / 2436"
-            objectFit="cover"
-            sizes="(max-width: 768px) 72vw, 288px"
-            priority
-            radius="xl"
-          />
+          >
+            <Media
+              className="featured-app-screen"
+              src="/images/projects/jango/01.webp"
+              alt={
+                locale === "ko"
+                  ? "장고야 부탁해 홈 대시보드 앱스토어 스크린샷"
+                  : "Jango home dashboard App Store screenshot"
+              }
+              aspectRatio="1125 / 2436"
+              objectFit="cover"
+              sizes="(max-width: 768px) 72vw, 288px"
+              priority
+              radius="xl"
+            />
+          </DeviceScreenCanvas>
         </motion.div>
       </Column>
     </Row>
