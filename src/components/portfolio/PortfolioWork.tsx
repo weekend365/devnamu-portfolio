@@ -1,5 +1,6 @@
-import { Column, Grid, Heading, Row, Text } from "@once-ui-system/core";
+import { Column, Heading, Row, Text } from "@once-ui-system/core";
 import { Reveal } from "@/components/motion/Reveal";
+import { Stagger, StaggerItem } from "@/components/motion/Stagger";
 import { STAGGER_CARD, STAGGER_M } from "@/components/motion/tokens";
 import { getContent, localize, pageCopy, type Locale } from "@/resources";
 import { ProjectCard } from "./ProjectCard";
@@ -24,23 +25,21 @@ export function PortfolioWork({ locale }: { locale: Locale }) {
             gap="16"
             s={{ direction: "column", vertical: "start" }}
           >
-            <Column gap="8">
-              <Reveal inView delay={0} y={10}>
+            <Stagger className="work-section-heading-copy" interval={STAGGER_M} amount={0.4}>
+              <StaggerItem y={8}>
                 <Text className="eyebrow" variant="label-strong-s" onBackground="brand-weak">
                   {content.navigation.featured}
                 </Text>
-              </Reveal>
-              <Reveal inView delay={STAGGER_M} y={10}>
+              </StaggerItem>
+              <StaggerItem y={8}>
                 <Heading as="h2" variant="display-strong-s" wrap="balance">
                   {localize(copy.featuredTitle, locale)}
                 </Heading>
-              </Reveal>
-            </Column>
-            <Reveal inView delay={STAGGER_M * 2} y={8}>
-              <Text variant="body-default-s" onBackground="neutral-weak">
-                01 / {content.projects.length}
-              </Text>
-            </Reveal>
+              </StaggerItem>
+            </Stagger>
+            <Text variant="body-default-s" onBackground="neutral-weak">
+              01 / {content.projects.length}
+            </Text>
           </Row>
           <Reveal inView y={12} className="featured-project-reveal">
             <ProjectCard
@@ -62,42 +61,34 @@ export function PortfolioWork({ locale }: { locale: Locale }) {
           gap="16"
           s={{ direction: "column", vertical: "start" }}
         >
-          <Column gap="8">
-            <Reveal inView delay={0} y={10}>
+          <Stagger className="work-section-heading-copy" interval={STAGGER_M} amount={0.4}>
+            <StaggerItem y={8}>
               <Text className="eyebrow" variant="label-strong-s" onBackground="brand-weak">
                 {content.navigation.selectedWork}
               </Text>
-            </Reveal>
-            <Reveal inView delay={STAGGER_M} y={10}>
+            </StaggerItem>
+            <StaggerItem y={8}>
               <Heading as="h2" variant="display-strong-s" wrap="balance">
                 {localize(copy.selectedTitle, locale)}
               </Heading>
-            </Reveal>
-          </Column>
-          <Reveal inView delay={STAGGER_M * 2} y={8}>
-            <Text variant="body-default-s" onBackground="neutral-weak">
-              02–{String(content.projects.length).padStart(2, "0")}
-            </Text>
-          </Reveal>
+            </StaggerItem>
+          </Stagger>
+          <Text variant="body-default-s" onBackground="neutral-weak">
+            02–{String(content.projects.length).padStart(2, "0")}
+          </Text>
         </Row>
-        <Grid columns="2" s={{ columns: 1 }} gap="24">
+        <Stagger className="work-project-grid" interval={STAGGER_CARD}>
           {otherProjects.map((project, index) => (
-            <Reveal
-              key={project.slug}
-              className="project-card-reveal"
-              inView
-              delay={index * STAGGER_CARD}
-              y={12}
-            >
+            <StaggerItem key={project.slug} className="project-card-reveal" y={12}>
               <ProjectCard
                 project={project}
                 locale={locale}
                 priority={index < 2}
                 headingLevel="h3"
               />
-            </Reveal>
+            </StaggerItem>
           ))}
-        </Grid>
+        </Stagger>
       </Column>
     </Column>
   );

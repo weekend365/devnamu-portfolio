@@ -2,8 +2,7 @@
 
 import { Column, Text } from "@once-ui-system/core";
 import { CountUp } from "@/components/motion/CountUp";
-import { Reveal } from "@/components/motion/Reveal";
-import { STAGGER_CARD } from "@/components/motion/tokens";
+import { Stagger, StaggerItem } from "@/components/motion/Stagger";
 
 export type ProofItem = {
   value: number;
@@ -20,15 +19,9 @@ export function ProofStrip({
   className?: string;
 }) {
   return (
-    <div className={["proof-strip", className].filter(Boolean).join(" ")}>
-      {items.map((item, index) => (
-        <Reveal
-          key={item.label}
-          className="proof-item-reveal"
-          inView
-          delay={index * STAGGER_CARD}
-          y={10}
-        >
+    <Stagger className={["proof-strip", className].filter(Boolean).join(" ")}>
+      {items.map((item) => (
+        <StaggerItem key={item.label} className="proof-item-reveal">
           <Column className="proof-item" gap="4">
             <Text
               variant="display-strong-s"
@@ -40,8 +33,8 @@ export function ProofStrip({
               {item.label}
             </Text>
           </Column>
-        </Reveal>
+        </StaggerItem>
       ))}
-    </div>
+    </Stagger>
   );
 }

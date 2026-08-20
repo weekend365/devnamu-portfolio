@@ -1,9 +1,8 @@
 "use client";
 
 import { Column, Heading, Row, Tag, Text } from "@once-ui-system/core";
-import { motion, useReducedMotion } from "motion/react";
-import { Reveal } from "@/components/motion/Reveal";
-import { EASE } from "@/components/motion/tokens";
+import { Stagger, StaggerItem } from "@/components/motion/Stagger";
+import { STAGGER_CARD } from "@/components/motion/tokens";
 import { localize, type Experience, type Locale } from "@/resources";
 
 export function HomeTimeline({
@@ -15,35 +14,16 @@ export function HomeTimeline({
   experiences: Experience[];
   detailed?: boolean;
 }) {
-  const reduced = useReducedMotion();
-
   return (
-    <Column gap={detailed ? "48" : "32"}>
-      {experiences.map((experience, index) => (
-        <Row
-          key={experience.company.en}
-          className="timeline-item"
-          gap="24"
-          fillWidth
-        >
-          <motion.span
-            className="timeline-line"
-            aria-hidden="true"
-            initial={reduced ? false : { scaleY: 0 }}
-            whileInView={{ scaleY: 1 }}
-            viewport={{ once: true, amount: 0.35 }}
-            transition={{ duration: 0.2, delay: reduced ? 0 : 0.08, ease: EASE }}
-            style={{ originY: 0 }}
-          />
-          <motion.span
-            className="timeline-dot"
-            aria-hidden="true"
-            initial={reduced ? false : { scale: 0.55, opacity: 0 }}
-            whileInView={{ scale: 1, opacity: 1 }}
-            viewport={{ once: true, amount: 0.35 }}
-            transition={{ duration: 0.35, delay: reduced ? 0 : index * 0.04, ease: EASE }}
-          />
-          <Reveal inView delay={0.1} y={10} style={{ flex: 1, minWidth: 0 }}>
+    <Stagger
+      className={detailed ? "timeline-stagger timeline-stagger-detailed" : "timeline-stagger"}
+      interval={STAGGER_CARD}
+    >
+      {experiences.map((experience) => (
+        <StaggerItem key={experience.company.en} y={10}>
+          <Row className="timeline-item" gap="24" fillWidth>
+            <span className="timeline-line" aria-hidden="true" />
+            <span className="timeline-dot" aria-hidden="true" />
             <Column fillWidth gap={detailed ? "20" : "12"} paddingBottom="24">
               <Row fillWidth horizontal="between" gap="16" s={{ direction: "column" }}>
                 <Column gap="4">
@@ -92,9 +72,9 @@ export function HomeTimeline({
                 </Column>
               ) : null}
             </Column>
-          </Reveal>
-        </Row>
+          </Row>
+        </StaggerItem>
       ))}
-    </Column>
+    </Stagger>
   );
 }

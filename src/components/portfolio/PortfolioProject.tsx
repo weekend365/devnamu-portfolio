@@ -1,5 +1,5 @@
 import { Button, Column, Grid, Heading, Row, Tag, Text } from "@once-ui-system/core";
-import { Reveal } from "@/components/motion/Reveal";
+import { Stagger, StaggerItem } from "@/components/motion/Stagger";
 import { STAGGER_CARD } from "@/components/motion/tokens";
 import {
   baseURL,
@@ -240,6 +240,7 @@ export function PortfolioProject({ project, locale }: { project: Project; locale
           <SectionHeading
             eyebrow={labels.overview}
             title={localize(copy.overviewTitle, locale)}
+            reveal={false}
           />
           <Column gap="16" maxWidth="s">
             {project.description.map((paragraph) => (
@@ -273,6 +274,7 @@ export function PortfolioProject({ project, locale }: { project: Project; locale
               eyebrow={architecture.copy.eyebrow}
               title={architecture.copy.title}
               description={architecture.copy.description}
+              reveal={false}
             />
             <architecture.Diagram locale={locale} />
           </Column>
@@ -284,7 +286,7 @@ export function PortfolioProject({ project, locale }: { project: Project; locale
           fillWidth
           gap="24"
         >
-          <SectionHeading eyebrow={labels.scope} title={labels.contributions} />
+          <SectionHeading eyebrow={labels.scope} title={labels.contributions} reveal={false} />
           <DetailList items={project.contributions} locale={locale} />
         </Column>
         {project.challenges.length > 0 && (
@@ -295,7 +297,7 @@ export function PortfolioProject({ project, locale }: { project: Project; locale
             fillWidth
             gap="24"
           >
-            <SectionHeading eyebrow={labels.constraints} title={labels.challenges} />
+            <SectionHeading eyebrow={labels.constraints} title={labels.challenges} reveal={false} />
             <DetailList items={project.challenges} locale={locale} />
           </Column>
         )}
@@ -307,7 +309,7 @@ export function PortfolioProject({ project, locale }: { project: Project; locale
             fillWidth
             gap="24"
           >
-            <SectionHeading eyebrow={labels.evidence} title={labels.results} />
+            <SectionHeading eyebrow={labels.evidence} title={labels.results} reveal={false} />
             <Grid className="result-list" columns="2" s={{ columns: 1 }} gap="12">
               {project.results.map((result, index) => (
                 <Column
@@ -334,24 +336,18 @@ export function PortfolioProject({ project, locale }: { project: Project; locale
 
       <Column as="section" gap="40">
         <SectionHeading title={labels.related} />
-        <Grid columns="2" s={{ columns: 1 }} gap="24">
-          {related.map((item, index) => (
-            <Reveal
-              key={item.slug}
-              className="project-card-reveal"
-              inView
-              delay={index * STAGGER_CARD}
-              y={12}
-            >
+        <Stagger className="related-project-grid" interval={STAGGER_CARD}>
+          {related.map((item) => (
+            <StaggerItem key={item.slug} className="project-card-reveal" y={12}>
               <ProjectCard
                 project={item}
                 locale={locale}
                 headingLevel="h3"
                 variant="compact"
               />
-            </Reveal>
+            </StaggerItem>
           ))}
-        </Grid>
+        </Stagger>
       </Column>
     </Column>
   );

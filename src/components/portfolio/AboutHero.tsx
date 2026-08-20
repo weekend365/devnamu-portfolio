@@ -3,7 +3,7 @@
 import { Button, Column, Heading, Media, Row, Text } from "@once-ui-system/core";
 import { motion, useReducedMotion } from "motion/react";
 import { Magnetic } from "@/components/motion/Magnetic";
-import { Reveal } from "@/components/motion/Reveal";
+import { Stagger, StaggerItem } from "@/components/motion/Stagger";
 import { EASE, STAGGER_S } from "@/components/motion/tokens";
 import { getContent, localize, pageCopy, person, type Locale } from "@/resources";
 
@@ -21,35 +21,37 @@ export function AboutHero({ locale }: { locale: Locale }) {
       s={{ direction: "column-reverse", vertical: "start" }}
     >
       <Column flex={8} gap="20">
-        <Reveal delay={0} y={8}>
-          <Text className="eyebrow" variant="label-strong-m" onBackground="brand-weak">
-            {person.brand} · {labels.about}
-          </Text>
-        </Reveal>
-        <Reveal delay={STAGGER_S} y={13}>
-          <Heading as="h1" className="hero-title" variant="display-strong-l" wrap="balance">
-            {localize(copy.title, locale)}
-          </Heading>
-        </Reveal>
-        <Reveal delay={STAGGER_S * 2} y={8}>
-          <Text variant="heading-default-l" onBackground="neutral-weak" wrap="balance">
-            {localize(copy.summary, locale)}
-          </Text>
-        </Reveal>
-        <Reveal delay={STAGGER_S * 3} y={8}>
-          <Text variant="label-strong-m" onBackground="brand-weak">
-            {person.role[locale]}
-          </Text>
-        </Reveal>
-        <Reveal delay={STAGGER_S * 4} y={8}>
-          <Row gap="12" wrap>
-            <Magnetic>
-              <Button href={`mailto:${person.email}`} variant="primary" prefixIcon="email">
-                {labels.contact}
-              </Button>
-            </Magnetic>
-          </Row>
-        </Reveal>
+        <Stagger inView={false} interval={STAGGER_S} contents>
+          <StaggerItem y={8}>
+            <Text className="eyebrow" variant="label-strong-m" onBackground="brand-weak">
+              {person.brand} · {labels.about}
+            </Text>
+          </StaggerItem>
+          <StaggerItem y={13} fade={false}>
+            <Heading as="h1" className="hero-title" variant="display-strong-l" wrap="balance">
+              {localize(copy.title, locale)}
+            </Heading>
+          </StaggerItem>
+          <StaggerItem y={8}>
+            <Text variant="heading-default-l" onBackground="neutral-weak" wrap="balance">
+              {localize(copy.summary, locale)}
+            </Text>
+          </StaggerItem>
+          <StaggerItem y={8}>
+            <Text variant="label-strong-m" onBackground="brand-weak">
+              {person.role[locale]}
+            </Text>
+          </StaggerItem>
+          <StaggerItem y={8}>
+            <Row gap="12" wrap>
+              <Magnetic>
+                <Button href={`mailto:${person.email}`} variant="primary" prefixIcon="email">
+                  {labels.contact}
+                </Button>
+              </Magnetic>
+            </Row>
+          </StaggerItem>
+        </Stagger>
       </Column>
       <Column className="about-hero-meta" gap="12" horizontal="center">
         <motion.div

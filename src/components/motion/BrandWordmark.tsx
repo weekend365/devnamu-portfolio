@@ -11,8 +11,8 @@ export function BrandWordmark() {
   return (
     <motion.div
       className="portfolio-wordmark-motion"
-      initial={reduced ? false : { letterSpacing: "0.16em", opacity: 0.4 }}
-      animate={{ letterSpacing: "0.1em", opacity: 1 }}
+      initial={reduced ? false : { opacity: 0.45 }}
+      animate={{ opacity: 1 }}
       transition={wordmarkTransition}
     >
       <Text className="portfolio-wordmark" variant="label-strong-m">

@@ -1,7 +1,6 @@
 import {
   Button,
   Column,
-  Grid,
   Heading,
   Row,
   Tag,
@@ -10,6 +9,7 @@ import {
 import { Magnetic } from "@/components/motion/Magnetic";
 import { ProofStrip } from "@/components/motion/ProofStrip";
 import { Reveal } from "@/components/motion/Reveal";
+import { Stagger, StaggerItem } from "@/components/motion/Stagger";
 import { STAGGER_CARD } from "@/components/motion/tokens";
 import { getContent, localize, pageCopy, person, type Locale } from "@/resources";
 import { AboutHero } from "./AboutHero";
@@ -83,12 +83,7 @@ export function PortfolioAbout({ locale }: { locale: Locale }) {
           eyebrow={labels.workingPrinciples}
           title={labels.professionalSummary}
         />
-        <Grid
-          className="principles-grid"
-          columns="3"
-          s={{ columns: 1 }}
-          gap="16"
-        >
+        <Stagger className="principles-grid" interval={STAGGER_CARD}>
           {[
             locale === "ko"
               ? "01 · 문제를 구조화합니다"
@@ -100,13 +95,7 @@ export function PortfolioAbout({ locale }: { locale: Locale }) {
               ? "03 · 운영을 고려합니다"
               : "03 · Design for operations",
           ].map((title, index) => (
-            <Reveal
-              key={title}
-              className="card-reveal"
-              inView
-              delay={index * STAGGER_CARD}
-              y={12}
-            >
+            <StaggerItem key={title} className="card-reveal" y={12}>
               <Column
                 className="principle-card"
                 background="surface"
@@ -122,9 +111,9 @@ export function PortfolioAbout({ locale }: { locale: Locale }) {
                   {localize(content.person.summary[index], locale)}
                 </Text>
               </Column>
-            </Reveal>
+            </StaggerItem>
           ))}
-        </Grid>
+        </Stagger>
       </Column>
 
       <Column as="section" gap="40">
@@ -132,15 +121,9 @@ export function PortfolioAbout({ locale }: { locale: Locale }) {
           eyebrow={labels.technicalSkills}
           title={localize(copy.capabilitiesTitle, locale)}
         />
-        <Grid className="capability-grid" columns="2" s={{ columns: 1 }} gap="16">
+        <Stagger className="capability-grid" interval={STAGGER_CARD}>
           {capabilityGroups.map((category, index) => (
-            <Reveal
-              key={category.title}
-              className="card-reveal"
-              inView
-              delay={index * STAGGER_CARD}
-              y={12}
-            >
+            <StaggerItem key={category.title} className="card-reveal" y={12}>
               <Column
                 className={`skill-card${index < 2 ? " skill-card-core" : ""}`}
                 background="surface"
@@ -169,9 +152,9 @@ export function PortfolioAbout({ locale }: { locale: Locale }) {
                   ))}
                 </Row>
               </Column>
-            </Reveal>
+            </StaggerItem>
           ))}
-        </Grid>
+        </Stagger>
       </Column>
 
       <Column as="section" gap="32">
@@ -179,7 +162,7 @@ export function PortfolioAbout({ locale }: { locale: Locale }) {
           eyebrow={labels.education}
           title={localize(copy.credentialsTitle, locale)}
         />
-        <Grid className="credentials-grid" columns="3" s={{ columns: 1 }} gap="16">
+        <Stagger className="credentials-grid" interval={STAGGER_CARD}>
           {[
             {
               title: labels.education,
@@ -232,14 +215,8 @@ export function PortfolioAbout({ locale }: { locale: Locale }) {
                 </Column>
               ),
             },
-          ].map((card, index) => (
-            <Reveal
-              key={card.title}
-              className="card-reveal"
-              inView
-              delay={index * STAGGER_CARD}
-              y={12}
-            >
+          ].map((card) => (
+            <StaggerItem key={card.title} className="card-reveal" y={12}>
               <Column
                 className="credential-card"
                 background="surface"
@@ -253,9 +230,9 @@ export function PortfolioAbout({ locale }: { locale: Locale }) {
                 </Heading>
                 {card.body}
               </Column>
-            </Reveal>
+            </StaggerItem>
           ))}
-        </Grid>
+        </Stagger>
       </Column>
 
       <Column as="section" gap="32">

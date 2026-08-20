@@ -1,6 +1,7 @@
-import { Button, Column, Grid, Heading, Row, Text } from "@once-ui-system/core";
+import { Button, Column, Heading, Row, Text } from "@once-ui-system/core";
 import { Magnetic } from "@/components/motion/Magnetic";
 import { Reveal } from "@/components/motion/Reveal";
+import { Stagger, StaggerItem } from "@/components/motion/Stagger";
 import { STAGGER_CARD } from "@/components/motion/tokens";
 import { baseURL, getContent, localize, pageCopy, person, type Locale } from "@/resources";
 import { localePath } from "@/utils/site-metadata";
@@ -77,22 +78,9 @@ export function PortfolioHome({ locale }: { locale: Locale }) {
             {labels.allProjects}
           </Button>
         </Row>
-        <Grid
-          className="home-project-grid"
-          columns="2"
-          m={{ columns: 2 }}
-          s={{ columns: 1 }}
-          gap="24"
-          fillWidth
-        >
+        <Stagger className="home-project-grid" interval={STAGGER_CARD}>
           {secondaryProjects.map((project, index) => (
-            <Reveal
-              key={project.slug}
-              className="project-card-reveal"
-              inView
-              delay={index * STAGGER_CARD}
-              y={12}
-            >
+            <StaggerItem key={project.slug} className="project-card-reveal" y={12}>
               <ProjectCard
                 project={project}
                 locale={locale}
@@ -100,9 +88,9 @@ export function PortfolioHome({ locale }: { locale: Locale }) {
                 headingLevel="h3"
                 variant="compact"
               />
-            </Reveal>
+            </StaggerItem>
           ))}
-        </Grid>
+        </Stagger>
       </Column>
 
       <Column as="section" className="home-career" gap="40">

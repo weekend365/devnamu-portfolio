@@ -1,7 +1,7 @@
 "use client";
 
 import { Column, Heading, Text } from "@once-ui-system/core";
-import { Reveal } from "@/components/motion/Reveal";
+import { Stagger, StaggerItem } from "@/components/motion/Stagger";
 import { STAGGER_M } from "@/components/motion/tokens";
 
 export function SectionHeading({
@@ -9,33 +9,55 @@ export function SectionHeading({
   eyebrow,
   title,
   description,
+  reveal = true,
 }: {
   id?: string;
   eyebrow?: string;
   title: string;
   description?: string;
+  reveal?: boolean;
 }) {
-  return (
-    <Column className="section-heading" gap="8" maxWidth="s" fillWidth>
-      {eyebrow && (
-        <Reveal inView delay={0} y={10}>
+  if (!reveal) {
+    return (
+      <Column className="section-heading" gap="8" maxWidth="s" fillWidth>
+        {eyebrow && (
           <Text className="eyebrow" variant="label-strong-s" onBackground="brand-weak">
             {eyebrow}
           </Text>
-        </Reveal>
-      )}
-      <Reveal inView delay={STAGGER_M} y={10}>
+        )}
         <Heading id={id} as="h2" variant="display-strong-s" wrap="balance">
           {title}
         </Heading>
-      </Reveal>
-      {description && (
-        <Reveal inView delay={STAGGER_M * 2} y={10}>
+        {description && (
           <Text variant="body-default-l" onBackground="neutral-weak" wrap="balance">
             {description}
           </Text>
-        </Reveal>
-      )}
-    </Column>
+        )}
+      </Column>
+    );
+  }
+
+  return (
+    <Stagger className="section-heading" interval={STAGGER_M} amount={0.4}>
+      {eyebrow ? (
+        <StaggerItem y={8}>
+          <Text className="eyebrow" variant="label-strong-s" onBackground="brand-weak">
+            {eyebrow}
+          </Text>
+        </StaggerItem>
+      ) : null}
+      <StaggerItem y={8}>
+        <Heading id={id} as="h2" variant="display-strong-s" wrap="balance">
+          {title}
+        </Heading>
+      </StaggerItem>
+      {description ? (
+        <StaggerItem y={8}>
+          <Text variant="body-default-l" onBackground="neutral-weak" wrap="balance">
+            {description}
+          </Text>
+        </StaggerItem>
+      ) : null}
+    </Stagger>
   );
 }

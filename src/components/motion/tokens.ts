@@ -44,8 +44,8 @@ export const fadeUp: Variants = {
 };
 
 export const fadeUpTitle: Variants = {
-  hidden: { opacity: 0, y: 16 },
-  show: { opacity: 1, y: 0, transition: titleTransition },
+  hidden: { y: 16 },
+  show: { y: 0, transition: titleTransition },
 };
 
 export const stagger: Variants = {

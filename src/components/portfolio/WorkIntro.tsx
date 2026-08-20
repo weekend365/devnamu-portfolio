@@ -1,7 +1,7 @@
 "use client";
 
 import { Column, Heading, Text } from "@once-ui-system/core";
-import { Reveal } from "@/components/motion/Reveal";
+import { Stagger, StaggerItem } from "@/components/motion/Stagger";
 import { STAGGER_M } from "@/components/motion/tokens";
 import { getContent, localize, pageCopy, type Locale } from "@/resources";
 
@@ -11,21 +11,23 @@ export function WorkIntro({ locale }: { locale: Locale }) {
 
   return (
     <Column as="header" maxWidth="s" gap="16">
-      <Reveal delay={0} y={8}>
-        <Text className="eyebrow" variant="label-strong-m" onBackground="brand-weak">
-          {content.navigation.work}
-        </Text>
-      </Reveal>
-      <Reveal delay={STAGGER_M} y={12}>
-        <Heading as="h1" className="hero-name" variant="display-strong-l" wrap="balance">
-          {localize(copy.title, locale)}
-        </Heading>
-      </Reveal>
-      <Reveal delay={STAGGER_M * 2} y={8}>
-        <Text variant="heading-default-l" onBackground="neutral-weak">
-          {localize(copy.summary, locale)}
-        </Text>
-      </Reveal>
+      <Stagger inView={false} interval={STAGGER_M} contents>
+        <StaggerItem y={8}>
+          <Text className="eyebrow" variant="label-strong-m" onBackground="brand-weak">
+            {content.navigation.work}
+          </Text>
+        </StaggerItem>
+        <StaggerItem y={12} fade={false}>
+          <Heading as="h1" className="hero-name" variant="display-strong-l" wrap="balance">
+            {localize(copy.title, locale)}
+          </Heading>
+        </StaggerItem>
+        <StaggerItem y={8}>
+          <Text variant="heading-default-l" onBackground="neutral-weak">
+            {localize(copy.summary, locale)}
+          </Text>
+        </StaggerItem>
+      </Stagger>
     </Column>
   );
 }
