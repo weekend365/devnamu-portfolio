@@ -1,4 +1,6 @@
 import { Button, Column, Grid, Heading, Row, Tag, Text } from "@once-ui-system/core";
+import { Reveal } from "@/components/motion/Reveal";
+import { STAGGER_CARD } from "@/components/motion/tokens";
 import {
   baseURL,
   getProjects,
@@ -12,7 +14,8 @@ import {
 import { localePath } from "@/utils/site-metadata";
 import { BimsArchitectureDiagram, bimsArchitectureCopy } from "./BimsArchitectureDiagram";
 import { KcscArchitectureDiagram, kcscArchitectureCopy } from "./KcscArchitectureDiagram";
-import { getProjectStatusVariant, ProjectCard } from "./ProjectCard";
+import { ProjectHero } from "./ProjectHero";
+import { ProjectCard } from "./ProjectCard";
 import { ProjectScreenshotCarousel } from "./ProjectScreenshotCarousel";
 import { ProjectVisual } from "./ProjectVisual";
 import { SectionHeading } from "./SectionHeading";
@@ -108,58 +111,7 @@ export function PortfolioProject({ project, locale }: { project: Project; locale
           sameAs: project.repository ?? project.externalLink?.href,
         }}
       />
-      <Column as="header" className="project-hero" gap="24">
-        <Button
-          href={localePath(locale, "/work")}
-          variant="tertiary"
-          prefixIcon="chevronLeft"
-          size="s"
-        >
-          {labels.backToWork}
-        </Button>
-        <Row gap="8" wrap>
-          {project.featured && <Tag variant="brand">{labels.featured}</Tag>}
-          <Tag variant={getProjectStatusVariant(localize(project.status, locale))}>
-            {localize(project.status, locale)}
-          </Tag>
-        </Row>
-        <Heading as="h1" className="hero-name" variant="display-strong-l" wrap="balance">
-          {projectTitle}
-        </Heading>
-        {project.technicalName && (
-          <Text variant="label-default-m" onBackground="neutral-weak">
-            {localize(copy.namespace, locale)} · {project.technicalName}
-          </Text>
-        )}
-        <Column className="project-summary" maxWidth="s" gap="12">
-          <Text variant="heading-default-l" onBackground="neutral-weak" wrap="balance">
-            {localize(project.summary, locale)}
-          </Text>
-          <Text variant="body-default-s" onBackground="neutral-weak">
-            {localize(project.company, locale)} · {localize(project.period, locale)}
-          </Text>
-        </Column>
-        <Row gap="12" wrap>
-          {project.repository && (
-            <Button
-              href={project.repository}
-              prefixIcon="github"
-              suffixIcon="arrowUpRightFromSquare"
-            >
-              {labels.viewGithub}
-            </Button>
-          )}
-          {project.externalLink && !project.demoAccess && (
-            <Button
-              href={project.externalLink.href}
-              variant="secondary"
-              suffixIcon="arrowUpRightFromSquare"
-            >
-              {localize(project.externalLink.label, locale)}
-            </Button>
-          )}
-        </Row>
-      </Column>
+      <ProjectHero project={project} locale={locale} />
 
       <Grid
         className="project-story-grid"
@@ -383,14 +335,21 @@ export function PortfolioProject({ project, locale }: { project: Project; locale
       <Column as="section" gap="40">
         <SectionHeading title={labels.related} />
         <Grid columns="2" s={{ columns: 1 }} gap="24">
-          {related.map((item) => (
-            <ProjectCard
+          {related.map((item, index) => (
+            <Reveal
               key={item.slug}
-              project={item}
-              locale={locale}
-              headingLevel="h3"
-              variant="compact"
-            />
+              className="project-card-reveal"
+              inView
+              delay={index * STAGGER_CARD}
+              y={12}
+            >
+              <ProjectCard
+                project={item}
+                locale={locale}
+                headingLevel="h3"
+                variant="compact"
+              />
+            </Reveal>
           ))}
         </Grid>
       </Column>

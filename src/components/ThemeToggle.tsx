@@ -1,8 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { motion, useReducedMotion } from "motion/react";
 import { ToggleButton, useTheme } from "@once-ui-system/core";
+import { useEffect, useState } from "react";
 import type { Locale } from "@/resources";
+import { navTransition } from "./motion/tokens";
 
 export const ThemeToggle = ({
   locale,
@@ -12,6 +14,7 @@ export const ThemeToggle = ({
   showLabel?: boolean;
 }) => {
   const { setTheme } = useTheme();
+  const reduced = useReducedMotion();
   const [currentTheme, setCurrentTheme] = useState("light");
 
   useEffect(() => {
@@ -26,14 +29,22 @@ export const ThemeToggle = ({
       : `Switch to ${nextTheme} mode`;
 
   return (
-    <ToggleButton
-      prefixIcon={icon}
-      label={showLabel ? label : undefined}
-      onClick={() => {
-        setTheme(nextTheme);
-        setCurrentTheme(nextTheme);
-      }}
-      aria-label={label}
-    />
+    <motion.span
+      key={icon}
+      className="theme-toggle-motion"
+      initial={reduced ? false : { opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={reduced ? { duration: 0 } : navTransition}
+    >
+      <ToggleButton
+        prefixIcon={icon}
+        label={showLabel ? label : undefined}
+        onClick={() => {
+          setTheme(nextTheme);
+          setCurrentTheme(nextTheme);
+        }}
+        aria-label={label}
+      />
+    </motion.span>
   );
 };

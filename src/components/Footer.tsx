@@ -25,6 +25,7 @@ export function Footer({ locale }: { locale: Locale }) {
         </Text>
         <Row gap="8" vertical="center">
           <IconButton
+            className="footer-icon"
             href={person.github}
             icon="github"
             variant="tertiary"
@@ -32,6 +33,7 @@ export function Footer({ locale }: { locale: Locale }) {
             aria-label="GitHub"
           />
           <IconButton
+            className="footer-icon"
             href={`mailto:${person.email}`}
             icon="email"
             variant="tertiary"

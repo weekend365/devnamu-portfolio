@@ -3,12 +3,17 @@ import {
   Column,
   Grid,
   Heading,
-  Media,
   Row,
   Tag,
   Text,
 } from "@once-ui-system/core";
+import { Magnetic } from "@/components/motion/Magnetic";
+import { ProofStrip } from "@/components/motion/ProofStrip";
+import { Reveal } from "@/components/motion/Reveal";
+import { STAGGER_CARD } from "@/components/motion/tokens";
 import { getContent, localize, pageCopy, person, type Locale } from "@/resources";
+import { AboutHero } from "./AboutHero";
+import { HomeTimeline } from "./HomeTimeline";
 import { SectionHeading } from "./SectionHeading";
 
 export function PortfolioAbout({ locale }: { locale: Locale }) {
@@ -39,90 +44,16 @@ export function PortfolioAbout({ locale }: { locale: Locale }) {
 
   return (
     <Column className="page-stack about-page" maxWidth="m" fillWidth gap="80">
-      <Row
-        as="header"
-        fillWidth
-        gap="xl"
-        vertical="center"
-        s={{ direction: "column-reverse", vertical: "start" }}
-      >
-        <Column flex={8} gap="20">
-          <Text
-            className="eyebrow"
-            variant="label-strong-m"
-            onBackground="brand-weak"
-          >
-            {person.brand} · {labels.about}
-          </Text>
-          <Heading
-            as="h1"
-            className="hero-title"
-            variant="display-strong-l"
-            wrap="balance"
-          >
-            {localize(copy.title, locale)}
-          </Heading>
-          <Text variant="heading-default-l" onBackground="neutral-weak" wrap="balance">
-            {localize(copy.summary, locale)}
-          </Text>
-          <Text variant="label-strong-m" onBackground="brand-weak">
-            {person.role[locale]}
-          </Text>
-          <Row gap="12" wrap>
-            <Button
-              href={`mailto:${person.email}`}
-              variant="primary"
-              prefixIcon="email"
-            >
-              {labels.contact}
-            </Button>
-          </Row>
-        </Column>
-        <Column className="about-hero-meta" gap="12" horizontal="center">
-          <Media
-            className="profile-image"
-            src={person.avatar}
-            alt={
-              locale === "ko"
-                ? `${person.brand} ${person.name[locale]} 프로필 사진`
-                : `Portrait of ${person.name[locale]}`
-            }
-            aspectRatio="1 / 1"
-            objectFit="cover"
-            sizes="(max-width: 768px) 112px, 176px"
-            priority
-            radius="full"
-          />
-        </Column>
-      </Row>
+      <AboutHero locale={locale} />
 
-      <Row
-        className="proof-strip about-proof-strip"
-        fillWidth
-        gap="8"
-        s={{ direction: "column" }}
-      >
-        <Column className="proof-item" gap="4">
-          <Text variant="display-strong-s" onBackground="brand-weak">
-            3+
-          </Text>
-          <Text variant="label-default-s" onBackground="neutral-weak">
-            {localize(copy.proofYears, locale)}
-          </Text>
-        </Column>
-        <Column className="proof-item" gap="4">
-          <Text variant="display-strong-s">4</Text>
-          <Text variant="label-default-s" onBackground="neutral-weak">
-            {localize(copy.proofDomains, locale)}
-          </Text>
-        </Column>
-        <Column className="proof-item" gap="4">
-          <Text variant="display-strong-s">2</Text>
-          <Text variant="label-default-s" onBackground="neutral-weak">
-            {localize(copy.proofLanguages, locale)}
-          </Text>
-        </Column>
-      </Row>
+      <ProofStrip
+        className="about-proof-strip"
+        items={[
+          { value: 3, suffix: "+", label: localize(copy.proofYears, locale), brand: true },
+          { value: 4, label: localize(copy.proofDomains, locale) },
+          { value: 2, label: localize(copy.proofLanguages, locale) },
+        ]}
+      />
 
       <Column as="section" gap="32">
         <SectionHeading
@@ -144,60 +75,7 @@ export function PortfolioAbout({ locale }: { locale: Locale }) {
 
       <Column as="section" gap="40">
         <SectionHeading title={labels.careerTimeline} />
-        <Column gap="48">
-          {content.experiences.map((experience) => (
-            <Row
-              key={experience.company.en}
-              className="timeline-item"
-              gap="24"
-              fillWidth
-            >
-              <span className="timeline-dot" aria-hidden="true" />
-              <Column fillWidth gap="20" paddingBottom="24">
-                <Row
-                  fillWidth
-                  horizontal="between"
-                  gap="16"
-                  s={{ direction: "column" }}
-                >
-                  <Column gap="4">
-                    <Heading as="h3" variant="heading-strong-xl">
-                      {localize(experience.company, locale)}
-                    </Heading>
-                    <Text onBackground="brand-weak">
-                      {localize(experience.role, locale)}
-                    </Text>
-                  </Column>
-                  <Column className="timeline-meta" gap="4" align="right">
-                    <Text variant="label-strong-s">
-                      {localize(experience.period, locale)}
-                    </Text>
-                    <Text variant="label-default-s" onBackground="neutral-weak">
-                      {localize(experience.location, locale)}
-                    </Text>
-                  </Column>
-                </Row>
-                <Row wrap gap="8">
-                  {experience.projects.map((project) => (
-                    <Tag key={project.en}>{localize(project, locale)}</Tag>
-                  ))}
-                </Row>
-                <Column as="ul" gap="12" paddingLeft="24">
-                  {experience.achievements.map((achievement) => (
-                    <Text
-                      as="li"
-                      key={achievement.en}
-                      variant="body-default-m"
-                      onBackground="neutral-medium"
-                    >
-                      {localize(achievement, locale)}
-                    </Text>
-                  ))}
-                </Column>
-              </Column>
-            </Row>
-          ))}
-        </Column>
+        <HomeTimeline locale={locale} experiences={content.experiences} detailed />
       </Column>
 
       <Column as="section" gap="32">
@@ -222,22 +100,29 @@ export function PortfolioAbout({ locale }: { locale: Locale }) {
               ? "03 · 운영을 고려합니다"
               : "03 · Design for operations",
           ].map((title, index) => (
-            <Column
+            <Reveal
               key={title}
-              className="principle-card"
-              background="surface"
-              border="neutral-alpha-medium"
-              radius="l"
-              padding="l"
-              gap="12"
+              className="card-reveal"
+              inView
+              delay={index * STAGGER_CARD}
+              y={12}
             >
-              <Text variant="label-strong-s" onBackground="brand-weak">
-                {title}
-              </Text>
-              <Text variant="body-default-l" onBackground="neutral-medium">
-                {localize(content.person.summary[index], locale)}
-              </Text>
-            </Column>
+              <Column
+                className="principle-card"
+                background="surface"
+                border="neutral-alpha-medium"
+                radius="l"
+                padding="l"
+                gap="12"
+              >
+                <Text variant="label-strong-s" onBackground="brand-weak">
+                  {title}
+                </Text>
+                <Text variant="body-default-l" onBackground="neutral-medium">
+                  {localize(content.person.summary[index], locale)}
+                </Text>
+              </Column>
+            </Reveal>
           ))}
         </Grid>
       </Column>
@@ -249,35 +134,42 @@ export function PortfolioAbout({ locale }: { locale: Locale }) {
         />
         <Grid className="capability-grid" columns="2" s={{ columns: 1 }} gap="16">
           {capabilityGroups.map((category, index) => (
-            <Column
+            <Reveal
               key={category.title}
-              className={`skill-card${index < 2 ? " skill-card-core" : ""}`}
-              background="surface"
-              border="neutral-alpha-medium"
-              radius="l"
-              padding="l"
-              gap="16"
+              className="card-reveal"
+              inView
+              delay={index * STAGGER_CARD}
+              y={12}
             >
-              <Row fillWidth horizontal="between" vertical="center" gap="12">
-                <Heading as="h3" variant="heading-strong-m">
-                  {category.title}
-                </Heading>
-                <Text variant="label-default-xs" onBackground="neutral-weak">
-                  {index < 2
-                    ? locale === "ko"
-                      ? "핵심"
-                      : "Core"
-                    : locale === "ko"
-                      ? "확장"
-                      : "Supporting"}
-                </Text>
-              </Row>
-              <Row wrap gap="8">
-                {category.skills.map((skill) => (
-                  <Tag key={skill}>{skill}</Tag>
-                ))}
-              </Row>
-            </Column>
+              <Column
+                className={`skill-card${index < 2 ? " skill-card-core" : ""}`}
+                background="surface"
+                border="neutral-alpha-medium"
+                radius="l"
+                padding="l"
+                gap="16"
+              >
+                <Row fillWidth horizontal="between" vertical="center" gap="12">
+                  <Heading as="h3" variant="heading-strong-m">
+                    {category.title}
+                  </Heading>
+                  <Text variant="label-default-xs" onBackground="neutral-weak">
+                    {index < 2
+                      ? locale === "ko"
+                        ? "핵심"
+                        : "Core"
+                      : locale === "ko"
+                        ? "확장"
+                        : "Supporting"}
+                  </Text>
+                </Row>
+                <Row wrap gap="8">
+                  {category.skills.map((skill) => (
+                    <Tag key={skill}>{skill}</Tag>
+                  ))}
+                </Row>
+              </Column>
+            </Reveal>
           ))}
         </Grid>
       </Column>
@@ -288,78 +180,81 @@ export function PortfolioAbout({ locale }: { locale: Locale }) {
           title={localize(copy.credentialsTitle, locale)}
         />
         <Grid className="credentials-grid" columns="3" s={{ columns: 1 }} gap="16">
-          <Column
-            className="credential-card"
-            background="surface"
-            border="neutral-alpha-medium"
-            radius="l"
-            padding="l"
-            gap="16"
-          >
-            <Heading as="h3" variant="heading-strong-m">
-              {labels.education}
-            </Heading>
-            <Column as="ul" className="credential-list" gap="0" paddingLeft="0">
-              {content.education.map((item) => (
-                <Column as="li" className="credential-item" key={item.institution.en} gap="4">
-                  <Text variant="label-strong-s">{localize(item.institution, locale)}</Text>
-                  <Text variant="body-default-s" onBackground="neutral-medium">
-                    {localize(item.program, locale)}
-                  </Text>
-                  <Text variant="label-default-xs" onBackground="neutral-weak">
-                    {item.period}
-                  </Text>
+          {[
+            {
+              title: labels.education,
+              body: (
+                <Column as="ul" className="credential-list" gap="0" paddingLeft="0">
+                  {content.education.map((item) => (
+                    <Column as="li" className="credential-item" key={item.institution.en} gap="4">
+                      <Text variant="label-strong-s">{localize(item.institution, locale)}</Text>
+                      <Text variant="body-default-s" onBackground="neutral-medium">
+                        {localize(item.program, locale)}
+                      </Text>
+                      <Text variant="label-default-xs" onBackground="neutral-weak">
+                        {item.period}
+                      </Text>
+                    </Column>
+                  ))}
                 </Column>
-              ))}
-            </Column>
-          </Column>
-          <Column
-            className="credential-card"
-            background="surface"
-            border="neutral-alpha-medium"
-            radius="l"
-            padding="l"
-            gap="16"
-          >
-            <Heading as="h3" variant="heading-strong-m">
-              {labels.training}
-            </Heading>
-            <Column as="ul" className="credential-list" gap="0" paddingLeft="0">
-              {content.training.map((item) => (
-                <Column as="li" className="credential-item" key={item.institution.en} gap="4">
-                  <Text variant="label-strong-s">{localize(item.institution, locale)}</Text>
-                  <Text variant="body-default-s" onBackground="neutral-medium">
-                    {localize(item.program, locale)}
-                  </Text>
-                  <Text variant="label-default-xs" onBackground="neutral-weak">
-                    {item.period}
-                  </Text>
+              ),
+            },
+            {
+              title: labels.training,
+              body: (
+                <Column as="ul" className="credential-list" gap="0" paddingLeft="0">
+                  {content.training.map((item) => (
+                    <Column as="li" className="credential-item" key={item.institution.en} gap="4">
+                      <Text variant="label-strong-s">{localize(item.institution, locale)}</Text>
+                      <Text variant="body-default-s" onBackground="neutral-medium">
+                        {localize(item.program, locale)}
+                      </Text>
+                      <Text variant="label-default-xs" onBackground="neutral-weak">
+                        {item.period}
+                      </Text>
+                    </Column>
+                  ))}
                 </Column>
-              ))}
-            </Column>
-          </Column>
-          <Column
-            className="credential-card"
-            background="surface"
-            border="neutral-alpha-medium"
-            radius="l"
-            padding="l"
-            gap="16"
-          >
-            <Heading as="h3" variant="heading-strong-m">
-              {labels.certifications}
-            </Heading>
-            <Column as="ul" className="credential-list" gap="0" paddingLeft="0">
-              {content.certifications.map((item) => (
-                <Column as="li" className="credential-item" key={item.name.en} gap="4">
-                  <Text variant="label-strong-s">{localize(item.name, locale)}</Text>
-                  <Text variant="label-default-xs" onBackground="neutral-weak">
-                    {localize(item.detail, locale)}
-                  </Text>
+              ),
+            },
+            {
+              title: labels.certifications,
+              body: (
+                <Column as="ul" className="credential-list" gap="0" paddingLeft="0">
+                  {content.certifications.map((item) => (
+                    <Column as="li" className="credential-item" key={item.name.en} gap="4">
+                      <Text variant="label-strong-s">{localize(item.name, locale)}</Text>
+                      <Text variant="label-default-xs" onBackground="neutral-weak">
+                        {localize(item.detail, locale)}
+                      </Text>
+                    </Column>
+                  ))}
                 </Column>
-              ))}
-            </Column>
-          </Column>
+              ),
+            },
+          ].map((card, index) => (
+            <Reveal
+              key={card.title}
+              className="card-reveal"
+              inView
+              delay={index * STAGGER_CARD}
+              y={12}
+            >
+              <Column
+                className="credential-card"
+                background="surface"
+                border="neutral-alpha-medium"
+                radius="l"
+                padding="l"
+                gap="16"
+              >
+                <Heading as="h3" variant="heading-strong-m">
+                  {card.title}
+                </Heading>
+                {card.body}
+              </Column>
+            </Reveal>
+          ))}
         </Grid>
       </Column>
 
@@ -383,30 +278,34 @@ export function PortfolioAbout({ locale }: { locale: Locale }) {
         </Column>
       </Column>
 
-      <Column
-        as="section"
-        className="contact-section"
-        background="surface"
-        border="neutral-alpha-medium"
-        radius="xl"
-        padding="xl"
-        gap="20"
-        horizontal="center"
-        align="center"
-      >
-        <Text className="eyebrow" variant="label-strong-s" onBackground="brand-weak">
-          {labels.contact}
-        </Text>
-        <Heading as="h2" variant="display-strong-s" wrap="balance">
-          {localize(copy.contactTitle, locale)}
-        </Heading>
-        <Text variant="body-default-l" onBackground="neutral-weak" wrap="balance">
-          {localize(copy.contactBody, locale)}
-        </Text>
-        <Button href={`mailto:${person.email}`} variant="primary" prefixIcon="email">
-          {person.email}
-        </Button>
-      </Column>
+      <Reveal inView y={0} scale={0.98} amount={0.3} className="contact-reveal">
+        <Column
+          as="section"
+          className="contact-section"
+          background="surface"
+          border="neutral-alpha-medium"
+          radius="xl"
+          padding="xl"
+          gap="20"
+          horizontal="center"
+          align="center"
+        >
+          <Text className="eyebrow" variant="label-strong-s" onBackground="brand-weak">
+            {labels.contact}
+          </Text>
+          <Heading as="h2" variant="display-strong-s" wrap="balance">
+            {localize(copy.contactTitle, locale)}
+          </Heading>
+          <Text variant="body-default-l" onBackground="neutral-weak" wrap="balance">
+            {localize(copy.contactBody, locale)}
+          </Text>
+          <Magnetic>
+            <Button href={`mailto:${person.email}`} variant="primary" prefixIcon="email">
+              {person.email}
+            </Button>
+          </Magnetic>
+        </Column>
+      </Reveal>
     </Column>
   );
 }

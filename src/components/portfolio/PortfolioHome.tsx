@@ -1,7 +1,13 @@
-import { Button, Column, Grid, Heading, Media, Row, Tag, Text } from "@once-ui-system/core";
+import { Button, Column, Grid, Heading, Row, Text } from "@once-ui-system/core";
+import { Magnetic } from "@/components/motion/Magnetic";
+import { Reveal } from "@/components/motion/Reveal";
+import { STAGGER_CARD } from "@/components/motion/tokens";
 import { baseURL, getContent, localize, pageCopy, person, type Locale } from "@/resources";
 import { localePath } from "@/utils/site-metadata";
 import { FeaturedJango } from "./FeaturedJango";
+import { HomeHero } from "./HomeHero";
+import { HomeProof } from "./HomeProof";
+import { HomeTimeline } from "./HomeTimeline";
 import { ProjectCard } from "./ProjectCard";
 import { SectionHeading } from "./SectionHeading";
 import { StructuredData } from "./StructuredData";
@@ -36,107 +42,9 @@ export function PortfolioHome({ locale }: { locale: Locale }) {
         }}
       />
 
-      <Row
-        as="section"
-        className="home-hero"
-        fillWidth
-        gap="xl"
-        vertical="center"
-        aria-labelledby="home-heading"
-        s={{ direction: "column" }}
-      >
-        <Column className="hero-copy" flex={8} gap="24">
-          <Text className="eyebrow" variant="label-strong-m" onBackground="brand-weak">
-            {person.brand} · {person.name[locale]} / {person.role[locale]}
-          </Text>
-          <Heading
-            id="home-heading"
-            className="hero-title"
-            as="h1"
-            variant="display-strong-xl"
-            wrap="balance"
-          >
-            {localize(copy.title, locale)}
-          </Heading>
-          <Column maxWidth={44} fillWidth>
-            <Text variant="heading-default-l" onBackground="neutral-weak" wrap="balance">
-              {localize(copy.summary, locale)}
-            </Text>
-          </Column>
-          <Row className="hero-context" gap="8" wrap>
-            <Tag size="s">{localize(person.location, locale)}</Tag>
-            <Tag size="s">{localize(person.languages, locale)}</Tag>
-          </Row>
-          <Row className="hero-actions" gap="12" wrap>
-            <Button
-              href={localePath(locale, "/work")}
-              variant="primary"
-              prefixIcon="grid"
-              suffixIcon="arrowRight"
-            >
-              {locale === "ko" ? "대표 프로젝트 보기" : "View selected work"}
-            </Button>
-            <Row className="hero-secondary-actions" gap="12" wrap>
-              <Button
-                href={person.github}
-                variant="secondary"
-                prefixIcon="github"
-                suffixIcon="arrowUpRightFromSquare"
-              >
-                {labels.github}
-              </Button>
-              <Button
-                className="hero-email-button"
-                href={`mailto:${person.email}`}
-                variant="tertiary"
-                prefixIcon="email"
-                aria-label={labels.contact}
-              >
-                {labels.contact}
-              </Button>
-            </Row>
-          </Row>
-        </Column>
-        <Column className="hero-portrait" flex={3} horizontal="center">
-          <Media
-            className="profile-image"
-            src={person.avatar}
-            alt={
-              locale === "ko"
-                ? `${person.brand} ${person.name[locale]} 프로필 사진`
-                : `Portrait of ${person.name[locale]}`
-            }
-            aspectRatio="1 / 1"
-            objectFit="cover"
-            sizes="(max-width: 768px) 112px, 160px"
-            priority
-            radius="full"
-          />
-        </Column>
-      </Row>
+      <HomeHero locale={locale} />
 
-      <Row className="proof-strip home-proof-strip" fillWidth gap="8" s={{ direction: "row" }}>
-        <Column className="proof-item" gap="4">
-          <Text variant="display-strong-s" onBackground="brand-weak">
-            3+
-          </Text>
-          <Text variant="label-default-s" onBackground="neutral-weak">
-            {localize(copy.proofYears, locale)}
-          </Text>
-        </Column>
-        <Column className="proof-item" gap="4">
-          <Text variant="display-strong-s">{content.projects.length}</Text>
-          <Text variant="label-default-s" onBackground="neutral-weak">
-            {localize(copy.proofProjects, locale)}
-          </Text>
-        </Column>
-        <Column className="proof-item" gap="4">
-          <Text variant="display-strong-s">2</Text>
-          <Text variant="label-default-s" onBackground="neutral-weak">
-            {localize(copy.proofDelivery, locale)}
-          </Text>
-        </Column>
-      </Row>
+      <HomeProof locale={locale} projectCount={content.projects.length} />
 
       <Column
         as="section"
@@ -178,14 +86,21 @@ export function PortfolioHome({ locale }: { locale: Locale }) {
           fillWidth
         >
           {secondaryProjects.map((project, index) => (
-            <ProjectCard
+            <Reveal
               key={project.slug}
-              project={project}
-              locale={locale}
-              priority={index === 0}
-              headingLevel="h3"
-              variant="compact"
-            />
+              className="project-card-reveal"
+              inView
+              delay={index * STAGGER_CARD}
+              y={12}
+            >
+              <ProjectCard
+                project={project}
+                locale={locale}
+                priority={index === 0}
+                headingLevel="h3"
+                variant="compact"
+              />
+            </Reveal>
           ))}
         </Grid>
       </Column>
@@ -206,68 +121,44 @@ export function PortfolioHome({ locale }: { locale: Locale }) {
             {localize(copy.experienceAction, locale)}
           </Button>
         </Row>
-        <Column gap="32">
-          {content.experiences.map((experience) => (
-            <Row key={experience.company.en} className="timeline-item" gap="24" fillWidth>
-              <span className="timeline-dot" aria-hidden="true" />
-              <Column fillWidth gap="12" paddingBottom="24">
-                <Row fillWidth horizontal="between" gap="16" s={{ direction: "column" }}>
-                  <Column gap="4">
-                    <Heading as="h3" variant="heading-strong-l">
-                      {localize(experience.company, locale)}
-                    </Heading>
-                    <Text variant="body-default-m" onBackground="brand-weak">
-                      {localize(experience.role, locale)}
-                    </Text>
-                  </Column>
-                  <Text variant="label-default-s" onBackground="neutral-weak">
-                    {localize(experience.period, locale)}
-                  </Text>
-                </Row>
-                <Row gap="8" wrap>
-                  {experience.projects.map((project) => (
-                    <Tag key={project.en} size="s">
-                      {localize(project, locale)}
-                    </Tag>
-                  ))}
-                </Row>
-              </Column>
-            </Row>
-          ))}
-        </Column>
+        <HomeTimeline locale={locale} experiences={content.experiences} />
       </Column>
 
-      <Column
-        as="section"
-        id="contact"
-        className="contact-section"
-        background="surface"
-        border="neutral-alpha-medium"
-        radius="xl"
-        paddingX="xl"
-        paddingY="xl"
-        gap="24"
-        horizontal="center"
-        align="center"
-      >
-        <Text className="eyebrow" variant="label-strong-s" onBackground="brand-weak">
-          {labels.contact}
-        </Text>
-        <Heading as="h2" variant="display-strong-s" wrap="balance">
-          {localize(copy.contactTitle, locale)}
-        </Heading>
-        <Text variant="body-default-l" onBackground="neutral-weak" wrap="balance">
-          {localize(copy.contactBody, locale)}
-        </Text>
-        <Row gap="12" wrap horizontal="center">
-          <Button href={`mailto:${person.email}`} variant="primary" prefixIcon="email">
-            {person.email}
-          </Button>
-          <Button href={person.github} variant="secondary" prefixIcon="github">
-            GitHub
-          </Button>
-        </Row>
-      </Column>
+      <Reveal inView y={0} scale={0.98} amount={0.3} className="contact-reveal">
+        <Column
+          as="section"
+          id="contact"
+          className="contact-section"
+          background="surface"
+          border="neutral-alpha-medium"
+          radius="xl"
+          paddingX="xl"
+          paddingY="xl"
+          gap="24"
+          horizontal="center"
+          align="center"
+        >
+          <Text className="eyebrow" variant="label-strong-s" onBackground="brand-weak">
+            {labels.contact}
+          </Text>
+          <Heading as="h2" variant="display-strong-s" wrap="balance">
+            {localize(copy.contactTitle, locale)}
+          </Heading>
+          <Text variant="body-default-l" onBackground="neutral-weak" wrap="balance">
+            {localize(copy.contactBody, locale)}
+          </Text>
+          <Row gap="12" wrap horizontal="center">
+            <Magnetic>
+              <Button href={`mailto:${person.email}`} variant="primary" prefixIcon="email">
+                {person.email}
+              </Button>
+            </Magnetic>
+            <Button href={person.github} variant="secondary" prefixIcon="github">
+              GitHub
+            </Button>
+          </Row>
+        </Column>
+      </Reveal>
     </Column>
   );
 }

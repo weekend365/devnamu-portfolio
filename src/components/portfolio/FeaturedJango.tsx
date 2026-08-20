@@ -1,4 +1,7 @@
+"use client";
+
 import { Button, Column, Grid, Heading, Media, Row, Tag, Text } from "@once-ui-system/core";
+import { Reveal } from "@/components/motion/Reveal";
 import type { Locale } from "@/resources";
 import { getProject, localize, ui } from "@/resources";
 import { localePath } from "@/utils/site-metadata";
@@ -9,7 +12,8 @@ export function FeaturedJango({ locale }: { locale: Locale }) {
   const labels = ui[locale];
 
   return (
-    <Row
+    <Reveal inView y={12} className="featured-project-reveal">
+      <Row
       as="article"
       className="featured-project"
       fillWidth
@@ -112,7 +116,7 @@ export function FeaturedJango({ locale }: { locale: Locale }) {
               ? "장고야 부탁해 홈 대시보드 앱스토어 스크린샷"
               : "Jango home dashboard App Store screenshot"
           }
-          aspectRatio="1125 / 2433"
+          aspectRatio="1125 / 2436"
           objectFit="cover"
           sizes="(max-width: 768px) 72vw, 288px"
           priority
@@ -120,5 +124,6 @@ export function FeaturedJango({ locale }: { locale: Locale }) {
         />
       </Column>
     </Row>
+    </Reveal>
   );
 }

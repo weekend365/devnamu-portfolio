@@ -1,4 +1,8 @@
+"use client";
+
 import { Column, Heading, Text } from "@once-ui-system/core";
+import { Reveal } from "@/components/motion/Reveal";
+import { STAGGER_M } from "@/components/motion/tokens";
 
 export function SectionHeading({
   id,
@@ -14,17 +18,23 @@ export function SectionHeading({
   return (
     <Column className="section-heading" gap="8" maxWidth="s" fillWidth>
       {eyebrow && (
-        <Text className="eyebrow" variant="label-strong-s" onBackground="brand-weak">
-          {eyebrow}
-        </Text>
+        <Reveal inView delay={0} y={10}>
+          <Text className="eyebrow" variant="label-strong-s" onBackground="brand-weak">
+            {eyebrow}
+          </Text>
+        </Reveal>
       )}
-      <Heading id={id} as="h2" variant="display-strong-s" wrap="balance">
-        {title}
-      </Heading>
+      <Reveal inView delay={STAGGER_M} y={10}>
+        <Heading id={id} as="h2" variant="display-strong-s" wrap="balance">
+          {title}
+        </Heading>
+      </Reveal>
       {description && (
-        <Text variant="body-default-l" onBackground="neutral-weak" wrap="balance">
-          {description}
-        </Text>
+        <Reveal inView delay={STAGGER_M * 2} y={10}>
+          <Text variant="body-default-l" onBackground="neutral-weak" wrap="balance">
+            {description}
+          </Text>
+        </Reveal>
       )}
     </Column>
   );

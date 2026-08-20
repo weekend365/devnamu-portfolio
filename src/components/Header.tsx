@@ -14,6 +14,8 @@ import {
 } from "@once-ui-system/core";
 import type { Locale } from "@/resources";
 import { getContent, localize, pageCopy, person } from "@/resources";
+import { NavTab, NavTabs } from "./motion/NavTab";
+import { BrandWordmark } from "./motion/BrandWordmark";
 import { ThemeToggle } from "./ThemeToggle";
 
 function localizedPath(locale: Locale, path: string): string {
@@ -55,14 +57,13 @@ export function Header({ locale }: { locale: Locale }) {
           aria-label={`${person.brand} · ${person.name[locale]} · ${labels.home}`}
         >
           <Row gap="8" vertical="center">
-            <Text className="portfolio-wordmark" variant="label-strong-m">
-              {person.brand}
-            </Text>
+            <BrandWordmark />
             <Text className="portfolio-owner" variant="label-default-s" onBackground="neutral-weak">
               / {person.name[locale]}
             </Text>
           </Row>
         </SmartLink>
+        <NavTabs id="desktop-nav">
         <Row
           as="nav"
           className="portfolio-nav desktop-navigation"
@@ -74,26 +75,32 @@ export function Header({ locale }: { locale: Locale }) {
           vertical="center"
           aria-label={localize(copy.primaryNavigation, locale)}
         >
-          <ToggleButton
-            prefixIcon="home"
-            href={homePath}
-            label={labels.home}
-            selected={pathname === homePath}
-            aria-label={labels.home}
-          />
+          <NavTab selected={pathname === homePath} layoutId="desktop-nav-pill">
+            <ToggleButton
+              prefixIcon="home"
+              href={homePath}
+              label={labels.home}
+              selected={pathname === homePath}
+              aria-label={labels.home}
+            />
+          </NavTab>
           <Line className="nav-divider" background="neutral-alpha-medium" vert maxHeight="24" />
-          <ToggleButton
-            prefixIcon="person"
-            href={aboutPath}
-            label={labels.about}
-            selected={pathname === aboutPath}
-          />
-          <ToggleButton
-            prefixIcon="grid"
-            href={workPath}
-            label={labels.work}
-            selected={pathname.startsWith(workPath)}
-          />
+          <NavTab selected={pathname === aboutPath} layoutId="desktop-nav-pill">
+            <ToggleButton
+              prefixIcon="person"
+              href={aboutPath}
+              label={labels.about}
+              selected={pathname === aboutPath}
+            />
+          </NavTab>
+          <NavTab selected={pathname.startsWith(workPath)} layoutId="desktop-nav-pill">
+            <ToggleButton
+              prefixIcon="grid"
+              href={workPath}
+              label={labels.work}
+              selected={pathname.startsWith(workPath)}
+            />
+          </NavTab>
           <Line className="nav-divider" background="neutral-alpha-medium" vert maxHeight="24" />
           <Button
             className="language-toggle"
@@ -110,6 +117,7 @@ export function Header({ locale }: { locale: Locale }) {
             <ThemeToggle locale={locale} />
           </span>
         </Row>
+        </NavTabs>
         <DropdownWrapper
           className="mobile-navigation"
           placement="bottom-end"
@@ -142,27 +150,41 @@ export function Header({ locale }: { locale: Locale }) {
               >
                 {person.brand} · {person.name[locale]}
               </Text>
-              <ToggleButton
-                prefixIcon="home"
-                href={homePath}
-                label={labels.home}
-                selected={pathname === homePath}
-                onClick={() => setMoreOpen(false)}
-              />
-              <ToggleButton
-                prefixIcon="person"
-                href={aboutPath}
-                label={labels.about}
-                selected={pathname === aboutPath}
-                onClick={() => setMoreOpen(false)}
-              />
-              <ToggleButton
-                prefixIcon="grid"
-                href={workPath}
-                label={labels.work}
-                selected={pathname.startsWith(workPath)}
-                onClick={() => setMoreOpen(false)}
-              />
+              <NavTabs id="mobile-nav">
+                <NavTab selected={pathname === homePath} layoutId="mobile-nav-pill">
+                  <ToggleButton
+                    prefixIcon="home"
+                    href={homePath}
+                    label={labels.home}
+                    selected={pathname === homePath}
+                    fillWidth
+                    horizontal="start"
+                    onClick={() => setMoreOpen(false)}
+                  />
+                </NavTab>
+                <NavTab selected={pathname === aboutPath} layoutId="mobile-nav-pill">
+                  <ToggleButton
+                    prefixIcon="person"
+                    href={aboutPath}
+                    label={labels.about}
+                    selected={pathname === aboutPath}
+                    fillWidth
+                    horizontal="start"
+                    onClick={() => setMoreOpen(false)}
+                  />
+                </NavTab>
+                <NavTab selected={pathname.startsWith(workPath)} layoutId="mobile-nav-pill">
+                  <ToggleButton
+                    prefixIcon="grid"
+                    href={workPath}
+                    label={labels.work}
+                    selected={pathname.startsWith(workPath)}
+                    fillWidth
+                    horizontal="start"
+                    onClick={() => setMoreOpen(false)}
+                  />
+                </NavTab>
+              </NavTabs>
               <Line background="neutral-alpha-medium" />
               <Button
                 href={languagePath}
