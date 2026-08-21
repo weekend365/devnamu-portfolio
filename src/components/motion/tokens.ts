@@ -6,6 +6,8 @@ export const STAGGER_S = 0.06;
 export const STAGGER_M = 0.04;
 export const STAGGER_CARD = 0.05;
 export const MAGNETIC_MAX = 6;
+export const TILT_MAX = 7;
+export const TILT_PERSPECTIVE = 900;
 
 export const fadeTransition: Transition = {
   duration: 0.5,

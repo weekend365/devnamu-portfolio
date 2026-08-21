@@ -2,6 +2,7 @@ export { BrandWordmark } from "./BrandWordmark";
 export { CountUp } from "./CountUp";
 export { DeviceScreenCanvas } from "./DeviceScreenCanvas";
 export { Magnetic } from "./Magnetic";
+export { Tilt } from "./Tilt";
 export { NavTab, NavTabs } from "./NavTab";
 export { ProofStrip } from "./ProofStrip";
 export { Reveal } from "./Reveal";

@@ -282,13 +282,6 @@ export const certifications = [
       "Sep 2025 · 120 · Intermediate Mid 2",
     ),
   },
-  {
-    name: t("1종 보통 운전면허", "Class 1 Driver’s License"),
-    detail: t(
-      "2018.04 · 최종합격 · 경찰청",
-      "Apr 2018 · Passed · Korean National Police Agency",
-    ),
-  },
 ];
 
 export const skillCategories = [

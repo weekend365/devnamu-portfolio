@@ -422,6 +422,15 @@ body {
   box-shadow: 0 2.25rem 6rem color-mix(in srgb, var(--brand-on-background-strong) 10%, transparent);
 }
 
+.featured-project:hover .featured-visual {
+  overflow: visible;
+}
+
+.preview-tilt {
+  width: 100%;
+  transform-origin: center center;
+}
+
 .featured-ownership {
   border-left: 2px solid var(--brand-border-strong);
 }
@@ -2063,6 +2072,10 @@ body {
   .footer-icon,
   .footer-icon:hover {
     transform: none;
+  }
+
+  .featured-project:hover .featured-visual {
+    overflow: hidden;
   }
 }
 
