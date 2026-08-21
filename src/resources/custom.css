@@ -71,6 +71,37 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.citrus-wash {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 72% 56% at 0% -8%, color-mix(in srgb, var(--portfolio-lime) 38%, transparent), transparent 64%),
+    radial-gradient(ellipse 68% 50% at 100% -6%, color-mix(in srgb, var(--portfolio-lemon) 36%, transparent), transparent 62%),
+    radial-gradient(ellipse 48% 42% at 100% 110%, color-mix(in srgb, var(--portfolio-lime) 24%, transparent), transparent 68%),
+    radial-gradient(ellipse 44% 40% at -4% 108%, color-mix(in srgb, var(--portfolio-lemon) 22%, transparent), transparent 66%),
+    linear-gradient(
+      158deg,
+      color-mix(in srgb, var(--portfolio-lime) 18%, transparent) 0%,
+      transparent 42%,
+      color-mix(in srgb, var(--portfolio-lemon) 16%, transparent) 100%
+    );
+}
+
+html[data-theme="dark"] .citrus-wash {
+  background:
+    radial-gradient(ellipse 72% 56% at 0% -8%, color-mix(in srgb, var(--portfolio-lime) 22%, transparent), transparent 64%),
+    radial-gradient(ellipse 68% 50% at 100% -6%, color-mix(in srgb, var(--portfolio-lemon) 20%, transparent), transparent 62%),
+    radial-gradient(ellipse 48% 42% at 100% 110%, color-mix(in srgb, var(--portfolio-lime) 14%, transparent), transparent 68%),
+    radial-gradient(ellipse 44% 40% at -4% 108%, color-mix(in srgb, var(--portfolio-lemon) 12%, transparent), transparent 66%),
+    linear-gradient(
+      158deg,
+      color-mix(in srgb, var(--portfolio-lime) 9%, transparent) 0%,
+      transparent 42%,
+      color-mix(in srgb, var(--portfolio-lemon) 8%, transparent) 100%
+    );
+}
+
 .citrus-backdrop {
   position: absolute;
   inset: 0;

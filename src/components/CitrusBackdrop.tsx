@@ -40,31 +40,34 @@ const pieces = [
 
 export function CitrusBackdrop() {
   return (
-    <div className="citrus-backdrop" aria-hidden="true">
-      {pieces.map((piece, index) => (
-        <div
-          key={`${piece.kind}-${piece.tone}-${index}`}
-          className={`citrus-piece citrus-${piece.kind} citrus-${piece.tone} citrus-depth-${piece.depth}${"desktopOnly" in piece && piece.desktopOnly ? " citrus-desktop-only" : ""}`}
-          style={{
-            top: piece.top,
-            left: piece.left,
-            "--citrus-rotation": `${piece.rotate}deg`,
-            animationDelay: `${80 + index * 28}ms`,
-          } as CSSProperties}
-        >
-          {piece.kind === "fruit" ? (
-            <Image
-              src={`/images/citrus/${piece.src}.png`}
-              alt=""
-              width={fruitSize[piece.src].width}
-              height={fruitSize[piece.src].height}
-              sizes="(max-width: 768px) 140px, 240px"
-            />
-          ) : (
-            <span>DEVNAMU</span>
-          )}
-        </div>
-      ))}
-    </div>
+    <>
+      <div className="citrus-wash" aria-hidden="true" />
+      <div className="citrus-backdrop" aria-hidden="true">
+        {pieces.map((piece, index) => (
+          <div
+            key={`${piece.kind}-${piece.tone}-${index}`}
+            className={`citrus-piece citrus-${piece.kind} citrus-${piece.tone} citrus-depth-${piece.depth}${"desktopOnly" in piece && piece.desktopOnly ? " citrus-desktop-only" : ""}`}
+            style={{
+              top: piece.top,
+              left: piece.left,
+              "--citrus-rotation": `${piece.rotate}deg`,
+              animationDelay: `${80 + index * 28}ms`,
+            } as CSSProperties}
+          >
+            {piece.kind === "fruit" ? (
+              <Image
+                src={`/images/citrus/${piece.src}.png`}
+                alt=""
+                width={fruitSize[piece.src].width}
+                height={fruitSize[piece.src].height}
+                sizes="(max-width: 768px) 140px, 240px"
+              />
+            ) : (
+              <span>DEVNAMU</span>
+            )}
+          </div>
+        ))}
+      </div>
+    </>
   );
 }
