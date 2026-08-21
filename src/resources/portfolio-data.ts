@@ -217,6 +217,73 @@ export const experiences: Experience[] = [
   },
 ];
 
+export const education = [
+  {
+    institution: t("한국방송통신대학교", "Korea National Open University"),
+    program: t(
+      "컴퓨터과학과 · 편입/졸업",
+      "Computer Science · Transfer/Graduated",
+    ),
+    period: "2023.01 – 2025.08",
+  },
+  {
+    institution: t("학점은행제", "Academic Credit Bank System"),
+    program: t(
+      "컴퓨터네트워크 · 수료 · 2·3년제 인정학력",
+      "Computer Networks · Completed · Associate-degree-equivalent credit",
+    ),
+    period: "2021.04 – 2023.01",
+  },
+  {
+    institution: t("인천효성고등학교", "Incheon Hyosung High School"),
+    program: t("이과계열 · 졸업", "Natural Sciences · Graduated"),
+    period: "2012.03 – 2015.01",
+  },
+];
+
+export const training = [
+  {
+    institution: t("이젠아카데미컴퓨터학원", "Ezen Academy Computer Institute"),
+    program: t(
+      "자바(JAVA) 웹개발 프로그래밍 · 800시간",
+      "Java Web Development Programming · 800 hours",
+    ),
+    period: "2022.09.03 – 2023.01.26",
+  },
+];
+
+export const certifications = [
+  {
+    name: t("정보처리기사", "Engineer Information Processing"),
+    detail: t(
+      "2025.09 · 최종합격 · 한국산업인력공단",
+      "Sep 2025 · Passed · HRD Korea",
+    ),
+  },
+  {
+    name: t("SQL개발자(SQLD)", "SQL Developer (SQLD)"),
+    detail: t(
+      "2024.09 · 최종합격 · 한국데이터산업진흥원",
+      "Sep 2024 · Passed · Korea Data Agency",
+    ),
+  },
+  {
+    name: t("네트워크관리사 2급", "Network Administrator Level 2"),
+    detail: t(
+      "2021.12 · 최종합격 · 한국정보통신자격협회",
+      "Dec 2021 · Passed · ICQA",
+    ),
+  },
+  { name: t("TOEIC", "TOEIC"), detail: t("2025.10 · 835점", "Oct 2025 · 835") },
+  {
+    name: t("TOEIC Speaking Test", "TOEIC Speaking Test"),
+    detail: t(
+      "2025.09 · 120점 · Intermediate Mid 2",
+      "Sep 2025 · 120 · Intermediate Mid 2",
+    ),
+  },
+];
+
 export const skillCategories = [
   {
     title: t("Frontend", "Frontend"),
@@ -964,6 +1031,10 @@ export const pageCopy = {
       "제품을 끝까지 연결하는 역량",
       "Capabilities across the product lifecycle",
     ),
+    credentialsTitle: t(
+      "학력·교육·자격",
+      "Education, training, and credentials",
+    ),
     contactTitle: t(
       "함께 만들 제품에 대해 이야기해 주세요",
       "Tell me about the product you’re building",
@@ -1006,6 +1077,9 @@ export const ui = {
     workingPrinciples: "일하는 방식",
     careerTimeline: "경력",
     technicalSkills: "기술",
+    education: "학력",
+    training: "교육",
+    certifications: "자격 · 어학",
     interests: "관심 분야",
     caseStudy: "사례 읽기",
     viewGithub: "GitHub 저장소",
@@ -1043,6 +1117,9 @@ export const ui = {
     workingPrinciples: "How I Work",
     careerTimeline: "Career Timeline",
     technicalSkills: "Technical Skills",
+    education: "Education",
+    training: "Training",
+    certifications: "Certifications · Language Tests",
     interests: "Interests",
     caseStudy: "Read case study",
     viewGithub: "GitHub Repository",
@@ -1085,6 +1162,9 @@ export function getContent(locale: Locale) {
     locale,
     person,
     experiences,
+    education,
+    training,
+    certifications,
     skillCategories,
     interests,
     navigation: ui[locale],

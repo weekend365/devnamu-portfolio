@@ -125,7 +125,7 @@ html[data-theme="dark"] .citrus-wash {
 .citrus-piece {
   --citrus-opacity: 0.5;
   --citrus-rotation: 0deg;
-  --citrus-size: clamp(7rem, 10vw, 10rem);
+  --citrus-size: clamp(4.65rem, 6.65vw, 6.65rem);
   position: absolute;
   display: grid;
   place-items: center;
@@ -152,7 +152,7 @@ html[data-theme="dark"] .citrus-wash {
 
 .citrus-logo > span {
   font-family: var(--font-pretendard), var(--font-heading);
-  font-size: clamp(0.62rem, 0.85vw, 0.78rem);
+  font-size: clamp(0.41rem, 0.57vw, 0.52rem);
   font-weight: 700;
   letter-spacing: 0;
   line-height: 1;
@@ -165,17 +165,17 @@ html[data-theme="dark"] .citrus-wash {
 }
 
 .citrus-depth-front {
-  --citrus-size: clamp(9.5rem, 14vw, 13.5rem);
+  --citrus-size: clamp(6.35rem, 9.35vw, 9rem);
   z-index: 3;
 }
 
 .citrus-depth-mid {
-  --citrus-size: clamp(7.25rem, 10.5vw, 10.5rem);
+  --citrus-size: clamp(4.85rem, 7vw, 7rem);
   z-index: 2;
 }
 
 .citrus-depth-back {
-  --citrus-size: clamp(5.5rem, 8vw, 8rem);
+  --citrus-size: clamp(3.65rem, 5.35vw, 5.35rem);
   z-index: 1;
 }
 
@@ -1485,7 +1485,9 @@ html[data-theme="dark"] .citrus-wash {
 }
 
 .detail-list,
-.detail-list-item {
+.detail-list-item,
+.credential-list,
+.credential-item {
   list-style: none;
 }
 
@@ -1715,6 +1717,39 @@ html[data-theme="dark"] .citrus-wash {
   border-color: var(--brand-border-medium);
 }
 
+.credentials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  width: 100%;
+  align-items: stretch;
+}
+
+.credential-card {
+  min-width: 0;
+  background: color-mix(in srgb, var(--surface-background) 80%, transparent);
+  transition: border-color 180ms ease, transform 180ms ease;
+}
+
+.credential-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--neutral-alpha-strong);
+}
+
+.credential-card-core {
+  border-color: var(--brand-border-medium);
+}
+
+.credential-item {
+  padding-block: 0.9rem;
+  border-top: 1px solid var(--neutral-alpha-weak);
+}
+
+.credential-item:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+
 .interest-list {
   border-top: 1px solid var(--neutral-alpha-medium);
 }
@@ -1756,6 +1791,14 @@ html[data-theme="dark"] .citrus-wash {
   .project-card-featured {
     grid-template-columns: minmax(0, 1fr) minmax(18rem, 0.82fr);
   }
+
+  .credentials-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .credentials-grid > :last-child {
+    grid-column: 1 / -1;
+  }
 }
 
 @media (max-width: 768px) {
@@ -1779,19 +1822,19 @@ html[data-theme="dark"] .citrus-wash {
   }
 
   .citrus-depth-front {
-    --citrus-size: 7.5rem;
+    --citrus-size: 5rem;
   }
 
   .citrus-depth-mid {
-    --citrus-size: 6rem;
+    --citrus-size: 4rem;
   }
 
   .citrus-depth-back {
-    --citrus-size: 4.75rem;
+    --citrus-size: 3.15rem;
   }
 
   .citrus-logo > span {
-    font-size: 0.58rem;
+    font-size: 0.39rem;
   }
 
   .site-main {
@@ -1974,7 +2017,8 @@ html[data-theme="dark"] .citrus-wash {
   .work-project-grid,
   .related-project-grid,
   .principles-grid,
-  .capability-grid {
+  .capability-grid,
+  .credentials-grid {
     grid-template-columns: minmax(0, 1fr);
   }
 
@@ -2228,7 +2272,8 @@ html[data-theme="dark"] .citrus-wash {
     min-height: 0;
   }
 
-  .capability-grid > :first-child {
+  .capability-grid > :first-child,
+  .credentials-grid > :last-child {
     grid-column: auto;
   }
 
@@ -2292,6 +2337,7 @@ html[data-theme="dark"] .citrus-wash {
   .screenshot-media,
   .screenshot-dot,
   .skill-card,
+  .credential-card,
   .footer-icon,
   .portfolio-wordmark,
   .portfolio-owner,
@@ -2311,6 +2357,7 @@ html[data-theme="dark"] .citrus-wash {
   .project-card:hover,
   .project-card:focus-within,
   .skill-card:hover,
+  .credential-card:hover,
   .screenshot-slide:hover .screenshot-media,
   .screenshot-slide:focus-within .screenshot-media,
   .timeline-line,

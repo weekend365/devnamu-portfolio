@@ -158,6 +158,75 @@ export function PortfolioAbout({ locale }: { locale: Locale }) {
       </Column>
 
       <Column as="section" gap="32">
+        <SectionHeading
+          eyebrow={labels.education}
+          title={localize(copy.credentialsTitle, locale)}
+        />
+        <Stagger className="credentials-grid" interval={STAGGER_CARD}>
+          {[
+            {
+              title: labels.education,
+              items: content.education.map((item) => ({
+                heading: localize(item.institution, locale),
+                body: localize(item.program, locale),
+                meta: item.period,
+              })),
+            },
+            {
+              title: labels.training,
+              items: content.training.map((item) => ({
+                heading: localize(item.institution, locale),
+                body: localize(item.program, locale),
+                meta: item.period,
+              })),
+            },
+            {
+              title: labels.certifications,
+              items: content.certifications.map((item) => ({
+                heading: localize(item.name, locale),
+                body: localize(item.detail, locale),
+              })),
+            },
+          ].map((card, index) => (
+            <StaggerItem key={card.title} className="card-reveal" y={12}>
+              <Column
+                className={`credential-card${index === 2 ? " credential-card-core" : ""}`}
+                background="surface"
+                border="neutral-alpha-medium"
+                radius="l"
+                padding="l"
+                gap="16"
+              >
+                <Row fillWidth horizontal="between" vertical="center" gap="12">
+                  <Heading as="h3" variant="heading-strong-m">
+                    {card.title}
+                  </Heading>
+                  <Text variant="label-default-xs" onBackground="neutral-weak">
+                    0{index + 1}
+                  </Text>
+                </Row>
+                <Column as="ul" className="credential-list" gap="0" paddingLeft="0">
+                  {card.items.map((item) => (
+                    <Column as="li" className="credential-item" key={item.heading} gap="8">
+                      <Text variant="label-strong-s">{item.heading}</Text>
+                      <Text variant="body-default-s" onBackground="neutral-medium">
+                        {item.body}
+                      </Text>
+                      {"meta" in item && item.meta ? (
+                        <Text variant="label-default-xs" onBackground="neutral-weak">
+                          {item.meta}
+                        </Text>
+                      ) : null}
+                    </Column>
+                  ))}
+                </Column>
+              </Column>
+            </StaggerItem>
+          ))}
+        </Stagger>
+      </Column>
+
+      <Column as="section" gap="32">
         <SectionHeading title={labels.interests} />
         <Column className="interest-list" as="ul" gap="0">
           {content.interests.map((interest, index) => (
