@@ -9,4 +9,3 @@ export const pretendard = localFont({
   variable: "--font-pretendard",
   display: "swap",
 });
-

@@ -5,7 +5,6 @@ export const EASE = [0.22, 1, 0.36, 1] as const;
 export const STAGGER_S = 0.06;
 export const STAGGER_M = 0.04;
 export const STAGGER_CARD = 0.05;
-export const MAGNETIC_MAX = 6;
 export const TILT_MAX = 7;
 export const TILT_PERSPECTIVE = 900;
 
@@ -34,7 +33,7 @@ export const navTransition: Transition = {
   ease: EASE,
 };
 
-export const magneticSpring = {
+export const tiltSpring = {
   stiffness: 340,
   damping: 22,
   mass: 0.55,

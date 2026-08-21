@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { motion, useMotionValue, useReducedMotion, useSpring } from "motion/react";
-import { TILT_MAX, TILT_PERSPECTIVE, magneticSpring } from "./tokens";
+import { TILT_MAX, TILT_PERSPECTIVE, tiltSpring } from "./tokens";
 
 export function Tilt({
   children,
@@ -19,8 +19,8 @@ export function Tilt({
   const ref = useRef<HTMLDivElement>(null);
   const rotateX = useMotionValue(0);
   const rotateY = useMotionValue(0);
-  const springX = useSpring(rotateX, magneticSpring);
-  const springY = useSpring(rotateY, magneticSpring);
+  const springX = useSpring(rotateX, tiltSpring);
+  const springY = useSpring(rotateY, tiltSpring);
   const [finePointer, setFinePointer] = useState(false);
 
   useEffect(() => {

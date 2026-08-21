@@ -7,6 +7,7 @@ import {
 } from "@once-ui-system/core";
 import type { Locale } from "@/resources";
 import { dataStyle, effects, style } from "@/resources";
+import { CitrusBackdrop } from "./CitrusBackdrop";
 import { Footer } from "./Footer";
 import { Header } from "./Header";
 import { Providers } from "./Providers";
@@ -31,6 +32,7 @@ export function PortfolioShell({ children, locale }: { children: React.ReactNode
               size: effects.lines.size as SpacingToken,
             }}
           />
+          <CitrusBackdrop />
         </Flex>
         <a className="skip-link" href="#main-content">
           {locale === "ko" ? "본문으로 바로가기" : "Skip to main content"}
