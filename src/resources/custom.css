@@ -427,8 +427,29 @@ body {
 }
 
 .preview-tilt {
-  width: 100%;
   transform-origin: center center;
+}
+
+.preview-tilt-media,
+.screenshot-tilt {
+  display: block;
+  width: fit-content;
+  max-width: 100%;
+  margin-inline: auto;
+}
+
+.project-browser-frame .preview-tilt-media {
+  width: 100%;
+}
+
+.jango-card-visual .preview-tilt-media,
+.mobile-card-visual .preview-tilt-media {
+  width: min(13rem, 66%);
+}
+
+.project-card-compact .jango-card-visual .preview-tilt-media,
+.project-card-compact .mobile-card-visual .preview-tilt-media {
+  width: min(10rem, 58%);
 }
 
 .featured-ownership {
@@ -536,6 +557,8 @@ body {
 
 .project-card:hover,
 .project-card:focus-within {
+  z-index: 2;
+  overflow: visible;
   transform: translateY(-3px);
   border-color: var(--brand-border-medium);
   box-shadow: 0 1.5rem 4rem color-mix(in srgb, var(--neutral-on-background-strong) 9%, transparent);
@@ -660,7 +683,7 @@ body {
 
 .jango-card-screen,
 .mobile-card-screen {
-  width: min(13rem, 66%);
+  width: 100%;
   border: 1px solid var(--neutral-alpha-medium);
   background: var(--neutral-background-strong);
   box-shadow: 0 1.5rem 4rem color-mix(in srgb, var(--neutral-on-background-strong) 20%, transparent);
@@ -669,11 +692,6 @@ body {
 .project-card-compact .jango-card-visual,
 .project-card-compact .mobile-card-visual {
   min-height: 16rem;
-}
-
-.project-card-compact .jango-card-screen,
-.project-card-compact .mobile-card-screen {
-  width: min(10rem, 58%);
 }
 
 .project-browser-frame {
@@ -761,16 +779,6 @@ body {
 .workflow-arrow {
   flex: 0 0 auto;
   font-size: 1.2rem;
-}
-
-.project-workflow-kcsc .workflow-node:first-child,
-.project-workflow-gis-facility-system .workflow-node:first-child {
-  border-color: var(--brand-border-medium);
-}
-
-.project-workflow-bims .workflow-node:nth-child(3),
-.project-workflow-subscription-platform .workflow-node:nth-child(3) {
-  border-color: var(--accent-border-medium);
 }
 
 .work-page,
@@ -1259,9 +1267,7 @@ body {
 }
 
 .detail-list,
-.detail-list-item,
-.credential-list,
-.credential-item {
+.detail-list-item {
   list-style: none;
 }
 
@@ -1323,16 +1329,27 @@ body {
 
 .screenshot-figure {
   display: grid;
+  justify-items: center;
   gap: var(--static-space-12);
   margin: 0;
+}
+
+.screenshot-tilt {
+  width: min(18rem, 100%);
+}
+
+.screenshot-slide-desktop .screenshot-tilt {
+  width: 100%;
 }
 
 .screenshot-caption {
   padding-inline: var(--static-space-4);
   line-height: 1.55;
+  text-align: center;
 }
 
 .screenshot-media {
+  width: 100%;
   border: 1px solid var(--neutral-alpha-medium);
   background: var(--neutral-background-strong);
   box-shadow: 0 1.5rem 4rem color-mix(in srgb, var(--neutral-on-background-strong) 22%, transparent);
@@ -1474,28 +1491,6 @@ body {
   border-color: var(--brand-border-medium);
 }
 
-.credentials-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1rem;
-  width: 100%;
-  align-items: start;
-}
-
-.credential-card {
-  min-width: 0;
-}
-
-.credential-item {
-  padding-block: 0.9rem;
-  border-top: 1px solid var(--neutral-alpha-weak);
-}
-
-.credential-item:first-child {
-  border-top: 0;
-  padding-top: 0;
-}
-
 .interest-list {
   border-top: 1px solid var(--neutral-alpha-medium);
 }
@@ -1536,14 +1531,6 @@ body {
 @media (max-width: 1024px) {
   .project-card-featured {
     grid-template-columns: minmax(0, 1fr) minmax(18rem, 0.82fr);
-  }
-
-  .credentials-grid {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .credentials-grid > :last-child {
-    grid-column: 1 / -1;
   }
 }
 
@@ -1982,13 +1969,8 @@ body {
     min-height: 0;
   }
 
-  .capability-grid > :first-child,
-  .credentials-grid > :last-child {
+  .capability-grid > :first-child {
     grid-column: auto;
-  }
-
-  .credentials-grid {
-    grid-template-columns: 1fr;
   }
 
   .contact-section {
@@ -2072,6 +2054,12 @@ body {
   .footer-icon,
   .footer-icon:hover {
     transform: none;
+  }
+
+  .project-card:hover,
+  .project-card:focus-within {
+    overflow: hidden;
+    z-index: auto;
   }
 
   .featured-project:hover .featured-visual {

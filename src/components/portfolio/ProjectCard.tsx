@@ -82,6 +82,7 @@ export function ProjectCard({
       radius="l"
       padding="8"
       gap="4"
+      {...{ "data-tilt-root": "" }}
     >
       <a className="project-card-hit" href={caseStudyHref}>
         <span className="sr-only">

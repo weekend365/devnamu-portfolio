@@ -2,6 +2,7 @@
 
 import { IconButton, Media, Row, Text } from "@once-ui-system/core";
 import { type KeyboardEvent, type UIEvent, useCallback, useEffect, useRef, useState } from "react";
+import { Tilt } from "@/components/motion/Tilt";
 import { localize, type Locale, type ProjectImage } from "@/resources";
 
 type ProjectScreenshotCarouselProps = {
@@ -163,20 +164,22 @@ export function ProjectScreenshotCarousel({
             aria-label={copy.slide(index)}
           >
             <figure className="screenshot-figure">
-              <Media
-                className={`screenshot-media screenshot-media-${image.variant}`}
-                src={image.src}
-                alt={localize(image.alt, locale)}
-                aspectRatio={image.variant === "desktop" ? "16 / 9" : "1125 / 2436"}
-                objectFit={image.variant === "mobile" ? "cover" : "contain"}
-                sizes={
-                  image.variant === "mobile"
-                    ? "(max-width: 480px) 78vw, (max-width: 1024px) 38vw, 288px"
-                    : "(max-width: 768px) 88vw, 832px"
-                }
-                priority={index === 0}
-                radius={image.variant === "mobile" ? "xl" : "l"}
-              />
+              <Tilt className="screenshot-tilt" max={image.variant === "mobile" ? 7 : 5}>
+                <Media
+                  className={`screenshot-media screenshot-media-${image.variant}`}
+                  src={image.src}
+                  alt={localize(image.alt, locale)}
+                  aspectRatio={image.variant === "desktop" ? "16 / 9" : "1125 / 2436"}
+                  objectFit={image.variant === "mobile" ? "cover" : "contain"}
+                  sizes={
+                    image.variant === "mobile"
+                      ? "(max-width: 480px) 78vw, (max-width: 1024px) 38vw, 288px"
+                      : "(max-width: 768px) 88vw, 832px"
+                  }
+                  priority={index === 0}
+                  radius={image.variant === "mobile" ? "xl" : "l"}
+                />
+              </Tilt>
               <Text
                 as="figcaption"
                 className="screenshot-caption"

@@ -45,7 +45,8 @@ export function Tilt({
       return;
     }
     const root =
-      (node.closest("[data-tilt-root], .featured-visual") as HTMLElement | null) ?? node;
+      (node.closest("[data-tilt-root], .project-card, .featured-visual") as HTMLElement | null) ??
+      node;
 
     const reset = () => {
       rotateX.set(0);

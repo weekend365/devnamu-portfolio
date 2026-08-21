@@ -1,5 +1,6 @@
 import { Column, Media, Row, Tag, Text } from "@once-ui-system/core";
 import { Fragment, type ReactNode } from "react";
+import { Tilt } from "@/components/motion/Tilt";
 import type { Locale, Project } from "@/resources";
 import { localize } from "@/resources";
 
@@ -234,16 +235,18 @@ export function ProjectVisual({
         radius="l"
       >
         <Column fillWidth center>
-          <Media
-            className={project.slug === "jango" ? "jango-card-screen" : "mobile-card-screen"}
-            src={image.src}
-            alt={localize(image.alt, locale)}
-            aspectRatio={aspectRatio}
-            objectFit="cover"
-            sizes="(max-width: 768px) 72vw, 260px"
-            priority={priority}
-            radius="l"
-          />
+          <Tilt className="preview-tilt-media" max={7}>
+            <Media
+              className={project.slug === "jango" ? "jango-card-screen" : "mobile-card-screen"}
+              src={image.src}
+              alt={localize(image.alt, locale)}
+              aspectRatio={aspectRatio}
+              objectFit="cover"
+              sizes="(max-width: 768px) 72vw, 260px"
+              priority={priority}
+              radius="l"
+            />
+          </Tilt>
         </Column>
       </Column>
     );
@@ -252,16 +255,18 @@ export function ProjectVisual({
   if (image?.variant === "desktop") {
     return (
       <ImageBrowserFrame project={project} locale={locale}>
-        <Media
-          className="project-desktop-media"
-          src={image.src}
-          alt={localize(image.alt, locale)}
-          aspectRatio={aspectRatio}
-          objectFit="contain"
-          sizes="(max-width: 768px) 100vw, 960px"
-          priority={priority}
-          radius="none"
-        />
+        <Tilt className="preview-tilt-media" max={5}>
+          <Media
+            className="project-desktop-media"
+            src={image.src}
+            alt={localize(image.alt, locale)}
+            aspectRatio={aspectRatio}
+            objectFit="contain"
+            sizes="(max-width: 768px) 100vw, 960px"
+            priority={priority}
+            radius="none"
+          />
+        </Tilt>
       </ImageBrowserFrame>
     );
   }
