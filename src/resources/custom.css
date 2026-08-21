@@ -591,10 +591,6 @@ body {
   box-shadow: 0 2rem 5.5rem var(--portfolio-lemon-alpha-weak);
 }
 
-.featured-project:hover .featured-visual {
-  overflow: visible;
-}
-
 .preview-tilt {
   transform-origin: center center;
 }
@@ -741,7 +737,7 @@ body {
 .project-card:hover,
 .project-card:focus-within {
   z-index: 2;
-  overflow: visible;
+  overflow: hidden;
   transform: none;
   border-color: var(--portfolio-lemon-alpha-strong) !important;
   box-shadow: 0 1.5rem 4rem var(--portfolio-lemon-alpha-weak);
