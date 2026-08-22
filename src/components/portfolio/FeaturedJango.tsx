@@ -15,6 +15,8 @@ export function FeaturedJango({ locale }: { locale: Locale }) {
   const project = getProject("jango", locale);
   if (!project) return null;
   const labels = ui[locale];
+  const hero = project.images[0];
+  if (!hero) return null;
 
   return (
     <Row
@@ -124,22 +126,14 @@ export function FeaturedJango({ locale }: { locale: Locale }) {
         >
           <Tilt track="root">
             <DeviceScreenCanvas
-              src="/images/projects/jango/01.webp"
-              alt={
-                locale === "ko"
-                  ? "장고야 부탁해 홈 대시보드 앱스토어 스크린샷"
-                  : "Jango home dashboard App Store screenshot"
-              }
+              src={hero.src}
+              alt={localize(hero.alt, locale)}
             >
               <Media
                 className="featured-app-screen"
-                src="/images/projects/jango/01.webp"
-                alt={
-                  locale === "ko"
-                    ? "장고야 부탁해 홈 대시보드 앱스토어 스크린샷"
-                    : "Jango home dashboard App Store screenshot"
-                }
-                aspectRatio="1125 / 2436"
+                src={hero.src}
+                alt={localize(hero.alt, locale)}
+                aspectRatio="1125 / 2433"
                 objectFit="cover"
                 sizes="(max-width: 768px) 72vw, 288px"
                 priority

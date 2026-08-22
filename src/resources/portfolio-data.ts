@@ -477,7 +477,7 @@ export const projects: Project[] = [
     ],
     images: [
       {
-        src: "/images/projects/jango/01.webp",
+        src: "/images/projects/jango/01.png",
         alt: t(
           "오늘 만료되는 재료와 유통기한 현황, AI 추천 요리를 보여주는 장고야 부탁해 홈 화면",
           "Jango home dashboard showing ingredients expiring today, expiry status, and an AI recipe suggestion",
@@ -489,7 +489,7 @@ export const projects: Project[] = [
         variant: "mobile",
       },
       {
-        src: "/images/projects/jango/02.webp",
+        src: "/images/projects/jango/02.png",
         alt: t(
           "보관 중인 재료를 유통기한 순서로 조회하고 관리하는 장고야 부탁해 보관함 화면",
           "Jango inventory screen for browsing and managing stored ingredients by expiry date",
@@ -501,7 +501,7 @@ export const projects: Project[] = [
         variant: "mobile",
       },
       {
-        src: "/images/projects/jango/03.webp",
+        src: "/images/projects/jango/03.png",
         alt: t(
           "남은 재료를 우선 활용해 오늘의 AI 추천 요리를 보여주는 화면",
           "AI recipe recommendations prioritizing ingredients already in the refrigerator",
@@ -513,7 +513,7 @@ export const projects: Project[] = [
         variant: "mobile",
       },
       {
-        src: "/images/projects/jango/04.webp",
+        src: "/images/projects/jango/04.png",
         alt: t(
           "카메라로 상품 바코드와 유통기한을 인식하는 장고야 부탁해 스캔 화면",
           "Jango camera scanner recognizing a product barcode and its expiry date",
@@ -525,7 +525,7 @@ export const projects: Project[] = [
         variant: "mobile",
       },
       {
-        src: "/images/projects/jango/05.webp",
+        src: "/images/projects/jango/05.png",
         alt: t(
           "보관 위치와 유통기한을 확인해 식재료 등록을 완료하는 화면",
           "Guided ingredient registration flow confirming storage location and expiry date",
@@ -537,7 +537,7 @@ export const projects: Project[] = [
         variant: "mobile",
       },
       {
-        src: "/images/projects/jango/06.webp",
+        src: "/images/projects/jango/06.png",
         alt: t(
           "초대 코드로 가족이나 동료와 여러 냉장고를 공유하는 화면",
           "Jango shared refrigerator screen for managing multiple spaces with family or colleagues",
