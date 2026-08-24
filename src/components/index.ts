@@ -1,3 +1,4 @@
+export { CharacterBuddy } from "./CharacterBuddy/CharacterBuddy";
 export { Footer } from "./Footer";
 export { Header } from "./Header";
 export { PortfolioShell } from "./PortfolioShell";

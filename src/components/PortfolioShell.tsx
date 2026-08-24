@@ -7,6 +7,7 @@ import {
 } from "@once-ui-system/core";
 import type { Locale } from "@/resources";
 import { dataStyle, effects, style } from "@/resources";
+import { CharacterBuddy } from "./CharacterBuddy/CharacterBuddy";
 import { TreeBackdrop } from "./TreeBackdrop";
 import { Footer } from "./Footer";
 import { Header } from "./Header";
@@ -51,6 +52,7 @@ export function PortfolioShell({ children, locale }: { children: React.ReactNode
           {children}
         </Flex>
         <Footer locale={locale} />
+        <CharacterBuddy locale={locale} />
       </Column>
       <script
         id="theme-init"

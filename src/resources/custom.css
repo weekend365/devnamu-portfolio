@@ -2284,4 +2284,216 @@ body {
   .print-only {
     display: initial;
   }
+
+  .character-buddy {
+    display: none;
+  }
+}
+
+.character-buddy {
+  --buddy-size: clamp(5.75rem, 15vw, 8.5rem);
+  --buddy-right: clamp(0.7rem, 3vw, 1.75rem);
+  --buddy-bottom: clamp(0.7rem, 3vw, 1.75rem);
+  /* Mouth height on jango-speak / idle sprites (stage-relative). */
+  --buddy-mouth-y: 45%;
+  --buddy-tail-center: 1.2rem;
+  position: fixed;
+  right: var(--buddy-right);
+  bottom: calc(var(--buddy-bottom) + env(safe-area-inset-bottom, 0px));
+  z-index: 40;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.45rem;
+  width: var(--buddy-size);
+  overflow: visible;
+  pointer-events: none;
+}
+
+.character-buddy.is-placed {
+  right: auto;
+  bottom: auto;
+}
+
+.character-buddy.is-dragging {
+  user-select: none;
+}
+
+.character-buddy-stage {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  pointer-events: auto;
+  touch-action: none;
+  animation: buddy-float 3.8s ease-in-out infinite;
+}
+
+.character-buddy.is-dragging .character-buddy-stage {
+  animation: none;
+}
+
+.character-buddy-hit {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: grab;
+}
+
+.character-buddy.is-dragging .character-buddy-hit {
+  cursor: grabbing;
+}
+
+.character-buddy-hit:focus-visible {
+  outline: 2px solid var(--portfolio-lemon);
+  outline-offset: 4px;
+  border-radius: 1.25rem;
+}
+
+.character-buddy-layer {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.character-buddy-layer.is-active {
+  opacity: 1;
+  visibility: visible;
+  z-index: 1;
+}
+
+.character-buddy-poster {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: transparent;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.character-buddy-poster.is-active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.character-buddy-bubble {
+  position: absolute;
+  z-index: 2;
+  display: block;
+  width: max-content;
+  max-width: min(16.75rem, calc(100vw - 7rem));
+  padding: 0.9rem 1.05rem 0.85rem;
+  border: 0;
+  border-radius: 1.2rem;
+  background: #fff;
+  color: #1a1f27;
+  box-shadow:
+    0 1px 0 color-mix(in srgb, #1a1f27 8%, transparent),
+    0 14px 34px color-mix(in srgb, #1a1f27 16%, transparent);
+  pointer-events: none;
+  text-align: left;
+  animation: buddy-bubble-in 220ms ease;
+}
+
+.character-buddy-bubble p {
+  margin: 0;
+  font-size: 0.8rem;
+  font-weight: 650;
+  line-height: 1.45;
+  letter-spacing: -0.03em;
+  word-break: keep-all;
+}
+
+.character-buddy-bubble p + p {
+  margin-top: 0.28rem;
+}
+
+.character-buddy-bubble.is-left {
+  right: calc(100% - 0.2rem);
+  top: auto;
+  bottom: calc(100% - var(--buddy-mouth-y) - var(--buddy-tail-center));
+}
+
+.character-buddy-bubble.is-right {
+  left: calc(100% - 0.2rem);
+  top: auto;
+  bottom: calc(100% - var(--buddy-mouth-y) - var(--buddy-tail-center));
+}
+
+.character-buddy-bubble::after {
+  content: "";
+  position: absolute;
+  bottom: 0.85rem;
+  top: auto;
+  width: 0.72rem;
+  height: 0.72rem;
+  background: #fff;
+  transform: rotate(45deg);
+}
+
+.character-buddy-bubble.is-left::after {
+  right: -0.22rem;
+}
+
+.character-buddy-bubble.is-right::after {
+  left: -0.22rem;
+}
+
+@keyframes buddy-float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -0.45rem, 0);
+  }
+}
+
+@keyframes buddy-bubble-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 0.35rem, 0) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@media (max-width: 768px) {
+  .character-buddy {
+    --buddy-size: clamp(4.75rem, 22vw, 6.75rem);
+    --buddy-right: 0.65rem;
+    --buddy-bottom: 0.65rem;
+  }
+
+  .character-buddy-bubble {
+    max-width: min(13.5rem, calc(100vw - 5.5rem));
+    padding: 0.7rem 0.8rem 0.65rem;
+  }
+
+  .character-buddy-bubble p {
+    font-size: 0.72rem;
+  }
+}
+
+@media (max-width: 420px) {
+  .character-buddy {
+    --buddy-size: 4.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .character-buddy-stage,
+  .character-buddy-bubble {
+    animation: none;
+  }
 }
