@@ -86,12 +86,11 @@ export function CharacterBuddy({ locale }: { locale: Locale }) {
           } satisfies Record<BuddyState, string>,
           welcome: [
             "안녕하세요! 저는 장고예요.",
-            "데브나무의 포트폴리오에 오신 걸 환영해요!",
+            "데브나무의 포트폴리오에 오신 걸 환영해요.",
             "편하게 둘러보세요~!",
           ],
           introLines: [
-            "안녕하세요, 저는 장고예요!",
-            "‘장고야 부탁해’의 마스코트예요.",
+            "저는 ‘장고야 부탁해’의 마스코트 장고예요.",
             "냉장고를 지키는 꼬마 셰프랍니다.",
             "앱스토어나 플레이스토어에서 만나요~!",
           ],
