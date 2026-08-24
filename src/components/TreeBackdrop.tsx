@@ -3,7 +3,7 @@ export function TreeBackdrop() {
     <div className="tree-backdrop" aria-hidden="true">
       <img
         className="tree-backdrop-image"
-        src="/images/forest.jpg?v=20260822-1621"
+        src="/images/todd-quackenbush-XBxQZLNBM0Q-unsplash.jpg?v=20260824-1335"
         alt=""
         decoding="async"
       />
