@@ -59,13 +59,14 @@ export function ProjectCard({
   const labels = ui[locale];
   const hasVisual = Boolean(project.images[0]) || hasWorkflowVisual(project.slug);
   const evidence = project.results[0] ?? project.outcome;
-  const evidenceLabel = project.results.length > 0
-    ? locale === "ko"
-      ? "검증된 결과"
-      : "Verified outcome"
-    : locale === "ko"
-      ? "핵심 납품"
-      : "Key delivery";
+  const evidenceLabel =
+    project.results.length > 0
+      ? locale === "ko"
+        ? "검증된 결과"
+        : "Verified outcome"
+      : locale === "ko"
+        ? "핵심 납품"
+        : "Key delivery";
   const title = localize(project.title, locale);
   const caseStudyHref = localePath(locale, `/work/${project.slug}`);
   const compact = variant === "compact";
@@ -73,7 +74,7 @@ export function ProjectCard({
   return (
     <Column
       as="article"
-      className={`project-card project-card-${variant}${hasVisual ? "" : " project-card-evidence"}${
+      className={`project-card project-card-${variant} project-card-${project.slug}${hasVisual ? "" : " project-card-evidence"}${
         compact ? "" : " project-card-with-visual"
       }`}
       fillWidth
@@ -104,7 +105,11 @@ export function ProjectCard({
                 ? localize(project.company, locale)
                 : `${localize(project.company, locale)} · ${localize(project.period, locale)}`}
             </Text>
-            <Heading as={headingLevel} variant={compact ? "heading-strong-l" : "heading-strong-xl"} wrap="balance">
+            <Heading
+              as={headingLevel}
+              variant={compact ? "heading-strong-l" : "heading-strong-xl"}
+              wrap="balance"
+            >
               {title}
             </Heading>
           </Column>
@@ -112,7 +117,12 @@ export function ProjectCard({
             {localize(project.status, locale)}
           </Tag>
         </Row>
-        <Text className="project-card-role" variant="label-default-s" onBackground="neutral-weak" wrap="balance">
+        <Text
+          className="project-card-role"
+          variant="label-default-s"
+          onBackground="neutral-weak"
+          wrap="balance"
+        >
           {labels.role} · {localize(project.role, locale)}
         </Text>
         {compact ? null : (

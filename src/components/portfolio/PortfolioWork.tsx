@@ -10,7 +10,7 @@ export function PortfolioWork({ locale }: { locale: Locale }) {
   const copy = pageCopy.work;
 
   return (
-    <Column className="page-stack work-page" maxWidth="l" fillWidth gap="64">
+    <Column className="page-stack work-page" maxWidth="l" fillWidth gap="48">
       <WorkIntro locale={locale} />
       <Column as="section" className="work-selected" gap="24">
         <Row

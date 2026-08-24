@@ -141,7 +141,7 @@ function WorkflowVisual({ project, locale }: { project: Project; locale: Locale 
 
   return (
     <Column
-      className={`project-placeholder project-workflow project-workflow-${project.slug}`}
+      className={`project-placeholder project-workflow project-visual-${project.slug} project-workflow-${project.slug}`}
       fillWidth
       border="neutral-alpha-medium"
       radius="l"
@@ -229,7 +229,7 @@ export function ProjectVisual({
   if (image?.variant === "mobile") {
     return (
       <Column
-        className={project.slug === "jango" ? "jango-card-visual" : "mobile-card-visual"}
+        className={`${project.slug === "jango" ? "jango-card-visual" : "mobile-card-visual"} project-visual-${project.slug}`}
         fillWidth
         center
         radius="l"
@@ -254,7 +254,11 @@ export function ProjectVisual({
 
   if (image?.variant === "desktop") {
     return (
-      <ImageBrowserFrame project={project} locale={locale}>
+      <ImageBrowserFrame
+        project={project}
+        locale={locale}
+        className={`project-visual-${project.slug}`}
+      >
         <Tilt className="preview-tilt-media" max={5}>
           <Media
             className="project-desktop-media"
@@ -277,7 +281,7 @@ export function ProjectVisual({
 
   return (
     <Column
-      className="project-evidence-visual"
+      className={`project-evidence-visual project-visual-${project.slug}`}
       fillWidth
       border="neutral-alpha-medium"
       radius="l"

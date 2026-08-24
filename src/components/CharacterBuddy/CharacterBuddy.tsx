@@ -1,6 +1,7 @@
 "use client";
 
 import { useReducedMotion } from "motion/react";
+import { usePathname } from "next/navigation";
 import {
   useCallback,
   useEffect,
@@ -46,7 +47,12 @@ function storePosition(position: BuddyPosition) {
   }
 }
 
-function clampBuddyPosition(left: number, top: number, width: number, height: number): BuddyPosition {
+function clampBuddyPosition(
+  left: number,
+  top: number,
+  width: number,
+  height: number,
+): BuddyPosition {
   const maxLeft = Math.max(0, window.innerWidth - width);
   const maxTop = Math.max(0, window.innerHeight - height);
   return {
@@ -56,6 +62,13 @@ function clampBuddyPosition(left: number, top: number, width: number, height: nu
 }
 
 export function CharacterBuddy({ locale }: { locale: Locale }) {
+  const pathname = usePathname();
+  const homePath = locale === "en" ? "/en" : "/";
+
+  return pathname === homePath ? <CharacterBuddyContent locale={locale} /> : null;
+}
+
+function CharacterBuddyContent({ locale }: { locale: Locale }) {
   const reduced = useReducedMotion();
   const rootRef = useRef<HTMLDivElement>(null);
   const poseTimerRef = useRef<number | null>(null);
@@ -104,11 +117,7 @@ export function CharacterBuddy({ locale }: { locale: Locale }) {
             idle: "idle",
             speak: "introducing myself",
           } satisfies Record<BuddyState, string>,
-          welcome: [
-            "Hello! I'm Jango.",
-            "Welcome to the portfolio!",
-            "Feel free to look around~",
-          ],
+          welcome: ["Hello! I'm Jango.", "Welcome to the portfolio!", "Feel free to look around~"],
           introLines: [
             "Hello, I'm Jango!",
             "I'm the mascot of Jango — 장고야 부탁해.",
