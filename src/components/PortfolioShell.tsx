@@ -8,7 +8,6 @@ import {
 import type { Locale } from "@/resources";
 import { dataStyle, effects, style } from "@/resources";
 import { CharacterBuddy } from "./CharacterBuddy/CharacterBuddy";
-import { TreeBackdrop } from "./TreeBackdrop";
 import { Footer } from "./Footer";
 import { Header } from "./Header";
 import { Providers } from "./Providers";
@@ -33,7 +32,6 @@ export function PortfolioShell({ children, locale }: { children: React.ReactNode
               size: effects.lines.size as SpacingToken,
             }}
           />
-          <TreeBackdrop />
         </Flex>
         <a className="skip-link" href="#main-content">
           {locale === "ko" ? "본문으로 바로가기" : "Skip to main content"}
