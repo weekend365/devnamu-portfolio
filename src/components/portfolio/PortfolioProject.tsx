@@ -14,8 +14,10 @@ import {
 import { localePath } from "@/utils/site-metadata";
 import { BimsArchitectureDiagram, bimsArchitectureCopy } from "./BimsArchitectureDiagram";
 import { KcscArchitectureDiagram, kcscArchitectureCopy } from "./KcscArchitectureDiagram";
-import { ProjectHero } from "./ProjectHero";
 import { ProjectCard } from "./ProjectCard";
+import { ProjectDemoAccess } from "./ProjectDemoAccess";
+import { ProjectHero } from "./ProjectHero";
+import { ProjectHiringSnapshot } from "./ProjectHiringSnapshot";
 import { ProjectScreenshotCarousel } from "./ProjectScreenshotCarousel";
 import { ProjectVisual } from "./ProjectVisual";
 import { SectionHeading } from "./SectionHeading";
@@ -43,37 +45,6 @@ function DetailList({ items, locale }: { items: Project["contributions"]; locale
           </Text>
         </Column>
       ))}
-    </Column>
-  );
-}
-
-function StorySignal({
-  label,
-  value,
-  children,
-}: {
-  label: string;
-  value?: string;
-  children?: React.ReactNode;
-}) {
-  return (
-    <Column
-      className="project-story-card"
-      background="surface"
-      border="neutral-alpha-medium"
-      radius="l"
-      padding="l"
-      gap="8"
-    >
-      <Text variant="label-strong-s" onBackground="brand-weak">
-        {label}
-      </Text>
-      {value && (
-        <Text variant="heading-strong-m" wrap="balance">
-          {value}
-        </Text>
-      )}
-      {children}
     </Column>
   );
 }
@@ -112,92 +83,7 @@ export function PortfolioProject({ project, locale }: { project: Project; locale
         }}
       />
       <ProjectHero project={project} locale={locale} />
-
-      <Grid
-        className="project-story-grid"
-        columns="3"
-        s={{ columns: 1 }}
-        gap="12"
-        aria-label={locale === "ko" ? "프로젝트 요약" : "Project summary"}
-      >
-        <StorySignal label={labels.problem} value={localize(project.problem, locale)} />
-        <StorySignal label={labels.constraints}>
-          <Text variant="body-default-m" onBackground="neutral-medium">
-            {project.challenges[0]
-              ? localize(project.challenges[0], locale)
-              : localize(copy.fallbackConstraint, locale)}
-          </Text>
-        </StorySignal>
-        <StorySignal label={labels.evidence}>
-          <Text variant="body-default-m" onBackground="neutral-medium">
-            {localize(project.outcome, locale)}
-          </Text>
-        </StorySignal>
-      </Grid>
-
-      {project.images.length > 1 ? (
-        <ProjectScreenshotCarousel
-          id={project.slug}
-          images={project.images}
-          locale={locale}
-          projectTitle={projectTitle}
-        />
-      ) : project.images[0] ? (
-        <ProjectVisual project={project} locale={locale} priority />
-      ) : null}
-
-      <Grid className="project-meta-grid" columns="3" s={{ columns: 1 }} gap="12">
-        <Column className="project-meta-card" background="surface" border="neutral-alpha-medium" radius="l" padding="l" gap="8">
-          <Text variant="label-strong-s" onBackground="neutral-weak">
-            {labels.role}
-          </Text>
-          <Text variant="heading-strong-m">{localize(project.role, locale)}</Text>
-        </Column>
-        <Column className="project-meta-card" background="surface" border="neutral-alpha-medium" radius="l" padding="l" gap="8">
-          <Text variant="label-strong-s" onBackground="neutral-weak">
-            {localize(copy.period, locale)}
-          </Text>
-          <Text variant="heading-strong-m">{localize(project.period, locale)}</Text>
-        </Column>
-        <Column className="project-meta-card" background="surface" border="neutral-alpha-medium" radius="l" padding="l" gap="8">
-          <Text variant="label-strong-s" onBackground="neutral-weak">
-            {labels.status}
-          </Text>
-          <Text variant="heading-strong-m">{localize(project.status, locale)}</Text>
-        </Column>
-      </Grid>
-
-      {project.metrics && project.metrics.length > 0 && (
-        <Grid
-          className="project-metrics"
-          columns="3"
-          s={{ columns: 1 }}
-          gap="12"
-          aria-label={locale === "ko" ? "프로젝트 핵심 지표" : "Project metrics"}
-        >
-          {project.metrics.map((metric) => (
-            <Column
-              key={metric.value + metric.label.en}
-              className="project-metric"
-              background="brand-alpha-weak"
-              border="brand-alpha-medium"
-              radius="l"
-              padding="l"
-              gap="4"
-            >
-              <Text variant="display-strong-s" onBackground="brand-weak">
-                {metric.value}
-              </Text>
-              <Text variant="label-strong-s">{localize(metric.label, locale)}</Text>
-              {metric.note && (
-                <Text variant="body-default-s" onBackground="neutral-weak">
-                  {localize(metric.note, locale)}
-                </Text>
-              )}
-            </Column>
-          ))}
-        </Grid>
-      )}
+      <ProjectHiringSnapshot project={project} locale={locale} />
 
       <Row
         as="nav"
@@ -206,6 +92,9 @@ export function PortfolioProject({ project, locale }: { project: Project; locale
         wrap
         aria-label={locale === "ko" ? "사례 목차" : "Case study sections"}
       >
+        <Button href="#project-evidence" size="s" variant="tertiary">
+          {locale === "ko" ? "공개 증거" : "Evidence"}
+        </Button>
         <Button href="#project-overview" size="s" variant="tertiary">
           {labels.overview}
         </Button>
@@ -228,6 +117,51 @@ export function PortfolioProject({ project, locale }: { project: Project; locale
           </Button>
         )}
       </Row>
+
+      <Column
+        as="section"
+        id="project-evidence"
+        className="project-evidence-section case-study-section"
+        fillWidth
+        gap="24"
+      >
+        <SectionHeading
+          eyebrow={locale === "ko" ? "확인 가능한 작업물" : "Work you can inspect"}
+          title={
+            project.images.length > 0
+              ? locale === "ko"
+                ? "설명보다 먼저, 실제 제품 화면"
+                : "Real product screens before explanations"
+              : locale === "ko"
+                ? "보안 범위 안에서 공개한 업무 구조"
+                : "The workflow documented within confidentiality limits"
+          }
+          description={
+            project.images.length > 0
+              ? locale === "ko"
+                ? "각 화면의 캡션에서 어떤 사용자 문제를 해결했는지 확인할 수 있습니다."
+                : "Each caption explains the user problem addressed by the screen."
+              : locale === "ko"
+                ? "실제 운영 데이터와 화면 대신 공개 가능한 구조와 흐름만 익명화했습니다."
+                : "Sensitive production data and screens are replaced with an anonymized structural view."
+          }
+          reveal={false}
+        />
+        {project.images.length > 1 ? (
+          <ProjectScreenshotCarousel
+            id={project.slug}
+            images={project.images}
+            locale={locale}
+            projectTitle={projectTitle}
+          />
+        ) : (
+          <ProjectVisual project={project} locale={locale} priority />
+        )}
+      </Column>
+
+      {project.demoAccess ? (
+        <ProjectDemoAccess demoAccess={project.demoAccess} locale={locale} />
+      ) : null}
 
       <Column as="article" className="article-copy" fillWidth gap="48">
         <Column
@@ -339,12 +273,7 @@ export function PortfolioProject({ project, locale }: { project: Project; locale
         <Stagger className="related-project-grid" interval={STAGGER_CARD}>
           {related.map((item) => (
             <StaggerItem key={item.slug} className="project-card-reveal" y={12}>
-              <ProjectCard
-                project={item}
-                locale={locale}
-                headingLevel="h3"
-                variant="compact"
-              />
+              <ProjectCard project={item} locale={locale} headingLevel="h3" variant="compact" />
             </StaggerItem>
           ))}
         </Stagger>

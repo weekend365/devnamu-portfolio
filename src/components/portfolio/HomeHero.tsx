@@ -163,27 +163,16 @@ export function HomeHero({ locale }: { locale: Locale }) {
             </Column>
           </Row>
 
-          <Row className="hero-person-summary" fillWidth gap="12" vertical="center">
-            <Media
-              className="hero-profile-thumbnail"
-              src={person.avatar}
-              alt={
-                locale === "ko"
-                  ? `${person.name[locale]} 프로필 사진`
-                  : `Portrait of ${person.name[locale]}`
-              }
-              aspectRatio="1 / 1"
-              objectFit="cover"
-              sizes="48px"
-              priority
-              radius="full"
-            />
+          <Row className="hero-person-summary" fillWidth horizontal="between" gap="12" vertical="center">
             <Column gap="2">
               <Text variant="label-strong-s">{person.name[locale]}</Text>
               <Text variant="label-default-xs" onBackground="neutral-weak">
                 {localize(person.location, locale)} · {localize(person.languages, locale)}
               </Text>
             </Column>
+            <Text className="hero-person-role" variant="label-strong-xs" onBackground="neutral-weak">
+              {locale === "ko" ? "프론트엔드 중심 풀스택" : "Frontend-focused full stack"}
+            </Text>
           </Row>
         </Column>
       ) : null}

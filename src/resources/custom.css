@@ -348,7 +348,7 @@ body {
   width: min(42rem, 58vw);
   height: min(42rem, 58vw);
   border-radius: 999px;
-  background: radial-gradient(circle, var(--brand-alpha-medium), transparent 68%);
+  background: radial-gradient(circle, var(--brand-alpha-weak), transparent 68%);
   content: "";
   pointer-events: none;
 }
@@ -383,13 +383,18 @@ body {
   min-width: 20rem;
   min-height: 29rem;
   align-self: stretch;
-  border-color: color-mix(in srgb, var(--portfolio-lime) 38%, transparent) !important;
-  background: radial-gradient(
-      circle at 76% 18%,
-      var(--portfolio-lemon-alpha-medium),
-      transparent 34%
-    ), linear-gradient(145deg, var(--portfolio-lime-alpha-weak), var(--surface-background) 58%);
-  box-shadow: 0 1.5rem 4rem color-mix(in srgb, var(--neutral-on-background-strong) 8%, transparent);
+  border-color: var(--neutral-alpha-medium) !important;
+  background: linear-gradient(145deg, var(--surface-background), var(--neutral-alpha-weak));
+  box-shadow: 0 1.25rem 3.5rem
+    color-mix(in srgb, var(--neutral-on-background-strong) 7%, transparent);
+}
+
+.hero-evidence-card::after {
+  position: absolute;
+  inset: 0 0 auto;
+  height: 3px;
+  background: linear-gradient(90deg, var(--portfolio-lime), var(--portfolio-lemon));
+  content: "";
 }
 
 .hero-evidence-card::before,
@@ -406,7 +411,7 @@ body {
   bottom: -5rem;
   width: 14rem;
   height: 14rem;
-  background: var(--brand-alpha-medium);
+  background: var(--brand-alpha-weak);
   filter: blur(3.5rem);
 }
 
@@ -453,12 +458,39 @@ body {
   border-top: 1px solid var(--neutral-alpha-medium);
 }
 
-.hero-profile-thumbnail {
-  flex: 0 0 auto;
-  width: 3rem;
-  height: 3rem;
-  border: 1px solid var(--neutral-alpha-medium);
-  background: var(--surface-background);
+.hero-person-role {
+  max-width: 10rem;
+  text-align: right;
+}
+
+.home-credibility {
+  padding-block: 1.5rem;
+  border-top: 1px solid var(--neutral-alpha-medium);
+  border-bottom: 1px solid var(--neutral-alpha-medium);
+}
+
+.home-credibility-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border-top: 1px solid var(--neutral-alpha-weak);
+}
+
+.home-credibility-item {
+  min-width: 0;
+  min-height: 9rem;
+  padding: 1.25rem 1.25rem 0.25rem 0;
+  overflow-wrap: anywhere;
+}
+
+.home-credibility-item:not(:last-child) {
+  margin-right: 1.25rem;
+  border-right: 1px solid var(--neutral-alpha-weak);
+}
+
+.home-credibility-index,
+.home-capability-index {
+  color: var(--portfolio-lime-ink) !important;
+  font-variant-numeric: tabular-nums;
 }
 
 .magnetic-cta {
@@ -532,6 +564,7 @@ body {
 .home-featured-section,
 .home-experience,
 .home-career,
+.home-capabilities,
 .work-featured,
 .work-selected {
   scroll-margin-top: 6rem;
@@ -541,7 +574,7 @@ body {
   overflow: hidden;
   isolation: isolate;
   min-height: 34rem;
-  border-color: var(--portfolio-lime-alpha-medium) !important;
+  border-color: var(--neutral-alpha-medium) !important;
   box-shadow: 0 1.75rem 5rem color-mix(in srgb, var(--neutral-on-background-strong) 7%, transparent);
   transition: border-color 180ms ease, box-shadow 220ms ease;
 }
@@ -556,8 +589,9 @@ body {
 
 .featured-project:hover,
 .featured-project:focus-within {
-  border-color: var(--portfolio-lemon-alpha-strong) !important;
-  box-shadow: 0 2rem 5.5rem var(--portfolio-lemon-alpha-weak);
+  border-color: var(--neutral-alpha-strong) !important;
+  box-shadow: 0 2rem 5.5rem
+    color-mix(in srgb, var(--neutral-on-background-strong) 9%, transparent);
 }
 
 .preview-tilt {
@@ -670,7 +704,7 @@ body {
   position: relative;
   overflow: hidden;
   min-width: 0;
-  border-color: var(--portfolio-lime-alpha-medium) !important;
+  border-color: var(--neutral-alpha-medium) !important;
   box-shadow: 0 1rem 3rem color-mix(in srgb, var(--neutral-on-background-strong) 5%, transparent);
   transition: border-color 200ms ease, box-shadow 220ms ease;
 }
@@ -709,7 +743,8 @@ body {
   overflow: hidden;
   transform: none;
   border-color: color-mix(in srgb, var(--project-accent) 48%, transparent) !important;
-  box-shadow: 0 1.5rem 4rem color-mix(in srgb, var(--project-accent) 14%, transparent);
+  box-shadow: 0 1.5rem 4rem
+    color-mix(in srgb, var(--neutral-on-background-strong) 9%, transparent);
 }
 
 .project-card:hover::after,
@@ -719,31 +754,36 @@ body {
 }
 
 .project-card-jango,
-.project-visual-jango {
+.project-visual-jango,
+.project-hiring-snapshot-jango {
   --project-accent: #9bea35;
   --project-accent-alt: #ffe45c;
 }
 
 .project-card-kcsc,
-.project-visual-kcsc {
+.project-visual-kcsc,
+.project-hiring-snapshot-kcsc {
   --project-accent: #4f8cff;
   --project-accent-alt: #65d9f3;
 }
 
 .project-card-bims,
-.project-visual-bims {
+.project-visual-bims,
+.project-hiring-snapshot-bims {
   --project-accent: #ff9f43;
   --project-accent-alt: #ffd45c;
 }
 
 .project-card-subscription-platform,
-.project-visual-subscription-platform {
+.project-visual-subscription-platform,
+.project-hiring-snapshot-subscription-platform {
   --project-accent: #9672ff;
   --project-accent-alt: #e38cff;
 }
 
 .project-card-gis-facility-system,
-.project-visual-gis-facility-system {
+.project-visual-gis-facility-system,
+.project-hiring-snapshot-gis-facility-system {
   --project-accent: #22bfa3;
   --project-accent-alt: #58a6ff;
 }
@@ -837,7 +877,36 @@ body {
   width: 100%;
 }
 
+.home-capability-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  width: 100%;
+}
+
+.home-capability-card {
+  min-height: 18rem;
+  border-color: var(--neutral-alpha-medium) !important;
+  box-shadow: none;
+}
+
+.home-capability-skills {
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid var(--neutral-alpha-weak);
+}
+
+.home-capability-skills > *:not(:last-child)::after {
+  margin-left: 0.5rem;
+  color: var(--neutral-on-background-weak);
+  content: "·";
+}
+
 .home-project-grid > :last-child:nth-child(odd) {
+  grid-column: 1 / -1;
+}
+
+.work-primary-grid > :first-child {
   grid-column: 1 / -1;
 }
 
@@ -1012,6 +1081,10 @@ body {
   gap: clamp(3.75rem, 6vw, 5.75rem);
 }
 
+.project-page {
+  gap: clamp(3rem, 4vw, 4rem);
+}
+
 .work-page > header,
 .project-hero {
   isolation: isolate;
@@ -1056,30 +1129,80 @@ body {
   max-width: 45rem;
 }
 
-.project-story-grid,
-.project-meta-grid,
-.project-metrics {
-  align-items: stretch;
+.project-hiring-snapshot {
+  --project-accent: var(--portfolio-lime);
+  --project-accent-alt: var(--portfolio-lemon);
+  border-color: color-mix(in srgb, var(--project-accent) 42%, transparent) !important;
+  background: color-mix(in srgb, var(--surface-background) 94%, transparent);
+  box-shadow: 0 1.5rem 4rem color-mix(in srgb, var(--neutral-on-background-strong) 7%, transparent);
 }
 
-.project-story-card {
-  min-height: 11rem;
-  background: color-mix(in srgb, var(--surface-background) 84%, transparent);
+.hiring-snapshot-heading {
+  background: radial-gradient(
+      circle at 92% 10%,
+      color-mix(in srgb, var(--project-accent-alt) 24%, transparent),
+      transparent 34%
+    ),
+    linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--project-accent) 12%, transparent),
+      transparent 56%
+    );
 }
 
-.project-story-card:first-child {
-  border-color: var(--portfolio-lime-alpha-medium);
-  background: var(--portfolio-lime-alpha-weak);
+.hiring-snapshot-meta {
+  border-top: 1px solid var(--neutral-alpha-medium);
+  border-bottom: 1px solid var(--neutral-alpha-medium);
 }
 
-.project-meta-card,
-.project-metric {
-  min-height: 8.5rem;
+.hiring-snapshot-meta-item {
+  min-width: 0;
+  padding: 1.1rem 1.25rem;
 }
 
-.project-metric {
-  border-color: var(--portfolio-lime-alpha-medium) !important;
-  background: linear-gradient(145deg, var(--portfolio-lime-alpha-weak), transparent);
+.hiring-snapshot-meta-item:not(:last-child),
+.hiring-snapshot-story:not(:last-child),
+.hiring-snapshot-metric:not(:last-child) {
+  border-right: 1px solid var(--neutral-alpha-weak);
+}
+
+.hiring-snapshot-story {
+  min-width: 0;
+  min-height: 13rem;
+  padding: 1.35rem 1.25rem;
+}
+
+.hiring-snapshot-story.is-decision {
+  background: color-mix(in srgb, var(--project-accent) 9%, transparent);
+}
+
+.hiring-snapshot-story.is-outcome {
+  background: color-mix(in srgb, var(--project-accent-alt) 8%, transparent);
+}
+
+.hiring-snapshot-index {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.9rem;
+  height: 1.9rem;
+  border-radius: 999px;
+  background: var(--project-accent);
+  color: #111;
+}
+
+.hiring-snapshot-metrics {
+  border-top: 1px solid var(--neutral-alpha-medium);
+  background: color-mix(in srgb, var(--project-accent) 5%, transparent);
+}
+
+.hiring-snapshot-metric {
+  min-width: 0;
+  padding: 1.15rem 1.25rem;
+}
+
+.project-evidence-section {
+  max-width: 100%;
 }
 
 .project-demo-access {
@@ -1864,6 +1987,10 @@ body {
     gap: 3.5rem;
   }
 
+  .project-page {
+    gap: 3rem;
+  }
+
   .home-hero {
     min-height: auto;
     padding-block: 1rem 0;
@@ -1880,6 +2007,38 @@ body {
   .hero-evidence-card {
     flex: none;
     width: 100%;
+  }
+
+  .hero-person-role {
+    max-width: 8rem;
+    font-size: 0.65rem;
+  }
+
+  .home-credibility {
+    padding-block: 1.25rem;
+  }
+
+  .home-credibility-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .home-credibility-item {
+    min-height: 8.5rem;
+    padding: 1rem 0.75rem 0.75rem 0;
+  }
+
+  .home-credibility-item:not(:last-child) {
+    margin-right: 0;
+    border-right: 0;
+  }
+
+  .home-credibility-item:nth-child(odd) {
+    margin-right: 0.75rem;
+    border-right: 1px solid var(--neutral-alpha-weak);
+  }
+
+  .home-credibility-item:nth-child(n + 3) {
+    border-top: 1px solid var(--neutral-alpha-weak);
   }
 
   .hero-title {
@@ -2034,7 +2193,19 @@ body {
     grid-template-columns: minmax(0, 1fr);
   }
 
+  .home-capability-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .home-capability-card {
+    min-height: 0;
+  }
+
   .home-project-grid > :last-child:nth-child(odd) {
+    grid-column: auto;
+  }
+
+  .work-primary-grid > :first-child {
     grid-column: auto;
   }
 
@@ -2095,9 +2266,50 @@ body {
     left: -10rem;
   }
 
-  .project-story-card,
-  .project-meta-card,
-  .project-metric,
+  .hiring-snapshot-heading {
+    padding: 1.25rem;
+  }
+
+  .hiring-snapshot-meta-item,
+  .hiring-snapshot-metric {
+    min-height: 0;
+    padding: 0.85rem 0.7rem;
+  }
+
+  .hiring-snapshot-story {
+    min-height: 0;
+    padding: 1rem 1.25rem;
+    border-right: 0 !important;
+  }
+
+  .hiring-snapshot-story:not(:last-child) {
+    border-bottom: 1px solid var(--neutral-alpha-weak);
+  }
+
+  .hiring-snapshot-meta-item > :last-child,
+  .hiring-snapshot-metric > :nth-child(2) {
+    font-size: 0.72rem;
+    line-height: 1.35;
+  }
+
+  .hiring-snapshot-metric > :first-child {
+    font-size: 1.25rem;
+  }
+
+  .hiring-snapshot-metric > :last-child {
+    font-size: 0.62rem;
+    line-height: 1.3;
+  }
+
+  .hiring-snapshot-story > :last-child {
+    font-size: 0.86rem;
+    line-height: 1.55;
+  }
+
+  .hiring-snapshot-story-grid {
+    border-top: 0;
+  }
+
   .result-item {
     min-height: 0;
   }
@@ -2315,6 +2527,24 @@ body {
 
   .hero-evidence-card {
     padding: 1rem;
+  }
+
+  .home-credibility-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .home-credibility-item {
+    min-height: 0;
+    padding: 1rem 0;
+  }
+
+  .home-credibility-item:nth-child(odd) {
+    margin-right: 0;
+    border-right: 0;
+  }
+
+  .home-credibility-item:nth-child(n + 2) {
+    border-top: 1px solid var(--neutral-alpha-weak);
   }
 
   .proof-item {

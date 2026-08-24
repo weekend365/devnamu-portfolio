@@ -50,9 +50,6 @@ export function ProjectHero({ project, locale }: { project: Project; locale: Loc
             <Text variant="heading-default-l" onBackground="neutral-weak" wrap="balance">
               {localize(project.summary, locale)}
             </Text>
-            <Text variant="body-default-s" onBackground="neutral-weak">
-              {localize(project.company, locale)} · {localize(project.period, locale)}
-            </Text>
           </Column>
         </StaggerItem>
         <StaggerItem y={8}>
@@ -75,6 +72,15 @@ export function ProjectHero({ project, locale }: { project: Project; locale: Loc
                 {localize(project.externalLink.label, locale)}
               </Button>
             )}
+            {project.demoAccess ? (
+              <Button
+                href={project.demoAccess.url}
+                variant="secondary"
+                suffixIcon="arrowUpRightFromSquare"
+              >
+                {locale === "ko" ? "공개 데모 체험" : "Open live demo"}
+              </Button>
+            ) : null}
           </Row>
         </StaggerItem>
       </Stagger>

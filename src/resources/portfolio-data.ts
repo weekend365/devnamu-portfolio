@@ -46,6 +46,7 @@ export type Project = {
   status: LocalizedText;
   summary: LocalizedText;
   problem: LocalizedText;
+  decision: LocalizedText;
   outcome: LocalizedText;
   metrics?: {
     value: string;
@@ -328,6 +329,10 @@ export const projects: Project[] = [
       "유통기한이 임박한 식재료를 놓치고, 기록·추천·공유가 서로 끊겨 있었습니다.",
       "People missed expiring ingredients because tracking, recommendations, and shared spaces lived in separate flows.",
     ),
+    decision: t(
+      "Expo Go에서 지원하지 않는 네이티브 기능은 dev·EAS 빌드와 iOS 실기기로 검증하고, 모바일·API·관리자의 계약은 공유 스키마로 일치시켰습니다.",
+      "Validated native features unavailable in Expo Go through dev and EAS builds on real iOS devices, while keeping mobile, API, and admin contracts aligned through shared schemas.",
+    ),
     outcome: t(
       "iOS 앱을 App Store에 정식 출시했고, Android는 Google Play 비공개 테스트를 진행 중입니다. Railway 기반 API/Admin 운영 환경과 269개 자동 검사를 통과한 핵심 모바일 흐름을 연결했습니다.",
       "Launched the iOS app on the App Store while Android is in Google Play closed testing, backed by live Railway API/Admin services and a core mobile flow that passed 269 automated checks.",
@@ -535,6 +540,10 @@ export const projects: Project[] = [
       "시설물부터 변수까지 이어지는 깊은 기준 데이터를 다루면서 현재 선택과 편집 맥락을 잃기 쉬웠습니다.",
       "Deep standards data from facilities to variables made it easy to lose the current selection and editing context.",
     ),
+    decision: t(
+      "다중 패널 기준맵으로 계층 맥락을 유지하고, TanStack Query의 서버 상태와 Zustand의 로컬 편집 상태를 분리했습니다.",
+      "Preserved hierarchical context through a multi-panel standards map and separated TanStack Query server state from Zustand local editing state.",
+    ),
     outcome: t(
       "표준·사용자 라이브러리, API Center, 지원 게시판이 실제 시범운영 사이트에서 함께 동작하도록 고도화했습니다.",
       "Advanced the live pilot so standard and user libraries, the API Center, and support boards work as one operational system.",
@@ -645,6 +654,10 @@ export const projects: Project[] = [
       "버스·노선·운영 이벤트가 흩어져 있어 관리자가 업무 순서대로 데이터를 확인하기 어려웠습니다.",
       "Bus, route, and operational events were spread across views, making it difficult for administrators to work in sequence.",
     ),
+    decision: t(
+      "API 응답을 화면 모델로 변환해 지도·테이블·상세 화면의 조회와 수정 상태를 하나의 관리 업무 흐름으로 통일했습니다.",
+      "Translated API responses into screen models so map, table, and detail views share one consistent administration workflow for viewing and editing.",
+    ),
     outcome: t(
       "Next.js 관리자 화면과 Spring Boot API를 연결해 버스·노선·운영 데이터의 조회·수정 흐름을 구현하고, 지도 관제·운영 대시보드·접속 이력 화면으로 업무 범위를 확장했습니다.",
       "Connected the Next.js admin interface to Spring Boot APIs for bus, route, and operations workflows, extending the scope to map monitoring, operations dashboards, and access history.",
@@ -730,6 +743,10 @@ export const projects: Project[] = [
     problem: t(
       "인증·상품·구독 상태가 연결된 하나의 사용자 여정을 만들어야 했습니다.",
       "Authentication, products, and subscription state needed to behave as one coherent user journey.",
+    ),
+    decision: t(
+      "Next.js 화면, NestJS API와 PostgreSQL 모델의 책임을 나누고 인증·상품·구독 상태를 하나의 데이터 흐름으로 연결했습니다.",
+      "Separated responsibilities across Next.js screens, NestJS APIs, and PostgreSQL models while connecting authentication, products, and subscriptions into one data flow.",
     ),
     outcome: t(
       "React·Next.js 화면과 NestJS API, PostgreSQL 모델을 연결해 구독 서비스의 핵심 흐름을 구현했습니다.",
@@ -818,6 +835,10 @@ export const projects: Project[] = [
     problem: t(
       "시설물 위치와 상세 정보를 지도·목록·패널 사이를 오가며 확인해야 했습니다.",
       "Users had to move between the map, list, and detail panel to understand facility locations and information.",
+    ),
+    decision: t(
+      "시설물 선택 상태를 공통 기준으로 두고 지도 마커·목록·팝업·상세 패널이 같은 탐색 맥락을 공유하도록 구성했습니다.",
+      "Used facility selection as shared state so map markers, lists, popups, and detail panels preserve the same exploration context.",
     ),
     outcome: t(
       "지도 마커·팝업·상세 패널을 연결한 시스템이 한국수자원공사에 납품되어 실제 업무 환경에서 사용되었습니다.",
@@ -940,8 +961,8 @@ export const pageCopy = {
       "The product I currently own most deeply",
     ),
     selectedTitle: t(
-      "복잡한 업무를 사용 가능한 소프트웨어로 바꾼 작업",
-      "Turning complex operations into usable software",
+      "출시·복잡한 업무·운영 데이터 역량을 보여주는 대표 사례",
+      "Flagship cases across shipping, complex workflows, and operational data",
     ),
   },
   about: {
@@ -993,10 +1014,6 @@ export const pageCopy = {
     namespace: t("저장소 이름", "Repository namespace"),
     period: t("기간", "Period"),
     overviewTitle: t("무엇을 만들었는가", "What I built"),
-    fallbackConstraint: t(
-      "핵심 흐름을 유지하면서 제품 범위를 단계적으로 확장했습니다.",
-      "Expanded the product in stages while protecting the core workflow.",
-    ),
   },
   header: {
     primaryNavigation: t("주요 탐색", "Primary navigation"),

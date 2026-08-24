@@ -6,6 +6,7 @@ import { STAGGER_CARD } from "@/components/motion/tokens";
 import { baseURL, getContent, localize, pageCopy, person, type Locale } from "@/resources";
 import { localePath } from "@/utils/site-metadata";
 import { FeaturedJango } from "./FeaturedJango";
+import { HomeCredibility } from "./HomeCredibility";
 import { HomeHero } from "./HomeHero";
 import { HomeTimeline } from "./HomeTimeline";
 import { ProjectCard } from "./ProjectCard";
@@ -16,7 +17,50 @@ export function PortfolioHome({ locale }: { locale: Locale }) {
   const content = getContent(locale);
   const labels = content.navigation;
   const copy = pageCopy.home;
-  const secondaryProjects = content.projects.filter((project) => !project.featured).slice(0, 3);
+  const homeProjectSlugs = new Set(["kcsc", "bims"]);
+  const secondaryProjects = content.projects.filter((project) => homeProjectSlugs.has(project.slug));
+  const capabilityGroups =
+    locale === "ko"
+      ? [
+          {
+            index: "01",
+            title: "복잡한 업무를 명확한 UI로",
+            body: "트리·테이블·다중 패널·지도 화면을 사용자의 작업 순서에 맞게 구조화합니다.",
+            skills: ["React", "Next.js", "TypeScript", "TanStack Query", "Zustand"],
+          },
+          {
+            index: "02",
+            title: "화면 뒤 데이터까지 연결",
+            body: "API와 데이터 모델을 이해하고 프론트엔드부터 백엔드·관리자까지 하나의 흐름으로 만듭니다.",
+            skills: ["NestJS", "Spring Boot", "PostgreSQL", "REST API"],
+          },
+          {
+            index: "03",
+            title: "검증하고 운영까지 전달",
+            body: "테스트·배포·모니터링을 제품 개발의 일부로 다뤄 실제 환경에서 동작하는 결과를 전달합니다.",
+            skills: ["Jest", "RTL", "Docker", "Jenkins", "Sentry"],
+          },
+        ]
+      : [
+          {
+            index: "01",
+            title: "Clear UI for complex work",
+            body: "I structure trees, tables, multi-panel layouts, and maps around the user's working sequence.",
+            skills: ["React", "Next.js", "TypeScript", "TanStack Query", "Zustand"],
+          },
+          {
+            index: "02",
+            title: "Connected through the data layer",
+            body: "I understand APIs and data models, connecting frontend, backend, and admin tools into one flow.",
+            skills: ["NestJS", "Spring Boot", "PostgreSQL", "REST API"],
+          },
+          {
+            index: "03",
+            title: "Verified and delivered",
+            body: "I treat testing, deployment, and monitoring as product work and deliver for real environments.",
+            skills: ["Jest", "RTL", "Docker", "Jenkins", "Sentry"],
+          },
+        ];
 
   return (
     <Column className="page-stack home-page" maxWidth="l" fillWidth gap="32">
@@ -44,6 +88,8 @@ export function PortfolioHome({ locale }: { locale: Locale }) {
       />
 
       <HomeHero locale={locale} />
+
+      <HomeCredibility locale={locale} />
 
       <Column
         as="section"
@@ -108,6 +154,61 @@ export function PortfolioHome({ locale }: { locale: Locale }) {
           </Button>
         </Row>
         <HomeTimeline locale={locale} experiences={content.experiences} />
+      </Column>
+
+      <Column as="section" className="home-capabilities" gap="32">
+        <Row
+          fillWidth
+          horizontal="between"
+          vertical="end"
+          gap="24"
+          s={{ direction: "column", vertical: "start" }}
+        >
+          <SectionHeading
+            eyebrow={locale === "ko" ? "핵심 역량" : "Core capabilities"}
+            title={
+              locale === "ko"
+                ? "채용 후 바로 기여할 수 있는 세 가지 방식"
+                : "Three ways I can contribute from day one"
+            }
+          />
+          <Button href={localePath(locale, "/about")} variant="tertiary" suffixIcon="arrowRight">
+            {locale === "ko" ? "전체 기술과 경력 보기" : "View all skills and experience"}
+          </Button>
+        </Row>
+        <Stagger className="home-capability-grid" interval={STAGGER_CARD}>
+          {capabilityGroups.map((capability) => (
+            <StaggerItem key={capability.index} className="card-reveal" y={12}>
+              <Column
+                className="home-capability-card"
+                background="surface"
+                border="neutral-alpha-medium"
+                radius="l"
+                padding="l"
+                gap="16"
+              >
+                <Text className="home-capability-index" variant="label-strong-s">
+                  {capability.index}
+                </Text>
+                <Column gap="8">
+                  <Heading as="h3" variant="heading-strong-l" wrap="balance">
+                    {capability.title}
+                  </Heading>
+                  <Text variant="body-default-m" onBackground="neutral-weak" wrap="balance">
+                    {capability.body}
+                  </Text>
+                </Column>
+                <Row className="home-capability-skills" gap="8" wrap>
+                  {capability.skills.map((skill) => (
+                    <Text key={skill} variant="label-default-xs" onBackground="neutral-medium">
+                      {skill}
+                    </Text>
+                  ))}
+                </Row>
+              </Column>
+            </StaggerItem>
+          ))}
+        </Stagger>
       </Column>
 
       <Reveal inView y={0} scale={0.98} amount={0.3} className="contact-reveal">
