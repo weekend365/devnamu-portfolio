@@ -7,7 +7,6 @@ import { baseURL, getContent, localize, pageCopy, person, type Locale } from "@/
 import { localePath } from "@/utils/site-metadata";
 import { FeaturedJango } from "./FeaturedJango";
 import { HomeHero } from "./HomeHero";
-import { HomeProof } from "./HomeProof";
 import { HomeTimeline } from "./HomeTimeline";
 import { ProjectCard } from "./ProjectCard";
 import { SectionHeading } from "./SectionHeading";
@@ -45,8 +44,6 @@ export function PortfolioHome({ locale }: { locale: Locale }) {
       />
 
       <HomeHero locale={locale} />
-
-      <HomeProof locale={locale} projectCount={content.projects.length} />
 
       <Column
         as="section"

@@ -10,8 +10,16 @@ import { EASE, STAGGER_S } from "@/components/motion/tokens";
 
 export function HomeHero({ locale }: { locale: Locale }) {
   const reduced = useReducedMotion();
-  const labels = getContent(locale).navigation;
+  const content = getContent(locale);
+  const labels = content.navigation;
   const copy = pageCopy.home;
+  const featuredProject = content.projects.find((project) => project.featured);
+  const featuredImage = featuredProject?.images[0];
+  const proofItems = [
+    { value: "3+", label: localize(copy.proofYears, locale) },
+    { value: String(content.projects.length), label: localize(copy.proofProjects, locale) },
+    { value: "2", label: localize(copy.proofDelivery, locale) },
+  ];
 
   return (
     <Row
@@ -19,15 +27,15 @@ export function HomeHero({ locale }: { locale: Locale }) {
       className="home-hero"
       fillWidth
       gap="xl"
-      vertical="center"
+      vertical="stretch"
       aria-labelledby="home-heading"
       s={{ direction: "column" }}
     >
-      <Column className="hero-copy" flex={8} gap="24">
+      <Column className="hero-copy" flex={7} gap="24" vertical="center">
         <Stagger inView={false} interval={STAGGER_S} contents>
           <StaggerItem y={8}>
             <Text className="eyebrow" variant="label-strong-m" onBackground="brand-weak">
-              {person.brand} · {person.name[locale]} / {person.role[locale]}
+              {person.name[locale]} · {person.role[locale]}
             </Text>
           </StaggerItem>
           <StaggerItem y={16} fade={false}>
@@ -49,31 +57,37 @@ export function HomeHero({ locale }: { locale: Locale }) {
             </Column>
           </StaggerItem>
           <StaggerItem y={8}>
-            <Row className="hero-context" gap="8" wrap>
-              <Tag size="s">{localize(person.location, locale)}</Tag>
-              <Tag size="s">{localize(person.languages, locale)}</Tag>
-            </Row>
+            <div
+              className="hero-proof-grid"
+              aria-label={locale === "ko" ? "핵심 경력 요약" : "Career highlights"}
+            >
+              {proofItems.map((item) => (
+                <Column key={item.label} className="hero-proof-item" gap="4">
+                  <Text variant="display-strong-xs" onBackground="brand-weak">
+                    {item.value}
+                  </Text>
+                  <Text variant="label-default-s" onBackground="neutral-weak">
+                    {item.label}
+                  </Text>
+                </Column>
+              ))}
+            </div>
           </StaggerItem>
           <StaggerItem y={8}>
             <Row className="hero-actions" gap="12" wrap>
               <Magnetic arrow>
                 <Button
-                  href={localePath(locale, "/work")}
+                  href={localePath(locale, "/work/jango")}
                   variant="primary"
                   prefixIcon="grid"
                   suffixIcon="arrowRight"
                 >
-                  {locale === "ko" ? "대표 프로젝트 보기" : "View selected work"}
+                  {locale === "ko" ? "대표 사례 2분 요약" : "View flagship case study"}
                 </Button>
               </Magnetic>
               <Row className="hero-secondary-actions" gap="12" wrap>
-                <Button
-                  href={person.github}
-                  variant="secondary"
-                  prefixIcon="github"
-                  suffixIcon="arrowUpRightFromSquare"
-                >
-                  {labels.github}
+                <Button href={localePath(locale, "/about")} variant="secondary" prefixIcon="person">
+                  {locale === "ko" ? "경력·역량 보기" : "Experience & skills"}
                 </Button>
                 <Button
                   className="hero-email-button"
@@ -89,28 +103,90 @@ export function HomeHero({ locale }: { locale: Locale }) {
           </StaggerItem>
         </Stagger>
       </Column>
-      <Column className="hero-portrait" flex={3} horizontal="center">
-        <motion.div
-          initial={reduced ? false : { scale: 1.04 }}
-          animate={{ scale: 1 }}
-          transition={{ duration: 0.6, ease: EASE, delay: reduced ? 0 : STAGGER_S * 3 }}
+      {featuredProject && featuredImage ? (
+        <Column
+          className="hero-evidence-card"
+          flex={5}
+          background="surface"
+          border="brand-alpha-medium"
+          radius="xl"
+          padding="l"
+          gap="20"
         >
-          <Media
-            className="profile-image"
-            src={person.avatar}
-            alt={
-              locale === "ko"
-                ? `${person.brand} ${person.name[locale]} 프로필 사진`
-                : `Portrait of ${person.name[locale]}`
-            }
-            aspectRatio="1 / 1"
-            objectFit="cover"
-            sizes="(max-width: 768px) 112px, 160px"
-            priority
-            radius="full"
-          />
-        </motion.div>
-      </Column>
+          <Row fillWidth horizontal="between" vertical="start" gap="12">
+            <Column gap="4">
+              <Text className="eyebrow" variant="label-strong-s" onBackground="brand-weak">
+                {locale === "ko" ? "직접 출시한 대표 제품" : "Flagship product shipped"}
+              </Text>
+              <Heading as="h2" variant="heading-strong-xl">
+                {localize(featuredProject.title, locale)}
+              </Heading>
+            </Column>
+            <Tag variant="success" size="s">
+              App Store
+            </Tag>
+          </Row>
+
+          <Row className="hero-evidence-content" fillWidth gap="20" vertical="center">
+            <motion.div
+              className="hero-product-device"
+              initial={reduced ? false : { scale: 0.97, y: 10 }}
+              animate={{ scale: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: EASE, delay: reduced ? 0 : STAGGER_S * 2 }}
+            >
+              <Media
+                className="hero-product-screen"
+                src={featuredImage.src}
+                alt={localize(featuredImage.alt, locale)}
+                aspectRatio="1125 / 2433"
+                objectFit="cover"
+                sizes="(max-width: 768px) 116px, 152px"
+                priority
+                radius="l"
+              />
+            </motion.div>
+            <Column className="hero-evidence-metrics" fillWidth gap="12">
+              {(featuredProject.metrics ?? []).map((metric) => (
+                <Column
+                  key={metric.value + metric.label.en}
+                  className="hero-evidence-metric"
+                  gap="2"
+                >
+                  <Text variant="heading-strong-m" onBackground="brand-weak">
+                    {metric.value}
+                  </Text>
+                  <Text variant="label-default-s" onBackground="neutral-weak">
+                    {localize(metric.label, locale)}
+                  </Text>
+                </Column>
+              ))}
+            </Column>
+          </Row>
+
+          <Row className="hero-person-summary" fillWidth gap="12" vertical="center">
+            <Media
+              className="hero-profile-thumbnail"
+              src={person.avatar}
+              alt={
+                locale === "ko"
+                  ? `${person.name[locale]} 프로필 사진`
+                  : `Portrait of ${person.name[locale]}`
+              }
+              aspectRatio="1 / 1"
+              objectFit="cover"
+              sizes="48px"
+              priority
+              radius="full"
+            />
+            <Column gap="2">
+              <Text variant="label-strong-s">{person.name[locale]}</Text>
+              <Text variant="label-default-xs" onBackground="neutral-weak">
+                {localize(person.location, locale)} · {localize(person.languages, locale)}
+              </Text>
+            </Column>
+          </Row>
+        </Column>
+      ) : null}
     </Row>
   );
 }

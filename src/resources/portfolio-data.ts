@@ -69,10 +69,7 @@ const t = (ko: string, en: string): LocalizedText => ({ ko, en });
 export const person = {
   brand: "DEVNAMU",
   name: t("남우현", "Nam Woo-hyun"),
-  role: t(
-    "프론트엔드 중심 풀스택 개발자",
-    "Frontend-focused full-stack developer",
-  ),
+  role: t("프론트엔드 중심 풀스택 개발자", "Frontend-focused full-stack developer"),
   email: "skadngus14@naver.com",
   github: "https://github.com/weekend365",
   portfolio: "https://devnamu.com/",
@@ -140,18 +137,10 @@ export const experiences: Experience[] = [
   },
   {
     company: t("겟앤쇼", "Get&Show"),
-    role: t(
-      "개발부 · 주임 · 풀스택 개발자",
-      "Associate · Full-stack Developer",
-    ),
+    role: t("개발부 · 주임 · 풀스택 개발자", "Associate · Full-stack Developer"),
     period: t("2025.05 – 2025.12 · 8개월", "May 2025 – Dec 2025 · 8 months"),
     location: t("서울", "Seoul"),
-    projects: [
-      t(
-        "자사 구독 서비스 웹·앱 플랫폼",
-        "In-house subscription web and app platform",
-      ),
-    ],
+    projects: [t("자사 구독 서비스 웹·앱 플랫폼", "In-house subscription web and app platform")],
     achievements: [
       t(
         "Next.js App Router와 TypeScript로 사용자 인증, 상품·서비스 정보와 구독 상태를 연결하는 사용자 화면을 개발했습니다.",
@@ -177,21 +166,10 @@ export const experiences: Experience[] = [
   },
   {
     company: t("케이엠아이에스㈜", "KMIS Co., Ltd."),
-    role: t(
-      "개발부 · 주임 · 프론트엔드 개발자",
-      "Associate · Frontend Developer",
-    ),
-    period: t(
-      "2023.05 – 2025.01 · 1년 9개월",
-      "May 2023 – Jan 2025 · 1 year 9 months",
-    ),
+    role: t("개발부 · 주임 · 프론트엔드 개발자", "Associate · Frontend Developer"),
+    period: t("2023.05 – 2025.01 · 1년 9개월", "May 2023 – Jan 2025 · 1 year 9 months"),
     location: t("인천", "Incheon"),
-    projects: [
-      t(
-        "GIS 기반 시설물 조회 시스템 웹앱",
-        "GIS-based facility lookup web application",
-      ),
-    ],
+    projects: [t("GIS 기반 시설물 조회 시스템 웹앱", "GIS-based facility lookup web application")],
     achievements: [
       t(
         "React·Next.js·TypeScript 기반 GIS 웹 애플리케이션의 시설물 조회와 상세 정보 화면을 담당했습니다.",
@@ -220,10 +198,7 @@ export const experiences: Experience[] = [
 export const education = [
   {
     institution: t("한국방송통신대학교", "Korea National Open University"),
-    program: t(
-      "컴퓨터과학과 · 편입/졸업",
-      "Computer Science · Transfer/Graduated",
-    ),
+    program: t("컴퓨터과학과 · 편입/졸업", "Computer Science · Transfer/Graduated"),
     period: "2023.01 – 2025.08",
   },
   {
@@ -255,32 +230,20 @@ export const training = [
 export const certifications = [
   {
     name: t("정보처리기사", "Engineer Information Processing"),
-    detail: t(
-      "2025.09 · 최종합격 · 한국산업인력공단",
-      "Sep 2025 · Passed · HRD Korea",
-    ),
+    detail: t("2025.09 · 최종합격 · 한국산업인력공단", "Sep 2025 · Passed · HRD Korea"),
   },
   {
     name: t("SQL개발자(SQLD)", "SQL Developer (SQLD)"),
-    detail: t(
-      "2024.09 · 최종합격 · 한국데이터산업진흥원",
-      "Sep 2024 · Passed · Korea Data Agency",
-    ),
+    detail: t("2024.09 · 최종합격 · 한국데이터산업진흥원", "Sep 2024 · Passed · Korea Data Agency"),
   },
   {
     name: t("네트워크관리사 2급", "Network Administrator Level 2"),
-    detail: t(
-      "2021.12 · 최종합격 · 한국정보통신자격협회",
-      "Dec 2021 · Passed · ICQA",
-    ),
+    detail: t("2021.12 · 최종합격 · 한국정보통신자격협회", "Dec 2021 · Passed · ICQA"),
   },
   { name: t("TOEIC", "TOEIC"), detail: t("2025.10 · 835점", "Oct 2025 · 835") },
   {
     name: t("TOEIC Speaking Test", "TOEIC Speaking Test"),
-    detail: t(
-      "2025.09 · 120점 · Intermediate Mid 2",
-      "Sep 2025 · 120 · Intermediate Mid 2",
-    ),
+    detail: t("2025.09 · 120점 · Intermediate Mid 2", "Sep 2025 · 120 · Intermediate Mid 2"),
   },
 ];
 
@@ -356,10 +319,7 @@ export const projects: Project[] = [
       "2026 · iOS 출시 · Android 비공개 테스트",
       "2026 · iOS launched · Android closed testing",
     ),
-    status: t(
-      "iOS 정식 출시 · Android 비공개 테스트",
-      "iOS live · Android closed testing",
-    ),
+    status: t("iOS 정식 출시 · Android 비공개 테스트", "iOS live · Android closed testing"),
     summary: t(
       "냉장고 식재료와 생활용품의 유통기한을 관리하고, 임박 식재료를 우선 활용하는 AI 레시피를 추천하는 서비스입니다.",
       "An ingredient and household inventory service that tracks expiry dates and recommends AI-generated recipes prioritizing items that expire soon.",
@@ -542,10 +502,7 @@ export const projects: Project[] = [
           "초대 코드로 가족이나 동료와 여러 냉장고를 공유하는 화면",
           "Jango shared refrigerator screen for managing multiple spaces with family or colleagues",
         ),
-        caption: t(
-          "가족·동료와 함께 관리하는 공유 공간",
-          "Shared spaces for households and teams",
-        ),
+        caption: t("가족·동료와 함께 관리하는 공유 공간", "Shared spaces for households and teams"),
         variant: "mobile",
       },
     ],
@@ -567,10 +524,7 @@ export const projects: Project[] = [
       "KCSC Digital Construction Standards Pilot Support System",
     ),
     company: t("씨엔넷", "C&Net"),
-    role: t(
-      "프론트엔드 개발·UX 고도화",
-      "Frontend Development & UX Enhancement",
-    ),
+    role: t("프론트엔드 개발·UX 고도화", "Frontend Development & UX Enhancement"),
     period: t("2025.12 – 재직중", "Dec 2025 – Present"),
     status: t("시범운영 · 2026.08 기준", "Pilot operation · Aug 2026"),
     summary: t(
@@ -678,10 +632,7 @@ export const projects: Project[] = [
     startedAt: "2025-12",
     endedAt: null,
     locale: ["ko", "en"],
-    title: t(
-      "BIMS 버스 정보 관리 시스템",
-      "BIMS Bus Information Management System",
-    ),
+    title: t("BIMS 버스 정보 관리 시스템", "BIMS Bus Information Management System"),
     company: t("씨엔넷", "C&Net"),
     role: t("풀스택 개발", "Full-stack Development"),
     period: t("2025.12 – 재직중", "Dec 2025 – Present"),
@@ -942,16 +893,16 @@ export const projects: Project[] = [
 export const pageCopy = {
   home: {
     title: t(
-      "복잡한 업무를, 실제로 쓰이는 제품으로 바꿉니다.",
-      "I turn complex operations into products people can use.",
+      "React·Next.js로 업무 시스템과 출시 제품을 만듭니다.",
+      "I build operational systems and shipped products with React and Next.js.",
     ),
     summary: t(
-      "3년 이상 React와 Next.js로 공공·교통·구독 제품을 만들었습니다. 복잡한 업무 UI를 설계하고 API·데이터·관리자·배포까지 제품의 흐름을 연결합니다.",
-      "For over three years, I’ve built public, transportation, and subscription products with React and Next.js—connecting complex business UIs to APIs, data, admin tools, and delivery.",
+      "3년 이상 공공·교통·구독 도메인의 화면과 API를 연결했습니다. iOS 정식 출시부터 공공기관 납품·시범 운영까지, 프론트엔드 중심으로 제품을 끝까지 구현합니다.",
+      "For over three years, I’ve connected interfaces and APIs across public-sector, transportation, and subscription products—from an iOS launch to public-sector delivery and pilot operations.",
     ),
-    proofYears: t("제품 개발 경력", "years in product"),
+    proofYears: t("실무 제품 개발", "professional product work"),
     proofProjects: t("프로젝트 사례", "case studies"),
-    proofDelivery: t("운영·납품 사례", "live or delivered"),
+    proofDelivery: t("출시·납품·운영", "launched or delivered"),
     featuredTitle: t(
       "장고야 부탁해 — 모바일부터 운영까지 연결한 제품",
       "Jango — one product from mobile experience to operations",
@@ -979,10 +930,7 @@ export const pageCopy = {
     ),
   },
   work: {
-    title: t(
-      "제품을 만들고, 업무를 움직인 기록",
-      "Products built. Operations improved.",
-    ),
+    title: t("제품을 만들고, 업무를 움직인 기록", "Products built. Operations improved."),
     summary: t(
       "개인 제품부터 공공·교통·구독 서비스까지, 복잡한 업무 흐름을 화면·API·데이터 구조로 구현한 과정과 결과를 정리했습니다.",
       "A record of how I turned complex workflows into interfaces, APIs, and data structures across an independent product, public systems, transportation, and subscriptions.",
@@ -1031,10 +979,7 @@ export const pageCopy = {
       "제품을 끝까지 연결하는 역량",
       "Capabilities across the product lifecycle",
     ),
-    credentialsTitle: t(
-      "학력·교육·자격",
-      "Education, training, and credentials",
-    ),
+    credentialsTitle: t("학력·교육·자격", "Education, training, and credentials"),
     contactTitle: t(
       "함께 만들 제품에 대해 이야기해 주세요",
       "Tell me about the product you’re building",

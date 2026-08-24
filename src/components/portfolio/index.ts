@@ -3,7 +3,6 @@ export * from "./KcscArchitectureDiagram";
 export * from "./AboutHero";
 export * from "./FeaturedJango";
 export * from "./HomeHero";
-export * from "./HomeProof";
 export * from "./HomeTimeline";
 export * from "./PortfolioAbout";
 export * from "./PortfolioHome";
