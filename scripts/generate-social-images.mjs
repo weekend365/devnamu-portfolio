@@ -13,12 +13,28 @@ const screenshotData = `data:image/png;base64,${screenshot.toString("base64")}`;
 const h = React.createElement;
 
 const copy = {
-  ko: ["화면부터 운영까지,", "제품의 흐름을 만듭니다."],
-  en: ["I build the product,", "not just the interface."],
+  ko: {
+    eyebrow: "검증된 제품 개발 경험",
+    headline: ["출시와 납품으로", "증명한 제품 개발"],
+    proofs: [
+      ["APP STORE", "iOS 정식 출시"],
+      ["PUBLIC", "공공기관 납품"],
+      ["269", "자동 검사 통과"],
+    ],
+  },
+  en: {
+    eyebrow: "VERIFIED PRODUCT EXPERIENCE",
+    headline: ["Product work proven", "by launch and delivery"],
+    proofs: [
+      ["APP STORE", "iOS app launched"],
+      ["PUBLIC", "Public-sector delivery"],
+      ["269", "Automated checks"],
+    ],
+  },
 };
 
 function socialImage(locale) {
-  const headline = copy[locale];
+  const content = copy[locale];
   return h(
     "section",
     {
@@ -26,42 +42,94 @@ function socialImage(locale) {
         width: "100%",
         height: "100%",
         display: "flex",
-        alignItems: "center",
+        alignItems: "stretch",
         justifyContent: "space-between",
         overflow: "hidden",
-        padding: "76px 86px",
-        background: "linear-gradient(135deg, #07110b 0%, #0d1b12 54%, #12351f 100%)",
-        color: "#f7fbfa",
+        padding: "64px 76px",
+        background:
+          "radial-gradient(circle at 86% 18%, rgba(183,243,74,0.34), transparent 32%), linear-gradient(135deg, #fbfcf9 0%, #f5f8f1 58%, #edf5e5 100%)",
+        color: "#10140d",
         fontFamily: "Pretendard",
       },
     },
     h(
       "section",
-      { style: { display: "flex", flexDirection: "column", width: 700, gap: 22 } },
+      {
+        style: {
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+          width: 724,
+          padding: "16px 0 10px",
+        },
+      },
       h(
-        "span",
-        { style: { color: "#4ade80", fontSize: 24, fontWeight: 600, letterSpacing: 2 } },
-        "DEVNAMU · NAM WOO-HYUN",
+        "section",
+        { style: { display: "flex", flexDirection: "column", gap: 20 } },
+        h(
+          "span",
+          {
+            style: {
+              color: "#4d7000",
+              fontSize: 22,
+              fontWeight: 700,
+              letterSpacing: 1.5,
+            },
+          },
+          "DEVNAMU · NAM WOO-HYUN",
+        ),
+        h(
+          "section",
+          {
+            style: {
+              display: "flex",
+              flexDirection: "column",
+              fontSize: locale === "ko" ? 62 : 58,
+              fontWeight: 700,
+              letterSpacing: locale === "ko" ? -4.4 : -3.2,
+              lineHeight: 1.04,
+            },
+          },
+          h("span", null, content.headline[0]),
+          h("span", null, content.headline[1]),
+        ),
       ),
       h(
         "section",
-        {
-          style: {
-            display: "flex",
-            flexDirection: "column",
-            fontSize: locale === "ko" ? 54 : 58,
-            fontWeight: 700,
-            letterSpacing: -3.5,
-            lineHeight: 1.08,
-          },
-        },
-        h("span", null, headline[0]),
-        h("span", null, headline[1]),
-      ),
-      h(
-        "span",
-        { style: { color: "#9db0a2", fontSize: 28, lineHeight: 1.4 } },
-        "React · Next.js · React Native · NestJS",
+        { style: { display: "flex", flexDirection: "column", gap: 16 } },
+        h(
+          "section",
+          { style: { display: "flex", gap: 12 } },
+          ...content.proofs.map(([value, label]) =>
+            h(
+              "section",
+              {
+                key: value,
+                style: {
+                  display: "flex",
+                  flexDirection: "column",
+                  width: 208,
+                  gap: 4,
+                  padding: "14px 16px",
+                  border: "1px solid #d8e2d0",
+                  borderRadius: 15,
+                  background: "rgba(255,255,255,0.76)",
+                },
+              },
+              h(
+                "span",
+                { style: { color: "#4d7000", fontSize: 23, fontWeight: 700 } },
+                value,
+              ),
+              h("span", { style: { color: "#5d6658", fontSize: 17 } }, label),
+            ),
+          ),
+        ),
+        h(
+          "span",
+          { style: { color: "#687064", fontSize: 20, letterSpacing: 0.2 } },
+          "React · Next.js · React Native · NestJS",
+        ),
       ),
     ),
     h(
@@ -71,21 +139,21 @@ function socialImage(locale) {
           display: "flex",
           alignItems: "flex-start",
           justifyContent: "center",
-          width: 292,
-          height: 560,
+          width: 304,
+          height: 574,
           overflow: "hidden",
-          border: "1px solid rgba(255,255,255,0.18)",
-          borderRadius: 42,
+          border: "7px solid #10110f",
+          borderRadius: 44,
           background: "#000",
-          boxShadow: "0 36px 90px rgba(0,0,0,0.42)",
-          transform: "rotate(2deg) translateY(34px)",
+          boxShadow: "0 32px 72px rgba(20,40,13,0.24)",
+          transform: "rotate(1.5deg) translateY(32px)",
         },
       },
       h("img", {
         src: screenshotData,
         alt: "",
-        width: 292,
-        height: 632,
+        width: 304,
+        height: 658,
         style: { objectFit: "cover", objectPosition: "top" },
       }),
     ),

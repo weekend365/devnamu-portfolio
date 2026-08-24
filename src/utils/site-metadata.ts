@@ -39,6 +39,7 @@ export function buildMetadata({
   description,
   path = "/",
   image,
+  appendIdentity = true,
 }: {
   locale: Locale;
   title: string;
@@ -50,14 +51,15 @@ export function buildMetadata({
     height: number;
     alt: string;
   };
+  appendIdentity?: boolean;
 }): Metadata {
   const localized = localePath(locale, path);
   const koPath = localePath("ko", path);
   const enPath = localePath("en", path);
-  const fullTitle = `${title} | ${person.brand} · ${person.name[locale]}`;
+  const fullTitle = appendIdentity ? `${title} | ${person.brand} · ${person.name[locale]}` : title;
   const socialImage =
     image ?? {
-      url: `/images/og/portfolio-${locale}.png`,
+      url: `/images/og/portfolio-${locale}.png?v=2`,
       width: 1200,
       height: 630,
       alt: `${person.brand} · ${person.name[locale]} · ${title}`,
