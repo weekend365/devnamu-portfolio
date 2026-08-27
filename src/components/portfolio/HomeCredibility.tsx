@@ -1,101 +1,82 @@
 import { Column, Row, Text } from "@once-ui-system/core";
 import type { Locale } from "@/resources";
+import { localePath } from "@/utils/site-metadata";
 
 const credibilityItems = {
   ko: [
     {
-      label: "실무 조직",
-      value: "씨엔넷 · 겟앤쇼 · KMIS",
-      detail: "3개 조직에서 제품 개발",
+      href: "/work/kcsc",
+      label: "시범운영",
+      value: "KCSC",
+      detail: "디지털 건설기준 계층을 다루는 업무 UI",
     },
     {
-      label: "도메인",
-      value: "공공 · 교통 · 구독",
-      detail: "복잡한 업무 흐름을 화면으로 구조화",
+      href: "/work/gis-facility-system",
+      label: "납품",
+      value: "한국수자원공사",
+      detail: "GIS 시설물 조회 시스템 · KMIS",
     },
     {
+      href: "/work/jango",
       label: "출시",
-      value: "App Store 정식 출시",
-      detail: "개인 제품의 설계부터 운영까지",
-    },
-    {
-      label: "납품·운영",
-      value: "공공기관 납품 · 시범운영",
-      detail: "실제 업무 환경 적용 경험",
+      value: "App Store",
+      detail: "장고야 부탁해 · 설계부터 운영까지",
     },
   ],
   en: [
     {
-      label: "Teams",
-      value: "C&Net · Get&Show · KMIS",
-      detail: "Product work across three organizations",
+      href: "/work/kcsc",
+      label: "Pilot",
+      value: "KCSC",
+      detail: "Operational UI for digital construction standards",
     },
     {
-      label: "Domains",
-      value: "Public · Transit · Subscription",
-      detail: "Complex workflows shaped into clear interfaces",
+      href: "/work/gis-facility-system",
+      label: "Delivered",
+      value: "K-water",
+      detail: "GIS facility lookup system · KMIS",
     },
     {
-      label: "Launch",
-      value: "Live on the App Store",
-      detail: "Independent product from design to operations",
-    },
-    {
-      label: "Delivery",
-      value: "Public delivery · Pilot operations",
-      detail: "Experience in real operational environments",
+      href: "/work/jango",
+      label: "Launched",
+      value: "App Store",
+      detail: "Jango · from product design to operations",
     },
   ],
 } as const;
 
 export function HomeCredibility({ locale }: { locale: Locale }) {
   return (
-    <Column
-      as="section"
+    <div
       className="home-credibility"
-      gap="16"
-      aria-labelledby="home-credibility-title"
+      aria-label={locale === "ko" ? "확인 가능한 결과" : "Verified outcomes"}
     >
-      <Row
-        fillWidth
-        horizontal="between"
-        vertical="end"
-        gap="16"
-        wrap
-        s={{ direction: "column", vertical: "start" }}
-      >
-        <Column gap="4">
-          <Text className="eyebrow" variant="label-strong-s" onBackground="brand-weak">
-            {locale === "ko" ? "채용자가 빠르게 보는 근거" : "Recruiter-ready evidence"}
-          </Text>
-          <Text id="home-credibility-title" variant="heading-strong-l" wrap="balance">
-            {locale === "ko" ? "어디에서 무엇을 끝까지 만들었는지" : "Where I worked and what I delivered"}
-          </Text>
-        </Column>
-        <Text variant="label-default-s" onBackground="neutral-weak">
-          {locale === "ko" ? "이력서의 핵심만 먼저 요약했습니다." : "A quick summary of the evidence behind the résumé."}
-        </Text>
-      </Row>
       <div className="home-credibility-grid">
         {credibilityItems[locale].map((item, index) => (
-          <Column key={item.label} className="home-credibility-item" gap="4">
-            <Row gap="8" vertical="center">
-              <Text className="home-credibility-index" variant="label-strong-xs">
-                {String(index + 1).padStart(2, "0")}
+          <a
+            key={item.label}
+            href={localePath(locale, item.href)}
+            className="home-credibility-item"
+          >
+            <Column gap="4" fillWidth>
+              <Row gap="8" vertical="center">
+                <Text className="home-credibility-index" variant="label-strong-xs">
+                  {String(index + 1).padStart(2, "0")}
+                </Text>
+                <Text variant="label-strong-xs" onBackground="neutral-weak">
+                  {item.label}
+                </Text>
+              </Row>
+              <Text className="home-credibility-value" variant="heading-strong-m" wrap="balance">
+                {item.value}
               </Text>
-              <Text variant="label-strong-xs" onBackground="neutral-weak">
-                {item.label}
+              <Text variant="body-default-s" onBackground="neutral-weak" wrap="balance">
+                {item.detail}
               </Text>
-            </Row>
-            <Text variant="heading-strong-m" wrap="balance">
-              {item.value}
-            </Text>
-            <Text variant="body-default-s" onBackground="neutral-weak" wrap="balance">
-              {item.detail}
-            </Text>
-          </Column>
+            </Column>
+          </a>
         ))}
       </div>
-    </Column>
+    </div>
   );
 }

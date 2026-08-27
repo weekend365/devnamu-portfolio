@@ -5,8 +5,6 @@ import { Stagger, StaggerItem } from "@/components/motion/Stagger";
 import { STAGGER_CARD } from "@/components/motion/tokens";
 import { baseURL, getContent, localize, pageCopy, person, type Locale } from "@/resources";
 import { localePath } from "@/utils/site-metadata";
-import { FeaturedJango } from "./FeaturedJango";
-import { HomeCredibility } from "./HomeCredibility";
 import { HomeHero } from "./HomeHero";
 import { HomeTimeline } from "./HomeTimeline";
 import { ProjectCard } from "./ProjectCard";
@@ -17,8 +15,12 @@ export function PortfolioHome({ locale }: { locale: Locale }) {
   const content = getContent(locale);
   const labels = content.navigation;
   const copy = pageCopy.home;
-  const homeProjectSlugs = new Set(["kcsc", "bims"]);
-  const secondaryProjects = content.projects.filter((project) => homeProjectSlugs.has(project.slug));
+  const flagshipProjects = ["kcsc", "jango"]
+    .map((slug) => content.projects.find((project) => project.slug === slug))
+    .filter((project): project is (typeof content.projects)[number] => Boolean(project));
+  const selectedProjects = ["gis-facility-system", "bims"]
+    .map((slug) => content.projects.find((project) => project.slug === slug))
+    .filter((project): project is (typeof content.projects)[number] => Boolean(project));
   const capabilityGroups =
     locale === "ko"
       ? [
@@ -89,21 +91,31 @@ export function PortfolioHome({ locale }: { locale: Locale }) {
 
       <HomeHero locale={locale} />
 
-      <HomeCredibility locale={locale} />
-
       <Column
         as="section"
+        id="home-flagship"
         className="home-featured-section"
         gap="40"
         aria-labelledby="featured-heading"
       >
         <SectionHeading
           id="featured-heading"
-          eyebrow={labels.featured}
+          eyebrow={localize(copy.featuredEyebrow, locale)}
           title={localize(copy.featuredTitle, locale)}
           description={localize(copy.featuredDescription, locale)}
         />
-        <FeaturedJango locale={locale} />
+        <Stagger className="home-flagship-grid" interval={STAGGER_CARD}>
+          {flagshipProjects.map((project) => (
+            <StaggerItem key={project.slug} className="project-card-reveal" y={12}>
+              <ProjectCard
+                project={project}
+                locale={locale}
+                priority={project.slug === "jango"}
+                headingLevel="h3"
+              />
+            </StaggerItem>
+          ))}
+        </Stagger>
       </Column>
 
       <Column as="section" className="home-experience" gap="40">
@@ -123,12 +135,11 @@ export function PortfolioHome({ locale }: { locale: Locale }) {
           </Button>
         </Row>
         <Stagger className="home-project-grid" interval={STAGGER_CARD}>
-          {secondaryProjects.map((project, index) => (
+          {selectedProjects.map((project) => (
             <StaggerItem key={project.slug} className="project-card-reveal" y={12}>
               <ProjectCard
                 project={project}
                 locale={locale}
-                priority={index === 0}
                 headingLevel="h3"
                 variant="compact"
               />

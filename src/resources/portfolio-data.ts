@@ -924,13 +924,15 @@ export const pageCopy = {
     proofYears: t("실무 제품 개발", "professional product work"),
     proofProjects: t("프로젝트 사례", "case studies"),
     proofDelivery: t("출시·납품·운영", "launched or delivered"),
+    viewCases: t("선별 사례 보기", "View selected work"),
+    featuredEyebrow: t("업무 UI · 출시 제품", "Operational UI · Shipped product"),
     featuredTitle: t(
-      "장고야 부탁해 — 모바일부터 운영까지 연결한 제품",
-      "Jango — one product from mobile experience to operations",
+      "지금 다루는 업무 UI, 그리고 출시한 제품",
+      "The operational UI I work on now, and the product I shipped",
     ),
     featuredDescription: t(
-      "유통기한 관리 문제를 실제 앱, API, 관리자와 운영 환경이 연결된 제품으로 확장하고 있습니다.",
-      "An expiry-management problem developed into a working product spanning the app, APIs, admin tools, and operations.",
+      "건설기준 계층을 다루는 시범운영 시스템과 App Store에 올린 개인 제품을 같은 비중으로 보여줍니다.",
+      "A live construction-standards pilot and an App Store product, shown with equal weight.",
     ),
     selectedTitle: t(
       "복잡한 업무를 명확한 흐름으로 바꾼 작업",
