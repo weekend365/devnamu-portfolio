@@ -63,15 +63,17 @@ export function ProjectHero({ project, locale }: { project: Project; locale: Loc
                 {labels.viewGithub}
               </Button>
             )}
-            {project.externalLink && !project.demoAccess && (
-              <Button
-                href={project.externalLink.href}
-                variant="secondary"
-                suffixIcon="arrowUpRightFromSquare"
-              >
-                {localize(project.externalLink.label, locale)}
-              </Button>
-            )}
+            {!project.demoAccess &&
+              project.externalLinks?.map((link) => (
+                <Button
+                  key={link.href}
+                  href={link.href}
+                  variant="secondary"
+                  suffixIcon="arrowUpRightFromSquare"
+                >
+                  {localize(link.label, locale)}
+                </Button>
+              ))}
             {project.demoAccess ? (
               <Button
                 href={project.demoAccess.url}

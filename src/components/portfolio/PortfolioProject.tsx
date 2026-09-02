@@ -79,7 +79,9 @@ export function PortfolioProject({ project, locale }: { project: Project; locale
           creator: { "@type": "Person", name: person.name[locale], alternateName: person.brand },
           keywords: project.technologies.join(", "),
           image: project.images[0] ? `${baseURL}${project.images[0].src}` : undefined,
-          sameAs: project.repository ?? project.externalLink?.href,
+          sameAs: [project.repository, ...(project.externalLinks ?? []).map((link) => link.href)].filter(
+            (link): link is string => Boolean(link),
+          ),
         }}
       />
       <ProjectHero project={project} locale={locale} />

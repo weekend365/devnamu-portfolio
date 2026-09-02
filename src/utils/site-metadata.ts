@@ -59,7 +59,7 @@ export function buildMetadata({
   const fullTitle = appendIdentity ? `${title} | ${person.brand} · ${person.name[locale]}` : title;
   const socialImage =
     image ?? {
-      url: `/images/og/portfolio-${locale}.png?v=2`,
+      url: `/images/og/portfolio-${locale}.png?v=3`,
       width: 1200,
       height: 630,
       alt: `${person.brand} · ${person.name[locale]} · ${title}`,

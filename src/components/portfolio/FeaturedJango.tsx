@@ -95,15 +95,16 @@ export function FeaturedJango({ locale }: { locale: Locale }) {
           >
             {labels.viewGithub}
           </Button>
-          {project.externalLink && (
+          {project.externalLinks?.map((link) => (
             <Button
-              href={project.externalLink.href}
+              key={link.href}
+              href={link.href}
               variant="secondary"
               suffixIcon="arrowUpRightFromSquare"
             >
-              {localize(project.externalLink.label, locale)}
+              {localize(link.label, locale)}
             </Button>
-          )}
+          ))}
         </Row>
       </Column>
       <Column
@@ -133,7 +134,9 @@ export function FeaturedJango({ locale }: { locale: Locale }) {
                 className="featured-app-screen"
                 src={hero.src}
                 alt={localize(hero.alt, locale)}
-                aspectRatio="1125 / 2433"
+                aspectRatio={
+                  hero.width && hero.height ? `${hero.width} / ${hero.height}` : "1125 / 2433"
+                }
                 objectFit="cover"
                 sizes="(max-width: 768px) 72vw, 288px"
                 priority

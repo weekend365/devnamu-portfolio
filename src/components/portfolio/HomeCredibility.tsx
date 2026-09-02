@@ -19,8 +19,8 @@ const credibilityItems = {
     {
       href: "/work/jango",
       label: "출시",
-      value: "App Store",
-      detail: "장고야 부탁해 · 설계부터 운영까지",
+      value: "iOS · Android",
+      detail: "장고야 부탁해 · 양대 스토어 정식 출시",
     },
   ],
   en: [
@@ -39,8 +39,8 @@ const credibilityItems = {
     {
       href: "/work/jango",
       label: "Launched",
-      value: "App Store",
-      detail: "Jango · from product design to operations",
+      value: "iOS · Android",
+      detail: "Jango · live on both major app stores",
     },
   ],
 } as const;

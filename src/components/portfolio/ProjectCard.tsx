@@ -12,7 +12,7 @@ export function getProjectStatusVariant(status: string): "neutral" | "info" | "s
 
 function CardActions({ project, locale }: { project: Project; locale: Locale }) {
   const labels = ui[locale];
-  if (!project.repository && !project.externalLink) {
+  if (!project.repository && !project.externalLinks?.length) {
     return null;
   }
 
@@ -29,16 +29,17 @@ function CardActions({ project, locale }: { project: Project; locale: Locale }) 
           GitHub
         </Button>
       )}
-      {project.externalLink && (
+      {project.externalLinks?.map((link) => (
         <Button
-          href={project.externalLink.href}
+          key={link.href}
+          href={link.href}
           size="s"
           variant="tertiary"
           suffixIcon="arrowUpRightFromSquare"
         >
-          {localize(project.externalLink.label, locale)}
+          {localize(link.label, locale)}
         </Button>
-      )}
+      ))}
     </Row>
   );
 }

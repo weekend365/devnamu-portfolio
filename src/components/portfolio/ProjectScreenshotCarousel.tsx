@@ -169,7 +169,13 @@ export function ProjectScreenshotCarousel({
                   className={`screenshot-media screenshot-media-${image.variant}`}
                   src={image.src}
                   alt={localize(image.alt, locale)}
-                  aspectRatio={image.variant === "desktop" ? "16 / 9" : "1125 / 2436"}
+                  aspectRatio={
+                    image.width && image.height
+                      ? `${image.width} / ${image.height}`
+                      : image.variant === "desktop"
+                        ? "16 / 9"
+                        : "1125 / 2436"
+                  }
                   objectFit={image.variant === "mobile" ? "cover" : "contain"}
                   sizes={
                     image.variant === "mobile"

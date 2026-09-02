@@ -30,7 +30,7 @@ export type DemoAccess = {
 export type ProjectExternalLink = {
   href: string;
   label: LocalizedText;
-  kind: "app-store" | "website";
+  kind: "app-store" | "google-play" | "website";
 };
 
 export type Project = {
@@ -61,7 +61,7 @@ export type Project = {
   images: ProjectImage[];
   featured?: boolean;
   repository?: string;
-  externalLink?: ProjectExternalLink;
+  externalLinks?: ProjectExternalLink[];
   demoAccess?: DemoAccess;
 };
 
@@ -317,10 +317,10 @@ export const projects: Project[] = [
       "Product · Mobile · Backend · Admin · Infrastructure",
     ),
     period: t(
-      "2026 · iOS 출시 · Android 비공개 테스트",
-      "2026 · iOS launched · Android closed testing",
+      "2026 · App Store·Google Play 출시 · v1.4.0",
+      "2026 · App Store and Google Play launch · v1.4.0",
     ),
-    status: t("iOS 정식 출시 · Android 비공개 테스트", "iOS live · Android closed testing"),
+    status: t("양대 스토어 정식 출시 · v1.4.0", "Live on both stores · v1.4.0"),
     summary: t(
       "냉장고 식재료와 생활용품의 유통기한을 관리하고, 임박 식재료를 우선 활용하는 AI 레시피를 추천하는 서비스입니다.",
       "An ingredient and household inventory service that tracks expiry dates and recommends AI-generated recipes prioritizing items that expire soon.",
@@ -330,24 +330,25 @@ export const projects: Project[] = [
       "People missed expiring ingredients because tracking, recommendations, and shared spaces lived in separate flows.",
     ),
     decision: t(
-      "Expo Go에서 지원하지 않는 네이티브 기능은 dev·EAS 빌드와 iOS 실기기로 검증하고, 모바일·API·관리자의 계약은 공유 스키마로 일치시켰습니다.",
-      "Validated native features unavailable in Expo Go through dev and EAS builds on real iOS devices, while keeping mobile, API, and admin contracts aligned through shared schemas.",
+      "네이티브 스캔·결제·광고 기능은 EAS와 양 플랫폼 release build로 검증하고, 모바일·API·관리자의 계약과 비용·권한 정책은 공유 스키마와 서버 검증으로 일치시켰습니다.",
+      "Validated native scanning, billing, and advertising in EAS release builds on both platforms, while aligning mobile, API, and admin contracts, cost limits, and authorization through shared schemas and server-side verification.",
     ),
     outcome: t(
-      "iOS 앱을 App Store에 정식 출시했고, Android는 Google Play 비공개 테스트를 진행 중입니다. Railway 기반 API/Admin 운영 환경과 269개 자동 검사를 통과한 핵심 모바일 흐름을 연결했습니다.",
-      "Launched the iOS app on the App Store while Android is in Google Play closed testing, backed by live Railway API/Admin services and a core mobile flow that passed 269 automated checks.",
+      "1.4.0을 App Store와 Google Play에 정식 출시했습니다. 공유 냉장고, 사진 일괄 등록, 개인 플러스와 구매 복원까지 Railway 운영 환경에 연결했고 147개 파일의 885개 자동 테스트를 통과했습니다.",
+      "Released version 1.4.0 on both the App Store and Google Play. Shared refrigerators, bulk photo intake, Jango Plus, and purchase restoration run against live Railway services, with 885 automated tests across 147 files passing.",
     ),
     metrics: [
       {
-        value: "App Store",
-        label: t("iOS 정식 출시", "iOS app launched"),
+        value: "2 Stores",
+        label: t("iOS·Android 정식 출시", "iOS and Android launched"),
+        note: t("App Store · Google Play", "App Store · Google Play"),
       },
       {
-        value: "269",
-        label: t("자동 검사 통과", "Automated checks passed"),
+        value: "885",
+        label: t("자동 테스트 통과", "Automated tests passed"),
         note: t(
-          "전체 typecheck·환경 정합성 검사 포함",
-          "Including full typecheck and environment parity checks",
+          "Shared·Mobile·API 147개 테스트 파일",
+          "147 test files across Shared, Mobile, and API",
         ),
       },
       {
@@ -357,8 +358,8 @@ export const projects: Project[] = [
     ],
     description: [
       t(
-        "장고야 부탁해는 Expo 기반 모바일 앱, NestJS REST API, Next.js 운영 관리자, 공유 계약 패키지를 하나의 pnpm 모노레포로 구성한 한국어 우선 MVP입니다.",
-        "Jango is a Korean-first MVP organized as a pnpm monorepo containing an Expo mobile app, NestJS REST API, Next.js operations admin, and shared contracts package.",
+        "장고야 부탁해는 Expo 모바일 앱, NestJS REST API, Next.js 운영 관리자, 공유 계약 패키지를 하나의 pnpm 모노레포로 구성해 양대 스토어에 출시한 한국어 우선 제품입니다.",
+        "Jango is a Korean-first product released on both major stores, organized as a pnpm monorepo containing an Expo mobile app, NestJS REST API, Next.js operations admin, and shared contracts package.",
       ),
       t(
         "기술 패키지와 번들 ID에는 기존 ExpiryMate namespace가 남아 있으며, 사용자에게 보이는 브랜드는 장고야 부탁해입니다.",
@@ -384,140 +385,166 @@ export const projects: Project[] = [
     ],
     contributions: [
       t(
-        "Expo Router, Zustand, TanStack Query, React Hook Form, Zod로 모바일 앱의 인증·재고·추천·설정 흐름을 구성했습니다.",
-        "Built authentication, inventory, recommendation, and settings flows with Expo Router, Zustand, TanStack Query, React Hook Form, and Zod.",
+        "Expo Router, TanStack Query, Zustand, React Hook Form, Zod로 인증·재고·추천·공유 공간·설정 흐름을 구성했습니다.",
+        "Built authentication, inventory, recommendation, shared-space, and settings flows with Expo Router, TanStack Query, Zustand, React Hook Form, and Zod.",
       ),
       t(
-        "ML Kit 바코드 스캔과 유통기한 OCR을 ProductMaster 조회 및 등록 prefill 흐름과 연결했습니다.",
-        "Connected ML Kit barcode scanning and expiry OCR to ProductMaster lookup and registration prefill flows.",
+        "ML Kit 바코드·유통기한 OCR과 OpenAI Vision 기반 영수증·냉장고 사진 일괄 등록을 신뢰도별 빠른 저장·수정 흐름으로 연결했습니다.",
+        "Connected ML Kit barcode and expiry OCR plus OpenAI Vision receipt and refrigerator-photo intake to confidence-aware quick-save and correction flows.",
       ),
       t(
-        "NestJS, Prisma, PostgreSQL로 제품, 재고, 대시보드, 추천, 알림, 인증, 개인정보 API를 구현했습니다.",
-        "Implemented product, inventory, dashboard, recommendation, notification, authentication, and privacy APIs with NestJS, Prisma, and PostgreSQL.",
+        "NestJS, Prisma, PostgreSQL로 제품·재고·공간·추천·알림·인증·개인정보·수익화 API와 소유자·역할 기반 권한을 구현했습니다.",
+        "Implemented product, inventory, space, recommendation, notification, authentication, privacy, and monetization APIs with owner- and role-based authorization using NestJS, Prisma, and PostgreSQL.",
       ),
       t(
-        "재고 snapshot과 추천 조건을 서버에서 OpenAI Responses API로 전달하는 AI 레시피 추천과 동의·철회·기록 삭제 정책을 구현했습니다.",
-        "Implemented AI recipe recommendations through the server-side OpenAI Responses API together with consent, withdrawal, and history-deletion policies.",
+        "OpenAI Responses API 추천에 임박 재료 우선 전략, 식단·알레르기 검증, semantic repair, 모델 롤아웃과 호출별 비용·지연 관측을 적용했습니다.",
+        "Added expiring-first strategies, dietary and allergy validation, semantic repair, model rollout controls, and per-call cost and latency observability to recommendations built on the OpenAI Responses API.",
       ),
       t(
         "개인·가족·매장 공간, owner/manager/member 권한, 이메일·일회용 코드 초대 구조를 구현했습니다.",
         "Implemented personal, household, and store spaces with owner/manager/member roles and email or one-time-code invitations.",
       ),
       t(
-        "Kakao, Naver, Google, Apple, Email 인증과 Expo 알림, 구독 entitlement 검증을 구성했습니다.",
-        "Configured Kakao, Naver, Google, Apple, and email authentication, Expo notifications, and subscription entitlement verification.",
+        "개인 플러스 월간·연간 구독, App Store·Google Play 구매 검증과 복원, 서버 알림, 비맞춤형 보상 광고의 SSV 보상을 구현했습니다.",
+        "Implemented monthly and annual Jango Plus subscriptions, App Store and Google Play purchase verification and restoration, server notifications, and SSV-backed rewards for non-personalized ads.",
       ),
       t(
-        "Next.js 관리자에서 제품·재고·문의·seed 상태를 관리하고 Railway, Docker, EAS, Sentry, Resend 기반 운영 환경을 구성했습니다.",
-        "Built Next.js administration for products, inventory, support inquiries, and seed status, and configured Railway, Docker, EAS, Sentry, and Resend operations.",
+        "요리 완료 후 재고 차감·되돌리기, 조리 단계 타이머, 부족하거나 소진한 재료를 잇는 장보기·제휴 흐름을 구현했습니다.",
+        "Implemented post-cooking inventory deduction and undo, step timers, and shopping and affiliate flows for missing or depleted ingredients.",
+      ),
+      t(
+        "Next.js 관리자에서 제품·재고·문의와 AI 비용·수익 지표를 관리하고 Railway, Docker, EAS, Sentry, Resend 기반 운영 환경을 구성했습니다.",
+        "Built Next.js administration for products, inventory, support, and AI cost and revenue metrics, and configured Railway, Docker, EAS, Sentry, and Resend operations.",
       ),
     ],
     challenges: [
       t(
-        "Expo Go에서 동작하지 않는 native 바코드·OCR 기능을 dev/EAS 빌드와 iOS 실기기에서 검증해야 했습니다.",
-        "Native barcode and OCR features unavailable in Expo Go required dev/EAS builds and iOS device validation.",
+        "Expo Go에서 동작하지 않는 스캔·결제·광고 기능을 iOS와 Android의 dev·EAS release build와 실기기에서 검증해야 했습니다.",
+        "Native scanning, billing, and advertising unavailable in Expo Go required dev and EAS release builds plus real-device validation on iOS and Android.",
       ),
       t(
         "모바일, API, 관리자 사이의 계약을 공유하면서도 클라이언트에 안전한 타입과 schema만 노출해야 했습니다.",
         "Shared contracts across mobile, API, and admin had to expose only client-safe types and schemas.",
       ),
       t(
-        "AI 추천, 소셜 로그인, 공유 공간 초대에 필요한 개인정보 동의·보관·삭제 흐름을 제품 기능과 일치시켜야 했습니다.",
-        "Privacy consent, retention, and deletion behavior for AI recommendations, social login, and space invitations had to match product behavior.",
+        "AI 추천·사진 처리·스토어 결제·광고·공유 초대의 개인정보, 비용 한도, 구매 상태를 실제 제품 동작과 스토어 선언에 일치시켜야 했습니다.",
+        "Privacy, cost limits, and purchase state for AI recommendations, photo processing, store billing, ads, and invitations had to remain consistent with product behavior and store declarations.",
       ),
     ],
     results: [
       t(
-        "iOS 앱을 App Store에 정식 출시했고, Android 앱은 Google Play 비공개 테스트를 진행하고 있습니다.",
-        "The iOS app is live on the App Store, while the Android app is in Google Play closed testing.",
+        "1.4.0 앱을 App Store와 Google Play에 정식 출시해 iOS와 Android에서 운영하고 있습니다.",
+        "Version 1.4.0 is live on both the App Store and Google Play for iOS and Android.",
       ),
       t(
-        "ESLint, 전체 typecheck, 환경 정합성 검사와 269개 자동 검사를 통과했습니다.",
-        "The project passed ESLint, full type checking, environment parity validation, and 269 automated checks.",
+        "Shared·Mobile·API 147개 테스트 파일의 885개 테스트를 통과했고 lint·typecheck·환경 정합성 검사를 운영 기준으로 유지합니다.",
+        "The project passes 885 tests across 147 Shared, Mobile, and API test files, with linting, type checking, and environment parity checks maintained as release gates.",
       ),
       t(
-        "API/Admin은 Railway에서 운영 중이며 Google Play 정식 출시를 위한 테스트와 검증을 이어가고 있습니다.",
-        "API/Admin services are live on Railway, with testing and validation continuing toward the Google Play production release.",
+        "Railway의 API/Admin 운영 환경에 공유 공간, 사진 AI, 개인 플러스 결제·복원, 폐기 예방 지표와 수익 관측을 연결했습니다.",
+        "Live API and admin services on Railway support shared spaces, photo AI, Jango Plus billing and restoration, waste-prevention insights, and revenue observability.",
       ),
     ],
     images: [
       {
         src: "/images/projects/jango/01.png",
         alt: t(
-          "오늘 만료되는 재료와 유통기한 현황, AI 추천 요리를 보여주는 장고야 부탁해 홈 화면",
-          "Jango home dashboard showing ingredients expiring today, expiry status, and an AI recipe suggestion",
+          "주간 장고 브리핑, 오늘의 요리 추천과 유통기한 현황을 한눈에 보여주는 장고야 부탁해 홈 화면",
+          "Jango home screen showing the weekly briefing, today's recipe recommendation, and expiry overview at a glance",
         ),
         caption: t(
-          "오늘 확인해야 할 식재료를 한 화면에 모은 홈",
-          "A home view focused on ingredients that need attention today",
+          "유통기한부터 오늘 메뉴까지 한눈에 보는 홈",
+          "A home overview spanning expiry dates and today's menu",
         ),
         variant: "mobile",
+        width: 1242,
+        height: 2688,
       },
       {
         src: "/images/projects/jango/02.png",
         alt: t(
-          "보관 중인 재료를 유통기한 순서로 조회하고 관리하는 장고야 부탁해 보관함 화면",
-          "Jango inventory screen for browsing and managing stored ingredients by expiry date",
+          "임박 재료 우선 조건으로 고른 세 가지 AI 요리와 즐겨찾기를 보여주는 장고야 부탁해 추천 화면",
+          "Jango recommendation screen showing three AI-selected dishes prioritized by expiring ingredients and recipe favorites",
         ),
         caption: t(
-          "유통기한 중심의 식재료 보관함",
-          "An ingredient inventory organized around expiry dates",
+          "남은 재료를 우선 활용하는 오늘의 AI 메뉴 추천",
+          "AI menu recommendations that prioritize ingredients already on hand",
         ),
         variant: "mobile",
+        width: 1242,
+        height: 2688,
       },
       {
         src: "/images/projects/jango/03.png",
         alt: t(
-          "남은 재료를 우선 활용해 오늘의 AI 추천 요리를 보여주는 화면",
-          "AI recipe recommendations prioritizing ingredients already in the refrigerator",
+          "조리 순서, 완료 상태와 백그라운드 타이머를 함께 보여주는 장고야 부탁해 요리 화면",
+          "Jango cooking screen showing step progress, completion state, and a timer that continues in the background",
         ),
         caption: t(
-          "임박 식재료를 우선 활용하는 AI 추천",
-          "AI recommendations that prioritize ingredients expiring soon",
+          "순서와 타이머로 차근차근 이어가는 요리",
+          "Step-by-step cooking supported by a persistent timer",
         ),
         variant: "mobile",
+        width: 1242,
+        height: 2688,
       },
       {
         src: "/images/projects/jango/04.png",
         alt: t(
-          "카메라로 상품 바코드와 유통기한을 인식하는 장고야 부탁해 스캔 화면",
-          "Jango camera scanner recognizing a product barcode and its expiry date",
+          "사진 일괄 등록, 바코드와 직접 입력 중 재료 등록 방식을 고르는 장고야 부탁해 화면",
+          "Jango ingredient-entry screen for choosing bulk photo intake, barcode scanning, or manual input",
         ),
         caption: t(
-          "바코드와 유통기한을 한 흐름에서 인식",
-          "Barcode and expiry-date capture in one flow",
+          "사진 한 장으로 여러 재료를 한 번에 등록",
+          "Adding multiple ingredients at once from a single photo",
         ),
         variant: "mobile",
+        width: 1242,
+        height: 2688,
       },
       {
         src: "/images/projects/jango/05.png",
         alt: t(
-          "보관 위치와 유통기한을 확인해 식재료 등록을 완료하는 화면",
-          "Guided ingredient registration flow confirming storage location and expiry date",
+          "만료·임박·여유 상태와 보관 위치로 재료를 검색하고 관리하는 장고야 부탁해 보관함 화면",
+          "Jango inventory screen for searching and managing ingredients by expired, expiring, safe, and storage-location filters",
         ),
         caption: t(
-          "필수 정보만 단계적으로 확인하는 등록 과정",
-          "A guided registration flow that asks only for essential details",
+          "임박한 재료를 놓치기 전에 정리하는 보관함",
+          "An inventory organized to catch expiring ingredients before they are missed",
         ),
         variant: "mobile",
+        width: 1242,
+        height: 2688,
       },
       {
         src: "/images/projects/jango/06.png",
         alt: t(
-          "초대 코드로 가족이나 동료와 여러 냉장고를 공유하는 화면",
-          "Jango shared refrigerator screen for managing multiple spaces with family or colleagues",
+          "공유 냉장고 구성원, 공간별 유통기한 알림과 초대 기능을 관리하는 장고야 부탁해 화면",
+          "Jango shared-refrigerator screen for managing members, per-space expiry alerts, and invitations",
         ),
-        caption: t("가족·동료와 함께 관리하는 공유 공간", "Shared spaces for households and teams"),
+        caption: t(
+          "구성원 초대부터 공유 공간 알림까지 한곳에서 관리",
+          "Managing invitations and shared-space alerts in one place",
+        ),
         variant: "mobile",
+        width: 1242,
+        height: 2688,
       },
     ],
     featured: true,
     repository: "https://github.com/weekend365/ExpiryMate",
-    externalLink: {
-      href: "https://apps.apple.com/kr/app/%EC%9E%A5%EA%B3%A0%EC%95%BC-%EB%B6%80%ED%83%81%ED%95%B4/id6793375883",
-      label: t("App Store에서 보기", "View on the App Store"),
-      kind: "app-store",
-    },
+    externalLinks: [
+      {
+        href: "https://apps.apple.com/kr/app/%EC%9E%A5%EA%B3%A0%EC%95%BC-%EB%B6%80%ED%83%81%ED%95%B4/id6793375883",
+        label: t("App Store에서 보기", "View on the App Store"),
+        kind: "app-store",
+      },
+      {
+        href: "https://play.google.com/store/apps/details?id=com.expirymate.mobile",
+        label: t("Google Play에서 보기", "View on Google Play"),
+        kind: "google-play",
+      },
+    ],
   },
   {
     slug: "kcsc",
@@ -918,8 +945,8 @@ export const pageCopy = {
       "I build operational systems and shipped products with React and Next.js.",
     ),
     summary: t(
-      "3년 이상 공공·교통·구독 도메인의 화면과 API를 연결했습니다. iOS 정식 출시부터 공공기관 납품·시범 운영까지, 프론트엔드 중심으로 제품을 끝까지 구현합니다.",
-      "For over three years, I’ve connected interfaces and APIs across public-sector, transportation, and subscription products—from an iOS launch to public-sector delivery and pilot operations.",
+      "3년 이상 공공·교통·구독 도메인의 화면과 API를 연결했습니다. iOS·Android 양대 스토어 출시부터 공공기관 납품·시범 운영까지, 프론트엔드 중심으로 제품을 끝까지 구현합니다.",
+      "For over three years, I’ve connected interfaces and APIs across public-sector, transportation, and subscription products—from an iOS and Android launch to public-sector delivery and pilot operations.",
     ),
     proofYears: t("실무 제품 개발", "professional product work"),
     proofProjects: t("프로젝트 사례", "case studies"),
@@ -931,8 +958,8 @@ export const pageCopy = {
       "The operational UI I work on now, and the product I shipped",
     ),
     featuredDescription: t(
-      "건설기준 계층을 다루는 시범운영 시스템과 App Store에 올린 개인 제품을 같은 비중으로 보여줍니다.",
-      "A live construction-standards pilot and an App Store product, shown with equal weight.",
+      "건설기준 계층을 다루는 시범운영 시스템과 App Store·Google Play에 출시한 개인 제품을 같은 비중으로 보여줍니다.",
+      "A live construction-standards pilot and an independent product released on both the App Store and Google Play, shown with equal weight.",
     ),
     selectedTitle: t(
       "복잡한 업무를 명확한 흐름으로 바꾼 작업",
@@ -994,8 +1021,8 @@ export const pageCopy = {
         "On C&Net's KCSC digital construction standards system, I worked with a complex hierarchy spanning facilities, review items, review elements, and variables, together with Java API integrations. I used AI development tools to explore related code and change points and to review refactoring directions and edge cases. In the implementation, I separated server and editing state with TanStack Query and Zustand, verified permissions, hierarchical editing, and data transformation with Jest and React Testing Library, and supported delivery through Docker and Jenkins.",
       ),
       t(
-        "개인 프로젝트 ‘장고야 부탁해’에서는 AI를 사용자 가치와 운영 조건까지 포함한 제품 기능으로 구현했습니다. 재고 snapshot과 유통기한을 OpenAI Responses API에 연결해 임박 재료를 우선 활용하는 레시피를 추천하고, AI 이용 동의·철회와 추천 기록 삭제 흐름을 함께 설계했습니다. ML Kit 기반 OCR, NestJS API, Next.js 관리자와 Sentry 모니터링을 하나의 모노레포로 연결했으며, 269개 자동 검사를 통과한 뒤 iOS 앱을 App Store에 정식 출시하고 Android 비공개 테스트를 진행하고 있습니다.",
-        "In my personal project Jango, I turned AI into a product capability that accounts for both user value and operational requirements. Inventory snapshots and expiry dates are sent through the OpenAI Responses API to recommend recipes that prioritize ingredients expiring soon, with consent, withdrawal, and recommendation-history deletion designed into the same flow. I connected ML Kit OCR, NestJS APIs, a Next.js admin, and Sentry monitoring in one monorepo, passed 269 automated checks, launched the iOS app on the App Store, and am running Android closed testing.",
+        "개인 프로젝트 ‘장고야 부탁해’에서는 AI를 사용자 가치와 운영 조건까지 포함한 제품 기능으로 구현했습니다. 재고 snapshot과 유통기한을 OpenAI Responses API에 연결해 임박 재료를 우선 활용하는 레시피를 추천하고, 동의·철회·기록 삭제와 모델별 비용 관측을 함께 설계했습니다. ML Kit OCR과 사진 일괄 등록, 공유 냉장고, 개인 플러스 결제·복원, NestJS API, Next.js 관리자를 하나의 모노레포로 연결했으며, 147개 파일의 885개 자동 테스트를 통과한 1.4.0을 App Store와 Google Play에 정식 출시했습니다.",
+        "In my personal project Jango, I turned AI into a product capability that accounts for both user value and operational requirements. Inventory snapshots and expiry dates feed the OpenAI Responses API to recommend recipes that prioritize expiring ingredients, with consent, withdrawal, history deletion, and per-model cost observability built into the flow. I connected ML Kit OCR and bulk photo intake, shared refrigerators, Jango Plus billing and restoration, NestJS APIs, and a Next.js admin in one monorepo, then released version 1.4.0 on both the App Store and Google Play after 885 automated tests across 147 files passed.",
       ),
     ],
     capabilitiesTitle: t(

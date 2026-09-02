@@ -17,18 +17,18 @@ const copy = {
     eyebrow: "검증된 제품 개발 경험",
     headline: ["출시와 납품으로", "증명한 제품 개발"],
     proofs: [
-      ["APP STORE", "iOS 정식 출시"],
+      ["2 STORES", "iOS·Android 정식 출시"],
       ["PUBLIC", "공공기관 납품"],
-      ["269", "자동 검사 통과"],
+      ["885", "자동 테스트 통과"],
     ],
   },
   en: {
     eyebrow: "VERIFIED PRODUCT EXPERIENCE",
     headline: ["Product work proven", "by launch and delivery"],
     proofs: [
-      ["APP STORE", "iOS app launched"],
+      ["2 STORES", "iOS and Android launched"],
       ["PUBLIC", "Public-sector delivery"],
-      ["269", "Automated checks"],
+      ["885", "Automated tests"],
     ],
   },
 };

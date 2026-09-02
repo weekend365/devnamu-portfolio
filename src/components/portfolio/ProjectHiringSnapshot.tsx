@@ -83,7 +83,7 @@ export function ProjectHiringSnapshot({ project, locale }: { project: Project; l
     project.images.length > 0 ? labels.screenshots(project.images.length) : null,
     project.demoAccess ? labels.publicDemo : null,
     project.repository ? labels.repository : null,
-    project.externalLink ? labels.external : null,
+    project.externalLinks?.length ? labels.external : null,
     project.images.length === 0 ? labels.documented : null,
   ].filter((item): item is string => Boolean(item));
 
