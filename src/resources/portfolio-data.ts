@@ -211,6 +211,14 @@ export const education = [
     period: "2021.04 – 2023.01",
   },
   {
+    institution: t("서일대학교", "Seoil University"),
+    program: t(
+      "정보통신과 · 3년제",
+      "Information and Communication · 3-year program",
+    ),
+    period: "2015.03 – 2019.03",
+  },
+  {
     institution: t("인천효성고등학교", "Incheon Hyosung High School"),
     program: t("이과계열 · 졸업", "Natural Sciences · Graduated"),
     period: "2012.03 – 2015.01",

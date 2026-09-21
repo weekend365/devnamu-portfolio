@@ -95,6 +95,9 @@ React · Next.js · TypeScript · Tailwind CSS · PostgreSQL API · HTML5 · CSS
 이젠아카데미컴퓨터학원 자바 웹개발 프로그래밍 · 800시간  
 2022.09–2023.01
 
+서일대학교 정보통신과 · 3년제\
+2015.03–2019.03
+
 ## Certifications & Language
 
 - 정보처리기사 · 2025.09
